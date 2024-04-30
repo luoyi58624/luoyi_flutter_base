@@ -11,6 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   luoyi_dart_base: ^1.0.0
+  mini_getx: ^5.0.0
 
 dev_dependencies:
   flutter_test:
