@@ -35,47 +35,40 @@ class _TapBuilderState extends State<TapBuilder> {
       onTapDown: (widget.delay == 0 || widget.disabled)
           ? null
           : (e) {
-              if (_timer != null) {
-                _timer!.cancel();
-                setState(() {
-                  isTap = false;
-                });
-                AsyncUtil.delayed(() {
-                  setState(() {
-                    isTap = true;
-                  });
-                }, 16);
-              } else {
-                setState(() {
-                  isTap = true;
-                });
-              }
-            },
+        if (_timer != null) {
+          _timer!.cancel();
+          _timer = null;
+          update(false);
+          AsyncUtil.delayed(() => update(true), 16);
+        } else {
+          update(true);
+        }
+      },
       onTapUp: (widget.delay == 0 || widget.disabled)
           ? null
           : (e) {
-              _timer = AsyncUtil.delayed(() {
-                setState(() {
-                  isTap = false;
-                });
-              }, widget.delay);
-            },
+        _timer = AsyncUtil.delayed(() {
+          update(false);
+          _timer = null;
+        }, widget.delay);
+      },
       onTapCancel: (widget.delay == 0 || widget.disabled)
           ? null
           : () {
-              _timer = AsyncUtil.delayed(() {
-                setState(() {
-                  isTap = false;
-                });
-              }, widget.delay);
-            },
+        _timer = AsyncUtil.delayed(() {
+          update(false);
+          _timer = null;
+        }, widget.delay);
+      },
       child: widget.builder(isTap),
     );
   }
 
   void update(bool enabled) {
-    setState(() {
-      isTap = enabled;
-    });
+    if (isTap != enabled) {
+      i('更新');
+      // i('xsxscd');
+      setState(() => isTap = enabled);
+    }
   }
 }
