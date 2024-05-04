@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/luoyi58624/luoyi_flutter_base/compare/v1.0.1...v1.0.2) (2024-05-04)
+
+
+### Bug Fixes
+
+* 尝试修复github actions自动化发布脚本 ([6c7869a](https://github.com/luoyi58624/luoyi_flutter_base/commit/6c7869a617f330e606ac34163acc2db3ad9ce8f7))
+
 ## [1.0.1](https://github.com/luoyi58624/luoyi_flutter_base/compare/v1.0.0...v1.0.1) (2024-05-04)
 
 
