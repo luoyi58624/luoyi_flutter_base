@@ -44,8 +44,6 @@ part 'src/utils/no_ripper.dart';
 
 part 'src/utils/platform.dart';
 
-part 'src/utils/serializable.dart';
-
 part 'src/widgets/animation.dart';
 
 part 'src/widgets/badge.dart';
