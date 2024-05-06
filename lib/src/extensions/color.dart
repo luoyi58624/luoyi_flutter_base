@@ -3,11 +3,12 @@ part of '../../luoyi_flutter_base.dart';
 /// Color工具函数扩展
 extension FlutterColorExtension on Color {
   /// 判断一个颜色是否是暗色
-  bool get isDark => hsp <= 150;
+  bool get isDark => hsp <= 168;
 
   /// 返回一个颜色的hsp (颜色的感知亮度)
-  int get hsp =>
-      math.sqrt(0.299 * (red * red) + 0.587 * (green * green) + 0.114 * (blue * blue)).ceilToDouble().toInt();
+  ///
+  /// http://www.w3.org/TR/AERT#color-contrast
+  int get hsp => ((red * 299 + green * 587 + blue * 114) / 1000).ceilToDouble().toInt();
 
   /// 根据明亮度获取一个新的颜色，lightness以1为基准，小于1则颜色变暗，大于1则颜色变亮
   Color getLightnessColor(double lightness) {
@@ -19,8 +20,12 @@ extension FlutterColorExtension on Color {
 
   /// Color对象转16进制字符串格式颜色
   /// * noLeading 是否不加 # 前缀
-  String toHex([bool? noLeading]) => '${noLeading == true ? '' : '#'}'
-      '${alpha.toRadixString(16).padLeft(2, '0')}'
+  String toHex({
+    bool hasLeading = false,
+    bool hasAlpha = false,
+  }) =>
+      '${hasLeading == true ? '#' : ''}'
+      '${hasAlpha == true ? alpha.toRadixString(16).padLeft(2, '0') : ''}'
       '${red.toRadixString(16).padLeft(2, '0')}'
       '${green.toRadixString(16).padLeft(2, '0')}'
       '${blue.toRadixString(16).padLeft(2, '0')}';
@@ -50,8 +55,7 @@ extension FlutterColorExtension on Color {
   Color brighten(int scale) {
     assert(scale > 0 && scale <= 100);
     var p = scale / 100;
-    return Color.fromARGB(
-        alpha, red + ((255 - red) * p).round(), green + ((255 - green) * p).round(), blue + ((255 - blue) * p).round());
+    return Color.fromARGB(alpha, red + ((255 - red) * p).round(), green + ((255 - green) * p).round(), blue + ((255 - blue) * p).round());
   }
 
   /// 将颜色变得更暗
@@ -69,10 +73,8 @@ extension FlutterColorExtension on Color {
   }
 
   /// 当用户鼠标悬停时的颜色
-  Color onHover(BuildContext context, bool flag, [int? scale]) =>
-      flag ? deepen(scale ?? context.flutterConfig.hoverScale) : this;
+  Color onHover(BuildContext context, bool flag, [int? scale]) => flag ? deepen(scale ?? context.flutterConfig.hoverScale) : this;
 
   /// 当用户鼠标、手指按下时的颜色
-  Color onTap(BuildContext context, bool flag, [int? scale]) =>
-      flag ? deepen(scale ?? context.flutterConfig.tapScale) : this;
+  Color onTap(BuildContext context, bool flag, [int? scale]) => flag ? deepen(scale ?? context.flutterConfig.tapScale) : this;
 }

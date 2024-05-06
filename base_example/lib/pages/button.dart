@@ -40,31 +40,59 @@ class _MyButtonTestPage extends StatefulWidget {
 
 class _MyButtonTestPageState extends State<_MyButtonTestPage> {
   int count = 0;
+  bool flag = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('自定义 Button'),
+        actions: [
+          Switch(
+            value: flag,
+            onChanged: (v) {
+              setState(() {
+                flag = v;
+              });
+            },
+          ),
+        ],
       ),
-      body: SingleChildScrollView(
-        child: buildCenterColumn(
-          List.generate(
-            10000,
-            (index) => Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: ButtonWidget(
-                onPressed: () {
-                  setState(() {
-                    count++;
-                  });
-                },
-                child: Text('count: $count'),
+      body: flag
+          ? ListView.builder(
+              itemCount: 1000,
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: UnconstrainedBox(
+                  child: ButtonWidget(
+                    onPressed: () {
+                      setState(() {
+                        count++;
+                      });
+                    },
+                    child: Text('count: $count'),
+                  ),
+                ),
+              ),
+            )
+          : SingleChildScrollView(
+              child: buildCenterColumn(
+                List.generate(
+                  1000,
+                  (index) => Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: ButtonWidget(
+                      onPressed: () {
+                        setState(() {
+                          count++;
+                        });
+                      },
+                      child: Text('count: $count'),
+                    ),
+                  ),
+                ),
               ),
             ),
-          ),
-        ),
-      ),
     );
   }
 }
@@ -78,31 +106,57 @@ class _MaterialButtonTestPage extends StatefulWidget {
 
 class _MaterialButtonTestPageState extends State<_MaterialButtonTestPage> {
   int count = 0;
+  bool flag = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Material Button'),
+        actions: [
+          Switch(
+            value: flag,
+            onChanged: (v) {
+              setState(() {
+                flag = v;
+              });
+            },
+          ),
+        ],
       ),
-      body: SingleChildScrollView(
-        child: buildCenterColumn(
-          List.generate(
-            10000,
-            (index) => Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    count++;
-                  });
-                },
-                child: Text('count: $count'),
+      body: flag
+          ? ListView.builder(
+              itemCount: 1000,
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      count++;
+                    });
+                  },
+                  child: Text('count: $count'),
+                ),
+              ),
+            )
+          : SingleChildScrollView(
+              child: buildCenterColumn(
+                List.generate(
+                  1000,
+                  (index) => Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          count++;
+                        });
+                      },
+                      child: Text('count: $count'),
+                    ),
+                  ),
+                ),
               ),
             ),
-          ),
-        ),
-      ),
     );
   }
 }

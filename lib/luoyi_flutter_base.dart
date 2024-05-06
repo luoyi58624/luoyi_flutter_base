@@ -20,6 +20,8 @@ part 'src/builders/hover.dart';
 
 part 'src/builders/tap.dart';
 
+part 'src/commons/color.dart';
+
 part 'src/commons/model.dart';
 
 part 'src/extensions/color.dart';
