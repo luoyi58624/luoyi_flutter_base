@@ -38,7 +38,7 @@ class FlutterConfigData {
   String? fontFamily;
 
   /// 设置全局普通文字字重，默认w500，flutter原始默认为w400
-  FontWeight defaultFontWeight;
+  FontWeight fontWeight;
 
   /// 头部高度 (appbar、navbar)
   double headerHeight;
@@ -70,7 +70,7 @@ class FlutterConfigData {
   FlutterConfigData({
     this.title = 'Flutter App',
     this.fontFamily,
-    this.defaultFontWeight = FontWeight.w400,
+    this.fontWeight = FontWeight.w400,
     this.headerHeight = 50,
     this.useMaterial3 = true,
     this.radius = 6,
@@ -87,7 +87,7 @@ class FlutterConfigData {
   FlutterConfigData copyWith({
     String? title,
     String? fontFamily,
-    FontWeight? defaultFontWeight,
+    FontWeight? fontWeight,
     double? headerHeight,
     bool? useMaterial3,
     double? radius,
@@ -101,7 +101,7 @@ class FlutterConfigData {
     return FlutterConfigData(
       title: title ?? this.title,
       fontFamily: fontFamily ?? this.fontFamily,
-      defaultFontWeight: defaultFontWeight ?? this.defaultFontWeight,
+      fontWeight: fontWeight ?? this.fontWeight,
       headerHeight: headerHeight ?? this.headerHeight,
       useMaterial3: useMaterial3 ?? this.useMaterial3,
       radius: radius ?? this.radius,

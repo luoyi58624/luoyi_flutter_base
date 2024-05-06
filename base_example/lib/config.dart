@@ -8,7 +8,7 @@ class MobileAppConfigData extends FlutterConfigData {
   MobileAppConfigData({
     super.title,
     super.fontFamily,
-    super.defaultFontWeight,
+    super.fontWeight,
     super.headerHeight,
     super.useMaterial3,
     super.radius,
@@ -25,7 +25,7 @@ class MobileAppConfigData extends FlutterConfigData {
   MobileAppConfigData copyWith({
     String? title,
     String? fontFamily,
-    FontWeight? defaultFontWeight,
+    FontWeight? fontWeight,
     double? headerHeight,
     bool? useMaterial3,
     double? radius,
@@ -40,7 +40,7 @@ class MobileAppConfigData extends FlutterConfigData {
     return MobileAppConfigData(
       title: title ?? this.title,
       fontFamily: fontFamily ?? this.fontFamily,
-      defaultFontWeight: defaultFontWeight ?? this.defaultFontWeight,
+      fontWeight: fontWeight ?? this.fontWeight,
       headerHeight: headerHeight ?? this.headerHeight,
       useMaterial3: useMaterial3 ?? this.useMaterial3,
       radius: radius ?? this.radius,
