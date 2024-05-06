@@ -2,7 +2,7 @@ part of '../luoyi_flutter_base.dart';
 
 extension FlutterThemeExtension on BuildContext {
   /// 根据当前[ThemeMode]获取相应的主题配置
-  FlutterThemeData get currentTheme =>
+  FlutterThemeData get flutterTheme =>
       Theme.of(this).extension<FlutterThemeData>() ??
       (isDarkMode ? FlutterThemeData.darkTheme : FlutterThemeData.theme);
 }
@@ -21,12 +21,9 @@ extension FlutterThemeExtension on BuildContext {
 /// );
 ///
 /// // 使用
-/// Container(color: context.currentTheme),
+/// Container(color: context.flutterTheme),
 /// ```
 class FlutterThemeData extends ThemeExtension<FlutterThemeData> {
-  static Color white = const Color(0xffffffff);
-  static Color black = const Color(0xff000000);
-  static Color transparent = const Color(0x00000000);
   static FlutterThemeData theme = const FlutterThemeData();
   static FlutterThemeData darkTheme = const FlutterThemeData.dark();
 

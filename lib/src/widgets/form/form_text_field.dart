@@ -310,7 +310,7 @@ class FormTextFieldWidgetState extends State<FormTextFieldWidget> {
         fontSize: widget.size != null
             ? labelFontSize[widget.size]
             : labelFontSize[FormInheritedWidget.of(context)?.size] ?? labelFontSize[FormSize.medium]!,
-        fontWeight: context.globalConfig.defaultFontWeight,
+        fontWeight: context.flutterConfig.defaultFontWeight,
       );
 
   @override
@@ -375,17 +375,17 @@ class FormTextFieldWidgetState extends State<FormTextFieldWidget> {
           fontSize: widget.size != null
               ? hintFontSize[widget.size]
               : hintFontSize[FormInheritedWidget.of(context)?.size] ?? hintFontSize[FormSize.medium]!,
-          fontWeight: context.globalConfig.defaultFontWeight,
+          fontWeight: context.flutterConfig.defaultFontWeight,
           color: Colors.grey,
         ),
         errorMaxLines: 3,
         errorStyle: TextStyle(
-          color: context.currentTheme.error,
+          color: context.flutterTheme.error,
           fontSize: (widget.size != null
                   ? hintFontSize[widget.size]
                   : hintFontSize[FormInheritedWidget.of(context)?.size] ?? hintFontSize[FormSize.medium]!)! -
               2,
-          fontWeight: context.globalConfig.defaultFontWeight,
+          fontWeight: context.flutterConfig.defaultFontWeight,
         ),
         prefixIcon: widget.prefixIcon != null
             ? Icon(

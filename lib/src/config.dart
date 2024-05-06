@@ -2,7 +2,7 @@ part of '../luoyi_flutter_base.dart';
 
 extension FlutterConfigExtension on BuildContext {
   /// 根据当前[ThemeMode]获取相应的主题配置
-  FlutterConfigData get globalConfig => FlutterConfig.of(this) ?? FlutterConfigData.globalConfig;
+  FlutterConfigData get flutterConfig => FlutterConfig.of(this) ?? FlutterConfigData.flutterConfig;
 }
 
 /// 注入全局配置
@@ -28,7 +28,7 @@ class FlutterConfig extends InheritedWidget {
 }
 
 class FlutterConfigData {
-  static FlutterConfigData globalConfig = FlutterConfigData();
+  static FlutterConfigData flutterConfig = FlutterConfigData();
 
   /// 应用标题
   String title;

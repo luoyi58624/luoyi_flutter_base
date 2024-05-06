@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage> {
                 return Container(
                   width: 100,
                   height: 100,
-                  color: context.currentTheme.primary.onTap(context, isTap).onHover(context, isHover),
+                  color: context.flutterTheme.primary.onTap(context, isTap).onHover(context, isHover),
                 );
               });
             }),
@@ -100,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                   height: 36,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(6),
-                    color: context.currentTheme.primary.onTap(context, isTap),
+                    color: context.flutterTheme.primary.onTap(context, isTap),
                   ),
                   child: Text('count: $count'),
                 );
@@ -129,13 +129,13 @@ class _HomePageState extends State<HomePage> {
             // Container(
             //   width: 100,
             //   height: 100,
-            //   color: FlutterTheme.currentTheme(context).primary,
+            //   color: FlutterTheme.flutterTheme(context).primary,
             // ),
             // Obx(() {
             //   return Container(
             //     width: 100,
             //     height: 100,
-            //     color: themeController.currentTheme(context).customColor,
+            //     color: themeController.flutterTheme(context).customColor,
             //   );
             // }),
           ],
@@ -172,8 +172,8 @@ class CupertionHomePage extends StatelessWidget {
               Container(
                 width: 100,
                 height: 100,
-                color: context.currentTheme.primary,
-                child: Text('Hello: ${context.currentTheme.primary}'),
+                color: context.flutterTheme.primary,
+                child: Text('Hello: ${context.flutterTheme.primary}'),
               ),
             ],
           ),
