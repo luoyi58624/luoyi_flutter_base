@@ -1,3 +1,5 @@
+import 'package:base_example/pages/button.dart';
+import 'package:base_example/widgets/button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:luoyi_flutter_base/luoyi_flutter_base.dart';
@@ -77,35 +79,42 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Column(
           children: [
-            TapBuilder(builder: (isTap) {
-              return HoverBuilder(builder: (isHover) {
-                return Container(
-                  width: 100,
-                  height: 100,
-                  color: context.flutterTheme.primary.onTap(context, isTap).onHover(context, isHover),
-                );
-              });
-            }),
-            const SizedBox(height: 8),
-            TapBuilder(
-              onTap: () {
-                // setState(() {
-                //   count++;
-                // });
+            ButtonWidget(
+              onPressed: () {
+                context.push(const ButtonTestPage());
               },
-              builder: (isTap) {
-                i(isTap);
-                return Container(
-                  width: 100,
-                  height: 36,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6),
-                    color: context.flutterTheme.primary.onTap(context, isTap),
-                  ),
-                  child: Text('count: $count'),
-                );
-              },
+              child: const Text('button测试页面'),
             ),
+            const SizedBox(height: 8),
+            // TapBuilder(builder: (isTap) {
+            //   return HoverBuilder(builder: (isHover) {
+            //     return Container(
+            //       width: 100,
+            //       height: 100,
+            //       color: context.flutterTheme.primary.onTap(context, isTap).onHover(context, isHover),
+            //     );
+            //   });
+            // }),
+            // const SizedBox(height: 8),
+            // TapBuilder(
+            //   onTap: () {
+            //     setState(() {
+            //       count++;
+            //     });
+            //   },
+            //   builder: (isTap) {
+            //     i(isTap);
+            //     return Container(
+            //       width: 100,
+            //       height: 36,
+            //       decoration: BoxDecoration(
+            //         borderRadius: BorderRadius.circular(6),
+            //         color: context.flutterTheme.primary.onTap(context, isTap),
+            //       ),
+            //       child: Text('count: $count'),
+            //     );
+            //   },
+            // ),
             // Container(
             //   width: 100,
             //   height: 100,

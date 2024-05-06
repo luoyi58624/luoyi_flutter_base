@@ -37,7 +37,7 @@ class FlutterConfigData {
   /// 自定义全局字体
   String? fontFamily;
 
-  /// 设置全局普通文字字重，默认w500，flutter原始默认为w400
+  /// 设置全局普通文字字重，默认w400
   FontWeight fontWeight;
 
   /// 头部高度 (appbar、navbar)
