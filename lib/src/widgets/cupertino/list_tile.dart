@@ -9,7 +9,7 @@ class MyCupertinoListTile extends StatelessWidget {
     this.disabledLeading = false,
     this.leadingIcon,
     this.leadingIconColor,
-    this.leadingWdiget,
+    this.leadingWidget,
     this.additionalInfo,
     this.trailing,
     this.disabledTrailing = false,
@@ -27,7 +27,7 @@ class MyCupertinoListTile extends StatelessWidget {
   final Color? leadingIconColor;
 
   /// 自定义前缀组件，优先级比leadingIcon高
-  final Widget? leadingWdiget;
+  final Widget? leadingWidget;
 
   /// 末尾前的小部件
   final Widget? additionalInfo;
@@ -42,7 +42,7 @@ class MyCupertinoListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget? leading = disabledLeading
         ? null
-        : leadingWdiget ??
+        : leadingWidget ??
             (leadingIcon == null
                 ? Container(
                     decoration: BoxDecoration(
