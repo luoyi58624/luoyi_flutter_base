@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.1.0](https://github.com/luoyi58624/luoyi_flutter_base/compare/v1.0.2...v1.1.0) (2024-05-06)
+
+
+### Features
+
+* globalConfig -&gt; flutterConfig, currentTheme -> flutterTheme ([7ef52f8](https://github.com/luoyi58624/luoyi_flutter_base/commit/7ef52f8b3adeff4966a4a5b619efa46cc01404a5))
+* 添加导航模型 ([6cc2d8f](https://github.com/luoyi58624/luoyi_flutter_base/commit/6cc2d8fe0bea1c4d720a70eeaa4cf84bd3d16eb9))
+
+
+### Bug Fixes
+
+* FlutterConfigData flutterConfig -&gt; config ([8594ecb](https://github.com/luoyi58624/luoyi_flutter_base/commit/8594ecb4fe1744a53e7e8d83586e7d9c9d169d0a))
+* MyCupertinoListTile错别字修复 ([cbe7da5](https://github.com/luoyi58624/luoyi_flutter_base/commit/cbe7da56c7f1212e9ed5fe5ffbc372d77cda5d62))
+
 ## [1.0.2](https://github.com/luoyi58624/luoyi_flutter_base/compare/v1.0.1...v1.0.2) (2024-05-04)
 
 
