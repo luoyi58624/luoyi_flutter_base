@@ -7,7 +7,9 @@ extension FlutterThemeExtension on BuildContext {
       (isDarkMode ? FlutterThemeData.darkTheme : FlutterThemeData.theme);
 }
 
-/// 自定义主题数据，它是基于[MaterialApp]进行拓展的
+/// 自定义主题数据, 它是基于[MaterialApp]进行拓展的, 不管你创建什么类型的App，都建议将[MaterialApp]作为根App，
+/// flutter存在很多其他根App: [CupertinoApp]、[FluentApp]、[MacosApp]，但实际上，
+/// 你使用这些设计系统的组件并非必须使用特定的根App来创建应用, 只需通过[builder]属性注入各自的主题系统即可
 /// ```dart
 /// // 将主题注入到 ThemeData
 /// MaterialApp(
