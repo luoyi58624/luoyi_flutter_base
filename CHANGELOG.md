@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.0](https://github.com/luoyi58624/luoyi_flutter_base/compare/v1.1.0...v1.2.0) (2024-05-06)
+
+
+### Features
+
+* color add getLightnessColor ([b05b1c2](https://github.com/luoyi58624/luoyi_flutter_base/commit/b05b1c207d4fb77b24715ae2a7b5d128d2d3b58f))
+* FlutterConfigData defaultFontWeight -&gt; fontWeight ([34b41d3](https://github.com/luoyi58624/luoyi_flutter_base/commit/34b41d3b66fd7accfc5dbcff9acc07acb2971b4c))
+
 ## [1.1.0](https://github.com/luoyi58624/luoyi_flutter_base/compare/v1.0.2...v1.1.0) (2024-05-06)
 
 
