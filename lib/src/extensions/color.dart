@@ -9,6 +9,14 @@ extension FlutterColorExtension on Color {
   int get hsp =>
       math.sqrt(0.299 * (red * red) + 0.587 * (green * green) + 0.114 * (blue * blue)).ceilToDouble().toInt();
 
+  /// 根据明亮度获取一个新的颜色，lightness以1为基准，小于1则颜色变暗，大于1则颜色变亮
+  Color getLightnessColor(double lightness) {
+    final originalColor = HSLColor.fromColor(this);
+    final newLightness = originalColor.lightness * lightness;
+    final newColor = originalColor.withLightness(newLightness.clamp(0.0, 1.0));
+    return newColor.toColor();
+  }
+
   /// Color对象转16进制字符串格式颜色
   /// * noLeading 是否不加 # 前缀
   String toHex([bool? noLeading]) => '${noLeading == true ? '' : '#'}'
