@@ -1,11 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:luoyi_flutter_base/luoyi_flutter_base.dart';
-import 'package:mini_getx/mini_getx.dart';
 
 import 'pages/home.dart';
 
-void main() {
+void main() async {
+  await initApp();
+  Get.put(AppDataController());
   runApp(const MainApp());
 }
 
@@ -14,48 +14,28 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return materialApp();
+    return Obx(() {
+      return AppData(
+        theme: AppDataController.of.theme.value,
+        darkTheme: AppDataController.of.darkTheme.value,
+        config: AppDataController.of.config.value,
+        child: materialApp(),
+      );
+    });
   }
 
   Widget materialApp() {
-    return MaterialApp(
-      theme: ThemeData(brightness: Brightness.light).copyWith(extensions: [
-        const FlutterThemeData(),
-      ]),
-      darkTheme: ThemeData(brightness: Brightness.dark).copyWith(extensions: [
-        const FlutterThemeData.dark(),
-      ]),
-      home: const HomePage(),
-    );
-  }
-
-  Widget cupertinoApp() {
-    return const CupertinoApp(
-      theme: CupertinoThemeData(),
-      home: CupertionHomePage(),
-    );
-  }
-
-  Widget demoApp() {
-    return MaterialApp(
-      theme: ThemeData(
-        brightness: Brightness.light,
-        pageTransitionsTheme: const PageTransitionsTheme(builders: {
-          TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-          TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
-        }),
-      ).copyWith(extensions: [
-        const FlutterThemeData(),
-      ]),
-      darkTheme: ThemeData(brightness: Brightness.dark).copyWith(extensions: [
-        const FlutterThemeData.dark(),
-      ]),
-      home: const CupertionHomePage(),
-      builder: (context, child) => CupertinoTheme(
-        data: CupertinoThemeData(brightness: context.theme.brightness),
-        child: child!,
-      ),
-    );
+    return Builder(builder: (context) {
+      return MaterialApp(
+        theme: ThemeDataUtil.buildThemeData(context, Brightness.light),
+        darkTheme: ThemeDataUtil.buildThemeData(context, Brightness.dark),
+        home: const HomePage(),
+        localizationsDelegates: const [
+          GlobalWidgetsLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+      );
+    });
   }
 }

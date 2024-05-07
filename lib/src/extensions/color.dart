@@ -55,7 +55,8 @@ extension FlutterColorExtension on Color {
   Color brighten(int scale) {
     assert(scale > 0 && scale <= 100);
     var p = scale / 100;
-    return Color.fromARGB(alpha, red + ((255 - red) * p).round(), green + ((255 - green) * p).round(), blue + ((255 - blue) * p).round());
+    return Color.fromARGB(
+        alpha, red + ((255 - red) * p).round(), green + ((255 - green) * p).round(), blue + ((255 - blue) * p).round());
   }
 
   /// 将颜色变得更暗
@@ -73,8 +74,10 @@ extension FlutterColorExtension on Color {
   }
 
   /// 当用户鼠标悬停时的颜色
-  Color onHover(BuildContext context, bool flag, [int? scale]) => flag ? deepen(scale ?? context.flutterConfig.hoverScale) : this;
+  Color onHover(BuildContext context, bool flag, [int? scale]) =>
+      flag ? deepen(scale ?? context.configData.hoverScale) : this;
 
   /// 当用户鼠标、手指按下时的颜色
-  Color onTap(BuildContext context, bool flag, [int? scale]) => flag ? deepen(scale ?? context.flutterConfig.tapScale) : this;
+  Color onTap(BuildContext context, bool flag, [int? scale]) =>
+      flag ? deepen(scale ?? context.configData.tapScale) : this;
 }

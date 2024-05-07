@@ -1,44 +1,11 @@
-part of '../luoyi_flutter_base.dart';
-
-extension FlutterConfigExtension on BuildContext {
-  /// 根据当前[ThemeMode]获取相应的主题配置
-  FlutterConfigData get flutterConfig => FlutterConfig.of(this) ?? FlutterConfigData.config;
-}
-
-/// 注入全局配置
-class FlutterConfig extends InheritedWidget {
-  const FlutterConfig({
-    super.key,
-    required super.child,
-    required this.configData,
-  });
-
-  final FlutterConfigData configData;
-
-  /// 拿到全局配置数据
-  static FlutterConfigData? of(BuildContext context) {
-    final FlutterConfig? result = context.dependOnInheritedWidgetOfExactType<FlutterConfig>();
-    return result?.configData;
-  }
-
-  @override
-  bool updateShouldNotify(FlutterConfig oldWidget) {
-    return true;
-  }
-}
+part of '../../luoyi_flutter_base.dart';
 
 class FlutterConfigData {
   /// 默认的配置实例
   static FlutterConfigData config = FlutterConfigData();
 
-  /// 应用标题
-  String title;
-
   /// 自定义全局字体
   String? fontFamily;
-
-  /// 设置全局普通文字字重，默认w400
-  FontWeight fontWeight;
 
   /// 头部高度 (appbar、navbar)
   double headerHeight;
@@ -58,59 +25,91 @@ class FlutterConfigData {
   /// 启用半透明状态栏，默认false
   bool translucenceStatusBar;
 
-  /// 是否开启性能视图
-  bool showPerformanceOverlay;
-
   /// 鼠标悬停背景颜色变化级别：1-100
   int hoverScale;
 
   /// 手指点击、鼠标点击背景颜色变化级别：1-100
   int tapScale;
 
+  /// Material2 配置
+  late M2ConfigData m2ConfigData;
+
+  /// Material3 配置
+  late M3ConfigData m3ConfigData;
+
   FlutterConfigData({
-    this.title = 'Flutter App',
     this.fontFamily,
-    this.fontWeight = FontWeight.w400,
     this.headerHeight = 50,
     this.useMaterial3 = true,
     this.radius = 6,
     this.centerTitle,
     this.enableRipple = true,
     this.translucenceStatusBar = false,
-    this.showPerformanceOverlay = false,
     this.hoverScale = 8,
     this.tapScale = 14,
+    M2ConfigData? m2ConfigData,
+    M3ConfigData? m3ConfigData,
   }) {
     centerTitle = centerTitle ?? (GetPlatform.isMobile ? true : false);
+    this.m2ConfigData = m2ConfigData ?? M2ConfigData.config;
+    this.m3ConfigData = m3ConfigData ?? M3ConfigData.config;
   }
 
   FlutterConfigData copyWith({
-    String? title,
     String? fontFamily,
-    FontWeight? fontWeight,
     double? headerHeight,
     bool? useMaterial3,
     double? radius,
     bool? centerTitle,
     bool? enableRipple,
     bool? translucenceStatusBar,
-    bool? showPerformanceOverlay,
     int? hoverScale,
     int? tapScale,
   }) {
     return FlutterConfigData(
-      title: title ?? this.title,
       fontFamily: fontFamily ?? this.fontFamily,
-      fontWeight: fontWeight ?? this.fontWeight,
       headerHeight: headerHeight ?? this.headerHeight,
       useMaterial3: useMaterial3 ?? this.useMaterial3,
       radius: radius ?? this.radius,
       centerTitle: centerTitle ?? this.centerTitle,
       enableRipple: enableRipple ?? this.enableRipple,
       translucenceStatusBar: translucenceStatusBar ?? this.translucenceStatusBar,
-      showPerformanceOverlay: showPerformanceOverlay ?? this.showPerformanceOverlay,
       hoverScale: hoverScale ?? this.hoverScale,
       tapScale: tapScale ?? this.tapScale,
     );
   }
+}
+
+/// Material2全局配置
+class M2ConfigData {
+  /// 默认的配置实例
+  static M2ConfigData config = M2ConfigData();
+
+  M2ConfigData({
+    this.appBarElevation = 0,
+    this.appBarScrollElevation = 2,
+  });
+
+  /// AppBar海拔高度
+  double appBarElevation;
+
+  /// AppBar滚动时海拔高度
+  double appBarScrollElevation;
+}
+
+/// Material3全局配置
+class M3ConfigData {
+  /// 默认的配置实例
+  static M3ConfigData config = M3ConfigData();
+
+  M3ConfigData({
+    this.appBarElevation = 0,
+    this.appBarScrollElevation = 0,
+  });
+
+  /// AppBar海拔高度
+  double appBarElevation;
+
+  /// AppBar滚动时海拔高度
+  double appBarScrollElevation;
 }

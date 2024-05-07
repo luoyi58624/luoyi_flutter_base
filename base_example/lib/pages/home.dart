@@ -4,7 +4,6 @@ import 'package:base_example/pages/hook.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:luoyi_flutter_base/luoyi_flutter_base.dart';
-import 'package:mini_getx/mini_getx.dart';
 
 import '../widgets/button.dart';
 import 'button.dart';
@@ -24,10 +23,21 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('首页'),
+        actions: [
+          Obx(
+            () => Switch(
+              value: AppDataController.of.config.value.useMaterial3,
+              onChanged: (v) {
+                AppDataController.of.config.value = AppDataController.of.config.value.copyWith(useMaterial3: v);
+              },
+            ),
+          ),
+        ],
       ),
       body: Center(
         child: Column(
           children: [
+            const SizedBox(height: 8),
             ButtonWidget(
               onPressed: () {
                 context.push(const ButtonTestPage());
@@ -124,8 +134,8 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class CupertionHomePage extends StatelessWidget {
-  const CupertionHomePage({super.key});
+class CupertinoHomePage extends StatelessWidget {
+  const CupertinoHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -151,8 +161,8 @@ class CupertionHomePage extends StatelessWidget {
               Container(
                 width: 100,
                 height: 100,
-                color: context.flutterTheme.primary,
-                child: Text('Hello: ${context.flutterTheme.primary}'),
+                color: context.currentThemeData.primary,
+                child: Text('Hello: ${context.currentThemeData.primary}'),
               ),
             ],
           ),

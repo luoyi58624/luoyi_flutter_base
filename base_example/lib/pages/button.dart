@@ -32,7 +32,7 @@ class ButtonTestPage extends StatelessWidget {
 }
 
 class _MyButtonTestPage extends StatefulWidget {
-  const _MyButtonTestPage({super.key});
+  const _MyButtonTestPage();
 
   @override
   State<_MyButtonTestPage> createState() => _MyButtonTestPageState();
@@ -60,7 +60,7 @@ class _MyButtonTestPageState extends State<_MyButtonTestPage> {
       ),
       body: flag
           ? ListView.builder(
-              itemCount: 1000,
+              itemCount: 100,
               itemBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.only(bottom: 8),
                 child: UnconstrainedBox(
@@ -78,7 +78,7 @@ class _MyButtonTestPageState extends State<_MyButtonTestPage> {
           : SingleChildScrollView(
               child: buildCenterColumn(
                 List.generate(
-                  1000,
+                  100,
                   (index) => Padding(
                     padding: const EdgeInsets.only(bottom: 8),
                     child: ButtonWidget(
@@ -98,7 +98,7 @@ class _MyButtonTestPageState extends State<_MyButtonTestPage> {
 }
 
 class _MaterialButtonTestPage extends StatefulWidget {
-  const _MaterialButtonTestPage({super.key});
+  const _MaterialButtonTestPage();
 
   @override
   State<_MaterialButtonTestPage> createState() => _MaterialButtonTestPageState();
@@ -126,9 +126,8 @@ class _MaterialButtonTestPageState extends State<_MaterialButtonTestPage> {
       ),
       body: flag
           ? ListView.builder(
-              itemCount: 1000,
-              itemBuilder: (context, index) => Padding(
-                padding: const EdgeInsets.only(bottom: 8),
+              itemCount: 100,
+              itemBuilder: (context, index) => UnconstrainedBox(
                 child: ElevatedButton(
                   onPressed: () {
                     setState(() {
@@ -142,17 +141,14 @@ class _MaterialButtonTestPageState extends State<_MaterialButtonTestPage> {
           : SingleChildScrollView(
               child: buildCenterColumn(
                 List.generate(
-                  1000,
-                  (index) => Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          count++;
-                        });
-                      },
-                      child: Text('count: $count'),
-                    ),
+                  100,
+                  (index) => ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        count++;
+                      });
+                    },
+                    child: Text('count: $count'),
                   ),
                 ),
               ),

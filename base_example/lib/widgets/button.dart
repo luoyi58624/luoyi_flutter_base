@@ -23,12 +23,12 @@ class ButtonWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           decoration: BoxDecoration(
             color: $color.onTap(context, isTap),
-            borderRadius: BorderRadius.circular(context.flutterConfig.radius),
+            borderRadius: BorderRadius.circular(context.configData.radius),
           ),
           child: DefaultTextStyle(
             style: TextStyle(
               color: $color.isDark ? Colors.white : Colors.black,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontUtil.medium,
             ),
             child: child,
           ),

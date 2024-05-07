@@ -22,7 +22,7 @@ class HookTestPage extends HookWidget {
         ),
         const SizedBox(height: 8),
         ButtonWidget(
-          color: context.flutterTheme.primary,
+          color: context.currentThemeData.primary,
           onPressed: () {
             count.value++;
           },
@@ -30,7 +30,7 @@ class HookTestPage extends HookWidget {
         ),
         const SizedBox(height: 8),
         ButtonWidget(
-          color: context.flutterTheme.success,
+          color: context.currentThemeData.success,
           onPressed: () {
             count.value++;
           },
@@ -38,7 +38,7 @@ class HookTestPage extends HookWidget {
         ),
         const SizedBox(height: 8),
         ButtonWidget(
-          color: context.flutterTheme.warning,
+          color: context.currentThemeData.warning,
           onPressed: () {
             count.value++;
           },
@@ -46,7 +46,7 @@ class HookTestPage extends HookWidget {
         ),
         const SizedBox(height: 8),
         ButtonWidget(
-          color: context.flutterTheme.error,
+          color: context.currentThemeData.error,
           onPressed: () {
             count.value++;
           },
@@ -54,7 +54,7 @@ class HookTestPage extends HookWidget {
         ),
         const SizedBox(height: 8),
         ButtonWidget(
-          color: context.flutterTheme.info,
+          color: context.currentThemeData.info,
           onPressed: () {
             count.value++;
           },

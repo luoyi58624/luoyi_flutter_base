@@ -171,9 +171,7 @@ class _FormItemWidgetState extends State<FormItemWidget> {
         FormInheritedWidget.of(context)?.labelStyle ??
         TextStyle(
             fontSize: labelFontSize[FormInheritedWidget.of(context)?.size],
-            fontWeight: FormInheritedWidget.of(context)?.labelBold ?? false
-                ? FontWeight.bold
-                : context.flutterConfig.fontWeight);
+            fontWeight: FormInheritedWidget.of(context)?.labelBold ?? false ? FontWeight.bold : FontUtil.medium);
     AlignmentGeometry labelAlignment = Alignment.centerLeft;
     if (!isColumn) {
       LabelAlign $labelAlign = widget.labelAlign ?? FormInheritedWidget.of(context)?.labelAlign ?? LabelAlign.start;

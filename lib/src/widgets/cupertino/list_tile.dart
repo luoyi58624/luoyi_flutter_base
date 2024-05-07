@@ -62,10 +62,7 @@ class MyCupertinoListTile extends StatelessWidget {
               }
             },
       leading: leading,
-      title: Text(
-        title,
-        style: TextStyle(fontSize: 16, fontWeight: context.flutterConfig.fontWeight),
-      ),
+      title: Text(title, style: const TextStyle(fontSize: 16)),
       padding: const EdgeInsets.symmetric(horizontal: 16),
       additionalInfo: additionalInfo,
       trailing: disabledTrailing ? null : trailing ?? const CupertinoListTileChevron(),

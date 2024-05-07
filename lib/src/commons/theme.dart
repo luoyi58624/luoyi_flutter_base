@@ -1,11 +1,4 @@
-part of '../luoyi_flutter_base.dart';
-
-extension FlutterThemeExtension on BuildContext {
-  /// 根据当前[ThemeMode]获取相应的主题配置
-  FlutterThemeData get flutterTheme =>
-      Theme.of(this).extension<FlutterThemeData>() ??
-      (isDarkMode ? FlutterThemeData.darkTheme : FlutterThemeData.theme);
-}
+part of '../../luoyi_flutter_base.dart';
 
 /// 自定义主题数据, 它是基于[MaterialApp]进行拓展的, 不管你创建什么类型的App，都建议将[MaterialApp]作为根App，
 /// flutter存在很多其他根App: [CupertinoApp]、[FluentApp]、[MacosApp]，但实际上，
