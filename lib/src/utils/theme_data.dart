@@ -56,8 +56,8 @@ class ThemeDataUtil {
         elevation: 0,
         backgroundColor: theme.bgColor2,
         selectedItemColor: theme.primary,
-        unselectedLabelStyle: TextStyle(fontWeight: FontUtil.medium, fontSize: 12),
-        selectedLabelStyle: TextStyle(fontWeight: FontUtil.medium, fontSize: 12),
+        unselectedLabelStyle: TextStyle(fontFamily: config.fontFamily, fontWeight: FontUtil.medium, fontSize: 12),
+        selectedLabelStyle: TextStyle(fontFamily: config.fontFamily, fontWeight: FontUtil.medium, fontSize: 12),
         unselectedIconTheme: IconThemeData(size: 26, color: theme.iconColor2),
         selectedIconTheme: IconThemeData(size: 26, color: theme.primary),
       ),
@@ -89,11 +89,13 @@ class ThemeDataUtil {
       ),
       listTileTheme: ListTileThemeData(
         titleTextStyle: TextStyle(
+          fontFamily: config.fontFamily,
           fontWeight: FontUtil.medium,
           color: theme.textColor,
           fontSize: 15,
         ),
         subtitleTextStyle: TextStyle(
+          fontFamily: config.fontFamily,
           fontWeight: FontUtil.medium,
           color: theme.textColor2,
           fontSize: 13,
@@ -109,7 +111,7 @@ class ThemeDataUtil {
         scrolledUnderElevation:
             themeData.useMaterial3 ? (config.m3ConfigData.appBarScrollShade ? 4 : 0) : config.m2ConfigData.appbarScrollElevation,
         backgroundColor: theme.headerColor,
-        titleTextStyle: TextStyle(fontSize: 18, fontWeight: FontUtil.medium, color: theme.textColor),
+        titleTextStyle: TextStyle(fontFamily: config.fontFamily, fontSize: 18, fontWeight: FontUtil.medium, color: theme.textColor),
         iconTheme: IconThemeData(color: theme.iconColor),
       ),
       iconTheme: IconThemeData(color: theme.iconColor),
@@ -117,14 +119,31 @@ class ThemeDataUtil {
 
     if (GetPlatform.isWindows) {
       i('加载谷歌字体');
+      // themeData = themeData.copyWith(
+      //   textTheme: GoogleFonts.notoSansScTextTheme(themeData.textTheme),
+      // );
+    } else {
       themeData = themeData.copyWith(
-        textTheme: GoogleFonts.notoSansScTextTheme(themeData.textTheme),
-      );
-    }else{
-      themeData = themeData.copyWith(
-        textTheme: GoogleFonts.notoSansScTextTheme(themeData.textTheme),
-        // textTheme: GoogleFonts.longCangTextTheme(themeData.textTheme),
-      );
+          // textTheme: GoogleFonts.notoSansScTextTheme(themeData.textTheme),
+          // textTheme: GoogleFonts.notoSansScTextTheme(themeData.textTheme).copyWith(
+          // displayLarge: TextStyle(fontWeight: FontUtil.normal, color: theme.textColor),
+          // displayMedium: TextStyle(fontWeight: FontUtil.normal, color: theme.textColor),
+          // displaySmall: TextStyle(fontWeight: FontUtil.normal, color: theme.textColor),
+          // headlineLarge: TextStyle(fontWeight: FontUtil.medium, color: theme.textColor),
+          // headlineMedium: TextStyle(fontWeight: FontUtil.medium, color: theme.textColor),
+          // headlineSmall: TextStyle(fontWeight: FontUtil.medium, color: theme.textColor),
+          // titleLarge: TextStyle(fontWeight: FontUtil.bold, color: theme.textColor),
+          // titleMedium: TextStyle(fontWeight: FontUtil.bold, color: theme.textColor),
+          // titleSmall: TextStyle(fontWeight: FontUtil.bold, color: theme.textColor),
+          // bodyLarge: TextStyle(fontWeight: FontUtil.normal, color: theme.textColor),
+          // bodyMedium: TextStyle(fontWeight: FontUtil.normal, color: theme.textColor),
+          // bodySmall: TextStyle(fontWeight: FontUtil.normal, color: theme.textColor),
+          // labelLarge: TextStyle(fontWeight: FontUtil.medium, color: theme.textColor),
+          // labelMedium: TextStyle(fontWeight: FontUtil.medium, color: theme.textColor),
+          // labelSmall: TextStyle(fontWeight: FontUtil.medium, color: theme.textColor),
+          // ),
+          // textTheme: GoogleFonts.longCangTextTheme(themeData.textTheme),
+          );
     }
     return themeData;
   }

@@ -6,7 +6,7 @@ import 'global.dart';
 
 void main() async {
   await initApp();
-  Get.put(AppDataController());
+  Get.put(AppDataController(config: FlutterConfigData(fontFamily: 'NotoSansSC')));
   Get.put(GlobalController());
   runApp(const MainApp());
 }

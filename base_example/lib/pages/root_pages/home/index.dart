@@ -61,121 +61,107 @@ class _HomeRootPageState extends State<HomeRootPage> {
           ),
         ],
       ),
-      body: Center(
-        child: Column(
-          children: [
-            const SizedBox(height: 8),
-            SelectableText(S.of(context).helloWorld),
-            const SizedBox(height: 8),
-            const Text(
-              'Hello，你好呀，按钮，工具，启动',
-              style: TextStyle(
-                fontWeight: FontWeight.w200,
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              const SizedBox(height: 8),
+              SelectableText(S.of(context).helloWorld),
+              ...FontWeight.values.map(
+                (e) => Text(
+                  '$e: Hello，你好呀，按钮，工具，启动',
+                  style: TextStyle(
+                    fontWeight: e,
+                  ),
+                ),
               ),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              'Hello，你好呀，按钮，工具，启动',
-              style: TextStyle(
-                fontWeight: FontWeight.w300,
+              const SizedBox(height: 8),
+              ...FontWeight.values.map(
+                (e) => Text(
+                  '$e: Hello，你好呀，按钮，工具，启动',
+                  style: GoogleFonts.notoSansSc(
+                    textStyle: TextStyle(
+                      fontWeight: e,
+                    ),
+                  ),
+                ),
               ),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              'Hello，你好呀，按钮，工具，启动',
-              style: TextStyle(
-                fontWeight: FontWeight.w400,
+              const SizedBox(height: 8),
+              Text(
+                'Hello，你好呀，按钮，工具，启动',
+                style: GoogleFonts.notoSansSc(),
               ),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              'Hello，你好呀，按钮，工具，启动',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
+              const SizedBox(height: 8),
+              Text(
+                'Hello，你好呀，按钮，工具，启动',
+                style: GoogleFonts.notoSansSc(
+                  textStyle: const TextStyle(
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              'Hello，你好呀，按钮，工具，启动',
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
+              const SizedBox(height: 8),
+              Text(
+                'Hello，你好呀，按钮，工具，启动',
+                style: GoogleFonts.longCang(
+                  textStyle: const TextStyle(
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'Hello，你好呀，按钮，工具，启动',
-              style: GoogleFonts.notoSansSc(),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'Hello，你好呀，按钮，工具，启动',
-              style: GoogleFonts.notoSansSc(
-                textStyle: const TextStyle(
+              const SizedBox(height: 8),
+              Text(
+                'Hello，你好呀，按钮，工具，启动',
+                style: GoogleFonts.notoSansJp(
+                  textStyle: const TextStyle(
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'Hello，你好呀，按钮，工具，启动',
+                style: TextStyle(
+                  fontFamily: 'NotoSansSC',
                   fontWeight: FontWeight.w500,
                 ),
               ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'Hello，你好呀，按钮，工具，启动',
-              style: GoogleFonts.longCang(
-                textStyle: const TextStyle(
-                  fontWeight: FontWeight.w500,
-                ),
+              const SizedBox(height: 8),
+              Text(
+                'Hello，你好呀',
+                style: GoogleFonts.lobster(),
               ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'Hello，你好呀，按钮，工具，启动',
-              style: GoogleFonts.notoSansJp(
-                textStyle: const TextStyle(
-                  fontWeight: FontWeight.w500,
-                ),
+              const SizedBox(height: 8),
+              ButtonWidget(
+                onPressed: () {
+                  context.push(const ButtonTestPage());
+                },
+                child: const Text('button测试页面'),
               ),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              'Hello，你好呀，按钮，工具，启动',
-              style: TextStyle(
-                fontFamily: 'NotoSansSC',
-                fontWeight: FontWeight.w500,
+              const SizedBox(height: 8),
+              ButtonWidget(
+                onPressed: () {
+                  context.push(const HookTestPage());
+                },
+                child: const Text('hook测试页面'),
               ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'Hello，你好呀',
-              style: GoogleFonts.lobster(),
-            ),
-            const SizedBox(height: 8),
-            ButtonWidget(
-              onPressed: () {
-                context.push(const ButtonTestPage());
-              },
-              child: const Text('button测试页面'),
-            ),
-            const SizedBox(height: 8),
-            ButtonWidget(
-              onPressed: () {
-                context.push(const HookTestPage());
-              },
-              child: const Text('hook测试页面'),
-            ),
-            const SizedBox(height: 8),
-            ButtonWidget(
-              onPressed: () {
-                context.push(const ColorTestPage());
-              },
-              child: const Text('color测试页面'),
-            ),
-            const SizedBox(height: 8),
-            ButtonWidget(
-              onPressed: () {
-                context.push(const AllColorTestPage());
-              },
-              child: const Text('all color测试页面'),
-            ),
-            const SizedBox(height: 8),
-          ],
+              const SizedBox(height: 8),
+              ButtonWidget(
+                onPressed: () {
+                  context.push(const ColorTestPage());
+                },
+                child: const Text('color测试页面'),
+              ),
+              const SizedBox(height: 8),
+              ButtonWidget(
+                onPressed: () {
+                  context.push(const AllColorTestPage());
+                },
+                child: const Text('all color测试页面'),
+              ),
+              const SizedBox(height: 8),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(

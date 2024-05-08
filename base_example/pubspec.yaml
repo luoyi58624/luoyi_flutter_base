@@ -30,5 +30,19 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+  fonts:
+    - family: NotoSansSC
+      fonts:
+        - asset: assets/fonts/NotoSansSC-Medium.ttf
+        - asset: assets/fonts/NotoSansSC-Bold.ttf
+        - asset: assets/fonts/NotoSansSC-SemiBold.ttf
+#        - asset: assets/fonts/NotoSansSC-Black.ttf
+#        - asset: assets/fonts/NotoSansSC-ExtraBold.ttf
+#        - asset: assets/fonts/NotoSansSC-ExtraLight.ttf
+#        - asset: assets/fonts/NotoSansSC-Light.ttf
+#        - asset: assets/fonts/NotoSansSC-Regular.ttf
+
+#        - asset: assets/fonts/NotoSansSC-Thin.ttf
+
 flutter_intl:
   enabled: true

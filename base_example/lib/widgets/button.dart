@@ -27,6 +27,7 @@ class ButtonWidget extends StatelessWidget {
           ),
           child: DefaultTextStyle(
             style: TextStyle(
+              fontFamily: context.configData.fontFamily,
               color: $color.isDark ? Colors.white : Colors.black,
               fontWeight: FontUtil.medium,
             ),

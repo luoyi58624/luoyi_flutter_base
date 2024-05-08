@@ -58,7 +58,7 @@ class FontUtil {
       }
       // Windows平台默认不包含w500字重，中等字重调整为400
       else if (GetPlatform.isWindows) {
-        _setFontWeight(FontWeight.w400, FontWeight.w500, FontWeight.bold);
+        _setFontWeight(FontWeight.w500, FontWeight.w500, FontWeight.w600);
       } else {
         _setFontWeight(FontWeight.w400, FontWeight.w500, FontWeight.bold);
       }
@@ -133,4 +133,8 @@ class FontUtil {
       labelSmall: TextStyle(fontWeight: medium, color: theme.textColor),
     );
   }
+
+
 }
+
+
