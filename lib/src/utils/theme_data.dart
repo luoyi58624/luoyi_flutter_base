@@ -118,8 +118,12 @@ class ThemeDataUtil {
     if (GetPlatform.isWindows) {
       i('加载谷歌字体');
       themeData = themeData.copyWith(
-        // textTheme: GoogleFonts.notoSansScTextTheme(themeData.textTheme),
-        textTheme: GoogleFonts.lobsterTextTheme(themeData.textTheme),
+        textTheme: GoogleFonts.notoSansScTextTheme(themeData.textTheme),
+      );
+    }else{
+      themeData = themeData.copyWith(
+        textTheme: GoogleFonts.notoSansScTextTheme(themeData.textTheme),
+        // textTheme: GoogleFonts.longCangTextTheme(themeData.textTheme),
       );
     }
     return themeData;

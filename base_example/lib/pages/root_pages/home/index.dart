@@ -65,16 +65,69 @@ class _HomeRootPageState extends State<HomeRootPage> {
         child: Column(
           children: [
             const SizedBox(height: 8),
-            SelectableText(
-              S.of(context).helloWorld,
-              style: const TextStyle(
+            SelectableText(S.of(context).helloWorld),
+            const SizedBox(height: 8),
+            const Text(
+              'Hello，你好呀，按钮，工具，启动',
+              style: TextStyle(
+                fontWeight: FontWeight.w200,
+              ),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Hello，你好呀，按钮，工具，启动',
+              style: TextStyle(
+                fontWeight: FontWeight.w300,
+              ),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Hello，你好呀，按钮，工具，启动',
+              style: TextStyle(
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Hello，你好呀，按钮，工具，启动',
+              style: TextStyle(
                 fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Hello，你好呀，按钮，工具，启动',
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
               ),
             ),
             const SizedBox(height: 8),
             Text(
               'Hello，你好呀，按钮，工具，启动',
+              style: GoogleFonts.notoSansSc(),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Hello，你好呀，按钮，工具，启动',
               style: GoogleFonts.notoSansSc(
+                textStyle: const TextStyle(
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Hello，你好呀，按钮，工具，启动',
+              style: GoogleFonts.longCang(
+                textStyle: const TextStyle(
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Hello，你好呀，按钮，工具，启动',
+              style: GoogleFonts.notoSansJp(
                 textStyle: const TextStyle(
                   fontWeight: FontWeight.w500,
                 ),
