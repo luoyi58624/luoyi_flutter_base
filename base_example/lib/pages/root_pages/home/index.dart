@@ -75,62 +75,57 @@ class _HomeRootPageState extends State<HomeRootPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 8),
-              ...FontWeight.values.map(
-                (e) => Text(
-                  '$e: Hello，你好呀，按钮，工具，启动',
-                  style: GoogleFonts.notoSansSc(
-                    textStyle: TextStyle(
-                      fontWeight: e,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Hello，你好呀，按钮，工具，启动',
-                style: GoogleFonts.notoSansSc(),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Hello，你好呀，按钮，工具，启动',
-                style: GoogleFonts.notoSansSc(
-                  textStyle: const TextStyle(
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Hello，你好呀，按钮，工具，启动',
-                style: GoogleFonts.longCang(
-                  textStyle: const TextStyle(
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Hello，你好呀，按钮，工具，启动',
-                style: GoogleFonts.notoSansJp(
-                  textStyle: const TextStyle(
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                'Hello，你好呀，按钮，工具，启动',
-                style: TextStyle(
-                  fontFamily: 'NotoSansSC',
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Hello，你好呀',
-                style: GoogleFonts.lobster(),
-              ),
+              // const SizedBox(height: 8),
+              // ...FontWeight.values.map(
+              //   (e) => Text(
+              //     '$e: Hello，你好呀，按钮，工具，启动',
+              //     style: GoogleFonts.notoSansSc(
+              //       textStyle: TextStyle(
+              //         fontWeight: e,
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // const SizedBox(height: 8),
+              // Text(
+              //   'Hello，你好呀，按钮，工具，启动',
+              //   style: GoogleFonts.notoSansSc(),
+              // ),
+              // const SizedBox(height: 8),
+              // Text(
+              //   'Hello，你好呀，按钮，工具，启动',
+              //   style: GoogleFonts.notoSansSc(
+              //     textStyle: const TextStyle(
+              //       fontWeight: FontWeight.w500,
+              //     ),
+              //   ),
+              // ),
+              // const SizedBox(height: 8),
+              // Text(
+              //   'Hello，你好呀，按钮，工具，启动',
+              //   style: GoogleFonts.longCang(
+              //     textStyle: const TextStyle(
+              //       fontWeight: FontWeight.w500,
+              //     ),
+              //   ),
+              // ),
+              // const SizedBox(height: 8),
+              // Text(
+              //   'Hello，你好呀，按钮，工具，启动',
+              //   style: GoogleFonts.notoSansJp(
+              //     textStyle: const TextStyle(
+              //       fontWeight: FontWeight.w500,
+              //     ),
+              //   ),
+              // ),
+              // const SizedBox(height: 8),
+              // const Text(
+              //   'Hello，你好呀，按钮，工具，启动',
+              //   style: TextStyle(
+              //     fontFamily: 'NotoSansSC',
+              //     fontWeight: FontWeight.w500,
+              //   ),
+              // ),
               const SizedBox(height: 8),
               ButtonWidget(
                 onPressed: () {
