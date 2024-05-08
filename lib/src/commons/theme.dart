@@ -19,7 +19,10 @@ part of '../../luoyi_flutter_base.dart';
 /// Container(color: context.flutterTheme),
 /// ```
 class FlutterThemeData extends ThemeExtension<FlutterThemeData> {
+  /// 默认亮色主题对象
   static FlutterThemeData theme = const FlutterThemeData();
+
+  /// 默认暗色主题对象
   static FlutterThemeData darkTheme = const FlutterThemeData.dark();
 
   /// 主要颜色
@@ -40,11 +43,17 @@ class FlutterThemeData extends ThemeExtension<FlutterThemeData> {
   /// 背景色
   final Color bgColor;
 
-  /// 二级背景色，这是一个用于与背景色做一个轻微的区分
+  /// 二级背景色
   final Color bgColor2;
 
-  /// 三级背景色，这是一个用于与背景色做一个稍重的区分
+  /// 三级背景色
   final Color bgColor3;
+
+  /// 四级背景色
+  final Color bgColor4;
+
+  /// 五级背景色
+  final Color bgColor5;
 
   /// 头部导航栏背景颜色
   final Color headerColor;
@@ -63,8 +72,10 @@ class FlutterThemeData extends ThemeExtension<FlutterThemeData> {
     this.warning = const Color.fromARGB(255, 245, 158, 11),
     this.error = const Color.fromARGB(255, 239, 68, 68),
     this.bgColor = const Color(0xffffffff),
-    this.bgColor2 = const Color(0xfff6f6f6),
-    this.bgColor3 = const Color(0xffdde1e3),
+    this.bgColor2 = const Color(0xfffafafa),
+    this.bgColor3 = const Color(0xfff6f6f6),
+    this.bgColor4 = const Color(0xfff1f3f5),
+    this.bgColor5 = const Color(0xffe5e7eb),
     this.headerColor = const Color(0xfff3f4f6),
     this.textColor = const Color(0xff1f1f1f),
     this.iconColor = const Color(0xff1f1f1f),
@@ -80,6 +91,8 @@ class FlutterThemeData extends ThemeExtension<FlutterThemeData> {
     this.bgColor = const Color(0xff181818),
     this.bgColor2 = const Color(0xff2d2d2d),
     this.bgColor3 = const Color(0xff4a4a4a),
+    this.bgColor4 = const Color(0xff52525B),
+    this.bgColor5 = const Color(0xff71717A),
     this.headerColor = const Color(0xff404040),
     this.textColor = const Color(0xfff6f6f6),
     this.iconColor = const Color(0xfff6f6f6),

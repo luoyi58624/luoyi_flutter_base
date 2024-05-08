@@ -11,6 +11,7 @@ extension AppDataExtension on BuildContext {
 }
 
 class AppData extends InheritedWidget {
+  /// App全局数据共享，一般配合[ThemeDataUtil]工具类构建主题，该组件可选，如果不提供，则使用默认实例构建主题
   const AppData({
     super.key,
     required super.child,

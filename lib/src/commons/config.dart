@@ -1,7 +1,7 @@
 part of '../../luoyi_flutter_base.dart';
 
 class FlutterConfigData {
-  /// 默认的配置实例
+  /// 默认的配置对象
   static FlutterConfigData config = FlutterConfigData();
 
   /// 自定义全局字体
@@ -22,9 +22,6 @@ class FlutterConfigData {
   /// 是否开启全局波纹，默认true
   bool enableRipple;
 
-  /// 启用半透明状态栏，默认false
-  bool translucenceStatusBar;
-
   /// 鼠标悬停背景颜色变化级别：1-100
   int hoverScale;
 
@@ -39,12 +36,11 @@ class FlutterConfigData {
 
   FlutterConfigData({
     this.fontFamily,
-    this.headerHeight = 50,
+    this.headerHeight = 44,
     this.useMaterial3 = true,
     this.radius = 6,
     this.centerTitle,
     this.enableRipple = true,
-    this.translucenceStatusBar = false,
     this.hoverScale = 8,
     this.tapScale = 14,
     M2ConfigData? m2ConfigData,
@@ -62,7 +58,6 @@ class FlutterConfigData {
     double? radius,
     bool? centerTitle,
     bool? enableRipple,
-    bool? translucenceStatusBar,
     int? hoverScale,
     int? tapScale,
   }) {
@@ -73,7 +68,6 @@ class FlutterConfigData {
       radius: radius ?? this.radius,
       centerTitle: centerTitle ?? this.centerTitle,
       enableRipple: enableRipple ?? this.enableRipple,
-      translucenceStatusBar: translucenceStatusBar ?? this.translucenceStatusBar,
       hoverScale: hoverScale ?? this.hoverScale,
       tapScale: tapScale ?? this.tapScale,
     );
@@ -85,16 +79,32 @@ class M2ConfigData {
   /// 默认的配置实例
   static M2ConfigData config = M2ConfigData();
 
-  M2ConfigData({
-    this.appBarElevation = 0,
-    this.appBarScrollElevation = 2,
-  });
-
   /// AppBar海拔高度
   double appBarElevation;
 
   /// AppBar滚动时海拔高度
   double appBarScrollElevation;
+
+  /// 是否启用半透明状态栏，默认false
+  bool translucenceStatusBar;
+
+  M2ConfigData({
+    this.appBarElevation = 0,
+    this.appBarScrollElevation = 2,
+    this.translucenceStatusBar = false,
+  });
+
+  M2ConfigData copyWith({
+    double? appBarElevation,
+    double? appBarScrollElevation,
+    bool? translucenceStatusBar,
+  }) {
+    return M2ConfigData(
+      appBarElevation: appBarElevation ?? this.appBarElevation,
+      appBarScrollElevation: appBarScrollElevation ?? this.appBarScrollElevation,
+      translucenceStatusBar: translucenceStatusBar ?? this.translucenceStatusBar,
+    );
+  }
 }
 
 /// Material3全局配置
@@ -102,14 +112,18 @@ class M3ConfigData {
   /// 默认的配置实例
   static M3ConfigData config = M3ConfigData();
 
+  /// 滚动时 AppBar 背景颜色改变，这里默认false，取消官方的默认行为
+  bool appBarScrollShade;
+
   M3ConfigData({
-    this.appBarElevation = 0,
-    this.appBarScrollElevation = 0,
+    this.appBarScrollShade = false,
   });
 
-  /// AppBar海拔高度
-  double appBarElevation;
-
-  /// AppBar滚动时海拔高度
-  double appBarScrollElevation;
+  M3ConfigData copyWith({
+    bool? appBarScrollShade,
+  }) {
+    return M3ConfigData(
+      appBarScrollShade: appBarScrollShade ?? this.appBarScrollShade,
+    );
+  }
 }

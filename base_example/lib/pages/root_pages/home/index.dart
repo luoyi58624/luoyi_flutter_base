@@ -1,42 +1,55 @@
 import 'package:base_example/pages/all_color.dart';
 import 'package:base_example/pages/color.dart';
 import 'package:base_example/pages/hook.dart';
+import 'package:base_example/pages/root_pages/home/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:luoyi_flutter_base/luoyi_flutter_base.dart';
 
-import '../widgets/button.dart';
-import 'button.dart';
+import '../../../global.dart';
+import '../../../widgets/button.dart';
+import '../../button.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomeRootPage extends StatefulWidget {
+  const HomeRootPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomeRootPage> createState() => _HomeRootPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeRootPageState extends State<HomeRootPage> {
   int count = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('首页'),
+        title: Text(S.of(context).bottomLabelHome),
         actions: [
-          Obx(
-            () => Switch(
-              value: AppDataController.of.config.value.useMaterial3,
-              onChanged: (v) {
-                AppDataController.of.config.value = AppDataController.of.config.value.copyWith(useMaterial3: v);
-              },
-            ),
+          PopupMenuButton<String>(
+            enableFeedback: true,
+            offset: Offset(0, context.configData.headerHeight),
+            popUpAnimationStyle: AnimationStyle.noAnimation,
+            icon: const Icon(Icons.translate),
+            onSelected: (value) {
+              S.load(Locale(value));
+              WidgetsBinding.instance.reassembleApplication();
+            },
+            itemBuilder: (context) {
+              return GlobalController.of.locale.keys
+                  .map((key) => PopupMenuItem(
+                        value: GlobalController.of.locale[key]!,
+                        child: Text(key),
+                      ))
+                  .toList();
+            },
           ),
         ],
       ),
       body: Center(
         child: Column(
           children: [
+            const SizedBox(height: 8),
+            Text(S.of(context).helloWorld),
             const SizedBox(height: 8),
             ButtonWidget(
               onPressed: () {
@@ -129,6 +142,12 @@ class _HomePageState extends State<HomePage> {
             // }),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.push(const ThemePage());
+        },
+        child: const Icon(Icons.color_lens),
       ),
     );
   }

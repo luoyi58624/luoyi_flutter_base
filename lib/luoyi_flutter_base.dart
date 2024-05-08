@@ -13,11 +13,6 @@ import 'package:mini_getx/mini_getx.dart';
 
 export 'package:luoyi_dart_base/luoyi_dart_base.dart';
 
-export 'package:mini_getx/mini_getx.dart';
-
-// flutter官方国际化库
-export 'package:flutter_localizations/flutter_localizations.dart';
-
 part 'src/commons/theme.dart';
 
 part 'src/commons/config.dart';

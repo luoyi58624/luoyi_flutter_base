@@ -1,0 +1,9 @@
+{
+  "title": "Flutter基础应用",
+  "helloWorld": "你好！",
+  "bottomLabelHome": "首页",
+  "bottomLabelMaterial": "安卓",
+  "bottomLabelCupertino": "苹果",
+  "bottomLabelCustom": "自定义",
+  "bottomLabelUser": "我的"
+}

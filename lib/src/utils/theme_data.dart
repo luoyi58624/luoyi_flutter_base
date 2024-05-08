@@ -3,8 +3,9 @@ part of '../../luoyi_flutter_base.dart';
 class ThemeDataUtil {
   ThemeDataUtil._();
 
-  /// 构建[MaterialApp]主题
-  /// * context 用于获取[AppData]实例，请注意传递的[context]作用域
+  /// 根据注入的[AppData]构建[MaterialApp]主题，如果你没有包裹[AppData]，则使用默认值构建
+  /// * context 用于获取[AppData]实例，如果在当前[Widget]下构建[AppData]和[MaterialApp]，
+  /// 请使用[Builder]小部件包裹[MaterialApp]，这是常见的[context]作用域问题，请注意规避
   static ThemeData buildThemeData(BuildContext context, Brightness brightness) {
     AppData? appData = AppData.maybeOf(context);
 
@@ -17,6 +18,16 @@ class ThemeDataUtil {
       brightness: brightness,
       seedColor: theme.primary,
     );
+
+    if (config.useMaterial3) {
+      SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 0)));
+    } else {
+      if (config.m2ConfigData.translucenceStatusBar) {
+        SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 200)));
+      } else {
+        SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 0)));
+      }
+    }
 
     final themeData = ThemeData(
       useMaterial3: config.useMaterial3,
@@ -40,8 +51,9 @@ class ThemeDataUtil {
         TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
       }),
       scaffoldBackgroundColor: theme.bgColor,
-      cardTheme: const CardTheme(
+      cardTheme: CardTheme(
         surfaceTintColor: Colors.transparent,
+        color: theme.bgColor2,
       ),
       inputDecorationTheme: const InputDecorationTheme(
         border: OutlineInputBorder(
@@ -59,9 +71,9 @@ class ThemeDataUtil {
       appBarTheme: themeData.appBarTheme.copyWith(
         centerTitle: config.centerTitle,
         toolbarHeight: config.headerHeight,
-        elevation: themeData.useMaterial3 ? config.m3ConfigData.appBarElevation : config.m2ConfigData.appBarElevation,
+        elevation: themeData.useMaterial3 ? 0 : config.m2ConfigData.appBarElevation,
         scrolledUnderElevation: themeData.useMaterial3
-            ? config.m3ConfigData.appBarScrollElevation
+            ? (config.m3ConfigData.appBarScrollShade ? 4 : 0)
             : config.m2ConfigData.appBarScrollElevation,
         backgroundColor: theme.headerColor,
         titleTextStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: theme.iconColor),
