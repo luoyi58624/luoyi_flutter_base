@@ -26,5 +26,21 @@
   "bottomLabelUser": "User",
   "@bottomLabelUser": {
     "description": "Bottom navbar label - User"
+  },
+  "appbarLabelMaterial": "Material Components",
+  "@appbarLabelMaterial": {
+    "description": "appbar label - Material"
+  },
+  "appbarLabelCupertino": "Cupertino Components",
+  "@appbarLabelCupertino": {
+    "description": "appbar label - Cupertino"
+  },
+  "appbarLabelCustom": "Custom Components",
+  "@appbarLabelCustom": {
+    "description": "appbar label - Custom"
+  },
+  "appbarLabelUser": "Hihi, Luoyi",
+  "@appbarLabelUser": {
+    "description": "appbar label - User"
   }
 }

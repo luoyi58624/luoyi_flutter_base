@@ -33,6 +33,8 @@ part 'src/extensions/router.dart';
 
 part 'src/extensions/string.dart';
 
+part 'src/extensions/text.dart';
+
 part 'src/pages/simple_page.dart';
 
 part 'src/utils/animation.dart';
@@ -60,6 +62,8 @@ part 'src/app.dart';
 part 'src/widgets/badge.dart';
 
 part 'src/widgets/flex_wrap.dart';
+
+part 'src/widgets/flexible_title.dart';
 
 part 'src/widgets/scroll_ripper.dart';
 

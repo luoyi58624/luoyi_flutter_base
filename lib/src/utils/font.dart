@@ -84,26 +84,51 @@ class FontUtil {
     }
   }
 
-  /// 根据底层默认样式重置字重，只是将[FontWeight.w400]、[FontWeight.w500]设置为[normal]、[medium]
+  /// material文字排版主题，关于M3的字体排版规范请查看：https://m3.material.io/styles/typography/applying-type
+  ///
+  /// 参数解析：
+  /// * display 屏幕上最大的文本，用于海报
+  /// * headline 大字标题，用于显示简短、突出的问题，例如：Dialog标题
   ///
   /// 提示：flutter底层会将用户的配置进行合并，你无需担心影响其他默认值
-  static TextTheme get _textTheme {
+  static TextTheme _textTheme(FlutterThemeData theme) {
     return TextTheme(
-      displayLarge: TextStyle(fontWeight: normal),
-      displayMedium: TextStyle(fontWeight: normal),
-      displaySmall: TextStyle(fontWeight: normal),
-      headlineLarge: TextStyle(fontWeight: normal),
-      headlineMedium: TextStyle(fontWeight: normal),
-      headlineSmall: TextStyle(fontWeight: normal),
-      titleLarge: TextStyle(fontWeight: bold),
-      titleMedium: TextStyle(fontWeight: bold),
-      titleSmall: TextStyle(fontWeight: bold),
-      bodyLarge: TextStyle(fontWeight: normal),
-      bodyMedium: TextStyle(fontWeight: normal),
-      bodySmall: TextStyle(fontWeight: normal),
-      labelLarge: TextStyle(fontWeight: medium),
-      labelMedium: TextStyle(fontWeight: medium),
-      labelSmall: TextStyle(fontWeight: medium),
+      displayLarge: TextStyle(fontWeight: normal, color: theme.textColor),
+      displayMedium: TextStyle(fontWeight: normal, color: theme.textColor),
+      displaySmall: TextStyle(fontWeight: normal, color: theme.textColor),
+      headlineLarge: TextStyle(fontWeight: medium, color: theme.textColor),
+      headlineMedium: TextStyle(fontWeight: medium, color: theme.textColor),
+      headlineSmall: TextStyle(fontWeight: medium, color: theme.textColor),
+      titleLarge: TextStyle(fontWeight: bold, color: theme.textColor),
+      titleMedium: TextStyle(fontWeight: bold, color: theme.textColor),
+      titleSmall: TextStyle(fontWeight: bold, color: theme.textColor),
+      bodyLarge: TextStyle(fontWeight: normal, color: theme.textColor),
+      bodyMedium: TextStyle(fontWeight: normal, color: theme.textColor),
+      bodySmall: TextStyle(fontWeight: normal, color: theme.textColor),
+      labelLarge: TextStyle(fontWeight: medium, color: theme.textColor),
+      labelMedium: TextStyle(fontWeight: medium, color: theme.textColor),
+      labelSmall: TextStyle(fontWeight: medium, color: theme.textColor),
+    );
+  }
+
+  /// material2字体主题
+  static TextTheme _m2TextTheme(FlutterThemeData theme) {
+    return TextTheme(
+      displayLarge: TextStyle(fontWeight: normal, color: theme.textColor),
+      displayMedium: TextStyle(fontWeight: normal, color: theme.textColor),
+      displaySmall: TextStyle(fontWeight: normal, color: theme.textColor),
+      headlineLarge: TextStyle(fontWeight: normal, color: theme.textColor),
+      headlineMedium: TextStyle(fontWeight: normal, color: theme.textColor),
+      headlineSmall: TextStyle(fontWeight: normal, color: theme.textColor),
+      titleLarge: TextStyle(fontWeight: medium, color: theme.textColor),
+      titleMedium: TextStyle(fontWeight: medium, color: theme.textColor),
+      titleSmall: TextStyle(fontWeight: medium, color: theme.textColor),
+      bodyLarge: TextStyle(fontWeight: normal, color: theme.textColor),
+      bodyMedium: TextStyle(fontWeight: normal, color: theme.textColor),
+      bodySmall: TextStyle(fontWeight: normal, color: theme.textColor),
+      labelLarge: TextStyle(fontWeight: medium, color: theme.textColor),
+      labelMedium: TextStyle(fontWeight: medium, color: theme.textColor),
+      labelSmall: TextStyle(fontWeight: medium, color: theme.textColor),
     );
   }
 }

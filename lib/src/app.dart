@@ -8,6 +8,10 @@ extension AppDataExtension on BuildContext {
 
   /// 全局配置数据
   FlutterConfigData get configData => AppData.maybeOf(this)?.config ?? FlutterConfigData.config;
+
+  /// Appbar高度
+  double get appbarHeight =>
+      configData.useMaterial3 ? configData.m3ConfigData.appbarHeight : configData.m2ConfigData.appbarHeight;
 }
 
 class AppData extends InheritedWidget {

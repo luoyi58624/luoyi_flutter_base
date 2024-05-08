@@ -9,17 +9,14 @@ class ThemeDataUtil {
   static ThemeData buildThemeData(BuildContext context, Brightness brightness) {
     AppData? appData = AppData.maybeOf(context);
 
-    FlutterThemeData theme = brightness == Brightness.light
-        ? (appData?.theme ?? FlutterThemeData.theme)
-        : (appData?.darkTheme ?? FlutterThemeData.darkTheme);
+    bool isDark = brightness == Brightness.dark;
+    FlutterThemeData theme =
+        isDark ? (appData?.darkTheme ?? FlutterThemeData.darkTheme) : (appData?.theme ?? FlutterThemeData.theme);
     FlutterConfigData config = appData?.config ?? FlutterConfigData.config;
 
-    ColorScheme colorScheme = ColorScheme.fromSeed(
-      brightness: brightness,
-      seedColor: theme.primary,
-    );
+    bool isM3 = config.useMaterial3;
 
-    if (config.useMaterial3) {
+    if (isM3) {
       SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 0)));
     } else {
       if (config.m2ConfigData.translucenceStatusBar) {
@@ -30,12 +27,17 @@ class ThemeDataUtil {
     }
 
     final themeData = ThemeData(
-      useMaterial3: config.useMaterial3,
-      primarySwatch: config.useMaterial3 ? null : theme.primary.toMaterialColor(),
-      colorScheme: config.useMaterial3 ? colorScheme : null,
+      useMaterial3: isM3,
+      colorScheme: isM3 ? ColorScheme.fromSeed(brightness: brightness, seedColor: theme.primary) : null,
+      primarySwatch: isM3 ? null : theme.primary.toMaterialColor(),
+      brightness: isM3 ? null : brightness,
+      // 设置默认字体
+      fontFamily: config.fontFamily,
+      // 设置优先加载的字体族列表
       fontFamilyFallback: FontUtil._fontFamilyFallback,
       // 设置文字主题样式
-      textTheme: FontUtil._textTheme,
+      textTheme: isM3 ? FontUtil._textTheme(theme) : FontUtil._m2TextTheme(theme),
+      primaryTextTheme: isM3 ? FontUtil._textTheme(theme) : FontUtil._m2TextTheme(theme),
       // 扩展主题
       extensions: [theme],
       // 是否禁用波纹
@@ -51,9 +53,22 @@ class ThemeDataUtil {
         TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
       }),
       scaffoldBackgroundColor: theme.bgColor,
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        elevation: 0,
+        backgroundColor: theme.bgColor2,
+        selectedItemColor: theme.primary,
+        unselectedLabelStyle: TextStyle(fontWeight: FontUtil.bold, fontSize: 12),
+        selectedLabelStyle: TextStyle(fontWeight: FontUtil.bold, fontSize: 12),
+        unselectedIconTheme: IconThemeData(size: 26, color: theme.iconColor2),
+        selectedIconTheme: IconThemeData(size: 26, color: theme.primary),
+      ),
       cardTheme: CardTheme(
-        surfaceTintColor: Colors.transparent,
         color: theme.bgColor2,
+        // m3会将此颜色和color进行混合从而产生一个新的material颜色 (生成一个淡淡的Primary Color)，
+        // 这里将其重置为透明，表示卡片用默认color展示
+        surfaceTintColor: Colors.transparent,
+        elevation: isDark ? 4 : 1,
+        margin: const EdgeInsets.all(8),
       ),
       inputDecorationTheme: const InputDecorationTheme(
         border: OutlineInputBorder(
@@ -65,18 +80,37 @@ class ThemeDataUtil {
         shape: Border.all(width: 0, style: BorderStyle.none),
         collapsedShape: Border.all(width: 0, style: BorderStyle.none),
       ),
+      popupMenuTheme: PopupMenuThemeData(
+        color: theme.bgColor3,
+        surfaceTintColor: Colors.transparent,
+        elevation: isDark ? 8 : 2,
+        enableFeedback: true,
+        textStyle: TextStyle(fontSize: 14, color: theme.textColor, fontWeight: FontUtil.medium),
+      ),
+      listTileTheme: ListTileThemeData(
+        titleTextStyle: TextStyle(
+          fontWeight: FontUtil.medium,
+          color: theme.textColor,
+          fontSize: 15,
+        ),
+        subtitleTextStyle: TextStyle(
+          fontWeight: FontUtil.medium,
+          color: theme.textColor2,
+          fontSize: 13,
+        ),
+      ),
     );
 
     return themeData.copyWith(
       appBarTheme: themeData.appBarTheme.copyWith(
         centerTitle: config.centerTitle,
-        toolbarHeight: config.headerHeight,
-        elevation: themeData.useMaterial3 ? 0 : config.m2ConfigData.appBarElevation,
+        toolbarHeight: isM3 ? config.m3ConfigData.appbarHeight : config.m2ConfigData.appbarHeight,
+        elevation: themeData.useMaterial3 ? 0 : config.m2ConfigData.appbarElevation,
         scrolledUnderElevation: themeData.useMaterial3
             ? (config.m3ConfigData.appBarScrollShade ? 4 : 0)
-            : config.m2ConfigData.appBarScrollElevation,
+            : config.m2ConfigData.appbarScrollElevation,
         backgroundColor: theme.headerColor,
-        titleTextStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: theme.iconColor),
+        titleTextStyle: TextStyle(fontSize: 18, fontWeight: FontUtil.bold, color: theme.textColor),
         iconTheme: IconThemeData(color: theme.iconColor),
       ),
       iconTheme: IconThemeData(color: theme.iconColor),

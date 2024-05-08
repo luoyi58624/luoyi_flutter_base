@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
+import '../../../global.dart';
+
 class CupertinoRootPage extends StatefulWidget {
   const CupertinoRootPage({super.key});
 
@@ -11,8 +13,8 @@ class _CupertinoRootPageState extends State<CupertinoRootPage> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('Cupertino Component'),
+      navigationBar: CupertinoNavigationBar(
+        middle: Text(S.of(context).appbarLabelCupertino),
       ),
       child: Container(),
     );

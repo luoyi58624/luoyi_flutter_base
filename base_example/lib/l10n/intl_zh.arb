@@ -5,5 +5,9 @@
   "bottomLabelMaterial": "安卓",
   "bottomLabelCupertino": "苹果",
   "bottomLabelCustom": "自定义",
-  "bottomLabelUser": "我的"
+  "bottomLabelUser": "我的",
+  "appbarLabelMaterial": "Material组件",
+  "appbarLabelCupertino": "Cupertino组件",
+  "appbarLabelCustom": "自定义组件",
+  "appbarLabelUser": "哈喽，Luoyi"
 }

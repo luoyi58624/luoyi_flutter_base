@@ -48,6 +48,42 @@ Widget buildListViewDemo({
   );
 }
 
+Widget buildCardCell(
+  BuildContext context, {
+  required String title,
+}) {
+  return Card(
+    child: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            child: Text('基础组件', style: context.h4),
+          ),
+          Column(
+            children: [
+              ListTile(
+                onTap: () {},
+                dense: true,
+                title: const Text('Button 按钮', style: TextStyle(fontSize: 15)),
+                trailing: const Icon(Icons.keyboard_arrow_right),
+              ),
+              ListTile(
+                onTap: () {},
+                dense: true,
+                title: const Text('Switch 开关', style: TextStyle(fontSize: 15)),
+                trailing: const Icon(Icons.keyboard_arrow_right),
+              ),
+            ],
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
 Widget buildPopupMenuButton({
   Offset? offset,
 }) {

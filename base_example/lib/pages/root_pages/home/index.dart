@@ -2,7 +2,6 @@ import 'package:base_example/pages/all_color.dart';
 import 'package:base_example/pages/color.dart';
 import 'package:base_example/pages/hook.dart';
 import 'package:base_example/pages/root_pages/home/theme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../global.dart';
@@ -25,9 +24,25 @@ class _HomeRootPageState extends State<HomeRootPage> {
       appBar: AppBar(
         title: Text(S.of(context).bottomLabelHome),
         actions: [
+          IconButton(
+            onPressed: () {
+              AppDataController.of.themeMode.value = context.isDarkMode ? ThemeMode.light : ThemeMode.dark;
+            },
+            icon: Icon(context.isDarkMode ? Icons.dark_mode : Icons.light_mode),
+          ),
+          Obx(
+            () => IconButton(
+              onPressed: () {
+                AppDataController.of.config.value = AppDataController.of.config.value
+                    .copyWith(useMaterial3: !AppDataController.of.config.value.useMaterial3);
+              },
+              icon: Icon(
+                  AppDataController.of.config.value.useMaterial3 ? Icons.looks_3_outlined : Icons.looks_two_outlined),
+            ),
+          ),
           PopupMenuButton<String>(
             enableFeedback: true,
-            offset: Offset(0, context.configData.headerHeight),
+            offset: Offset(0, context.appbarHeight + 4),
             popUpAnimationStyle: AnimationStyle.noAnimation,
             icon: const Icon(Icons.translate),
             onSelected: (value) {
@@ -37,6 +52,7 @@ class _HomeRootPageState extends State<HomeRootPage> {
             itemBuilder: (context) {
               return GlobalController.of.locale.keys
                   .map((key) => PopupMenuItem(
+                        height: 40,
                         value: GlobalController.of.locale[key]!,
                         child: Text(key),
                       ))
@@ -49,7 +65,7 @@ class _HomeRootPageState extends State<HomeRootPage> {
         child: Column(
           children: [
             const SizedBox(height: 8),
-            Text(S.of(context).helloWorld),
+            SelectableText(S.of(context).helloWorld),
             const SizedBox(height: 8),
             ButtonWidget(
               onPressed: () {
@@ -79,67 +95,6 @@ class _HomeRootPageState extends State<HomeRootPage> {
               child: const Text('all color测试页面'),
             ),
             const SizedBox(height: 8),
-            // TapBuilder(builder: (isTap) {
-            //   return HoverBuilder(builder: (isHover) {
-            //     return Container(
-            //       width: 100,
-            //       height: 100,
-            //       color: context.flutterTheme.primary.onTap(context, isTap).onHover(context, isHover),
-            //     );
-            //   });
-            // }),
-            // const SizedBox(height: 8),
-            // TapBuilder(
-            //   onTap: () {
-            //     setState(() {
-            //       count++;
-            //     });
-            //   },
-            //   builder: (isTap) {
-            //     i(isTap);
-            //     return Container(
-            //       width: 100,
-            //       height: 36,
-            //       decoration: BoxDecoration(
-            //         borderRadius: BorderRadius.circular(6),
-            //         color: context.flutterTheme.primary.onTap(context, isTap),
-            //       ),
-            //       child: Text('count: $count'),
-            //     );
-            //   },
-            // ),
-            // Container(
-            //   width: 100,
-            //   height: 100,
-            //   color: FlutterTheme.theme(context).primary,
-            //   child: Text('primary: ${FlutterTheme.theme(context).primary}'),
-            // ),
-            // Obx(() {
-            //   return Container(
-            //     width: 100,
-            //     height: 100,
-            //     color: themeController.darkTheme.primary,
-            //   );
-            // }),
-            // Obx(() {
-            //   return Container(
-            //     width: 100,
-            //     height: 100,
-            //     color: themeController.theme.customColor,
-            //   );
-            // }),
-            // Container(
-            //   width: 100,
-            //   height: 100,
-            //   color: FlutterTheme.flutterTheme(context).primary,
-            // ),
-            // Obx(() {
-            //   return Container(
-            //     width: 100,
-            //     height: 100,
-            //     color: themeController.flutterTheme(context).customColor,
-            //   );
-            // }),
           ],
         ),
       ),
@@ -150,76 +105,5 @@ class _HomeRootPageState extends State<HomeRootPage> {
         child: const Icon(Icons.color_lens),
       ),
     );
-  }
-}
-
-class CupertinoHomePage extends StatelessWidget {
-  const CupertinoHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    i(Theme.of(context).extension<FlutterThemeData>());
-    i(context.isDarkMode);
-    return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('首页'),
-      ),
-      child: SafeArea(
-        child: Center(
-          child: Column(
-            children: [
-              CupertinoButton.filled(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    CupertinoPageRoute(builder: (context) => const DemoPage()),
-                  );
-                },
-                child: Text('Hello: ${CupertinoTheme.of(context).brightness}'),
-              ),
-              const SizedBox(height: 8),
-              Container(
-                width: 100,
-                height: 100,
-                color: context.currentThemeData.primary,
-                child: Text('Hello: ${context.currentThemeData.primary}'),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class ChildPage extends StatelessWidget {
-  const ChildPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('子页面'),
-        previousPageTitle: '首页',
-      ),
-      child: Center(
-        child: CupertinoButton.filled(
-          onPressed: () {
-            Navigator.of(context).push(
-              CupertinoPageRoute(builder: (context) => const ChildPage()),
-            );
-          },
-          child: Text('Hello: ${CupertinoTheme.of(context).brightness}'),
-        ),
-      ),
-    );
-  }
-}
-
-class DemoPage extends StatelessWidget {
-  const DemoPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
   }
 }

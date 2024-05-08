@@ -37,16 +37,6 @@ class _RootPageState extends State<RootPage> {
           });
         },
         currentIndex: currentIndex,
-        unselectedFontSize: 12,
-        selectedFontSize: 12,
-        unselectedLabelStyle: TextStyle(
-          fontWeight: FontUtil.medium,
-        ),
-        iconSize: 26,
-        selectedItemColor: context.currentThemeData.primary,
-        selectedLabelStyle: const TextStyle(
-          fontWeight: FontWeight.bold,
-        ),
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(

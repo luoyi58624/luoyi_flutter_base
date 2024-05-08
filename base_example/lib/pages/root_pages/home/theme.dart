@@ -34,20 +34,6 @@ class _ThemePageState extends State<ThemePage> {
         mainAxisSize: MainAxisSize.min,
         children: [
           ListTile(
-            onTap: () {
-              AppDataController.of.themeMode.value = ThemeMode.dark;
-            },
-            title: const Text('启用Material3'),
-            trailing: Obx(
-              () => Switch(
-                value: AppDataController.of.config.value.useMaterial3,
-                onChanged: (v) {
-                  AppDataController.of.config.value = AppDataController.of.config.value.copyWith(useMaterial3: v);
-                },
-              ),
-            ),
-          ),
-          ListTile(
             title: const Text('开启性能监控'),
             trailing: Obx(
               () => Switch(

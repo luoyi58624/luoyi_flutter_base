@@ -22,6 +22,12 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "appbarLabelCupertino":
+            MessageLookupByLibrary.simpleMessage("Cupertino组件"),
+        "appbarLabelCustom": MessageLookupByLibrary.simpleMessage("自定义组件"),
+        "appbarLabelMaterial":
+            MessageLookupByLibrary.simpleMessage("Material组件"),
+        "appbarLabelUser": MessageLookupByLibrary.simpleMessage("哈喽，Luoyi"),
         "bottomLabelCupertino": MessageLookupByLibrary.simpleMessage("苹果"),
         "bottomLabelCustom": MessageLookupByLibrary.simpleMessage("自定义"),
         "bottomLabelHome": MessageLookupByLibrary.simpleMessage("首页"),

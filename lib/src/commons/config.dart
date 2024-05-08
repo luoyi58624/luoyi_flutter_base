@@ -7,9 +7,6 @@ class FlutterConfigData {
   /// 自定义全局字体
   String? fontFamily;
 
-  /// 头部高度 (appbar、navbar)
-  double headerHeight;
-
   /// 是否启用material3，默认true
   bool useMaterial3;
 
@@ -29,6 +26,9 @@ class FlutterConfigData {
   int tapScale;
 
   /// Material2 配置
+  late TextSizeConfigData textSizeConfigData;
+
+  /// Material2 配置
   late M2ConfigData m2ConfigData;
 
   /// Material3 配置
@@ -36,24 +36,24 @@ class FlutterConfigData {
 
   FlutterConfigData({
     this.fontFamily,
-    this.headerHeight = 44,
     this.useMaterial3 = true,
     this.radius = 6,
     this.centerTitle,
     this.enableRipple = true,
     this.hoverScale = 8,
     this.tapScale = 14,
+    TextSizeConfigData? textSizeConfigData,
     M2ConfigData? m2ConfigData,
     M3ConfigData? m3ConfigData,
   }) {
     centerTitle = centerTitle ?? (GetPlatform.isMobile ? true : false);
+    this.textSizeConfigData = textSizeConfigData ?? TextSizeConfigData.config;
     this.m2ConfigData = m2ConfigData ?? M2ConfigData.config;
     this.m3ConfigData = m3ConfigData ?? M3ConfigData.config;
   }
 
   FlutterConfigData copyWith({
     String? fontFamily,
-    double? headerHeight,
     bool? useMaterial3,
     double? radius,
     bool? centerTitle,
@@ -63,7 +63,6 @@ class FlutterConfigData {
   }) {
     return FlutterConfigData(
       fontFamily: fontFamily ?? this.fontFamily,
-      headerHeight: headerHeight ?? this.headerHeight,
       useMaterial3: useMaterial3 ?? this.useMaterial3,
       radius: radius ?? this.radius,
       centerTitle: centerTitle ?? this.centerTitle,
@@ -74,34 +73,80 @@ class FlutterConfigData {
   }
 }
 
+/// 文字大小配置
+class TextSizeConfigData {
+  /// 默认的配置实例
+  static TextSizeConfigData config = TextSizeConfigData();
+
+  double h1;
+  double h2;
+  double h3;
+  double h4;
+  double h5;
+  double h6;
+
+  TextSizeConfigData({
+    this.h1 = 28,
+    this.h2 = 24,
+    this.h3 = 20,
+    this.h4 = 18,
+    this.h5 = 16,
+    this.h6 = 14,
+  });
+
+  TextSizeConfigData copyWith({
+    double? h1,
+    double? h2,
+    double? h3,
+    double? h4,
+    double? h5,
+    double? h6,
+  }) {
+    return TextSizeConfigData(
+      h1: h1 ?? this.h1,
+      h2: h2 ?? this.h2,
+      h3: h3 ?? this.h3,
+      h4: h4 ?? this.h4,
+      h5: h5 ?? this.h5,
+      h6: h6 ?? this.h6,
+    );
+  }
+}
+
 /// Material2全局配置
 class M2ConfigData {
   /// 默认的配置实例
   static M2ConfigData config = M2ConfigData();
 
+  /// M2 Appbar高度
+  double appbarHeight;
+
   /// AppBar海拔高度
-  double appBarElevation;
+  double appbarElevation;
 
   /// AppBar滚动时海拔高度
-  double appBarScrollElevation;
+  double appbarScrollElevation;
 
   /// 是否启用半透明状态栏，默认false
   bool translucenceStatusBar;
 
   M2ConfigData({
-    this.appBarElevation = 0,
-    this.appBarScrollElevation = 2,
+    this.appbarHeight = 50,
+    this.appbarElevation = 0,
+    this.appbarScrollElevation = 2,
     this.translucenceStatusBar = false,
   });
 
   M2ConfigData copyWith({
-    double? appBarElevation,
-    double? appBarScrollElevation,
+    double? appbarHeight,
+    double? appbarElevation,
+    double? appbarScrollElevation,
     bool? translucenceStatusBar,
   }) {
     return M2ConfigData(
-      appBarElevation: appBarElevation ?? this.appBarElevation,
-      appBarScrollElevation: appBarScrollElevation ?? this.appBarScrollElevation,
+      appbarHeight: appbarHeight ?? this.appbarHeight,
+      appbarElevation: appbarElevation ?? this.appbarElevation,
+      appbarScrollElevation: appbarScrollElevation ?? this.appbarScrollElevation,
       translucenceStatusBar: translucenceStatusBar ?? this.translucenceStatusBar,
     );
   }
@@ -112,17 +157,23 @@ class M3ConfigData {
   /// 默认的配置实例
   static M3ConfigData config = M3ConfigData();
 
+  /// M3 Appbar高度
+  double appbarHeight;
+
   /// 滚动时 AppBar 背景颜色改变，这里默认false，取消官方的默认行为
   bool appBarScrollShade;
 
   M3ConfigData({
+    this.appbarHeight = 44,
     this.appBarScrollShade = false,
   });
 
   M3ConfigData copyWith({
+    double? appbarHeight,
     bool? appBarScrollShade,
   }) {
     return M3ConfigData(
+      appbarHeight: appbarHeight ?? this.appbarHeight,
       appBarScrollShade: appBarScrollShade ?? this.appBarScrollShade,
     );
   }

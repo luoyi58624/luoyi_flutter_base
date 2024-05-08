@@ -5,7 +5,6 @@ class MobileAppConfigData extends FlutterConfigData {
 
   MobileAppConfigData({
     super.fontFamily,
-    super.headerHeight,
     super.useMaterial3,
     super.radius,
     super.centerTitle,
@@ -18,7 +17,6 @@ class MobileAppConfigData extends FlutterConfigData {
   @override
   MobileAppConfigData copyWith({
     String? fontFamily,
-    double? headerHeight,
     bool? useMaterial3,
     double? radius,
     bool? centerTitle,
@@ -30,7 +28,6 @@ class MobileAppConfigData extends FlutterConfigData {
   }) {
     return MobileAppConfigData(
       fontFamily: fontFamily ?? this.fontFamily,
-      headerHeight: headerHeight ?? this.headerHeight,
       useMaterial3: useMaterial3 ?? this.useMaterial3,
       radius: radius ?? this.radius,
       centerTitle: centerTitle ?? this.centerTitle,

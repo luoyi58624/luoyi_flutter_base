@@ -119,6 +119,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Material Components`
+  String get appbarLabelMaterial {
+    return Intl.message(
+      'Material Components',
+      name: 'appbarLabelMaterial',
+      desc: 'appbar label - Material',
+      args: [],
+    );
+  }
+
+  /// `Cupertino Components`
+  String get appbarLabelCupertino {
+    return Intl.message(
+      'Cupertino Components',
+      name: 'appbarLabelCupertino',
+      desc: 'appbar label - Cupertino',
+      args: [],
+    );
+  }
+
+  /// `Custom Components`
+  String get appbarLabelCustom {
+    return Intl.message(
+      'Custom Components',
+      name: 'appbarLabelCustom',
+      desc: 'appbar label - Custom',
+      args: [],
+    );
+  }
+
+  /// `Hihi, Luoyi`
+  String get appbarLabelUser {
+    return Intl.message(
+      'Hihi, Luoyi',
+      name: 'appbarLabelUser',
+      desc: 'appbar label - User',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
