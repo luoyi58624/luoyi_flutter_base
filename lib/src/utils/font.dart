@@ -50,13 +50,15 @@ class FontUtil {
         // 小米w400字重偏细，为了提升观感，将基础字重设置为500
         if (DeviceUtil.isXiaomi) {
           _setFontWeight(FontWeight.w500, FontWeight.w500, FontWeight.bold);
+        } else if (DeviceUtil.isHUAWEI) {
+          _setFontWeight(FontWeight.w400, FontWeight.w500, FontWeight.w600);
         } else {
           _setFontWeight(FontWeight.w400, FontWeight.w500, FontWeight.bold);
         }
       }
       // Windows平台默认不包含w500字重，中等字重调整为400
       else if (GetPlatform.isWindows) {
-        _setFontWeight(FontWeight.w400, FontWeight.w400, FontWeight.bold);
+        _setFontWeight(FontWeight.w400, FontWeight.w500, FontWeight.bold);
       } else {
         _setFontWeight(FontWeight.w400, FontWeight.w500, FontWeight.bold);
       }
@@ -78,7 +80,7 @@ class FontUtil {
     if (GetPlatform.isMacOS || GetPlatform.isIOS) {
       return ['.AppleSystemUIFont', 'PingFang SC'];
     } else if (GetPlatform.isWindows) {
-      return ['Microsoft YaHei', '微软雅黑'];
+      return ['Microsoft YaHei', '微软雅黑', 'NotoSansSC'];
     } else {
       return null;
     }

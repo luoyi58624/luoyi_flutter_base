@@ -15,6 +15,7 @@ dependencies:
   flutter_hooks: ^0.20.5
   mini_getx: ^5.0.0
   intl: ^0.18.1
+  google_fonts: ^6.2.1
 
 dev_dependencies:
   flutter_test:

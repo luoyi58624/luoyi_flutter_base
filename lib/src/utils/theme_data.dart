@@ -10,8 +10,7 @@ class ThemeDataUtil {
     AppData? appData = AppData.maybeOf(context);
 
     bool isDark = brightness == Brightness.dark;
-    FlutterThemeData theme =
-        isDark ? (appData?.darkTheme ?? FlutterThemeData.darkTheme) : (appData?.theme ?? FlutterThemeData.theme);
+    FlutterThemeData theme = isDark ? (appData?.darkTheme ?? FlutterThemeData.darkTheme) : (appData?.theme ?? FlutterThemeData.theme);
     FlutterConfigData config = appData?.config ?? FlutterConfigData.config;
 
     bool isM3 = config.useMaterial3;
@@ -26,7 +25,7 @@ class ThemeDataUtil {
       }
     }
 
-    final themeData = ThemeData(
+    var themeData = ThemeData(
       useMaterial3: isM3,
       colorScheme: isM3 ? ColorScheme.fromSeed(brightness: brightness, seedColor: theme.primary) : null,
       primarySwatch: isM3 ? null : theme.primary.toMaterialColor(),
@@ -34,7 +33,7 @@ class ThemeDataUtil {
       // 设置默认字体
       fontFamily: config.fontFamily,
       // 设置优先加载的字体族列表
-      fontFamilyFallback: FontUtil._fontFamilyFallback,
+      // fontFamilyFallback: FontUtil._fontFamilyFallback,
       // 设置文字主题样式
       textTheme: isM3 ? FontUtil._textTheme(theme) : FontUtil._m2TextTheme(theme),
       primaryTextTheme: isM3 ? FontUtil._textTheme(theme) : FontUtil._m2TextTheme(theme),
@@ -57,11 +56,12 @@ class ThemeDataUtil {
         elevation: 0,
         backgroundColor: theme.bgColor2,
         selectedItemColor: theme.primary,
-        unselectedLabelStyle: TextStyle(fontWeight: FontUtil.bold, fontSize: 12),
-        selectedLabelStyle: TextStyle(fontWeight: FontUtil.bold, fontSize: 12),
+        unselectedLabelStyle: TextStyle(fontWeight: FontUtil.medium, fontSize: 12),
+        selectedLabelStyle: TextStyle(fontWeight: FontUtil.medium, fontSize: 12),
         unselectedIconTheme: IconThemeData(size: 26, color: theme.iconColor2),
         selectedIconTheme: IconThemeData(size: 26, color: theme.primary),
       ),
+      iconTheme: IconThemeData(color: theme.iconColor),
       cardTheme: CardTheme(
         color: theme.bgColor2,
         // m3会将此颜色和color进行混合从而产生一个新的material颜色 (生成一个淡淡的Primary Color)，
@@ -101,28 +101,35 @@ class ThemeDataUtil {
       ),
     );
 
-    return themeData.copyWith(
+    themeData = themeData.copyWith(
       appBarTheme: themeData.appBarTheme.copyWith(
         centerTitle: config.centerTitle,
         toolbarHeight: isM3 ? config.m3ConfigData.appbarHeight : config.m2ConfigData.appbarHeight,
         elevation: themeData.useMaterial3 ? 0 : config.m2ConfigData.appbarElevation,
-        scrolledUnderElevation: themeData.useMaterial3
-            ? (config.m3ConfigData.appBarScrollShade ? 4 : 0)
-            : config.m2ConfigData.appbarScrollElevation,
+        scrolledUnderElevation:
+            themeData.useMaterial3 ? (config.m3ConfigData.appBarScrollShade ? 4 : 0) : config.m2ConfigData.appbarScrollElevation,
         backgroundColor: theme.headerColor,
-        titleTextStyle: TextStyle(fontSize: 18, fontWeight: FontUtil.bold, color: theme.textColor),
+        titleTextStyle: TextStyle(fontSize: 18, fontWeight: FontUtil.medium, color: theme.textColor),
         iconTheme: IconThemeData(color: theme.iconColor),
       ),
       iconTheme: IconThemeData(color: theme.iconColor),
     );
+
+    if (GetPlatform.isWindows) {
+      i('加载谷歌字体');
+      themeData = themeData.copyWith(
+        // textTheme: GoogleFonts.notoSansScTextTheme(themeData.textTheme),
+        textTheme: GoogleFonts.lobsterTextTheme(themeData.textTheme),
+      );
+    }
+    return themeData;
   }
 
   static CupertinoThemeData buildCupertinoThemeData(BuildContext context, Brightness brightness) {
     AppData? appData = AppData.maybeOf(context);
 
-    FlutterThemeData theme = brightness == Brightness.light
-        ? (appData?.theme ?? FlutterThemeData.theme)
-        : (appData?.darkTheme ?? FlutterThemeData.darkTheme);
+    FlutterThemeData theme =
+        brightness == Brightness.light ? (appData?.theme ?? FlutterThemeData.theme) : (appData?.darkTheme ?? FlutterThemeData.darkTheme);
     FlutterConfigData config = appData?.config ?? FlutterConfigData.config;
 
     var textTheme = const CupertinoThemeData().textTheme;
