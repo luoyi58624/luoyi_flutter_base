@@ -10,7 +10,8 @@ class ThemeDataUtil {
     AppData? appData = AppData.maybeOf(context);
 
     bool isDark = brightness == Brightness.dark;
-    FlutterThemeData theme = isDark ? (appData?.darkTheme ?? FlutterThemeData.darkTheme) : (appData?.theme ?? FlutterThemeData.theme);
+    FlutterThemeData theme =
+        isDark ? (appData?.darkTheme ?? FlutterThemeData.darkTheme) : (appData?.theme ?? FlutterThemeData.theme);
     FlutterConfigData config = appData?.config ?? FlutterConfigData.config;
 
     bool isM3 = config.useMaterial3;
@@ -108,10 +109,12 @@ class ThemeDataUtil {
         centerTitle: config.centerTitle,
         toolbarHeight: isM3 ? config.m3ConfigData.appbarHeight : config.m2ConfigData.appbarHeight,
         elevation: themeData.useMaterial3 ? 0 : config.m2ConfigData.appbarElevation,
-        scrolledUnderElevation:
-            themeData.useMaterial3 ? (config.m3ConfigData.appBarScrollShade ? 4 : 0) : config.m2ConfigData.appbarScrollElevation,
+        scrolledUnderElevation: themeData.useMaterial3
+            ? (config.m3ConfigData.appBarScrollShade ? 4 : 0)
+            : config.m2ConfigData.appbarScrollElevation,
         backgroundColor: theme.headerColor,
-        titleTextStyle: TextStyle(fontFamily: config.fontFamily, fontSize: 18, fontWeight: FontUtil.medium, color: theme.textColor),
+        titleTextStyle:
+            TextStyle(fontFamily: config.fontFamily, fontSize: 18, fontWeight: FontUtil.medium, color: theme.textColor),
         iconTheme: IconThemeData(color: theme.iconColor),
       ),
       iconTheme: IconThemeData(color: theme.iconColor),
@@ -119,9 +122,9 @@ class ThemeDataUtil {
 
     if (GetPlatform.isWindows) {
       i('加载谷歌字体');
-      // themeData = themeData.copyWith(
-      //   textTheme: GoogleFonts.notoSansScTextTheme(themeData.textTheme),
-      // );
+      themeData = themeData.copyWith(
+        textTheme: GoogleFonts.notoSansScTextTheme(themeData.textTheme),
+      );
     } else {
       themeData = themeData.copyWith(
           // textTheme: GoogleFonts.notoSansScTextTheme(themeData.textTheme),
@@ -151,8 +154,9 @@ class ThemeDataUtil {
   static CupertinoThemeData buildCupertinoThemeData(BuildContext context, Brightness brightness) {
     AppData? appData = AppData.maybeOf(context);
 
-    FlutterThemeData theme =
-        brightness == Brightness.light ? (appData?.theme ?? FlutterThemeData.theme) : (appData?.darkTheme ?? FlutterThemeData.darkTheme);
+    FlutterThemeData theme = brightness == Brightness.light
+        ? (appData?.theme ?? FlutterThemeData.theme)
+        : (appData?.darkTheme ?? FlutterThemeData.darkTheme);
     FlutterConfigData config = appData?.config ?? FlutterConfigData.config;
 
     var textTheme = const CupertinoThemeData().textTheme;

@@ -44,7 +44,7 @@ class FontUtil {
     _medium = medium;
     _bold = bold;
     if (GetPlatform.isWeb) {
-      _setFontWeight(FontWeight.w400, FontWeight.w500, FontWeight.bold);
+      _setFontWeight(FontWeight.w400, FontWeight.w500, FontWeight.w600);
     } else {
       if (GetPlatform.isAndroid) {
         // 小米w400字重偏细，为了提升观感，将基础字重设置为500
@@ -133,8 +133,4 @@ class FontUtil {
       labelSmall: TextStyle(fontWeight: medium, color: theme.textColor),
     );
   }
-
-
 }
-
-

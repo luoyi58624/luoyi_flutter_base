@@ -34,10 +34,11 @@ class _HomeRootPageState extends State<HomeRootPage> {
           Obx(
             () => IconButton(
               onPressed: () {
-                AppDataController.of.config.value =
-                    AppDataController.of.config.value.copyWith(useMaterial3: !AppDataController.of.config.value.useMaterial3);
+                AppDataController.of.config.value = AppDataController.of.config.value
+                    .copyWith(useMaterial3: !AppDataController.of.config.value.useMaterial3);
               },
-              icon: Icon(AppDataController.of.config.value.useMaterial3 ? Icons.looks_3_outlined : Icons.looks_two_outlined),
+              icon: Icon(
+                  AppDataController.of.config.value.useMaterial3 ? Icons.looks_3_outlined : Icons.looks_two_outlined),
             ),
           ),
           PopupMenuButton<String>(
@@ -100,15 +101,15 @@ class _HomeRootPageState extends State<HomeRootPage> {
               //     ),
               //   ),
               // ),
-              // const SizedBox(height: 8),
-              // Text(
-              //   'Hello，你好呀，按钮，工具，启动',
-              //   style: GoogleFonts.longCang(
-              //     textStyle: const TextStyle(
-              //       fontWeight: FontWeight.w500,
-              //     ),
-              //   ),
-              // ),
+              const SizedBox(height: 8),
+              Text(
+                'Hello，你好呀，按钮，工具，启动',
+                style: GoogleFonts.longCang(
+                  textStyle: const TextStyle(
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
               // const SizedBox(height: 8),
               // Text(
               //   'Hello，你好呀，按钮，工具，启动',

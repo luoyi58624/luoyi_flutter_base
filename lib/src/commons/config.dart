@@ -164,7 +164,7 @@ class M3ConfigData {
   bool appBarScrollShade;
 
   M3ConfigData({
-    this.appbarHeight = 44,
+    this.appbarHeight = 56,
     this.appBarScrollShade = false,
   });
 
