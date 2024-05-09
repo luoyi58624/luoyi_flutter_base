@@ -101,15 +101,15 @@ class _HomeRootPageState extends State<HomeRootPage> {
               //     ),
               //   ),
               // ),
-              const SizedBox(height: 8),
-              Text(
-                'Hello，你好呀，按钮，工具，启动',
-                style: GoogleFonts.longCang(
-                  textStyle: const TextStyle(
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
+              // const SizedBox(height: 8),
+              // Text(
+              //   'Hello，你好呀，按钮，工具，启动',
+              //   style: GoogleFonts.longCang(
+              //     textStyle: const TextStyle(
+              //       fontWeight: FontWeight.w500,
+              //     ),
+              //   ),
+              // ),
               // const SizedBox(height: 8),
               // Text(
               //   'Hello，你好呀，按钮，工具，启动',
