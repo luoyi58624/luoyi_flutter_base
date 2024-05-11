@@ -14,7 +14,10 @@ class _MaterialRootPageState extends State<MaterialRootPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.of(context).appbarLabelMaterial),
+        title: Text(
+          S.of(context).appbarLabelMaterial,
+          style: TextStyle(fontFamily: context.configData.fontFamily),
+        ),
       ),
       body: SingleChildScrollView(
         child: Card(

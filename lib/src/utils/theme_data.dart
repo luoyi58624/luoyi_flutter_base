@@ -34,10 +34,10 @@ class ThemeDataUtil {
       // 设置默认字体
       fontFamily: config.fontFamily,
       // 设置优先加载的字体族列表
-      // fontFamilyFallback: FontUtil._fontFamilyFallback,
+      fontFamilyFallback: config.fontFamilyFallback,
       // 设置文字主题样式
-      textTheme: isM3 ? FontUtil._textTheme(theme) : FontUtil._m2TextTheme(theme),
-      primaryTextTheme: isM3 ? FontUtil._textTheme(theme) : FontUtil._m2TextTheme(theme),
+      textTheme: isM3 ? FontUtil._textTheme(theme, config) : FontUtil._m2TextTheme(theme),
+      primaryTextTheme: isM3 ? FontUtil._textTheme(theme, config) : FontUtil._m2TextTheme(theme),
       // 扩展主题
       extensions: [theme],
       // 是否禁用波纹
@@ -114,40 +114,11 @@ class ThemeDataUtil {
             : config.m2ConfigData.appbarScrollElevation,
         backgroundColor: theme.headerColor,
         titleTextStyle:
-            TextStyle(fontFamily: config.fontFamily, fontSize: 18, fontWeight: FontUtil.medium, color: theme.textColor),
+            TextStyle(fontFamily: config.fontFamily, fontSize: 18, fontWeight: FontWeight.w500, color: theme.textColor),
         iconTheme: IconThemeData(color: theme.iconColor),
       ),
       iconTheme: IconThemeData(color: theme.iconColor),
     );
-
-    if (GetPlatform.isWindows) {
-      i('加载谷歌字体');
-      // themeData = themeData.copyWith(
-      //   textTheme: GoogleFonts.notoSansScTextTheme(themeData.textTheme),
-      // );
-    } else {
-      themeData = themeData.copyWith(
-          // textTheme: GoogleFonts.notoSansScTextTheme(themeData.textTheme),
-          // textTheme: GoogleFonts.notoSansScTextTheme(themeData.textTheme).copyWith(
-          // displayLarge: TextStyle(fontWeight: FontUtil.normal, color: theme.textColor),
-          // displayMedium: TextStyle(fontWeight: FontUtil.normal, color: theme.textColor),
-          // displaySmall: TextStyle(fontWeight: FontUtil.normal, color: theme.textColor),
-          // headlineLarge: TextStyle(fontWeight: FontUtil.medium, color: theme.textColor),
-          // headlineMedium: TextStyle(fontWeight: FontUtil.medium, color: theme.textColor),
-          // headlineSmall: TextStyle(fontWeight: FontUtil.medium, color: theme.textColor),
-          // titleLarge: TextStyle(fontWeight: FontUtil.bold, color: theme.textColor),
-          // titleMedium: TextStyle(fontWeight: FontUtil.bold, color: theme.textColor),
-          // titleSmall: TextStyle(fontWeight: FontUtil.bold, color: theme.textColor),
-          // bodyLarge: TextStyle(fontWeight: FontUtil.normal, color: theme.textColor),
-          // bodyMedium: TextStyle(fontWeight: FontUtil.normal, color: theme.textColor),
-          // bodySmall: TextStyle(fontWeight: FontUtil.normal, color: theme.textColor),
-          // labelLarge: TextStyle(fontWeight: FontUtil.medium, color: theme.textColor),
-          // labelMedium: TextStyle(fontWeight: FontUtil.medium, color: theme.textColor),
-          // labelSmall: TextStyle(fontWeight: FontUtil.medium, color: theme.textColor),
-          // ),
-          // textTheme: GoogleFonts.longCangTextTheme(themeData.textTheme),
-          );
-    }
     return themeData;
   }
 
@@ -173,6 +144,12 @@ class ThemeDataUtil {
         ),
         navActionTextStyle: textTheme.navActionTextStyle.copyWith(
           color: theme.primary,
+          fontFamily: config.fontFamily,
+        ),
+        navTitleTextStyle: textTheme.navTitleTextStyle.copyWith(
+          fontFamily: config.fontFamily,
+        ),
+        navLargeTitleTextStyle: textTheme.navLargeTitleTextStyle.copyWith(
           fontFamily: config.fontFamily,
         ),
       ),

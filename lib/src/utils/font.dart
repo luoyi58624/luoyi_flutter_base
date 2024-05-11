@@ -93,23 +93,98 @@ class FontUtil {
   /// * headline 大字标题，用于显示简短、突出的问题，例如：Dialog标题
   ///
   /// 提示：flutter底层会将用户的配置进行合并，你无需担心影响其他默认值
-  static TextTheme _textTheme(FlutterThemeData theme) {
+  static TextTheme _textTheme(FlutterThemeData theme, FlutterConfigData config) {
     return TextTheme(
-      displayLarge: TextStyle(fontWeight: normal, color: theme.textColor),
-      displayMedium: TextStyle(fontWeight: normal, color: theme.textColor),
-      displaySmall: TextStyle(fontWeight: normal, color: theme.textColor),
-      headlineLarge: TextStyle(fontWeight: medium, color: theme.textColor),
-      headlineMedium: TextStyle(fontWeight: medium, color: theme.textColor),
-      headlineSmall: TextStyle(fontWeight: medium, color: theme.textColor),
-      titleLarge: TextStyle(fontWeight: bold, color: theme.textColor),
-      titleMedium: TextStyle(fontWeight: bold, color: theme.textColor),
-      titleSmall: TextStyle(fontWeight: bold, color: theme.textColor),
-      bodyLarge: TextStyle(fontWeight: normal, color: theme.textColor),
-      bodyMedium: TextStyle(fontWeight: normal, color: theme.textColor),
-      bodySmall: TextStyle(fontWeight: normal, color: theme.textColor),
-      labelLarge: TextStyle(fontWeight: medium, color: theme.textColor),
-      labelMedium: TextStyle(fontWeight: medium, color: theme.textColor),
-      labelSmall: TextStyle(fontWeight: medium, color: theme.textColor),
+      displayLarge: TextStyle(
+        fontWeight: normal,
+        color: theme.textColor,
+        fontFamily: config.fontFamily,
+        fontFamilyFallback: config.fontFamilyFallback,
+      ),
+      displayMedium: TextStyle(
+        fontWeight: normal,
+        color: theme.textColor,
+        fontFamily: config.fontFamily,
+        fontFamilyFallback: config.fontFamilyFallback,
+      ),
+      displaySmall: TextStyle(
+        fontWeight: normal,
+        color: theme.textColor,
+        fontFamily: config.fontFamily,
+        fontFamilyFallback: config.fontFamilyFallback,
+      ),
+      headlineLarge: TextStyle(
+        fontWeight: medium,
+        color: theme.textColor,
+        fontFamily: config.fontFamily,
+        fontFamilyFallback: config.fontFamilyFallback,
+      ),
+      headlineMedium: TextStyle(
+        fontWeight: medium,
+        color: theme.textColor,
+        fontFamily: config.fontFamily,
+        fontFamilyFallback: config.fontFamilyFallback,
+      ),
+      headlineSmall: TextStyle(
+        fontWeight: medium,
+        color: theme.textColor,
+        fontFamily: config.fontFamily,
+        fontFamilyFallback: config.fontFamilyFallback,
+      ),
+      titleLarge: TextStyle(
+        fontWeight: bold,
+        color: theme.textColor,
+        fontFamily: config.fontFamily,
+        fontFamilyFallback: config.fontFamilyFallback,
+      ),
+      titleMedium: TextStyle(
+        fontWeight: bold,
+        color: theme.textColor,
+        fontFamily: config.fontFamily,
+        fontFamilyFallback: config.fontFamilyFallback,
+      ),
+      titleSmall: TextStyle(
+        fontWeight: bold,
+        color: theme.textColor,
+        fontFamily: config.fontFamily,
+        fontFamilyFallback: config.fontFamilyFallback,
+      ),
+      bodyLarge: TextStyle(
+        fontWeight: normal,
+        color: theme.textColor,
+        fontFamily: config.fontFamily,
+        fontFamilyFallback: config.fontFamilyFallback,
+      ),
+      bodyMedium: TextStyle(
+        fontWeight: normal,
+        color: theme.textColor,
+        fontFamily: config.fontFamily,
+        fontFamilyFallback: config.fontFamilyFallback,
+      ),
+      bodySmall: TextStyle(
+        fontWeight: normal,
+        color: theme.textColor,
+        fontFamily: config.fontFamily,
+        fontFamilyFallback: config.fontFamilyFallback,
+      ),
+      labelLarge: TextStyle(
+        fontWeight: medium,
+        color: theme.textColor,
+        fontFamily: config.fontFamily,
+        fontFamilyFallback: config.fontFamilyFallback,
+      ),
+      labelMedium: TextStyle(
+        fontWeight: medium,
+        color: theme.textColor,
+        fontFamily: config.fontFamily,
+        fontFamilyFallback: config.fontFamilyFallback,
+      ),
+      labelSmall: TextStyle(
+        fontWeight: medium,
+        color: theme.textColor,
+        fontFamily: config.fontFamily,
+        fontFamilyFallback: config.fontFamilyFallback,
+      ),
     );
   }
 

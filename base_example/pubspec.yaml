@@ -16,6 +16,7 @@ dependencies:
   mini_getx: ^5.0.0
   intl: ^0.18.1
   google_fonts: ^6.2.1
+  luoyi_flutter_font: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -33,15 +34,8 @@ flutter:
   fonts:
     - family: NotoSansSC
       fonts:
-        - asset: assets/fonts/NotoSansSC-Medium.ttf
-        - asset: assets/fonts/NotoSansSC-Bold.ttf
-        - asset: assets/fonts/NotoSansSC-SemiBold.ttf
-        - asset: assets/fonts/NotoSansSC-Black.ttf
-        - asset: assets/fonts/NotoSansSC-ExtraBold.ttf
-        - asset: assets/fonts/NotoSansSC-ExtraLight.ttf
-        - asset: assets/fonts/NotoSansSC-Light.ttf
-        - asset: assets/fonts/NotoSansSC-Regular.ttf
-        - asset: assets/fonts/NotoSansSC-Thin.ttf
+        - asset: packages/luoyi_flutter_font/fonts/NotoSansSC/NotoSansSC-Bold.ttf
+        - asset: packages/luoyi_flutter_font/fonts/NotoSansSC/NotoSansSC-Medium.ttf
 
 flutter_intl:
   enabled: true

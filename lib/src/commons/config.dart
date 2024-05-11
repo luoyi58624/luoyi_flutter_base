@@ -7,6 +7,9 @@ class FlutterConfigData {
   /// 自定义全局字体
   String? fontFamily;
 
+  ///
+  List<String> fontFamilyFallback;
+
   /// 是否启用material3，默认true
   bool useMaterial3;
 
@@ -36,6 +39,7 @@ class FlutterConfigData {
 
   FlutterConfigData({
     this.fontFamily,
+    this.fontFamilyFallback = const [],
     this.useMaterial3 = true,
     this.radius = 6,
     this.centerTitle,
@@ -54,6 +58,7 @@ class FlutterConfigData {
 
   FlutterConfigData copyWith({
     String? fontFamily,
+    List<String>? fontFamilyFallback,
     bool? useMaterial3,
     double? radius,
     bool? centerTitle,
@@ -63,6 +68,7 @@ class FlutterConfigData {
   }) {
     return FlutterConfigData(
       fontFamily: fontFamily ?? this.fontFamily,
+      fontFamilyFallback: fontFamilyFallback ?? this.fontFamilyFallback,
       useMaterial3: useMaterial3 ?? this.useMaterial3,
       radius: radius ?? this.radius,
       centerTitle: centerTitle ?? this.centerTitle,
