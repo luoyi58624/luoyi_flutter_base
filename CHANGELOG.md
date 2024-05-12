@@ -6,7 +6,7 @@
 ### Features
 
 * color add getLightnessColor ([b05b1c2](https://github.com/luoyi58624/luoyi_flutter_base/commit/b05b1c207d4fb77b24715ae2a7b5d128d2d3b58f))
-* FlutterConfigData defaultFontWeight -&gt; fontWeight ([34b41d3](https://github.com/luoyi58624/luoyi_flutter_base/commit/34b41d3b66fd7accfc5dbcff9acc07acb2971b4c))
+* AppConfigData defaultFontWeight -&gt; fontWeight ([34b41d3](https://github.com/luoyi58624/luoyi_flutter_base/commit/34b41d3b66fd7accfc5dbcff9acc07acb2971b4c))
 
 ## [1.1.0](https://github.com/luoyi58624/luoyi_flutter_base/compare/v1.0.2...v1.1.0) (2024-05-06)
 
@@ -19,7 +19,7 @@
 
 ### Bug Fixes
 
-* FlutterConfigData flutterConfig -&gt; config ([8594ecb](https://github.com/luoyi58624/luoyi_flutter_base/commit/8594ecb4fe1744a53e7e8d83586e7d9c9d169d0a))
+* AppConfigData flutterConfig -&gt; config ([8594ecb](https://github.com/luoyi58624/luoyi_flutter_base/commit/8594ecb4fe1744a53e7e8d83586e7d9c9d169d0a))
 * MyCupertinoListTile错别字修复 ([cbe7da5](https://github.com/luoyi58624/luoyi_flutter_base/commit/cbe7da56c7f1212e9ed5fe5ffbc372d77cda5d62))
 
 ## [1.0.2](https://github.com/luoyi58624/luoyi_flutter_base/compare/v1.0.1...v1.0.2) (2024-05-04)

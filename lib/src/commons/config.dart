@@ -1,8 +1,8 @@
 part of '../../luoyi_flutter_base.dart';
 
-class FlutterConfigData {
+class AppConfigData {
   /// 默认的配置对象
-  static FlutterConfigData config = FlutterConfigData();
+  static AppConfigData config = AppConfigData();
 
   /// 自定义全局字体
   String? fontFamily;
@@ -37,7 +37,7 @@ class FlutterConfigData {
   /// Material3 配置
   late M3ConfigData m3ConfigData;
 
-  FlutterConfigData({
+  AppConfigData({
     this.fontFamily,
     this.fontFamilyFallback,
     this.useMaterial3,
@@ -56,7 +56,7 @@ class FlutterConfigData {
     this.m3ConfigData = m3ConfigData ?? M3ConfigData.config;
   }
 
-  FlutterConfigData copyWith({
+  AppConfigData copyWith({
     String? fontFamily,
     List<String>? fontFamilyFallback,
     bool? useMaterial3,
@@ -66,7 +66,7 @@ class FlutterConfigData {
     int? hoverScale,
     int? tapScale,
   }) {
-    return FlutterConfigData(
+    return AppConfigData(
       fontFamily: fontFamily ?? this.fontFamily,
       fontFamilyFallback: fontFamilyFallback ?? this.fontFamilyFallback,
       useMaterial3: useMaterial3 ?? this.useMaterial3,
@@ -140,7 +140,7 @@ class M2ConfigData {
     this.appbarHeight = 50,
     this.appbarElevation = 0,
     this.appbarScrollElevation = 2,
-    this.translucenceStatusBar = false,
+    this.translucenceStatusBar = true,
   });
 
   M2ConfigData copyWith({

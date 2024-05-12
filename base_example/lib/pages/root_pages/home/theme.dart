@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 import '../../../global.dart';
 
@@ -22,6 +25,38 @@ class _ThemePageState extends State<ThemePage> {
             buildCell(),
             buildLightPrimaryTheme(),
             buildDarkPrimaryTheme(),
+            _AppTheme(
+              title: 'bgColor',
+              color: context.appTheme.bgColor,
+              colorPicker: _ColorPicker(
+                color: context.appTheme.bgColor,
+                onChange: (color) {
+                  if (context.isDarkMode) {
+                    AppDataController.of.darkTheme.value.bgColor = color;
+                    AppDataController.of.darkTheme.refresh();
+                  } else {
+                    AppDataController.of.theme.value.bgColor = color;
+                    AppDataController.of.darkTheme.refresh();
+                  }
+                },
+              ),
+            ),
+            _AppTheme(
+              title: 'headerColor',
+              color: context.appTheme.headerColor,
+              colorPicker: _ColorPicker(
+                color: context.appTheme.headerColor,
+                onChange: (color) {
+                  if (context.isDarkMode) {
+                    AppDataController.of.darkTheme.value.headerColor = color;
+                    AppDataController.of.darkTheme.refresh();
+                  } else {
+                    AppDataController.of.theme.value.headerColor = color;
+                    AppDataController.of.darkTheme.refresh();
+                  }
+                },
+              ),
+            ),
           ]),
         ),
       ),
@@ -150,8 +185,7 @@ class _ThemePageState extends State<ThemePage> {
               children: FlutterColorData.materialColors.values.map((color) {
                 return InkWell(
                   onTap: () {
-                    AppDataController.of.darkTheme.value =
-                        AppDataController.of.darkTheme.value.copyWith(primary: color);
+                    AppDataController.of.darkTheme.value = AppDataController.of.darkTheme.value.copyWith(primary: color);
                   },
                   child: Obx(
                     () => Container(
@@ -172,6 +206,104 @@ class _ThemePageState extends State<ThemePage> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _AppTheme extends StatelessWidget {
+  const _AppTheme({
+    required this.title,
+    required this.color,
+    required this.colorPicker,
+  });
+
+  final String title;
+  final Color color;
+
+  final Widget colorPicker;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      clipBehavior: Clip.hardEdge,
+      child: Column(
+        children: [
+          ListTile(
+            onTap: () {
+              showDialog(
+                context: context,
+                barrierColor: Colors.black12,
+                builder: (context) => UnconstrainedBox(
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 280),
+                    child: Material(
+                      elevation: 2,
+                      borderRadius: BorderRadius.circular(6),
+                      child: colorPicker,
+                    ),
+                  ),
+                ),
+              );
+            },
+            title: Text(title),
+            trailing: const Icon(Icons.keyboard_arrow_right),
+          ),
+          Row(
+            children: [
+              ...List.generate(
+                5,
+                (index) {
+                  var $color = color.deepen(index * 5);
+                  return Expanded(
+                    child: AspectRatio(
+                      aspectRatio: 1,
+                      child: ColoredBox(
+                        color: $color,
+                        child: Center(
+                          child: Text(
+                            'bgColor${index == 0 ? '' : index + 1}',
+                            style: TextStyle(
+                              color: $color.isDark ? Colors.white : Colors.black,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ColorPicker extends StatelessWidget {
+  const _ColorPicker({
+    required this.color,
+    required this.onChange,
+  });
+
+  final Color color;
+  final void Function(Color color) onChange;
+
+  @override
+  Widget build(BuildContext context) {
+    return ColorPicker(
+      pickerColor: color,
+      portraitOnly: true,
+      colorPickerWidth: 280,
+      pickerAreaHeightPercent: 0.7,
+      enableAlpha: true,
+      displayThumbColor: true,
+      paletteType: PaletteType.hsvWithHue,
+      pickerAreaBorderRadius: BorderRadius.circular(6),
+      labelTypes: const [],
+      onColorChanged: (Color color) {
+        onChange(color);
+      },
     );
   }
 }

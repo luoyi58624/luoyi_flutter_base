@@ -23,13 +23,13 @@ class ButtonWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           decoration: BoxDecoration(
             color: $color.onTap(context, isTap),
-            borderRadius: BorderRadius.circular(context.configData.radius),
+            borderRadius: BorderRadius.circular(context.appConfig.radius),
           ),
           child: DefaultTextStyle(
             style: TextStyle(
-              fontFamily: context.configData.fontFamily,
+              fontFamily: context.appConfig.fontFamily,
               color: $color.isDark ? Colors.white : Colors.black,
-              fontWeight: FontUtil.medium,
+              fontWeight: FontWeight.w500,
             ),
             child: child,
           ),

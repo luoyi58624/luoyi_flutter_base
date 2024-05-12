@@ -22,7 +22,7 @@ class HookTestPage extends HookWidget {
         ),
         const SizedBox(height: 8),
         ButtonWidget(
-          color: context.currentThemeData.primary,
+          color: context.appTheme.primary,
           onPressed: () {
             count.value++;
           },
@@ -30,7 +30,7 @@ class HookTestPage extends HookWidget {
         ),
         const SizedBox(height: 8),
         ButtonWidget(
-          color: context.currentThemeData.success,
+          color: context.appTheme.success,
           onPressed: () {
             count.value++;
           },
@@ -38,7 +38,7 @@ class HookTestPage extends HookWidget {
         ),
         const SizedBox(height: 8),
         ButtonWidget(
-          color: context.currentThemeData.warning,
+          color: context.appTheme.warning,
           onPressed: () {
             count.value++;
           },
@@ -46,7 +46,7 @@ class HookTestPage extends HookWidget {
         ),
         const SizedBox(height: 8),
         ButtonWidget(
-          color: context.currentThemeData.error,
+          color: context.appTheme.error,
           onPressed: () {
             count.value++;
           },
@@ -54,7 +54,7 @@ class HookTestPage extends HookWidget {
         ),
         const SizedBox(height: 8),
         ButtonWidget(
-          color: context.currentThemeData.info,
+          color: context.appTheme.info,
           onPressed: () {
             count.value++;
           },

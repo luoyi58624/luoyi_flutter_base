@@ -1,15 +1,79 @@
 part of '../luoyi_flutter_base.dart';
 
+class AppData extends InheritedWidget {
+  /// App全局数据共享，一般配合[ThemeDataUtil]工具类构建主题，该组件可选，如果不提供，则使用默认实例构建主题
+  const AppData({
+    super.key,
+    required super.child,
+    required this.theme,
+    required this.darkTheme,
+    required this.config,
+  });
+
+  /// 亮色主题
+  final AppThemeData theme;
+
+  /// 暗色主题
+  final AppThemeData darkTheme;
+
+  /// 全局配置
+  final AppConfigData config;
+
+  static AppData? maybeOf(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<AppData>();
+  }
+
+  static AppData of(BuildContext context) {
+    final AppData? result = maybeOf(context);
+    assert(result != null, 'No AppData found in context');
+    return result!;
+  }
+
+  @override
+  bool updateShouldNotify(AppData oldWidget) {
+    return true;
+  }
+}
+
+/// [AppData]响应式控制器，基于[Getx] (可选)
+class AppDataController extends GetxController {
+  AppDataController({
+    ThemeMode? themeMode,
+    AppThemeData? theme,
+    AppThemeData? darkTheme,
+    AppConfigData? config,
+  }) {
+    _init(
+      themeMode ?? ThemeMode.system,
+      theme ?? AppThemeData.theme,
+      darkTheme ?? AppThemeData.darkTheme,
+      config ?? AppConfigData.config,
+    );
+  }
+
+  static AppDataController of = Get.find();
+  late final Rx<ThemeMode> themeMode;
+  late final Rx<AppThemeData> theme;
+  late final Rx<AppThemeData> darkTheme;
+  late final Rx<AppConfigData> config;
+
+  void _init(ThemeMode $themeMode, AppThemeData $theme, AppThemeData $darkTheme, AppConfigData $config) {
+    themeMode = $themeMode.obs;
+    theme = $theme.obs;
+    darkTheme = $darkTheme.obs;
+    config = $config.obs;
+  }
+}
+
 extension AppDataContextExtension on BuildContext {
   /// 当前主题数据
-  FlutterThemeData get currentThemeData =>
-      Theme.of(this).extension<FlutterThemeData>() ?? (isDarkMode ? FlutterThemeData.darkTheme : FlutterThemeData.theme);
+  AppThemeData get appTheme => Theme.of(this).extension<AppThemeData>() ?? (isDarkMode ? AppThemeData.darkTheme : AppThemeData.theme);
 
   /// 全局配置数据
-  FlutterConfigData get configData => AppData.maybeOf(this)?.config ?? FlutterConfigData.config;
+  AppConfigData get appConfig => AppData.maybeOf(this)?.config ?? AppConfigData.config;
 
   /// Appbar高度
-  double get appbarHeight => Theme.of(this).useMaterial3 ? configData.m3ConfigData.appbarHeight : configData.m2ConfigData.appbarHeight;
+  double get appbarHeight => Theme.of(this).useMaterial3 ? appConfig.m3ConfigData.appbarHeight : appConfig.m2ConfigData.appbarHeight;
 }
 
 extension FlutterThemeDataExtension on ThemeData {
@@ -18,8 +82,10 @@ extension FlutterThemeDataExtension on ThemeData {
     AppData? appData = AppData.maybeOf(context);
 
     bool isDark = brightness == Brightness.dark;
-    FlutterThemeData theme = isDark ? (appData?.darkTheme ?? FlutterThemeData.darkTheme) : (appData?.theme ?? FlutterThemeData.theme);
-    FlutterConfigData config = appData?.config ?? FlutterConfigData.config;
+    final lightTheme = appData?.theme ?? AppThemeData.theme;
+    final darkTheme = appData?.darkTheme ?? AppThemeData.darkTheme;
+    final theme = isDark ? darkTheme : lightTheme;
+    AppConfigData config = appData?.config ?? AppConfigData.config;
     String? fontFamily = config.fontFamily ?? textTheme.displayLarge?.fontFamily;
 
     bool isM3 = config.useMaterial3 ?? useMaterial3;
@@ -27,19 +93,27 @@ extension FlutterThemeDataExtension on ThemeData {
       SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 0)));
     } else {
       if (config.m2ConfigData.translucenceStatusBar) {
-        SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 200)));
+        AsyncUtil.delayed(() {
+          SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 200)));
+        }, 500);
       } else {
         SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 0)));
       }
     }
+
     return copyWith(
       useMaterial3: isM3,
       // 应用颜色主题
-      colorScheme: ColorScheme.fromSeed(brightness: brightness, seedColor: theme.primary),
-      // 如果是m2，我们需要在这里设置 brightness
-      brightness: isM3 ? null : brightness,
-      primaryColor: theme.primary,
-      textTheme: FontUtil._textTheme(theme, config),
+      colorScheme: isM3
+          ? ColorScheme.fromSeed(
+              brightness: brightness,
+              seedColor: theme.primary,
+            )
+          : ColorScheme.fromSwatch(
+              brightness: brightness,
+              primarySwatch: theme.primary.toMaterialColor(),
+            ),
+      textTheme: _textTheme(theme, config),
       // 扩展主题
       extensions: [theme],
       // 是否禁用波纹
@@ -56,13 +130,29 @@ extension FlutterThemeDataExtension on ThemeData {
       }),
       // 设置页面背景色
       scaffoldBackgroundColor: theme.bgColor,
+      appBarTheme: appBarTheme.copyWith(
+        centerTitle: config.centerTitle,
+        toolbarHeight: isM3 ? config.m3ConfigData.appbarHeight : config.m2ConfigData.appbarHeight,
+        elevation: isM3 ? 0 : config.m2ConfigData.appbarElevation,
+        scrolledUnderElevation: isM3 ? (config.m3ConfigData.appBarScrollShade ? 4 : 0) : config.m2ConfigData.appbarScrollElevation,
+        backgroundColor: theme.headerColor,
+        titleTextStyle: TextStyle(
+          fontFamily: fontFamily,
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+          color: theme.headerColor.isDark ? darkTheme.textColor : lightTheme.textColor,
+        ),
+        iconTheme: IconThemeData(
+          color: theme.headerColor.isDark ? darkTheme.iconColor : lightTheme.iconColor,
+        ),
+      ),
       // 设置底部导航栏
       bottomNavigationBarTheme: bottomNavigationBarTheme.copyWith(
         elevation: 0,
         backgroundColor: theme.bgColor2,
         selectedItemColor: theme.primary,
-        unselectedLabelStyle: TextStyle(fontFamily: fontFamily, fontWeight: FontUtil.medium, fontSize: 12),
-        selectedLabelStyle: TextStyle(fontFamily: fontFamily, fontWeight: FontUtil.medium, fontSize: 12),
+        unselectedLabelStyle: TextStyle(fontFamily: fontFamily, fontWeight: FontWeight.w500, fontSize: 12),
+        selectedLabelStyle: TextStyle(fontFamily: fontFamily, fontWeight: FontWeight.w500, fontSize: 12),
         unselectedIconTheme: IconThemeData(size: 26, color: theme.iconColor2),
         selectedIconTheme: IconThemeData(size: 26, color: theme.primary),
       ),
@@ -85,36 +175,32 @@ extension FlutterThemeDataExtension on ThemeData {
         shape: Border.all(width: 0, style: BorderStyle.none),
         collapsedShape: Border.all(width: 0, style: BorderStyle.none),
       ),
-      popupMenuTheme: PopupMenuThemeData(
+      popupMenuTheme: popupMenuTheme.copyWith(
         color: theme.bgColor3,
         surfaceTintColor: Colors.transparent,
         elevation: isDark ? 8 : 2,
         enableFeedback: true,
-        textStyle: TextStyle(fontSize: 14, color: theme.textColor, fontWeight: FontUtil.medium),
+        textStyle: TextStyle(
+          fontFamily: fontFamily,
+          fontWeight: FontWeight.w500,
+          color: theme.textColor,
+          fontSize: 14,
+        ),
       ),
       listTileTheme: listTileTheme.copyWith(
         titleTextStyle: TextStyle(
           fontFamily: fontFamily,
-          fontWeight: FontUtil.medium,
+          fontWeight: FontWeight.w500,
           color: theme.textColor,
           fontSize: 15,
         ),
         subtitleTextStyle: TextStyle(
           fontFamily: fontFamily,
-          fontWeight: FontUtil.medium,
+          fontWeight: FontWeight.w500,
           color: theme.textColor2,
           fontSize: 13,
         ),
-      ),
-      // radioTheme: radioTheme.copyWith(fillColor: MaterialStatePropertyAll(theme.primary)),
-      appBarTheme: appBarTheme.copyWith(
-        centerTitle: config.centerTitle,
-        toolbarHeight: isM3 ? config.m3ConfigData.appbarHeight : config.m2ConfigData.appbarHeight,
-        elevation: isM3 ? 0 : config.m2ConfigData.appbarElevation,
-        scrolledUnderElevation: isM3 ? (config.m3ConfigData.appBarScrollShade ? 4 : 0) : config.m2ConfigData.appbarScrollElevation,
-        backgroundColor: theme.headerColor,
-        titleTextStyle: TextStyle(fontFamily: fontFamily, fontSize: 18, fontWeight: FontWeight.w500, color: theme.textColor),
-        iconTheme: IconThemeData(color: theme.iconColor),
+        iconColor: theme.iconColor,
       ),
     );
   }
@@ -124,10 +210,10 @@ extension FlutterCupertinoThemeDataExtension on CupertinoThemeData {
   CupertinoThemeData applyAppData(BuildContext context) {
     AppData? appData = AppData.maybeOf(context);
 
-    FlutterThemeData theme =
-        brightness == Brightness.light ? (appData?.theme ?? FlutterThemeData.theme) : (appData?.darkTheme ?? FlutterThemeData.darkTheme);
+    AppThemeData theme =
+        brightness == Brightness.light ? (appData?.theme ?? AppThemeData.theme) : (appData?.darkTheme ?? AppThemeData.darkTheme);
 
-    FlutterConfigData config = appData?.config ?? FlutterConfigData.config;
+    AppConfigData config = appData?.config ?? AppConfigData.config;
     String? fontFamily = config.fontFamily ?? textTheme.textStyle.fontFamily;
 
     return copyWith(
@@ -155,67 +241,82 @@ extension FlutterCupertinoThemeDataExtension on CupertinoThemeData {
   }
 }
 
-class AppData extends InheritedWidget {
-  /// App全局数据共享，一般配合[ThemeDataUtil]工具类构建主题，该组件可选，如果不提供，则使用默认实例构建主题
-  const AppData({
-    super.key,
-    required super.child,
-    required this.theme,
-    required this.darkTheme,
-    required this.config,
-  });
-
-  /// 亮色主题
-  final FlutterThemeData theme;
-
-  /// 暗色主题
-  final FlutterThemeData darkTheme;
-
-  /// 全局配置
-  final FlutterConfigData config;
-
-  static AppData? maybeOf(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<AppData>();
-  }
-
-  static AppData of(BuildContext context) {
-    final AppData? result = maybeOf(context);
-    assert(result != null, 'No AppData found in context');
-    return result!;
-  }
-
-  @override
-  bool updateShouldNotify(AppData oldWidget) {
-    return true;
-  }
-}
-
-/// [AppData]响应式控制器，基于[Getx] (可选)
-class AppDataController extends GetxController {
-  AppDataController({
-    ThemeMode? themeMode,
-    FlutterThemeData? theme,
-    FlutterThemeData? darkTheme,
-    FlutterConfigData? config,
-  }) {
-    _init(
-      themeMode ?? ThemeMode.system,
-      theme ?? FlutterThemeData.theme,
-      darkTheme ?? FlutterThemeData.darkTheme,
-      config ?? FlutterConfigData.config,
-    );
-  }
-
-  static AppDataController of = Get.find();
-  late final Rx<ThemeMode> themeMode;
-  late final Rx<FlutterThemeData> theme;
-  late final Rx<FlutterThemeData> darkTheme;
-  late final Rx<FlutterConfigData> config;
-
-  void _init(ThemeMode $themeMode, FlutterThemeData $theme, FlutterThemeData $darkTheme, FlutterConfigData $config) {
-    themeMode = $themeMode.obs;
-    theme = $theme.obs;
-    darkTheme = $darkTheme.obs;
-    config = $config.obs;
-  }
+TextTheme _textTheme(AppThemeData theme, AppConfigData config) {
+  return TextTheme(
+    displayLarge: TextStyle(
+      color: theme.textColor,
+      fontFamily: config.fontFamily,
+      fontFamilyFallback: config.fontFamilyFallback,
+    ),
+    displayMedium: TextStyle(
+      color: theme.textColor,
+      fontFamily: config.fontFamily,
+      fontFamilyFallback: config.fontFamilyFallback,
+    ),
+    displaySmall: TextStyle(
+      color: theme.textColor,
+      fontFamily: config.fontFamily,
+      fontFamilyFallback: config.fontFamilyFallback,
+    ),
+    headlineLarge: TextStyle(
+      color: theme.textColor,
+      fontFamily: config.fontFamily,
+      fontFamilyFallback: config.fontFamilyFallback,
+    ),
+    headlineMedium: TextStyle(
+      color: theme.textColor,
+      fontFamily: config.fontFamily,
+      fontFamilyFallback: config.fontFamilyFallback,
+    ),
+    headlineSmall: TextStyle(
+      color: theme.textColor,
+      fontFamily: config.fontFamily,
+      fontFamilyFallback: config.fontFamilyFallback,
+    ),
+    titleLarge: TextStyle(
+      color: theme.textColor,
+      fontFamily: config.fontFamily,
+      fontFamilyFallback: config.fontFamilyFallback,
+    ),
+    titleMedium: TextStyle(
+      color: theme.textColor,
+      fontFamily: config.fontFamily,
+      fontFamilyFallback: config.fontFamilyFallback,
+    ),
+    titleSmall: TextStyle(
+      color: theme.textColor,
+      fontFamily: config.fontFamily,
+      fontFamilyFallback: config.fontFamilyFallback,
+    ),
+    bodyLarge: TextStyle(
+      color: theme.textColor,
+      fontFamily: config.fontFamily,
+      fontFamilyFallback: config.fontFamilyFallback,
+    ),
+    bodyMedium: TextStyle(
+      color: theme.textColor,
+      fontFamily: config.fontFamily,
+      fontFamilyFallback: config.fontFamilyFallback,
+    ),
+    bodySmall: TextStyle(
+      color: theme.textColor,
+      fontFamily: config.fontFamily,
+      fontFamilyFallback: config.fontFamilyFallback,
+    ),
+    labelLarge: TextStyle(
+      color: theme.textColor,
+      fontFamily: config.fontFamily,
+      fontFamilyFallback: config.fontFamilyFallback,
+    ),
+    labelMedium: TextStyle(
+      color: theme.textColor,
+      fontFamily: config.fontFamily,
+      fontFamilyFallback: config.fontFamilyFallback,
+    ),
+    labelSmall: TextStyle(
+      color: theme.textColor,
+      fontFamily: config.fontFamily,
+      fontFamilyFallback: config.fontFamilyFallback,
+    ),
+  );
 }

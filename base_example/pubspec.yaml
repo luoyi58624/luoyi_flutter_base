@@ -19,6 +19,8 @@ dependencies:
   luoyi_flutter_font:
     git:
       url: https://github.com/luoyi58624/luoyi_flutter_font.git
+  flex_color_picker: ^3.4.1
+  flutter_colorpicker: ^1.0.3
 
 dev_dependencies:
   flutter_test:

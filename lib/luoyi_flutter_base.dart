@@ -46,8 +46,6 @@ part 'src/utils/device.dart';
 
 part 'src/utils/flutter.dart';
 
-part 'src/utils/font.dart';
-
 part 'src/extensions/modal.dart';
 
 part 'src/utils/no_ripper.dart';
@@ -82,5 +80,4 @@ part 'src/widgets/cupertino/list_tile.dart';
 Future<void> initApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   await DeviceUtil._init();
-  FontUtil._init();
 }

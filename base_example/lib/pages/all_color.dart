@@ -37,23 +37,23 @@ class AllColorTestPage extends HookWidget {
       ),
       buildColorWidget(
         name: 'primary',
-        color: context.currentThemeData.primary,
+        color: context.appTheme.primary,
       ),
       buildColorWidget(
         name: 'success',
-        color: context.currentThemeData.success,
+        color: context.appTheme.success,
       ),
       buildColorWidget(
         name: 'warning',
-        color: context.currentThemeData.warning,
+        color: context.appTheme.warning,
       ),
       buildColorWidget(
         name: 'error',
-        color: context.currentThemeData.error,
+        color: context.appTheme.error,
       ),
       buildColorWidget(
         name: 'info',
-        color: context.currentThemeData.info,
+        color: context.appTheme.info,
       ),
     ];
     return widgets;

@@ -16,7 +16,7 @@ class _MaterialRootPageState extends State<MaterialRootPage> {
       appBar: AppBar(
         title: Text(
           S.of(context).appbarLabelMaterial,
-          style: TextStyle(fontFamily: context.configData.fontFamily),
+          style: TextStyle(fontFamily: context.appConfig.fontFamily),
         ),
       ),
       body: SingleChildScrollView(

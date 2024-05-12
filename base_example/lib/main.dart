@@ -9,7 +9,7 @@ void main() async {
   await initApp();
   await FlutterFont.init(FlutterFontModel.notoSansSC);
   Get.put(AppDataController(
-      config: FlutterConfigData(
+      config: AppConfigData(
     fontFamily: FlutterFont.fontFamily,
   )));
   Get.put(GlobalController());

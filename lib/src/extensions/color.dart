@@ -53,31 +53,34 @@ extension FlutterColorExtension on Color {
   /// 将颜色变得更亮
   /// * scale 0-100，值越大，颜色越亮
   Color brighten(int scale) {
-    assert(scale > 0 && scale <= 100);
+    assert(scale >= 0 && scale <= 100);
     var p = scale / 100;
-    return Color.fromARGB(
-        alpha, red + ((255 - red) * p).round(), green + ((255 - green) * p).round(), blue + ((255 - blue) * p).round());
+    return Color.fromARGB(alpha, red + ((255 - red) * p).round(), green + ((255 - green) * p).round(), blue + ((255 - blue) * p).round());
   }
 
   /// 将颜色变得更暗
   /// * scale 0-100，值越大，颜色越深
   Color darken(int scale) {
-    assert(scale > 0 && scale <= 100);
+    assert(scale >= 0 && scale <= 100);
     var f = 1 - scale / 100;
     return Color.fromARGB(alpha, (red * f).round(), (green * f).round(), (blue * f).round());
   }
 
   /// 将颜色变得深，如果当前颜色是亮色，颜色会变暗，但如果当前颜色是暗色，则颜色会变亮
   /// * scale 0-100，值越大，颜色越深
-  Color deepen(int scale) {
-    return isDark ? brighten(scale) : darken(scale);
+  /// * lightScale 0-100，当颜色是亮色时，应用的 scale 值
+  /// * darkScale 0-100，当颜色是暗色时，应用的 scale 值
+  Color deepen(
+    int scale, {
+    int? lightScale,
+    int? darkScale,
+  }) {
+    return isDark ? brighten(darkScale ?? scale) : darken(lightScale ?? scale);
   }
 
   /// 当用户鼠标悬停时的颜色
-  Color onHover(BuildContext context, bool flag, [int? scale]) =>
-      flag ? deepen(scale ?? context.configData.hoverScale) : this;
+  Color onHover(BuildContext context, bool flag, [int? scale]) => flag ? deepen(scale ?? context.appConfig.hoverScale) : this;
 
   /// 当用户鼠标、手指按下时的颜色
-  Color onTap(BuildContext context, bool flag, [int? scale]) =>
-      flag ? deepen(scale ?? context.configData.tapScale) : this;
+  Color onTap(BuildContext context, bool flag, [int? scale]) => flag ? deepen(scale ?? context.appConfig.tapScale) : this;
 }

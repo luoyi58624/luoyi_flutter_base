@@ -7,10 +7,10 @@ part of '../../luoyi_flutter_base.dart';
 /// // 将主题注入到 ThemeData
 /// MaterialApp(
 ///   theme: ThemeData(brightness: Brightness.light).copyWith(extensions: [
-///     const FlutterThemeData(),
+///     const AppThemeData(),
 ///   ]),
 ///   darkTheme: ThemeData(brightness: Brightness.dark).copyWith(extensions: [
-///     const FlutterThemeData.dark(),
+///     const AppThemeData.dark(),
 ///   ]),
 ///   home: const HomePage(),
 /// );
@@ -18,60 +18,60 @@ part of '../../luoyi_flutter_base.dart';
 /// // 使用
 /// Container(color: context.flutterTheme),
 /// ```
-class FlutterThemeData extends ThemeExtension<FlutterThemeData> {
+class AppThemeData extends ThemeExtension<AppThemeData> {
   /// 默认亮色主题对象
-  static FlutterThemeData theme = const FlutterThemeData();
+  static AppThemeData theme = AppThemeData();
 
   /// 默认暗色主题对象
-  static FlutterThemeData darkTheme = const FlutterThemeData.dark();
+  static AppThemeData darkTheme = AppThemeData.dark();
 
   /// 主要颜色
-  final Color primary;
+  Color primary;
 
   /// 成功颜色
-  final Color success;
+  Color success;
 
   /// 普通颜色
-  final Color info;
+  Color info;
 
   /// 警告颜色
-  final Color warning;
+  Color warning;
 
   /// 错误颜色
-  final Color error;
+  Color error;
 
   /// 背景色
-  final Color bgColor;
+  Color bgColor;
 
   /// 二级背景色，例如：卡片、底部导航栏
-  final Color bgColor2;
+  Color bgColor2;
 
   /// 三级背景色
-  final Color bgColor3;
+  Color bgColor3;
 
   /// 四级背景色
-  final Color bgColor4;
+  Color bgColor4;
 
   /// 五级背景色
-  final Color bgColor5;
+  Color bgColor5;
 
   /// 头部导航栏背景颜色
-  final Color headerColor;
+  Color headerColor;
 
   /// 文字颜色
-  final Color textColor;
+  Color textColor;
 
   /// 二级文字颜色，颜色更浅
-  final Color textColor2;
+  Color textColor2;
 
   /// icon颜色
-  final Color iconColor;
+  Color iconColor;
 
   /// 二级icon颜色，颜色更浅
-  final Color iconColor2;
+  Color iconColor2;
 
   /// 默认的亮色主题构造函数
-  const FlutterThemeData({
+  AppThemeData({
     this.primary = const Color.fromARGB(255, 0, 120, 212),
     this.success = const Color.fromARGB(255, 16, 185, 129),
     this.info = const Color.fromARGB(255, 127, 137, 154),
@@ -90,7 +90,7 @@ class FlutterThemeData extends ThemeExtension<FlutterThemeData> {
   });
 
   /// 默认的暗色主题构造函数
-  const FlutterThemeData.dark({
+  AppThemeData.dark({
     this.primary = const Color(0xff0ea5e9),
     this.success = const Color(0xff14b8a6),
     this.info = const Color(0xff64748B),
@@ -109,7 +109,7 @@ class FlutterThemeData extends ThemeExtension<FlutterThemeData> {
   });
 
   @override
-  FlutterThemeData copyWith({
+  AppThemeData copyWith({
     Color? primary,
     Color? success,
     Color? info,
@@ -122,7 +122,7 @@ class FlutterThemeData extends ThemeExtension<FlutterThemeData> {
     Color? textColor,
     Color? iconColor,
   }) {
-    return FlutterThemeData(
+    return AppThemeData(
       primary: primary ?? this.primary,
       success: success ?? this.success,
       info: info ?? this.info,
@@ -138,7 +138,7 @@ class FlutterThemeData extends ThemeExtension<FlutterThemeData> {
   }
 
   @override
-  ThemeExtension<FlutterThemeData> lerp(covariant ThemeExtension<FlutterThemeData>? other, double t) {
+  ThemeExtension<AppThemeData> lerp(covariant ThemeExtension<AppThemeData>? other, double t) {
     return this;
   }
 }

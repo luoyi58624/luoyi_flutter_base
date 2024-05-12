@@ -310,7 +310,7 @@ class FormTextFieldWidgetState extends State<FormTextFieldWidget> {
         fontSize: widget.size != null
             ? labelFontSize[widget.size]
             : labelFontSize[FormInheritedWidget.of(context)?.size] ?? labelFontSize[FormSize.medium]!,
-        fontWeight: FontUtil.medium,
+        fontWeight: FontWeight.w500,
       );
 
   @override
@@ -375,17 +375,17 @@ class FormTextFieldWidgetState extends State<FormTextFieldWidget> {
           fontSize: widget.size != null
               ? hintFontSize[widget.size]
               : hintFontSize[FormInheritedWidget.of(context)?.size] ?? hintFontSize[FormSize.medium]!,
-          fontWeight: FontUtil.medium,
+          fontWeight: FontWeight.w500,
           color: Colors.grey,
         ),
         errorMaxLines: 3,
         errorStyle: TextStyle(
-          color: context.currentThemeData.error,
+          color: context.appTheme.error,
           fontSize: (widget.size != null
                   ? hintFontSize[widget.size]
                   : hintFontSize[FormInheritedWidget.of(context)?.size] ?? hintFontSize[FormSize.medium]!)! -
               2,
-          fontWeight: FontUtil.medium,
+          fontWeight: FontWeight.w500,
         ),
         prefixIcon: widget.prefixIcon != null
             ? Icon(
