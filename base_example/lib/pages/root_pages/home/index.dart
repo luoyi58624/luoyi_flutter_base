@@ -3,7 +3,6 @@ import 'package:base_example/pages/color.dart';
 import 'package:base_example/pages/hook.dart';
 import 'package:base_example/pages/root_pages/home/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:luoyi_flutter_font/luoyi_flutter_font.dart';
 
 import '../../../global.dart';
@@ -37,10 +36,11 @@ class _HomeRootPageState extends State<HomeRootPage> {
             () => IconButton(
               onPressed: () {
                 AppDataController.of.config.value = AppDataController.of.config.value
-                    .copyWith(useMaterial3: !AppDataController.of.config.value.useMaterial3);
+                    .copyWith(useMaterial3: !(AppDataController.of.config.value.useMaterial3 ?? Theme.of(context).useMaterial3));
               },
-              icon: Icon(
-                  AppDataController.of.config.value.useMaterial3 ? Icons.looks_3_outlined : Icons.looks_two_outlined),
+              icon: Icon((AppDataController.of.config.value.useMaterial3 ?? Theme.of(context).useMaterial3)
+                  ? Icons.looks_3_outlined
+                  : Icons.looks_two_outlined),
             ),
           ),
           PopupMenuButton<String>(
@@ -162,7 +162,7 @@ class _HomeRootPageState extends State<HomeRootPage> {
                 onPressed: loading
                     ? null
                     : () async {
-                        await FlutterFont.loadFont(FlutterFontModel.systemFont, false);
+                        await FlutterFont.loadFont(FlutterFontModel.systemFont);
                         AppDataController.of.config.value.fontFamily = FlutterFont.fontFamily;
                         AppDataController.of.config.refresh();
                       },
@@ -173,7 +173,7 @@ class _HomeRootPageState extends State<HomeRootPage> {
                 onPressed: loading
                     ? null
                     : () async {
-                        await FlutterFont.loadFont(FlutterFontModel.initialFont, false);
+                        await FlutterFont.loadFont(FlutterFontModel.initialFont);
                         AppDataController.of.config.value.fontFamily = FlutterFont.fontFamily;
                         AppDataController.of.config.refresh();
                       },
@@ -188,7 +188,40 @@ class _HomeRootPageState extends State<HomeRootPage> {
                         AppDataController.of.config.value.fontFamily = FlutterFont.fontFamily;
                         AppDataController.of.config.refresh();
                       },
-                child: const Text('加载资产包中文字体'),
+                child: const Text('加载谷歌字体'),
+              ),
+              const SizedBox(height: 8),
+              ElevatedButton(
+                onPressed: loading
+                    ? null
+                    : () async {
+                        await FlutterFont.loadFont(FlutterFontModel.pingFangSC);
+                        AppDataController.of.config.value.fontFamily = FlutterFont.fontFamily;
+                        AppDataController.of.config.refresh();
+                      },
+                child: const Text('加载苹方字体'),
+              ),
+              const SizedBox(height: 8),
+              ElevatedButton(
+                onPressed: loading
+                    ? null
+                    : () async {
+                        await FlutterFont.loadFont(FlutterFontModel.miSans);
+                        AppDataController.of.config.value.fontFamily = FlutterFont.fontFamily;
+                        AppDataController.of.config.refresh();
+                      },
+                child: const Text('加载小米字体'),
+              ),
+              const SizedBox(height: 8),
+              ElevatedButton(
+                onPressed: loading
+                    ? null
+                    : () async {
+                        await FlutterFont.loadFont(FlutterFontModel.harmonyOS);
+                        AppDataController.of.config.value.fontFamily = FlutterFont.fontFamily;
+                        AppDataController.of.config.refresh();
+                      },
+                child: const Text('加载鸿蒙字体'),
               ),
               const SizedBox(height: 8),
               ElevatedButton(
@@ -200,8 +233,7 @@ class _HomeRootPageState extends State<HomeRootPage> {
                         });
                         await FlutterFont.loadFont(const FlutterFontModel(
                           fontFamily: 'LongCang',
-                          fontUrl:
-                              'https://fonts.gstatic.com/s/a/f626a05f45d156332017025fc68902a92f57f51ac57bb4a79097ee7bb1a97352.ttf',
+                          fontUrl: 'https://fonts.gstatic.com/s/a/f626a05f45d156332017025fc68902a92f57f51ac57bb4a79097ee7bb1a97352.ttf',
                         ));
                         AppDataController.of.config.value.fontFamily = FlutterFont.fontFamily;
                         AppDataController.of.config.refresh();
@@ -220,8 +252,7 @@ class _HomeRootPageState extends State<HomeRootPage> {
                           loading = true;
                         });
                         await FlutterFont.loadFont(GoogleFontModels.notoSansSc(FontWeight.values));
-                        AppDataController.of.config.value =
-                            AppDataController.of.config.value.copyWith(fontFamily: FlutterFont.fontFamily);
+                        AppDataController.of.config.value = AppDataController.of.config.value.copyWith(fontFamily: FlutterFont.fontFamily);
                         setState(() {
                           loading = false;
                         });

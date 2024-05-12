@@ -4,9 +4,6 @@ class MobileAppConfigData extends FlutterConfigData {
   int borderRadius;
 
   MobileAppConfigData({
-    super.fontFamily,
-    super.fontFamilyFallback,
-    super.useMaterial3,
     super.radius,
     super.centerTitle,
     super.enableRipple,
@@ -29,9 +26,6 @@ class MobileAppConfigData extends FlutterConfigData {
     int? borderRadius,
   }) {
     return MobileAppConfigData(
-      fontFamily: fontFamily ?? this.fontFamily,
-      fontFamilyFallback: fontFamilyFallback ?? this.fontFamilyFallback,
-      useMaterial3: useMaterial3 ?? this.useMaterial3,
       radius: radius ?? this.radius,
       centerTitle: centerTitle ?? this.centerTitle,
       enableRipple: enableRipple ?? this.enableRipple,

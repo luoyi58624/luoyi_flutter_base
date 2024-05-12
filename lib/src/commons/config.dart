@@ -7,11 +7,11 @@ class FlutterConfigData {
   /// 自定义全局字体
   String? fontFamily;
 
-  ///
-  List<String> fontFamilyFallback;
+  /// 如果[fontFamily]为空，那么会依次根据设置的字体列表去匹配相应的字体
+  List<String>? fontFamilyFallback;
 
   /// 是否启用material3，默认true
-  bool useMaterial3;
+  bool? useMaterial3;
 
   /// 组件默认圆角值
   double radius;
@@ -39,8 +39,8 @@ class FlutterConfigData {
 
   FlutterConfigData({
     this.fontFamily,
-    this.fontFamilyFallback = const [],
-    this.useMaterial3 = true,
+    this.fontFamilyFallback,
+    this.useMaterial3,
     this.radius = 6,
     this.centerTitle,
     this.enableRipple = true,
@@ -170,7 +170,7 @@ class M3ConfigData {
   bool appBarScrollShade;
 
   M3ConfigData({
-    this.appbarHeight = 56,
+    this.appbarHeight = 50,
     this.appBarScrollShade = false,
   });
 

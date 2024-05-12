@@ -48,8 +48,6 @@ part 'src/utils/flutter.dart';
 
 part 'src/utils/font.dart';
 
-part 'src/utils/theme_data.dart';
-
 part 'src/extensions/modal.dart';
 
 part 'src/utils/no_ripper.dart';

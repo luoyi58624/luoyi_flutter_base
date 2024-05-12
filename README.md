@@ -24,6 +24,7 @@
 - 在谷歌浏览器上运行
 
 > flutter run -d chrome --web-renderer html --flavor prod -t lib/main_prod.dart
+> flutter run -d chrome --web-renderer canvaskit --flavor prod -t lib/main_prod.dart
 
 - 打包和安装指定环境的app（仅限android）
 
@@ -36,7 +37,7 @@
 - 打包web
 
 > flutter build web
-> flutter build web --web-renderer html
+> flutter build web --web-renderer html --pwa-strategy none
 > flutter build web --web-renderer canvaskit --pwa-strategy none
 > dhttpd --path build/web/
 

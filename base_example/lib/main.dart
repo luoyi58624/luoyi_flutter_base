@@ -7,12 +7,10 @@ import 'global.dart';
 
 void main() async {
   await initApp();
-  List<String> fontFamilyFallback = await FlutterFont.initDefaultFont();
-  // await FlutterFont.initCustomFont();
+  await FlutterFont.init(FlutterFontModel.notoSansSC);
   Get.put(AppDataController(
       config: FlutterConfigData(
     fontFamily: FlutterFont.fontFamily,
-    fontFamilyFallback: fontFamilyFallback,
   )));
   Get.put(GlobalController());
   runApp(const MainApp());
@@ -39,8 +37,8 @@ class MainApp extends StatelessWidget {
         return MaterialApp(
           onGenerateTitle: (context) => S.of(context).title,
           themeMode: AppDataController.of.themeMode.value,
-          theme: ThemeDataUtil.buildThemeData(context, Brightness.light),
-          darkTheme: ThemeDataUtil.buildThemeData(context, Brightness.dark),
+          theme: ThemeData(brightness: Brightness.light).applyAppData(context),
+          darkTheme: ThemeData(brightness: Brightness.dark).applyAppData(context),
           showPerformanceOverlay: GlobalController.of.showPerformanceOverlay.value,
           home: const RootPage(),
           localizationsDelegates: const [
@@ -52,7 +50,7 @@ class MainApp extends StatelessWidget {
           supportedLocales: S.delegate.supportedLocales,
           builder: (context, child) => Material(
             child: CupertinoTheme(
-              data: ThemeDataUtil.buildCupertinoThemeData(context, context.theme.brightness),
+              data: CupertinoThemeData(brightness: context.theme.brightness).applyAppData(context),
               child: child!,
             ),
           ),

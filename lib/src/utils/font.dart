@@ -51,14 +51,14 @@ class FontUtil {
         if (DeviceUtil.isXiaomi) {
           _setFontWeight(FontWeight.w500, FontWeight.w500, FontWeight.bold);
         } else if (DeviceUtil.isHUAWEI) {
-          _setFontWeight(FontWeight.w400, FontWeight.w500, FontWeight.w600);
+          _setFontWeight(FontWeight.w400, FontWeight.w500, FontWeight.bold);
         } else {
           _setFontWeight(FontWeight.w400, FontWeight.w500, FontWeight.bold);
         }
       }
       // Windows平台默认不包含w500字重，中等字重调整为400
       else if (GetPlatform.isWindows) {
-        _setFontWeight(FontWeight.w500, FontWeight.w500, FontWeight.w600);
+        _setFontWeight(FontWeight.w500, FontWeight.w500, FontWeight.bold);
       } else {
         _setFontWeight(FontWeight.w400, FontWeight.w500, FontWeight.bold);
       }
