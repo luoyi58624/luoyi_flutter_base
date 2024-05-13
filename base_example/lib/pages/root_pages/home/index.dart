@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:base_example/global.dart';
 import '../../../widgets/button.dart';
 import '../../button.dart';
+import 'hook.dart';
 import 'theme2.dart';
 
 class HomeRootPage extends StatefulWidget {
@@ -73,6 +74,7 @@ class _HomeRootPageState extends State<HomeRootPage> {
               buildListTileWidget(context, title: '主题设置', page: const ThemePage()),
               buildListTileWidget(context, title: '主题设置2', page: const ThemePage2()),
               buildListTileWidget(context, title: '本地响应式变量', page: const LocalObsPage()),
+              buildListTileWidget(context, title: 'Hook测试', page: const HookPage()),
               const SizedBox(height: 8),
               ButtonWidget(
                 onPressed: () {
