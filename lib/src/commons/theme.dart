@@ -43,32 +43,31 @@ class AppThemeData extends ThemeExtension<AppThemeData> {
   /// 背景色
   Color bgColor;
 
-  /// 二级背景色，例如：卡片、底部导航栏
-  Color bgColor2;
-
-  /// 三级背景色
-  Color bgColor3;
-
-  /// 四级背景色
-  Color bgColor4;
-
-  /// 五级背景色
-  Color bgColor5;
-
   /// 头部导航栏背景颜色
   Color headerColor;
 
   /// 文字颜色
   Color textColor;
 
-  /// 二级文字颜色，颜色更浅
-  Color textColor2;
-
   /// icon颜色
   Color iconColor;
 
-  /// 二级icon颜色，颜色更浅
-  Color iconColor2;
+  /// 根据背景色自动创建一组次级颜色，例如：
+  /// 1. 卡片、底部导航栏
+  /// 2. Pop弹窗
+  List<Color> get bgColors => List.generate(4, (index) => bgColor.deepen(2 * (index + 1), darkScale: 10 * (index + 1)));
+
+  /// 根据头部颜色自动创建一组次级颜色
+  List<Color> get headerColors =>
+      List.generate(4, (index) => headerColor.deepen(2 * (index + 1), darkScale: 10 * (index + 1)));
+
+  /// 根据字体颜色自动创建一组次级颜色
+  List<Color> get textColors =>
+      List.generate(4, (index) => textColor.deepen(5 * (index + 1), darkScale: 8 * (index + 1)));
+
+  /// 根据字体颜色自动创建一组次级颜色
+  List<Color> get iconColors =>
+      List.generate(4, (index) => iconColor.deepen(5 * (index + 1), darkScale: 8 * (index + 1)));
 
   /// 默认的亮色主题构造函数
   AppThemeData({
@@ -78,15 +77,9 @@ class AppThemeData extends ThemeExtension<AppThemeData> {
     this.warning = const Color.fromARGB(255, 245, 158, 11),
     this.error = const Color.fromARGB(255, 239, 68, 68),
     this.bgColor = const Color(0xffffffff),
-    this.bgColor2 = const Color(0xfffafafa),
-    this.bgColor3 = const Color(0xfff6f6f6),
-    this.bgColor4 = const Color(0xfff1f3f5),
-    this.bgColor5 = const Color(0xffe5e7eb),
     this.headerColor = const Color(0xfff3f4f6),
     this.textColor = const Color(0xff1f1f1f),
-    this.textColor2 = const Color(0xff606368),
     this.iconColor = const Color(0xff1b1e23),
-    this.iconColor2 = const Color(0xff606368),
   });
 
   /// 默认的暗色主题构造函数
@@ -97,15 +90,9 @@ class AppThemeData extends ThemeExtension<AppThemeData> {
     this.warning = const Color(0xfffbbf24),
     this.error = const Color(0xfffb7185),
     this.bgColor = const Color(0xff181818),
-    this.bgColor2 = const Color(0xff2d2d2d),
-    this.bgColor3 = const Color(0xff4a4a4a),
-    this.bgColor4 = const Color(0xff52525B),
-    this.bgColor5 = const Color(0xff71717A),
     this.headerColor = const Color(0xff404040),
     this.textColor = const Color(0xfffafafa),
-    this.textColor2 = const Color(0xffe5e5e5),
     this.iconColor = const Color(0xfff6f6f6),
-    this.iconColor2 = const Color(0xffd4d4d4),
   });
 
   @override
@@ -116,8 +103,6 @@ class AppThemeData extends ThemeExtension<AppThemeData> {
     Color? warning,
     Color? error,
     Color? bgColor,
-    Color? bgColor2,
-    Color? bgColor3,
     Color? headerColor,
     Color? textColor,
     Color? iconColor,
@@ -129,8 +114,6 @@ class AppThemeData extends ThemeExtension<AppThemeData> {
       warning: warning ?? this.warning,
       error: error ?? this.error,
       bgColor: bgColor ?? this.bgColor,
-      bgColor2: bgColor2 ?? this.bgColor2,
-      bgColor3: bgColor3 ?? this.bgColor3,
       headerColor: headerColor ?? this.headerColor,
       textColor: textColor ?? this.textColor,
       iconColor: iconColor ?? this.iconColor,

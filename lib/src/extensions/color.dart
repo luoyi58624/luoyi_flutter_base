@@ -19,9 +19,10 @@ extension FlutterColorExtension on Color {
   }
 
   /// Color对象转16进制字符串格式颜色
-  /// * noLeading 是否不加 # 前缀
+  /// * hasLeading 是否添加 # 前缀，默认true
+  /// * hasAlpha 是否添加透明度，默认false
   String toHex({
-    bool hasLeading = false,
+    bool hasLeading = true,
     bool hasAlpha = false,
   }) =>
       '${hasLeading == true ? '#' : ''}'
@@ -55,7 +56,8 @@ extension FlutterColorExtension on Color {
   Color brighten(int scale) {
     assert(scale >= 0 && scale <= 100);
     var p = scale / 100;
-    return Color.fromARGB(alpha, red + ((255 - red) * p).round(), green + ((255 - green) * p).round(), blue + ((255 - blue) * p).round());
+    return Color.fromARGB(
+        alpha, red + ((255 - red) * p).round(), green + ((255 - green) * p).round(), blue + ((255 - blue) * p).round());
   }
 
   /// 将颜色变得更暗
@@ -79,8 +81,10 @@ extension FlutterColorExtension on Color {
   }
 
   /// 当用户鼠标悬停时的颜色
-  Color onHover(BuildContext context, bool flag, [int? scale]) => flag ? deepen(scale ?? context.appConfig.hoverScale) : this;
+  Color onHover(BuildContext context, bool flag, [int? scale]) =>
+      flag ? deepen(scale ?? context.appConfig.hoverScale) : this;
 
   /// 当用户鼠标、手指按下时的颜色
-  Color onTap(BuildContext context, bool flag, [int? scale]) => flag ? deepen(scale ?? context.appConfig.tapScale) : this;
+  Color onTap(BuildContext context, bool flag, [int? scale]) =>
+      flag ? deepen(scale ?? context.appConfig.tapScale) : this;
 }

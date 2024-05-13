@@ -7,10 +7,11 @@ import 'global.dart';
 
 void main() async {
   await initApp();
-  await FlutterFont.init(FlutterFontModel.notoSansSC);
+  var _fontFamilyFallback = await FlutterFont.initPlatformFont(FlutterFontModel.notoSansSC);
   Get.put(AppDataController(
       config: AppConfigData(
     fontFamily: FlutterFont.fontFamily,
+    fontFamilyFallback: _fontFamilyFallback,
   )));
   Get.put(GlobalController());
   runApp(const MainApp());

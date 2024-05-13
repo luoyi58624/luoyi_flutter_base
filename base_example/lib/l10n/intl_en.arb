@@ -1,4 +1,5 @@
 {
+  "@@locale": "en",
   "title": "Flutter Base App",
   "@title": {
     "description": "App title"

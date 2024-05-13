@@ -67,13 +67,15 @@ class AppDataController extends GetxController {
 
 extension AppDataContextExtension on BuildContext {
   /// 当前主题数据
-  AppThemeData get appTheme => Theme.of(this).extension<AppThemeData>() ?? (isDarkMode ? AppThemeData.darkTheme : AppThemeData.theme);
+  AppThemeData get appTheme =>
+      Theme.of(this).extension<AppThemeData>() ?? (isDarkMode ? AppThemeData.darkTheme : AppThemeData.theme);
 
   /// 全局配置数据
   AppConfigData get appConfig => AppData.maybeOf(this)?.config ?? AppConfigData.config;
 
   /// Appbar高度
-  double get appbarHeight => Theme.of(this).useMaterial3 ? appConfig.m3ConfigData.appbarHeight : appConfig.m2ConfigData.appbarHeight;
+  double get appbarHeight =>
+      Theme.of(this).useMaterial3 ? appConfig.m3ConfigData.appbarHeight : appConfig.m2ConfigData.appbarHeight;
 }
 
 extension FlutterThemeDataExtension on ThemeData {
@@ -94,7 +96,8 @@ extension FlutterThemeDataExtension on ThemeData {
     } else {
       if (config.m2ConfigData.translucenceStatusBar) {
         AsyncUtil.delayed(() {
-          SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 200)));
+          SystemChrome.setSystemUIOverlayStyle(
+              const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 200)));
         }, 500);
       } else {
         SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 0)));
@@ -134,7 +137,8 @@ extension FlutterThemeDataExtension on ThemeData {
         centerTitle: config.centerTitle,
         toolbarHeight: isM3 ? config.m3ConfigData.appbarHeight : config.m2ConfigData.appbarHeight,
         elevation: isM3 ? 0 : config.m2ConfigData.appbarElevation,
-        scrolledUnderElevation: isM3 ? (config.m3ConfigData.appBarScrollShade ? 4 : 0) : config.m2ConfigData.appbarScrollElevation,
+        scrolledUnderElevation:
+            isM3 ? (config.m3ConfigData.appBarScrollShade ? 4 : 0) : config.m2ConfigData.appbarScrollElevation,
         backgroundColor: theme.headerColor,
         titleTextStyle: TextStyle(
           fontFamily: fontFamily,
@@ -149,16 +153,16 @@ extension FlutterThemeDataExtension on ThemeData {
       // 设置底部导航栏
       bottomNavigationBarTheme: bottomNavigationBarTheme.copyWith(
         elevation: 0,
-        backgroundColor: theme.bgColor2,
+        backgroundColor: theme.bgColors[0],
         selectedItemColor: theme.primary,
         unselectedLabelStyle: TextStyle(fontFamily: fontFamily, fontWeight: FontWeight.w500, fontSize: 12),
         selectedLabelStyle: TextStyle(fontFamily: fontFamily, fontWeight: FontWeight.w500, fontSize: 12),
-        unselectedIconTheme: IconThemeData(size: 26, color: theme.iconColor2),
+        unselectedIconTheme: IconThemeData(size: 26, color: theme.iconColors[3]),
         selectedIconTheme: IconThemeData(size: 26, color: theme.primary),
       ),
       iconTheme: IconThemeData(color: theme.iconColor),
       cardTheme: CardTheme(
-        color: theme.bgColor2,
+        color: theme.bgColors[0],
         // m3会将此颜色和color进行混合从而产生一个新的material颜色 (生成一个淡淡的Primary Color)，
         // 这里将其重置为透明，表示卡片用默认color展示
         surfaceTintColor: Colors.transparent,
@@ -176,7 +180,7 @@ extension FlutterThemeDataExtension on ThemeData {
         collapsedShape: Border.all(width: 0, style: BorderStyle.none),
       ),
       popupMenuTheme: popupMenuTheme.copyWith(
-        color: theme.bgColor3,
+        color: theme.bgColors[1],
         surfaceTintColor: Colors.transparent,
         elevation: isDark ? 8 : 2,
         enableFeedback: true,
@@ -197,7 +201,7 @@ extension FlutterThemeDataExtension on ThemeData {
         subtitleTextStyle: TextStyle(
           fontFamily: fontFamily,
           fontWeight: FontWeight.w500,
-          color: theme.textColor2,
+          color: theme.textColors[1],
           fontSize: 13,
         ),
         iconColor: theme.iconColor,
@@ -210,8 +214,9 @@ extension FlutterCupertinoThemeDataExtension on CupertinoThemeData {
   CupertinoThemeData applyAppData(BuildContext context) {
     AppData? appData = AppData.maybeOf(context);
 
-    AppThemeData theme =
-        brightness == Brightness.light ? (appData?.theme ?? AppThemeData.theme) : (appData?.darkTheme ?? AppThemeData.darkTheme);
+    AppThemeData theme = brightness == Brightness.light
+        ? (appData?.theme ?? AppThemeData.theme)
+        : (appData?.darkTheme ?? AppThemeData.darkTheme);
 
     AppConfigData config = appData?.config ?? AppConfigData.config;
     String? fontFamily = config.fontFamily ?? textTheme.textStyle.fontFamily;

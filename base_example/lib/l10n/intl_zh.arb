@@ -1,4 +1,5 @@
 {
+  "@@locale": "zh",
   "title": "Flutter基础应用",
   "helloWorld": "你好！",
   "bottomLabelHome": "首页",

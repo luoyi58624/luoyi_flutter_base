@@ -1,5 +1,4 @@
-import 'dart:ffi';
-
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
@@ -13,6 +12,8 @@ class ThemePage extends StatefulWidget {
 }
 
 class _ThemePageState extends State<ThemePage> {
+  int count = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,9 +29,12 @@ class _ThemePageState extends State<ThemePage> {
             _AppTheme(
               title: 'bgColor',
               color: context.appTheme.bgColor,
+              colors: context.appTheme.bgColors,
               colorPicker: _ColorPicker(
                 color: context.appTheme.bgColor,
                 onChange: (color) {
+                  count++;
+                  i(count);
                   if (context.isDarkMode) {
                     AppDataController.of.darkTheme.value.bgColor = color;
                     AppDataController.of.darkTheme.refresh();
@@ -44,6 +48,7 @@ class _ThemePageState extends State<ThemePage> {
             _AppTheme(
               title: 'headerColor',
               color: context.appTheme.headerColor,
+              colors: context.appTheme.headerColors,
               colorPicker: _ColorPicker(
                 color: context.appTheme.headerColor,
                 onChange: (color) {
@@ -52,6 +57,40 @@ class _ThemePageState extends State<ThemePage> {
                     AppDataController.of.darkTheme.refresh();
                   } else {
                     AppDataController.of.theme.value.headerColor = color;
+                    AppDataController.of.darkTheme.refresh();
+                  }
+                },
+              ),
+            ),
+            _AppTheme(
+              title: 'textColor',
+              color: context.appTheme.textColor,
+              colors: context.appTheme.textColors,
+              colorPicker: _ColorPicker(
+                color: context.appTheme.textColor,
+                onChange: (color) {
+                  if (context.isDarkMode) {
+                    AppDataController.of.darkTheme.value.textColor = color;
+                    AppDataController.of.darkTheme.refresh();
+                  } else {
+                    AppDataController.of.theme.value.textColor = color;
+                    AppDataController.of.darkTheme.refresh();
+                  }
+                },
+              ),
+            ),
+            _AppTheme(
+              title: 'iconColor',
+              color: context.appTheme.iconColor,
+              colors: context.appTheme.iconColors,
+              colorPicker: _ColorPicker(
+                color: context.appTheme.iconColor,
+                onChange: (color) {
+                  if (context.isDarkMode) {
+                    AppDataController.of.darkTheme.value.iconColor = color;
+                    AppDataController.of.darkTheme.refresh();
+                  } else {
+                    AppDataController.of.theme.value.iconColor = color;
                     AppDataController.of.darkTheme.refresh();
                   }
                 },
@@ -185,7 +224,8 @@ class _ThemePageState extends State<ThemePage> {
               children: FlutterColorData.materialColors.values.map((color) {
                 return InkWell(
                   onTap: () {
-                    AppDataController.of.darkTheme.value = AppDataController.of.darkTheme.value.copyWith(primary: color);
+                    AppDataController.of.darkTheme.value =
+                        AppDataController.of.darkTheme.value.copyWith(primary: color);
                   },
                   child: Obx(
                     () => Container(
@@ -214,16 +254,19 @@ class _AppTheme extends StatelessWidget {
   const _AppTheme({
     required this.title,
     required this.color,
+    required this.colors,
     required this.colorPicker,
   });
 
   final String title;
   final Color color;
+  final List<Color> colors;
 
   final Widget colorPicker;
 
   @override
   Widget build(BuildContext context) {
+    List list = [0];
     return Card(
       clipBehavior: Clip.hardEdge,
       child: Column(
@@ -245,33 +288,46 @@ class _AppTheme extends StatelessWidget {
                 ),
               );
             },
-            title: Text(title),
+            tileColor: color,
+            title: Text(
+              '$title - ${color.toHex()}',
+              style: TextStyle(
+                color: color.isDark ? Colors.white : Colors.black,
+              ),
+            ),
             trailing: const Icon(Icons.keyboard_arrow_right),
           ),
           Row(
             children: [
-              ...List.generate(
-                5,
-                (index) {
-                  var $color = color.deepen(index * 5);
-                  return Expanded(
-                    child: AspectRatio(
-                      aspectRatio: 1,
-                      child: ColoredBox(
-                        color: $color,
-                        child: Center(
-                          child: Text(
-                            'bgColor${index == 0 ? '' : index + 1}',
-                            style: TextStyle(
-                              color: $color.isDark ? Colors.white : Colors.black,
+              ...colors.mapIndexed((index, $color) {
+                return Expanded(
+                  child: AspectRatio(
+                    aspectRatio: 1,
+                    child: ColoredBox(
+                      color: $color,
+                      child: Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              '$title${index + 1}',
+                              style: TextStyle(
+                                color: $color.isDark ? Colors.white : Colors.black,
+                              ),
                             ),
-                          ),
+                            Text(
+                              $color.toHex(),
+                              style: TextStyle(
+                                color: $color.isDark ? Colors.white : Colors.black,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                  );
-                },
-              )
+                  ),
+                );
+              }),
             ],
           ),
         ],

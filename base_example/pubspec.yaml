@@ -19,8 +19,8 @@ dependencies:
   luoyi_flutter_font:
     git:
       url: https://github.com/luoyi58624/luoyi_flutter_font.git
-  flex_color_picker: ^3.4.1
   flutter_colorpicker: ^1.0.3
+  collection: ^1.18.0
 
 dev_dependencies:
   flutter_test:
@@ -36,30 +36,10 @@ flutter:
   assets:
     - assets/images/
   fonts:
-    # 谷歌开源字体，可以商用
     - family: NotoSansSC
       fonts:
         - asset: packages/luoyi_flutter_font/fonts/NotoSansSC/NotoSansSC-Bold.ttf
         - asset: packages/luoyi_flutter_font/fonts/NotoSansSC/NotoSansSC-Medium.ttf
-#        - asset: packages/luoyi_flutter_font/fonts/NotoSansSC/NotoSansSC-Regular.ttf
-#    # 苹方字体，Apple下的设备可以商用
-#    # Medium字库可以渲染500、700两种字重，如果需要400字重请加上Regular字库
-#    - family: PingFang SC
-#      fonts:
-#        - asset: packages/luoyi_flutter_font/fonts/PingFangSC/PingFangSC-Medium.otf
-#        - asset: packages/luoyi_flutter_font/fonts/PingFangSC/PingFangSC-Regular.otf
-#    # 小米字体，可以商用
-#    # 小米源文件字体不能同时加载400、500字重，具体原因未知
-#    - family: MiSans
-#      fonts:
-#        - asset: packages/luoyi_flutter_font/fonts/MiSans/MiSans-Semibold.ttf
-#        - asset: packages/luoyi_flutter_font/fonts/MiSans/MiSans-Medium.ttf
-#    # 鸿蒙字体，可以商用
-#    - family: HarmonyOS Sans SC
-#      fonts:
-#        - asset: packages/luoyi_flutter_font/fonts/HarmonyOS/HarmonyOS-Bold.ttf
-#        - asset: packages/luoyi_flutter_font/fonts/HarmonyOS/HarmonyOS-Medium.ttf
-#        - asset: packages/luoyi_flutter_font/fonts/HarmonyOS/HarmonyOS-Regular.ttf
 
 flutter_intl:
   enabled: true
