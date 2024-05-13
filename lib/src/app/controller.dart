@@ -23,6 +23,7 @@ class AppDataController extends GetxController {
     return maybeOf!;
   }
 
+  late final count = useLocalObs(0, 'count', expire: 10);
   late final Rx<ThemeMode> themeMode;
   late final Rx<AppThemeData> theme;
   late final Rx<AppThemeData> darkTheme;

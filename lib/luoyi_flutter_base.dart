@@ -1,18 +1,22 @@
 library luoyi_flutter_base;
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:math' as math;
 
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:localstorage/localstorage.dart';
 import 'package:luoyi_dart_base/luoyi_dart_base.dart';
 import 'package:luoyi_flutter_font/luoyi_flutter_font.dart';
 import 'package:mini_getx/mini_getx.dart';
 
 export 'package:luoyi_dart_base/luoyi_dart_base.dart';
+
+// 一个非常轻量的 key-value 本地存储，整个包的源代码不超过100行，不依赖任何本机插件
+export 'package:localstorage/localstorage.dart' hide initLocalStorage, LocalStorage;
 
 part 'src/app/app.dart';
 
@@ -50,6 +54,8 @@ part 'src/utils/async.dart';
 
 part 'src/utils/flutter.dart';
 
+part 'src/utils/use_local_obs.dart';
+
 part 'src/extensions/modal.dart';
 
 part 'src/utils/no_ripper.dart';
@@ -77,3 +83,8 @@ part 'src/widgets/form/form_text_field.dart';
 part 'src/widgets/cupertino/list_group.dart';
 
 part 'src/widgets/cupertino/list_tile.dart';
+
+Future<void> initApp() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initLocalStorage();
+}

@@ -21,94 +21,96 @@ class _ThemePageState extends State<ThemePage> {
       appBar: AppBar(
         title: const Text('App主题设置'),
       ),
-      body: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(child: buildDarkCell()),
-          SliverToBoxAdapter(child: buildConfigCell()),
-          SliverToBoxAdapter(child: buildM2ConfigCell()),
-          SliverToBoxAdapter(child: buildM3ConfigCell()),
-          SliverToBoxAdapter(child: buildBaseThemeCell(context)),
-          SliverToBoxAdapter(
-            child: _LayoutTheme(
-              title: 'bgColor',
-              color: context.appTheme.bgColor,
-              colors: context.appTheme.bgColors,
-              colorPicker: _ColorPicker(
+      body: buildScrollbar(
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(child: buildDarkCell()),
+            SliverToBoxAdapter(child: buildConfigCell()),
+            SliverToBoxAdapter(child: buildM2ConfigCell()),
+            SliverToBoxAdapter(child: buildM3ConfigCell()),
+            SliverToBoxAdapter(child: buildBaseThemeCell(context)),
+            SliverToBoxAdapter(
+              child: _LayoutTheme(
+                title: 'bgColor',
                 color: context.appTheme.bgColor,
-                onChange: (color) {
-                  // count++;
-                  // i(count);
-                  if (context.isDarkMode) {
-                    AppDataController.of.darkTheme.value.bgColor = color;
-                    AppDataController.of.darkTheme.refresh();
-                  } else {
-                    AppDataController.of.theme.value.bgColor = color;
-                    AppDataController.of.darkTheme.refresh();
-                  }
-                },
+                colors: context.appTheme.bgColors,
+                colorPicker: _ColorPicker(
+                  color: context.appTheme.bgColor,
+                  onChange: (color) {
+                    // count++;
+                    // i(count);
+                    if (context.isDarkMode) {
+                      AppDataController.of.darkTheme.value.bgColor = color;
+                      AppDataController.of.darkTheme.refresh();
+                    } else {
+                      AppDataController.of.theme.value.bgColor = color;
+                      AppDataController.of.darkTheme.refresh();
+                    }
+                  },
+                ),
               ),
             ),
-          ),
-          SliverToBoxAdapter(
-            child: _LayoutTheme(
-              title: 'headerColor',
-              color: context.appTheme.headerColor,
-              colors: context.appTheme.headerColors,
-              colorPicker: _ColorPicker(
+            SliverToBoxAdapter(
+              child: _LayoutTheme(
+                title: 'headerColor',
                 color: context.appTheme.headerColor,
-                onChange: (color) {
-                  if (context.isDarkMode) {
-                    AppDataController.of.darkTheme.value.headerColor = color;
-                    AppDataController.of.darkTheme.refresh();
-                  } else {
-                    AppDataController.of.theme.value.headerColor = color;
-                    AppDataController.of.darkTheme.refresh();
-                  }
-                },
+                colors: context.appTheme.headerColors,
+                colorPicker: _ColorPicker(
+                  color: context.appTheme.headerColor,
+                  onChange: (color) {
+                    if (context.isDarkMode) {
+                      AppDataController.of.darkTheme.value.headerColor = color;
+                      AppDataController.of.darkTheme.refresh();
+                    } else {
+                      AppDataController.of.theme.value.headerColor = color;
+                      AppDataController.of.darkTheme.refresh();
+                    }
+                  },
+                ),
               ),
             ),
-          ),
-          SliverToBoxAdapter(
-            child: _LayoutTheme(
-              title: 'textColor',
-              color: context.appTheme.textColor,
-              colors: context.appTheme.textColors,
-              colorPicker: _ColorPicker(
+            SliverToBoxAdapter(
+              child: _LayoutTheme(
+                title: 'textColor',
                 color: context.appTheme.textColor,
-                onChange: (color) {
-                  if (context.isDarkMode) {
-                    AppDataController.of.darkTheme.value.textColor = color;
-                    AppDataController.of.darkTheme.refresh();
-                  } else {
-                    AppDataController.of.theme.value.textColor = color;
-                    AppDataController.of.darkTheme.refresh();
-                  }
-                },
+                colors: context.appTheme.textColors,
+                colorPicker: _ColorPicker(
+                  color: context.appTheme.textColor,
+                  onChange: (color) {
+                    if (context.isDarkMode) {
+                      AppDataController.of.darkTheme.value.textColor = color;
+                      AppDataController.of.darkTheme.refresh();
+                    } else {
+                      AppDataController.of.theme.value.textColor = color;
+                      AppDataController.of.darkTheme.refresh();
+                    }
+                  },
+                ),
               ),
             ),
-          ),
-          SliverToBoxAdapter(
-            child: _LayoutTheme(
-              title: 'iconColor',
-              color: context.appTheme.iconColor,
-              colors: context.appTheme.iconColors,
-              colorPicker: _ColorPicker(
+            SliverToBoxAdapter(
+              child: _LayoutTheme(
+                title: 'iconColor',
                 color: context.appTheme.iconColor,
-                onChange: (color) {
-                  if (context.isDarkMode) {
-                    AppDataController.of.darkTheme.value.iconColor = color;
-                    AppDataController.of.darkTheme.refresh();
-                  } else {
-                    AppDataController.of.theme.value.iconColor = color;
-                    AppDataController.of.darkTheme.refresh();
-                  }
-                },
+                colors: context.appTheme.iconColors,
+                colorPicker: _ColorPicker(
+                  color: context.appTheme.iconColor,
+                  onChange: (color) {
+                    if (context.isDarkMode) {
+                      AppDataController.of.darkTheme.value.iconColor = color;
+                      AppDataController.of.darkTheme.refresh();
+                    } else {
+                      AppDataController.of.theme.value.iconColor = color;
+                      AppDataController.of.darkTheme.refresh();
+                    }
+                  },
+                ),
               ),
             ),
-          ),
-          SliverToBoxAdapter(child: buildLightPrimaryTheme()),
-          SliverToBoxAdapter(child: buildDarkPrimaryTheme()),
-        ],
+            SliverToBoxAdapter(child: buildLightPrimaryTheme()),
+            SliverToBoxAdapter(child: buildDarkPrimaryTheme()),
+          ],
+        ),
       ),
     );
   }
@@ -401,8 +403,7 @@ class _ThemePageState extends State<ThemePage> {
               children: FlutterColorData.materialColors.values.map((color) {
                 return InkWell(
                   onTap: () {
-                    AppDataController.of.darkTheme.value =
-                        AppDataController.of.darkTheme.value.copyWith(primary: color);
+                    AppDataController.of.darkTheme.value = AppDataController.of.darkTheme.value.copyWith(primary: color);
                   },
                   child: Obx(
                     () => Container(

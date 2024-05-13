@@ -21,6 +21,7 @@ dependencies:
   google_fonts: ^6.2.1
   flutter_colorpicker: ^1.0.3
   collection: ^1.18.0
+  localstorage: ^5.0.0
 
 dev_dependencies:
   flutter_test:

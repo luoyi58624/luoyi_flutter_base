@@ -14,7 +14,9 @@ dependencies:
     sdk: flutter
   luoyi_dart_base: ^1.0.0
   luoyi_flutter_font: ^1.0.0
+  # 封装的一个轻量级 get 插件，只保留核心响应式状态管理
   mini_getx: ^5.0.0
+  localstorage: ^5.0.0
 
 dev_dependencies:
   flutter_test:

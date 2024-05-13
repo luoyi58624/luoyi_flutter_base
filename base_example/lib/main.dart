@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'global.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  await initApp();
   var _fontFamilyFallback = await FlutterFont.init(fontModel: FlutterFontModel.notoSansSC);
   await FlutterFont.initSystemFontWeight();
   Get.put(AppDataController(

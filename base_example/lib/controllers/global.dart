@@ -8,4 +8,5 @@ class GlobalController extends GetxController {
     '中文': 'zh',
     'English': 'en',
   }.obs;
+
 }
