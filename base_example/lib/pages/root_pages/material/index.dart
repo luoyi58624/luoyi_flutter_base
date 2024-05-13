@@ -21,36 +21,32 @@ class _MaterialRootPageState extends State<MaterialRootPage> {
       ),
       body: SingleChildScrollView(
         child: Card(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                  child: Text(
-                    '基础组件',
-                    style: context.h4,
+          clipBehavior: Clip.hardEdge,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                child: Text(
+                  '基础组件',
+                  style: context.h4,
+                ),
+              ),
+              Column(
+                children: [
+                  buildListTileWidget(
+                    context,
+                    title: 'Button 按钮',
+                    onTap: () {},
                   ),
-                ),
-                Column(
-                  children: [
-                    ListTile(
-                      onTap: () {},
-                      dense: true,
-                      title: const Text('Button 按钮', style: TextStyle(fontSize: 15)),
-                      trailing: const Icon(Icons.keyboard_arrow_right),
-                    ),
-                    ListTile(
-                      onTap: () {},
-                      dense: true,
-                      title: const Text('Switch 开关', style: TextStyle(fontSize: 15)),
-                      trailing: const Icon(Icons.keyboard_arrow_right),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                  buildListTileWidget(
+                    context,
+                    title: 'Switch 开关',
+                    onTap: () {},
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),

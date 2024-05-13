@@ -385,10 +385,10 @@ packages:
     dependency: transitive
     description:
       name: luoyi_dart_base
-      sha256: "4402b0b48021cd6c0310a27f38057a6c2c1faa18d22870796cb6f381fe9c87eb"
+      sha256: "9438b4e394c08f4c057122534d65c46746ca8a07b6c4393d22ac9cf8c59f62b5"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.3"
+    version: "1.1.1"
   luoyi_flutter_base:
     dependency: "direct overridden"
     description:
@@ -399,19 +399,19 @@ packages:
   luoyi_flutter_font:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "88d19d4191c4f7603ddd007b13adaaedc368ac4e"
-      url: "https://github.com/luoyi58624/luoyi_flutter_font.git"
-    source: git
-    version: "1.0.4"
+      name: luoyi_flutter_font
+      sha256: "357980da3401c2e60adb7c14b30d195c3a6bf145b4ed61b54b516cca36dcf22d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.7"
   luoyi_flutter_plugin:
     dependency: "direct main"
     description:
-      name: luoyi_flutter_plugin
-      sha256: "66667b9695a62694527b0ea803f902f5cfb3c58145b4d13d37d66cb307176a2d"
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: "65bb6ea7cf502d8a69b5d8f1008f5fe6e3998b53"
+      url: "https://github.com/luoyi58624/luoyi_flutter_plugin.git"
+    source: git
     version: "1.0.0"
   matcher:
     dependency: transitive

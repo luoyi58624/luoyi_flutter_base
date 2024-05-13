@@ -13,8 +13,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   luoyi_dart_base: ^1.0.0
+  luoyi_flutter_font: ^1.0.0
   mini_getx: ^5.0.0
-  device_info_plus: ^10.1.0
 
 dev_dependencies:
   flutter_test:

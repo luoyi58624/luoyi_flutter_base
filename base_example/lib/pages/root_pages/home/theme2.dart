@@ -5,14 +5,14 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 import '../../../global.dart';
 
-class ThemePage extends StatefulWidget {
-  const ThemePage({super.key});
+class ThemePage2 extends StatefulWidget {
+  const ThemePage2({super.key});
 
   @override
-  State<ThemePage> createState() => _ThemePageState();
+  State<ThemePage2> createState() => _ThemePage2State();
 }
 
-class _ThemePageState extends State<ThemePage> {
+class _ThemePage2State extends State<ThemePage2> {
   int count = 0;
 
   @override
@@ -21,15 +21,15 @@ class _ThemePageState extends State<ThemePage> {
       appBar: AppBar(
         title: const Text('App主题设置'),
       ),
-      body: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(child: buildDarkCell()),
-          SliverToBoxAdapter(child: buildConfigCell()),
-          SliverToBoxAdapter(child: buildM2ConfigCell()),
-          SliverToBoxAdapter(child: buildM3ConfigCell()),
-          SliverToBoxAdapter(child: buildBaseThemeCell(context)),
-          SliverToBoxAdapter(
-            child: _LayoutTheme(
+      body: buildScrollWidget(
+        child: Center(
+          child: Column(children: [
+            buildDarkCell(),
+            buildConfigCell(),
+            buildM2ConfigCell(),
+            buildM3ConfigCell(),
+            buildBaseThemeCell(context),
+            _LayoutTheme(
               title: 'bgColor',
               color: context.appTheme.bgColor,
               colors: context.appTheme.bgColors,
@@ -48,9 +48,7 @@ class _ThemePageState extends State<ThemePage> {
                 },
               ),
             ),
-          ),
-          SliverToBoxAdapter(
-            child: _LayoutTheme(
+            _LayoutTheme(
               title: 'headerColor',
               color: context.appTheme.headerColor,
               colors: context.appTheme.headerColors,
@@ -67,9 +65,7 @@ class _ThemePageState extends State<ThemePage> {
                 },
               ),
             ),
-          ),
-          SliverToBoxAdapter(
-            child: _LayoutTheme(
+            _LayoutTheme(
               title: 'textColor',
               color: context.appTheme.textColor,
               colors: context.appTheme.textColors,
@@ -86,9 +82,7 @@ class _ThemePageState extends State<ThemePage> {
                 },
               ),
             ),
-          ),
-          SliverToBoxAdapter(
-            child: _LayoutTheme(
+            _LayoutTheme(
               title: 'iconColor',
               color: context.appTheme.iconColor,
               colors: context.appTheme.iconColors,
@@ -105,10 +99,10 @@ class _ThemePageState extends State<ThemePage> {
                 },
               ),
             ),
-          ),
-          SliverToBoxAdapter(child: buildLightPrimaryTheme()),
-          SliverToBoxAdapter(child: buildDarkPrimaryTheme()),
-        ],
+            buildLightPrimaryTheme(),
+            buildDarkPrimaryTheme(),
+          ]),
+        ),
       ),
     );
   }

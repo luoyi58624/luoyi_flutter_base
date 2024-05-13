@@ -1,69 +1,4 @@
-part of '../luoyi_flutter_base.dart';
-
-class AppData extends InheritedWidget {
-  /// App全局数据共享，一般配合[ThemeDataUtil]工具类构建主题，该组件可选，如果不提供，则使用默认实例构建主题
-  const AppData({
-    super.key,
-    required super.child,
-    required this.theme,
-    required this.darkTheme,
-    required this.config,
-  });
-
-  /// 亮色主题
-  final AppThemeData theme;
-
-  /// 暗色主题
-  final AppThemeData darkTheme;
-
-  /// 全局配置
-  final AppConfigData config;
-
-  static AppData? maybeOf(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<AppData>();
-  }
-
-  static AppData of(BuildContext context) {
-    final AppData? result = maybeOf(context);
-    assert(result != null, 'No AppData found in context');
-    return result!;
-  }
-
-  @override
-  bool updateShouldNotify(AppData oldWidget) {
-    return true;
-  }
-}
-
-/// [AppData]响应式控制器，基于[Getx] (可选)
-class AppDataController extends GetxController {
-  AppDataController({
-    ThemeMode? themeMode,
-    AppThemeData? theme,
-    AppThemeData? darkTheme,
-    AppConfigData? config,
-  }) {
-    _init(
-      themeMode ?? ThemeMode.system,
-      theme ?? AppThemeData.theme,
-      darkTheme ?? AppThemeData.darkTheme,
-      config ?? AppConfigData.config,
-    );
-  }
-
-  static AppDataController of = Get.find();
-  late final Rx<ThemeMode> themeMode;
-  late final Rx<AppThemeData> theme;
-  late final Rx<AppThemeData> darkTheme;
-  late final Rx<AppConfigData> config;
-
-  void _init(ThemeMode $themeMode, AppThemeData $theme, AppThemeData $darkTheme, AppConfigData $config) {
-    themeMode = $themeMode.obs;
-    theme = $theme.obs;
-    darkTheme = $darkTheme.obs;
-    config = $config.obs;
-  }
-}
+part of '../../luoyi_flutter_base.dart';
 
 extension AppDataContextExtension on BuildContext {
   /// 当前主题数据
@@ -73,9 +8,63 @@ extension AppDataContextExtension on BuildContext {
   /// 全局配置数据
   AppConfigData get appConfig => AppData.maybeOf(this)?.config ?? AppConfigData.config;
 
+  bool get isM3 => Theme.of(this).useMaterial3;
+
   /// Appbar高度
-  double get appbarHeight =>
-      Theme.of(this).useMaterial3 ? appConfig.m3ConfigData.appbarHeight : appConfig.m2ConfigData.appbarHeight;
+  double get appbarHeight => isM3 ? appConfig.m3Config.appbar.height : appConfig.m2Config.appbar.height;
+
+  /// 导航栏默认颜色
+  Color get appbarColor => isM3
+      ? appTheme.headerColor
+      : (appConfig.m2Config.appbar.usePrimaryColor ? appTheme.primary : appTheme.headerColor);
+
+  /// 标题1 - 28px
+  TextStyle get h1 => TextStyle(
+        fontFamily: appConfig.fontFamily,
+        fontWeight: FlutterFont.bold,
+        fontSize: appConfig.textSizeConfig.h1,
+        color: appTheme.textColor,
+      );
+
+  /// 标题2 - 24px
+  TextStyle get h2 => TextStyle(
+        fontFamily: appConfig.fontFamily,
+        fontWeight: FlutterFont.bold,
+        fontSize: appConfig.textSizeConfig.h2,
+        color: appTheme.textColor,
+      );
+
+  /// 标题3 - 20px
+  TextStyle get h3 => TextStyle(
+        fontFamily: appConfig.fontFamily,
+        fontWeight: FlutterFont.bold,
+        fontSize: appConfig.textSizeConfig.h3,
+        color: appTheme.textColor,
+      );
+
+  /// 标题4 - 18px
+  TextStyle get h4 => TextStyle(
+        fontFamily: appConfig.fontFamily,
+        fontWeight: FlutterFont.bold,
+        fontSize: appConfig.textSizeConfig.h4,
+        color: appTheme.textColor,
+      );
+
+  /// 标题5 - 16px
+  TextStyle get h5 => TextStyle(
+        fontFamily: appConfig.fontFamily,
+        fontWeight: FlutterFont.bold,
+        fontSize: appConfig.textSizeConfig.h5,
+        color: appTheme.textColor,
+      );
+
+  /// 标题6 - 14px
+  TextStyle get h6 => TextStyle(
+        fontFamily: appConfig.fontFamily,
+        fontWeight: FlutterFont.bold,
+        fontSize: appConfig.textSizeConfig.h6,
+        color: appTheme.textColor,
+      );
 }
 
 extension FlutterThemeDataExtension on ThemeData {
@@ -86,21 +75,32 @@ extension FlutterThemeDataExtension on ThemeData {
     bool isDark = brightness == Brightness.dark;
     final lightTheme = appData?.theme ?? AppThemeData.theme;
     final darkTheme = appData?.darkTheme ?? AppThemeData.darkTheme;
-    final theme = isDark ? darkTheme : lightTheme;
-    AppConfigData config = appData?.config ?? AppConfigData.config;
-    String? fontFamily = config.fontFamily ?? textTheme.displayLarge?.fontFamily;
+    final appTheme = isDark ? darkTheme : lightTheme;
+    AppConfigData appConfig = appData?.config ?? AppConfigData.config;
+    String? fontFamily = appConfig.fontFamily ?? textTheme.displayLarge?.fontFamily;
 
-    bool isM3 = config.useMaterial3 ?? useMaterial3;
+    bool isM3 = appConfig.useMaterial3;
+
+    Color appbarColor = isDark
+        ? appTheme.headerColor
+        : isM3
+            ? appTheme.headerColor
+            : (appConfig.m2Config.appbar.usePrimaryColor ? appTheme.primary : appTheme.headerColor);
+
     if (isM3) {
-      SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 0)));
+      AsyncUtil.delayed(() {
+        SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 0)));
+      }, 200);
     } else {
-      if (config.m2ConfigData.translucenceStatusBar) {
+      if (appConfig.m2Config.translucenceStatusBar) {
         AsyncUtil.delayed(() {
           SystemChrome.setSystemUIOverlayStyle(
               const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 200)));
-        }, 500);
+        }, 200);
       } else {
-        SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 0)));
+        AsyncUtil.delayed(() {
+          SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 0)));
+        }, 200);
       }
     }
 
@@ -108,19 +108,13 @@ extension FlutterThemeDataExtension on ThemeData {
       useMaterial3: isM3,
       // 应用颜色主题
       colorScheme: isM3
-          ? ColorScheme.fromSeed(
-              brightness: brightness,
-              seedColor: theme.primary,
-            )
-          : ColorScheme.fromSwatch(
-              brightness: brightness,
-              primarySwatch: theme.primary.toMaterialColor(),
-            ),
-      textTheme: _textTheme(theme, config),
+          ? ColorScheme.fromSeed(brightness: brightness, seedColor: appTheme.primary)
+          : ColorScheme.fromSwatch(brightness: brightness, primarySwatch: appTheme.primary.toMaterialColor()),
+      textTheme: _textTheme(appTheme, appConfig),
       // 扩展主题
-      extensions: [theme],
+      extensions: [appTheme],
       // 是否禁用波纹
-      splashFactory: config.enableRipple ? InkRipple.splashFactory : noRipperFactory,
+      splashFactory: appConfig.enableRipple ? InkRipple.splashFactory : noRipperFactory,
       // 解决web上material按钮外边距为0问题，与移动端的效果保持一致
       materialTapTargetSize: MaterialTapTargetSize.padded,
       // 标准显示密度
@@ -132,41 +126,41 @@ extension FlutterThemeDataExtension on ThemeData {
         TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
       }),
       // 设置页面背景色
-      scaffoldBackgroundColor: theme.bgColor,
+      scaffoldBackgroundColor: appTheme.bgColor,
       appBarTheme: appBarTheme.copyWith(
-        centerTitle: config.centerTitle,
-        toolbarHeight: isM3 ? config.m3ConfigData.appbarHeight : config.m2ConfigData.appbarHeight,
-        elevation: isM3 ? 0 : config.m2ConfigData.appbarElevation,
+        centerTitle: appConfig.centerTitle,
+        toolbarHeight: isM3 ? appConfig.m3Config.appbar.height : appConfig.m2Config.appbar.height,
+        elevation: isM3 ? 0 : appConfig.m2Config.appbar.elevation,
         scrolledUnderElevation:
-            isM3 ? (config.m3ConfigData.appBarScrollShade ? 4 : 0) : config.m2ConfigData.appbarScrollElevation,
-        backgroundColor: theme.headerColor,
+            isM3 ? (appConfig.m3Config.appbar.scrollShade ? 4 : 0) : appConfig.m2Config.appbar.scrollElevation,
+        backgroundColor: appbarColor,
         titleTextStyle: TextStyle(
           fontFamily: fontFamily,
           fontSize: 18,
-          fontWeight: FontWeight.w500,
-          color: theme.headerColor.isDark ? darkTheme.textColor : lightTheme.textColor,
+          fontWeight: FlutterFont.medium,
+          color: appbarColor.isDark ? darkTheme.textColor : lightTheme.textColor,
         ),
         iconTheme: IconThemeData(
-          color: theme.headerColor.isDark ? darkTheme.iconColor : lightTheme.iconColor,
+          color: appbarColor.isDark ? darkTheme.iconColor : lightTheme.iconColor,
         ),
       ),
       // 设置底部导航栏
       bottomNavigationBarTheme: bottomNavigationBarTheme.copyWith(
         elevation: 0,
-        backgroundColor: theme.bgColors[0],
-        selectedItemColor: theme.primary,
+        backgroundColor: appTheme.bgColors[0],
+        selectedItemColor: appTheme.primary,
         unselectedLabelStyle: TextStyle(fontFamily: fontFamily, fontWeight: FontWeight.w500, fontSize: 12),
         selectedLabelStyle: TextStyle(fontFamily: fontFamily, fontWeight: FontWeight.w500, fontSize: 12),
-        unselectedIconTheme: IconThemeData(size: 26, color: theme.iconColors[3]),
-        selectedIconTheme: IconThemeData(size: 26, color: theme.primary),
+        unselectedIconTheme: IconThemeData(size: 26, color: appTheme.iconColors[3]),
+        selectedIconTheme: IconThemeData(size: 26, color: appTheme.primary),
       ),
-      iconTheme: IconThemeData(color: theme.iconColor),
+      iconTheme: IconThemeData(color: appTheme.iconColor),
       cardTheme: CardTheme(
-        color: theme.bgColors[0],
+        color: appTheme.bgColors[0],
         // m3会将此颜色和color进行混合从而产生一个新的material颜色 (生成一个淡淡的Primary Color)，
         // 这里将其重置为透明，表示卡片用默认color展示
         surfaceTintColor: Colors.transparent,
-        elevation: isDark ? 4 : 1,
+        elevation: isDark ? 4 : (isM3 ? appConfig.m3Config.cardElevation : appConfig.m2Config.cardElevation),
         margin: const EdgeInsets.all(8),
       ),
       inputDecorationTheme: const InputDecorationTheme(
@@ -175,36 +169,36 @@ extension FlutterThemeDataExtension on ThemeData {
         ),
       ),
       expansionTileTheme: ExpansionTileThemeData(
-        textColor: theme.primary,
+        textColor: appTheme.primary,
         shape: Border.all(width: 0, style: BorderStyle.none),
         collapsedShape: Border.all(width: 0, style: BorderStyle.none),
       ),
       popupMenuTheme: popupMenuTheme.copyWith(
-        color: theme.bgColors[1],
+        color: appTheme.bgColors[1],
         surfaceTintColor: Colors.transparent,
         elevation: isDark ? 8 : 2,
         enableFeedback: true,
         textStyle: TextStyle(
           fontFamily: fontFamily,
-          fontWeight: FontWeight.w500,
-          color: theme.textColor,
+          fontWeight: FlutterFont.medium,
+          color: appTheme.textColor,
           fontSize: 14,
         ),
       ),
       listTileTheme: listTileTheme.copyWith(
         titleTextStyle: TextStyle(
           fontFamily: fontFamily,
-          fontWeight: FontWeight.w500,
-          color: theme.textColor,
+          fontWeight: FlutterFont.medium,
+          color: appTheme.textColor,
           fontSize: 15,
         ),
         subtitleTextStyle: TextStyle(
           fontFamily: fontFamily,
-          fontWeight: FontWeight.w500,
-          color: theme.textColors[1],
+          fontWeight: FlutterFont.medium,
+          color: appTheme.textColors[1],
           fontSize: 13,
         ),
-        iconColor: theme.iconColor,
+        iconColor: appTheme.iconColor,
       ),
     );
   }
@@ -249,76 +243,91 @@ extension FlutterCupertinoThemeDataExtension on CupertinoThemeData {
 TextTheme _textTheme(AppThemeData theme, AppConfigData config) {
   return TextTheme(
     displayLarge: TextStyle(
+      fontWeight: FlutterFont.normal,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     displayMedium: TextStyle(
+      fontWeight: FlutterFont.normal,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     displaySmall: TextStyle(
+      fontWeight: FlutterFont.normal,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     headlineLarge: TextStyle(
+      fontWeight: FlutterFont.normal,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     headlineMedium: TextStyle(
+      fontWeight: FlutterFont.normal,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     headlineSmall: TextStyle(
+      fontWeight: FlutterFont.normal,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     titleLarge: TextStyle(
+      fontWeight: FlutterFont.bold,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     titleMedium: TextStyle(
+      fontWeight: FlutterFont.bold,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     titleSmall: TextStyle(
+      fontWeight: FlutterFont.bold,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     bodyLarge: TextStyle(
+      fontWeight: FlutterFont.normal,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     bodyMedium: TextStyle(
+      fontWeight: FlutterFont.normal,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     bodySmall: TextStyle(
+      fontWeight: FlutterFont.normal,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     labelLarge: TextStyle(
+      fontWeight: FlutterFont.medium,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     labelMedium: TextStyle(
+      fontWeight: FlutterFont.medium,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     labelSmall: TextStyle(
+      fontWeight: FlutterFont.medium,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,

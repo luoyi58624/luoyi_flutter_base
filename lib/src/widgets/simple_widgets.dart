@@ -1,5 +1,60 @@
 part of '../../luoyi_flutter_base.dart';
 
+const Widget arrowRightWidget = Icon(Icons.keyboard_arrow_right);
+
+/// 构建滚动组件
+Widget buildScrollWidget({
+  required Widget child,
+  ScrollController? controller,
+  bool showScrollbar = true,
+}) {
+  Widget widget = SingleChildScrollView(
+    controller: controller,
+    child: child,
+  );
+  if (showScrollbar) {
+    return widget = buildScrollbar(
+      controller: controller,
+      child: widget,
+    );
+  }
+  return widget;
+}
+
+/// 构建通用的[ListTile]组件
+Widget buildListTileWidget(
+  BuildContext context, {
+  required String title,
+  bool dense = true,
+  Widget trailing = arrowRightWidget,
+  GestureTapCallback? onTap,
+  Widget? page,
+  Widget? leading,
+  Color? tileColor,
+}) {
+  return ListTile(
+    onTap: onTap == null && page == null
+        ? null
+        : () {
+            if (onTap != null) {
+              onTap();
+            } else {
+              context.push(page!);
+            }
+          },
+    dense: dense,
+    leading: leading,
+    trailing: arrowRightWidget,
+    tileColor: tileColor,
+    title: Text(
+      title,
+      style: TextStyle(
+        fontSize: Theme.of(context).listTileTheme.titleTextStyle?.fontSize,
+      ),
+    ),
+  );
+}
+
 /// 构建通用分割线Widget
 Widget buildDividerWidget(
   BuildContext context, {
@@ -38,12 +93,12 @@ Widget buildListViewDemo({
   ScrollPhysics? physics,
 }) {
   return ListView.builder(
-    // itemExtentBuilder: ,
     itemCount: count,
     physics: physics,
-    itemBuilder: (context, index) => ListTile(
+    itemBuilder: (context, index) => buildListTileWidget(
+      context,
       onTap: () {},
-      title: Text('列表-${index + 1}'),
+      title: '列表-${index + 1}',
     ),
   );
 }
@@ -117,21 +172,48 @@ Widget buildCenterColumn(List<Widget> children) {
   );
 }
 
+Widget buildBoxWidget({
+  double width = 36,
+  double height = 36,
+  double radius = 4,
+  Color color = Colors.grey,
+}) {
+  return Container(
+    width: width,
+    height: height,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(radius),
+      color: color,
+    ),
+  );
+}
+
+/// 构建滚动条，如果是桌面端(包括桌面端web)，直接返回字元素
+Widget buildScrollbar({
+  required Widget child,
+  ScrollController? controller,
+  bool thumbVisibility = false, // 是否一直显示滚动条
+}) {
+  if (GetPlatform.isDesktop) return child;
+  return Scrollbar(
+    controller: controller,
+    thumbVisibility: thumbVisibility,
+    child: child,
+  );
+}
+
 /// 构建ios滚动条，如果是桌面端(包括桌面端web)，则不使用ios滚动条，因为会冲突
 Widget buildCupertinoScrollbar({
   required Widget child,
   ScrollController? controller,
   bool thumbVisibility = false, // 是否一直显示滚动条
 }) {
-  if (GetPlatform.isDesktop) {
-    return child;
-  } else {
-    return CupertinoScrollbar(
-      controller: controller,
-      thumbVisibility: thumbVisibility,
-      child: child,
-    );
-  }
+  if (GetPlatform.isDesktop) return child;
+  return CupertinoScrollbar(
+    controller: controller,
+    thumbVisibility: thumbVisibility,
+    child: child,
+  );
 }
 
 /// 构建ios loading

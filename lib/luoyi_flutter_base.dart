@@ -9,13 +9,24 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:luoyi_dart_base/luoyi_dart_base.dart';
+import 'package:luoyi_flutter_font/luoyi_flutter_font.dart';
 import 'package:mini_getx/mini_getx.dart';
 
 export 'package:luoyi_dart_base/luoyi_dart_base.dart';
 
-part 'src/commons/theme.dart';
+part 'src/app/app.dart';
 
-part 'src/commons/config.dart';
+part 'src/app/extension.dart';
+
+part 'src/app/controller.dart';
+
+part 'src/app/config/config.dart';
+
+part 'src/app/config/m2_config.dart';
+
+part 'src/app/config/m3_config.dart';
+
+part 'src/app/theme/theme.dart';
 
 part 'src/builders/hover.dart';
 
@@ -25,23 +36,17 @@ part 'src/commons/color.dart';
 
 part 'src/commons/model.dart';
 
-part 'src/extensions/color.dart';
+part 'src/extensions/base.dart';
 
 part 'src/extensions/drawer.dart';
 
 part 'src/extensions/router.dart';
-
-part 'src/extensions/string.dart';
-
-part 'src/extensions/text.dart';
 
 part 'src/pages/simple_page.dart';
 
 part 'src/utils/animation.dart';
 
 part 'src/utils/async.dart';
-
-part 'src/utils/device.dart';
 
 part 'src/utils/flutter.dart';
 
@@ -52,8 +57,6 @@ part 'src/utils/no_ripper.dart';
 part 'src/utils/platform.dart';
 
 part 'src/widgets/animation.dart';
-
-part 'src/app.dart';
 
 part 'src/widgets/badge.dart';
 
@@ -74,9 +77,3 @@ part 'src/widgets/form/form_text_field.dart';
 part 'src/widgets/cupertino/list_group.dart';
 
 part 'src/widgets/cupertino/list_tile.dart';
-
-/// 初始化App
-Future<void> initApp() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await DeviceUtil._init();
-}

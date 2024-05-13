@@ -1,13 +1,13 @@
 import 'package:base_example/pages/root.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:luoyi_flutter_font/luoyi_flutter_font.dart';
 
 import 'global.dart';
 
 void main() async {
-  await initApp();
-  var _fontFamilyFallback = await FlutterFont.initPlatformFont(FlutterFontModel.notoSansSC);
+  WidgetsFlutterBinding.ensureInitialized();
+  var _fontFamilyFallback = await FlutterFont.init(fontModel: FlutterFontModel.notoSansSC);
+  await FlutterFont.initSystemFontWeight();
   Get.put(AppDataController(
       config: AppConfigData(
     fontFamily: FlutterFont.fontFamily,

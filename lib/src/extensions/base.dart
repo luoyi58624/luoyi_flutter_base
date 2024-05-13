@@ -1,5 +1,15 @@
 part of '../../luoyi_flutter_base.dart';
 
+extension FlutterStringExtension on String {
+  /// 将16进制字符串颜色转成Color对象
+  Color toColor() {
+    final buffer = StringBuffer();
+    if (length == 6 || length == 7) buffer.write('ff');
+    buffer.write(replaceFirst('#', ''));
+    return Color(int.parse(buffer.toString(), radix: 16));
+  }
+}
+
 /// Color工具函数扩展
 extension FlutterColorExtension on Color {
   /// 判断一个颜色是否是暗色
@@ -88,3 +98,9 @@ extension FlutterColorExtension on Color {
   Color onTap(BuildContext context, bool flag, [int? scale]) =>
       flag ? deepen(scale ?? context.appConfig.tapScale) : this;
 }
+
+// extension FlutterBoolExtension on bool {
+//   void toggle() {
+//     this = !this;
+//   }
+// }

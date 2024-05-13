@@ -1,4 +1,4 @@
-part of '../../luoyi_flutter_base.dart';
+part of '../../../luoyi_flutter_base.dart';
 
 /// 自定义主题数据, 它是基于[MaterialApp]进行拓展的, 不管你创建什么类型的App，都建议将[MaterialApp]作为根App，
 /// flutter存在很多其他根App: [CupertinoApp]、[FluentApp]、[MacosApp]，但实际上，
@@ -40,7 +40,7 @@ class AppThemeData extends ThemeExtension<AppThemeData> {
   /// 错误颜色
   Color error;
 
-  /// 背景色
+  /// 全局背景色
   Color bgColor;
 
   /// 头部导航栏背景颜色
