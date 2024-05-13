@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.3.0](https://github.com/luoyi58624/luoyi_flutter_base/compare/v1.2.0...v1.3.0) (2024-05-13)
+
+
+### Features
+
+* 优化主题，新增ThemeDataUtil ([3346d2b](https://github.com/luoyi58624/luoyi_flutter_base/commit/3346d2bc4cdcab84da7a073ed10c4d5ddcc392f6))
+* 新增国际化示例 ([831fdbe](https://github.com/luoyi58624/luoyi_flutter_base/commit/831fdbef927ea42c49b05dd2a29d7b5f0c837f4a))
+* 新增更多主题配置 ([cc8a08f](https://github.com/luoyi58624/luoyi_flutter_base/commit/cc8a08f4910a073a5bab04ffbcbe5648cd2b0320))
+* 新增离线字体文件，优化windows、web上的字体渲染效果 ([73f5f79](https://github.com/luoyi58624/luoyi_flutter_base/commit/73f5f7930e900ee30bd05917f091c750bf3a3f86))
+* 更新 color hsp 算法 ([7db9452](https://github.com/luoyi58624/luoyi_flutter_base/commit/7db945236790daed98ec92a99ccf908f16ec004b))
+* 更新文档 ([a5a5c7f](https://github.com/luoyi58624/luoyi_flutter_base/commit/a5a5c7fe92ff6159f9f0e03dbf46374d8d910fc0))
+* 移除bgColor2、bgColor3等次级颜色，添加bgColors、headerColors、textColors、iconColors等次级颜色 ([e873712](https://github.com/luoyi58624/luoyi_flutter_base/commit/e87371276b0cb27353bb55d4261809ce19b322e5))
+* 移除ThemeDataUtil，更改为已扩展函数形式加载 ([3344fd7](https://github.com/luoyi58624/luoyi_flutter_base/commit/3344fd7c38c0235654964337d8ba6e22ad52c5d9))
+
 ## [1.2.0](https://github.com/luoyi58624/luoyi_flutter_base/compare/v1.1.0...v1.2.0) (2024-05-06)
 
 
