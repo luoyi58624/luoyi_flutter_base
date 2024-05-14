@@ -15,8 +15,30 @@ import 'package:mini_getx/mini_getx.dart';
 
 export 'package:luoyi_dart_base/luoyi_dart_base.dart';
 
-// 一个非常轻量的 key-value 本地存储，整个包的源代码不超过100行，不依赖任何本机插件
+/// 一个非常轻量的 key-value 本地存储，整个包的源代码不超过100行，不依赖任何本机插件
+/// ```dart
+/// localStorage.setItem('name', 'xxx');
+/// localStorage.getItem('name');
+/// ```
 export 'package:localstorage/localstorage.dart' hide initLocalStorage, LocalStorage;
+
+/// 轻松地在行或列小部件内添加间隙，它会自动适配元素排列方向，是 SizedBox 的替代品
+/// ```dart
+/// Column(
+///   children: [
+///     Text(''),
+///     const Gap(4),
+///     Text(''),
+///   ],
+/// )
+/// ```
+export 'package:gap/gap.dart';
+
+/// ListView、SliverListView增强插件，api和官方一样，支持高性能渲染不定高子元素列表，高性能拖动滚动条滚动
+export 'package:super_sliver_list/super_sliver_list.dart';
+
+/// 与 react-hook 类似，它可以节省大量 StatefulWidget 样板代码，你甚至可以使用它来实现双向绑定 (实用性远超react-hook)
+export 'package:flutter_hooks/flutter_hooks.dart';
 
 part 'src/app/app.dart';
 

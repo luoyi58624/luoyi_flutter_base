@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:luoyi_flutter_base/luoyi_flutter_base.dart';
 
 class AllColorTestPage extends HookWidget {
@@ -106,17 +105,20 @@ class AllColorTestPage extends HookWidget {
             if (materialSwatchs != null)
               Text(
                 '$materialSwatchs',
-                style: TextStyle(color: color.isDark ? Colors.white : Colors.black, fontWeight: FontWeight.w500, fontSize: 12),
+                style: TextStyle(
+                    color: color.isDark ? Colors.white : Colors.black, fontWeight: FontWeight.w500, fontSize: 12),
               ),
             if (materialSwatchs != null) const SizedBox(height: 2),
             Text(
               color.toHex(hasLeading: true),
-              style: TextStyle(color: color.isDark ? Colors.white : Colors.black, fontWeight: FontWeight.w500, fontSize: 12),
+              style: TextStyle(
+                  color: color.isDark ? Colors.white : Colors.black, fontWeight: FontWeight.w500, fontSize: 12),
             ),
             const SizedBox(height: 2),
             Text(
               'hsp: ${color.hsp}',
-              style: TextStyle(color: color.isDark ? Colors.white : Colors.black, fontWeight: FontWeight.w500, fontSize: 12),
+              style: TextStyle(
+                  color: color.isDark ? Colors.white : Colors.black, fontWeight: FontWeight.w500, fontSize: 12),
             ),
           ],
         ),

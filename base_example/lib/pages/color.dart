@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:luoyi_flutter_base/luoyi_flutter_base.dart';
 
 class ColorTestPage extends HookWidget {
@@ -23,7 +22,7 @@ class ColorTestPage extends HookWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  const Gap(4),
                   Text(
                     '${v[i]!.hsp}',
                     style: TextStyle(
@@ -31,7 +30,7 @@ class ColorTestPage extends HookWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  const Gap(4),
                   Text(
                     '$i',
                     style: TextStyle(
@@ -39,7 +38,7 @@ class ColorTestPage extends HookWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  const Gap(4),
                   Text(
                     v[i]!.toHex(hasLeading: true),
                     style: TextStyle(

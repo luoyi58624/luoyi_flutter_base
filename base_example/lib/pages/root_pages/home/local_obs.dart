@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:base_example/global.dart';
 
 class LocalObsPage extends HookWidget {
