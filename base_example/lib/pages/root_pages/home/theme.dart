@@ -1,7 +1,7 @@
 import 'package:base_example/extensions/context.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:luoyi_color_picker/luoyi_color_picker.dart';
 
 import '../../../global.dart';
 
@@ -403,7 +403,8 @@ class _ThemePageState extends State<ThemePage> {
               children: FlutterColorData.materialColors.values.map((color) {
                 return InkWell(
                   onTap: () {
-                    AppDataController.of.darkTheme.value = AppDataController.of.darkTheme.value.copyWith(primary: color);
+                    AppDataController.of.darkTheme.value =
+                        AppDataController.of.darkTheme.value.copyWith(primary: color);
                   },
                   child: Obx(
                     () => Container(

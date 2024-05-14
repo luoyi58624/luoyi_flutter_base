@@ -1,6 +1,6 @@
 import 'package:base_example/global.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:luoyi_color_picker/luoyi_color_picker.dart';
 
 extension ColorPickerExtension on BuildContext {
   Future<Color?> showColorPicker(Color color) async {

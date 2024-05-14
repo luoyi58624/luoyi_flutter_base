@@ -49,10 +49,12 @@ class MainApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: S.delegate.supportedLocales,
-          builder: (context, child) => Material(
-            child: CupertinoTheme(
-              data: CupertinoThemeData(brightness: context.theme.brightness).applyAppData(context),
-              child: child!,
+          builder: ToastUtil.builder(
+            (context, child) => Material(
+              child: CupertinoTheme(
+                data: CupertinoThemeData(brightness: context.theme.brightness).applyAppData(context),
+                child: child!,
+              ),
             ),
           ),
         );

@@ -12,6 +12,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  intl: ^0.19.0
   # 封装的一个轻量级 get 插件，只保留核心响应式状态管理
   mini_getx: ^5.0.0
   luoyi_dart_base: ^1.0.0
@@ -20,7 +21,7 @@ dependencies:
   gap: ^3.0.1
   super_sliver_list: ^0.4.1
   flutter_hooks: ^0.20.5
-  intl: ^0.18.1
+  fluttertoast: ^8.2.5
 
 dev_dependencies:
   flutter_test:

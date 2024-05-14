@@ -32,3 +32,4 @@ class UrlNavModel extends NavModel {
 
   late String path;
 }
+
