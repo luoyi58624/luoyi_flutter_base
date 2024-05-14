@@ -1,3 +1,4 @@
+import 'package:base_example/db/isar.dart';
 import 'package:base_example/pages/root.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'global.dart';
 
 void main() async {
   await initApp();
+  await initIsar();
   var _fontFamilyFallback = await FlutterFont.init(fontModel: FlutterFontModel.notoSansSC);
   await FlutterFont.initSystemFontWeight();
   Get.put(AppDataController(

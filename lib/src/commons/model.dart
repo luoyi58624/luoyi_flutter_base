@@ -33,3 +33,28 @@ class UrlNavModel extends NavModel {
   late String path;
 }
 
+/// 包含过期时间本地数据模型
+class ExpireLocalDataModel {
+  /// 存储的数据
+  dynamic data;
+
+  /// 过期时间，单位毫秒，如果为null或者小于等于0，则表示没有过期时间
+  /// 示例：
+  /// * 30分钟后过期：DateTime.now().millisecondsSinceEpoch + 1000 * 60 * 30
+  /// * 2024年1月1日过期：DateTime(2024, 1, 1).millisecondsSinceEpoch
+  int? expire;
+
+  ExpireLocalDataModel(this.data, [this.expire]);
+
+  ExpireLocalDataModel.fromJson(Map<String, dynamic> json) {
+    data = json['data'];
+    expire = json['expire'];
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'data': data,
+      'expire': expire,
+    };
+  }
+}

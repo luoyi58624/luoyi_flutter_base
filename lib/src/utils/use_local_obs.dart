@@ -1,32 +1,21 @@
 part of '../../luoyi_flutter_base.dart';
 
-class _LocalDataModel {
+class _LocalDataModel extends ExpireLocalDataModel {
   /// 持久化数据类型字符串，如果类型发生变化将清除旧的本地数据
   late String type;
 
-  /// 过期时间，单位：截止日期的时间戳；默认-1，表示永不过期。
-  /// 示例：
-  /// * 30分钟后过期：DateTime.now().millisecondsSinceEpoch + 1000 * 60 * 30
-  /// * 2024年1月1日过期：DateTime(2024, 1, 1).millisecondsSinceEpoch
-  late int expire;
+  _LocalDataModel(this.type, super.data, [super.expire]);
 
-  /// 存储的数据
-  dynamic data;
-
-  _LocalDataModel(this.type, this.expire, this.data);
-
-  _LocalDataModel.fromJson(Map<String, dynamic> json) {
+  _LocalDataModel.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
     type = json['type'] ?? '';
-    expire = json['expire'] ?? -1;
-    data = json['data'];
   }
 
+  @override
   Map<String, dynamic> toJson() {
-    final mapData = <String, dynamic>{};
-    mapData['type'] = type;
-    mapData['expire'] = expire;
-    mapData['data'] = data;
-    return mapData;
+    return {
+      'type': type,
+      ...super.toJson(),
+    };
   }
 }
 
@@ -61,7 +50,7 @@ extension GetxLocalObs on GetxController {
     T value,
     String key, {
     bool clear = false,
-    int expire = 0,
+    int expire = -1,
     SerializeFun<T>? serializeFun,
     DeserializeFun<T>? deserializeFun,
   }) {
@@ -85,7 +74,7 @@ extension GetxLocalObs on GetxController {
         // 如果更改了响应式变量类型，则清除旧数据
         localStorage.removeItem(key);
         $value = value.obs;
-      } else if (localDataModel.expire > 0 && localDataModel.expire < DateTime.now().millisecondsSinceEpoch) {
+      } else if (localDataModel.expire! > 0 && localDataModel.expire! < DateTime.now().millisecondsSinceEpoch) {
         // 如果用户设置了过期时间，同时过期时间小于当前时间，则清除旧数据
         localStorage.removeItem(key);
         $value = value.obs;
@@ -102,7 +91,11 @@ extension GetxLocalObs on GetxController {
       localStorage.setItem(
         key,
         jsonEncode(
-          _LocalDataModel(valueType, _setExpire(expire), serializeFun == null ? v : serializeFun(v)).toJson(),
+          _LocalDataModel(
+            valueType,
+            serializeFun == null ? v : serializeFun(v),
+            _setExpire(expire),
+          ).toJson(),
         ),
       );
     });
@@ -121,7 +114,7 @@ extension GetxLocalObs on GetxController {
     List<T> value,
     String key, {
     bool clear = false,
-    int expire = 0,
+    int expire = -1,
     SerializeFun<T>? serializeFun,
     DeserializeFun<T>? deserializeFun,
   }) {
@@ -139,7 +132,7 @@ extension GetxLocalObs on GetxController {
         // 如果更改了响应式变量类型，则清除旧数据
         localStorage.removeItem(key);
         $value = value.obs;
-      } else if (localDataModel.expire > 0 && localDataModel.expire < DateTime.now().millisecondsSinceEpoch) {
+      } else if (localDataModel.expire! > 0 && localDataModel.expire! < DateTime.now().millisecondsSinceEpoch) {
         // 如果用户设置了过期时间，同时过期时间小于当前时间，则清除旧数据
         localStorage.removeItem(key);
         $value = value.obs;
@@ -162,12 +155,12 @@ extension GetxLocalObs on GetxController {
           jsonEncode(
             _LocalDataModel(
               valueType,
-              _setExpire(expire),
               serializeFun == null
                   ? v
                   : v.map((value) {
                       return serializeFun(value);
                     }).toList(),
+              _setExpire(expire),
             ).toJson(),
           ),
         );
@@ -209,7 +202,7 @@ extension GetxLocalObs on GetxController {
     Map<String, T> value,
     String key, {
     bool clear = false,
-    int expire = 0,
+    int expire = -1,
     SerializeFun<T>? serializeFun,
     DeserializeFun<T>? deserializeFun,
   }) {
@@ -227,7 +220,7 @@ extension GetxLocalObs on GetxController {
         // 如果更改了响应式变量类型，则清除旧数据
         localStorage.removeItem(key);
         $value = value.obs;
-      } else if (localDataModel.expire > 0 && localDataModel.expire < DateTime.now().millisecondsSinceEpoch) {
+      } else if (localDataModel.expire! > 0 && localDataModel.expire! < DateTime.now().millisecondsSinceEpoch) {
         // 如果用户设置了过期时间，同时过期时间小于当前时间，则清除旧数据
         localStorage.removeItem(key);
         $value = value.obs;
@@ -247,8 +240,8 @@ extension GetxLocalObs on GetxController {
         jsonEncode(
           _LocalDataModel(
             valueType,
-            _setExpire(expire),
             serializeFun == null ? v : v.map((key, value) => MapEntry(key, serializeFun(value))),
+            _setExpire(expire),
           ).toJson(),
         ),
       );
@@ -257,4 +250,4 @@ extension GetxLocalObs on GetxController {
   }
 }
 
-int _setExpire(int expire) => expire > 0 ? DartUtil.currentMilliseconds + expire * 1000 : 0;
+int _setExpire(int expire) => expire > 0 ? DartUtil.currentMilliseconds + expire * 1000 : -1;
