@@ -1,15 +1,21 @@
-import 'package:base_example/db/isar.dart';
 import 'package:base_example/pages/root.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'global.dart';
 
+/// 根节点导航key
+final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
+
+/// 根节点context
+BuildContext get rootContext => rootNavigatorKey.currentContext!;
+
 void main() async {
   await initApp();
-  await initIsar();
-  var _fontFamilyFallback = await FlutterFont.init(fontModel: FlutterFontModel.notoSansSC);
+  var _fontFamilyFallback = await FlutterFont.init();
   await FlutterFont.initSystemFontWeight();
+  await CacheInterceptor.init();
+  LoadingUtil.init(rootNavigatorKey);
   Get.put(AppDataController(
       config: AppConfigData(
     fontFamily: FlutterFont.fontFamily,
@@ -38,6 +44,7 @@ class MainApp extends StatelessWidget {
     return Builder(builder: (context) {
       return Obx(() {
         return MaterialApp(
+          navigatorKey: rootNavigatorKey,
           onGenerateTitle: (context) => S.of(context).title,
           themeMode: AppDataController.of.themeMode.value,
           theme: ThemeData(brightness: Brightness.light).applyAppData(context),

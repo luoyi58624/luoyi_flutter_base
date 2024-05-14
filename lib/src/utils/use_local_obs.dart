@@ -39,13 +39,19 @@ typedef DeserializeFun<T> = T Function(String json);
 /// }
 /// ```
 extension GetxLocalObs on GetxController {
-  /// 创建基于[Getx]响应式变量(Observable State)，更新时会同步至本地，重新加载时会取本地数据作为初始值
+  /// 创建[Getx]响应式变量，更新时会同步至本地，重新加载时会取本地数据作为初始值
   /// * value - 初始值
   /// * key - 本地缓存key，请确保它们唯一
   /// * clear - 清除本地缓存，此属性一般用于重置本地数据
-  /// * expire - 过期时间，单位秒，如果小于等于 0 则表示永不过期
+  /// * expire - 过期时间，单位毫秒，如果小于等于 0 则表示永不过期
   /// * serializeFun - 序列化函数，如果你传入的是对象，你必须将其转换为字符串才能缓存在本地
   /// * deserializeFun - 反序列化函数，将本地存储的字符串转回目标对象
+  ///
+  /// 序列化一个模型对象示例：
+  /// ```dart
+  /// serializeFun: (model) => jsonEncode(model.toJson()),
+  /// deserializeFun: (json) => UserModel.fromJson(jsonDecode(json))
+  /// ```
   Rx<T> useLocalObs<T>(
     T value,
     String key, {
@@ -94,7 +100,7 @@ extension GetxLocalObs on GetxController {
           _LocalDataModel(
             valueType,
             serializeFun == null ? v : serializeFun(v),
-            _setExpire(expire),
+            expire,
           ).toJson(),
         ),
       );
@@ -102,7 +108,7 @@ extension GetxLocalObs on GetxController {
     return $value;
   }
 
-  /// 创建基于[Getx]响应式[List]列表(Observable State)，更新时会同步至本地，重新加载时会取本地数据作为初始值
+  /// 创建[Getx]响应式[List]，更新时会同步至本地，重新加载时会取本地数据作为初始值
   /// * value - 初始值
   /// * key - 本地缓存key，请确保它们唯一
   ///
@@ -160,7 +166,7 @@ extension GetxLocalObs on GetxController {
                   : v.map((value) {
                       return serializeFun(value);
                     }).toList(),
-              _setExpire(expire),
+              expire,
             ).toJson(),
           ),
         );
@@ -170,7 +176,7 @@ extension GetxLocalObs on GetxController {
     return $value;
   }
 
-  /// 创建基于[Getx]响应式[Map]对象(Observable State)，key强制为String，更新时会同步至本地，重新加载时会取本地数据作为初始值
+  /// 创建[Getx]响应式[Map]，key强制为String，更新时会同步至本地，重新加载时会取本地数据作为初始值
   /// * value - 初始值
   /// * key - 本地缓存key，请确保它们唯一
   ///
@@ -191,12 +197,6 @@ extension GetxLocalObs on GetxController {
   ///   serializeFun: (value) => jsonEncode(value.toJson()),
   ///   deserializeFun: (value) => UserModel.fromJson(jsonDecode(value)),
   /// );
-  ///
-  /// // 注意：操作响应式Map不要加.value
-  /// controller.localMap['key'] = 1;
-  /// controller.localMap.addAll({'key': 1});
-  ///
-  /// controller.localMap.update('key',(value)=>value+1);
   /// ```
   RxMap<String, T> useLocalMapObs<T>(
     Map<String, T> value,
@@ -208,6 +208,7 @@ extension GetxLocalObs on GetxController {
   }) {
     if (clear) localStorage.removeItem(key);
     String valueType = T.toString();
+    i(valueType);
     bool isBaseType = DartUtil.isBaseTypeString(valueType) || valueType.contains('Map');
     assert(isBaseType || (serializeFun != null && deserializeFun != null), '请为响应式持久化变量[$key]提供序列化和反序列化函数');
     late RxMap<String, T> $value;
@@ -241,7 +242,7 @@ extension GetxLocalObs on GetxController {
           _LocalDataModel(
             valueType,
             serializeFun == null ? v : v.map((key, value) => MapEntry(key, serializeFun(value))),
-            _setExpire(expire),
+            expire,
           ).toJson(),
         ),
       );
@@ -249,5 +250,3 @@ extension GetxLocalObs on GetxController {
     return $value;
   }
 }
-
-int _setExpire(int expire) => expire > 0 ? DartUtil.currentMilliseconds + expire * 1000 : -1;

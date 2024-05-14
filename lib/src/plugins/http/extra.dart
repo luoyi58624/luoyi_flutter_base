@@ -17,7 +17,7 @@ class RequestExtra {
   /// 如果你需要执行多个请求，同时又希望它们共用一个Loading弹窗，那么你应该将它设为false。
   ///
   /// 它由某些拦截器控制：[cacheInterceptor]、[errorInterceptor],
-  bool? closeLoading;
+  bool? autoCloseLoading;
 
   /// 强制使用mock数据，注意：你需要在mock文件中声明此接口的数据
   bool? useMockData;
@@ -27,7 +27,7 @@ class RequestExtra {
     this.onReceiveProgress,
     this.showErrorMessage,
     this.showServerException,
-    this.closeLoading,
+    this.autoCloseLoading,
     this.useMockData,
   });
 }
@@ -48,7 +48,7 @@ class GetRequestExtra extends RequestExtra {
     super.onReceiveProgress,
     super.showErrorMessage,
     super.showServerException,
-    super.closeLoading,
+    super.autoCloseLoading,
     this.enableCache,
     this.useCache,
     this.cacheTime,
@@ -64,7 +64,7 @@ class PostRequestExtra extends RequestExtra {
     super.onReceiveProgress,
     super.showErrorMessage,
     super.showServerException,
-    super.closeLoading,
+    super.autoCloseLoading,
     this.onSendProgress,
   });
 }
@@ -78,7 +78,7 @@ class PutRequestExtra extends RequestExtra {
     super.onReceiveProgress,
     super.showErrorMessage,
     super.showServerException,
-    super.closeLoading,
+    super.autoCloseLoading,
     this.onSendProgress,
   });
 }
@@ -92,7 +92,7 @@ class PatchRequestExtra extends RequestExtra {
     super.onReceiveProgress,
     super.showErrorMessage,
     super.showServerException,
-    super.closeLoading,
+    super.autoCloseLoading,
     this.onSendProgress,
   });
 }
@@ -102,6 +102,6 @@ class DeleteRequestExtra extends RequestExtra {
     super.cancelToken,
     super.showErrorMessage,
     super.showServerException,
-    super.closeLoading,
+    super.autoCloseLoading,
   });
 }

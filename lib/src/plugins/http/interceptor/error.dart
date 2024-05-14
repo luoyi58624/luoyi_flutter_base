@@ -9,7 +9,7 @@ class ErrorInterceptor extends Interceptor {
 
   @override
   onResponse(Response response, ResponseInterceptorHandler handler) async {
-    if (response.requestOptions.extra['closeLoading'] == true) {
+    if (response.requestOptions.extra['autoCloseLoading'] == true) {
       await LoadingUtil.close();
     }
     return handler.resolve(response);
@@ -18,7 +18,7 @@ class ErrorInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     e(err, '全局Http请求异常：${err.requestOptions.uri}');
-    if (err.requestOptions.extra['closeLoading'] == true) {
+    if (err.requestOptions.extra['autoCloseLoading'] == true) {
       await LoadingUtil.close();
     }
     String errorMsg = '';

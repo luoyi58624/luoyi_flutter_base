@@ -3,14 +3,16 @@ import 'package:luoyi_dart_base/luoyi_dart_base.dart';
 import 'package:mini_getx/mini_getx.dart';
 
 import 'extra.dart';
+import 'interceptor/cache.dart';
 import 'interceptor/error.dart';
 import 'interceptor/retry.dart';
 
 export 'extra.dart';
+export 'interceptor/cache.dart';
 export 'interceptor/error.dart';
 export 'interceptor/retry.dart';
 
-/// Http请求类，包含重试请求、错误拦截、请求缓存、数据mock拦截等功能。
+/// Http请求类，包含重试请求、错误拦截、请求缓存、数据mock拦截等功能，其底层基于[Dio]，如果你要使用它，请先安装Dio的依赖包
 /// 扩展示例：
 /// ```dart
 /// class Http extends FlutterHttp {
@@ -52,15 +54,15 @@ export 'interceptor/retry.dart';
 ///     return ResponseModel.fromJson(resData);
 ///   }
 /// ```
-class FlutterHttp {
+class BaseHttp {
   /// Flutter Http请求构造函数
   /// * enableRetryInterceptor 开启重试拦截器
-  /// * enableCacheInterceptor 开启缓存拦截器
+  /// * enableCacheInterceptor 开启缓存拦截器，使用前需要执行 init 初始化方法
   /// * enableErrorInterceptor 开启错误拦截器
   ///
   /// 注意：添加自定义拦截器时请把控好顺序，因为有些拦截器已经处理掉了结果，后面的拦截器就无法再执行，当前最佳拦截器的顺序就是：
   /// retryInterceptor -> CacheInterceptor -> 自定义拦截器 -> ErrorInterceptor
-  FlutterHttp({
+  BaseHttp({
     enableRetryInterceptor = false,
     enableCacheInterceptor = false,
     enableErrorInterceptor = false,
@@ -68,7 +70,7 @@ class FlutterHttp {
     instance = Dio(baseOptions);
     instance.interceptors
       ..addIf(enableErrorInterceptor, retryInterceptor(instance))
-      // ..addIf(enableCacheInterceptor, CacheInterceptor())
+      ..addIf(enableCacheInterceptor, CacheInterceptor())
       ..addIf(enableErrorInterceptor, ErrorInterceptor());
   }
 
@@ -85,16 +87,16 @@ class FlutterHttp {
   bool get showErrorMessage => true;
 
   /// 当启用缓存拦截器时，是否默认开启缓存（仅限Get请求）
-  bool get enableCache => false;
+  bool get enableCache => true;
 
   /// 当启用缓存拦截器时，是否默认使用缓存（仅限Get请求）
-  bool get useCache => false;
+  bool get useCache => true;
 
   /// 缓存时间，默认1小时
   int get cacheTime => 1000 * 60 * 60;
 
   /// 当请求结束时是否自动关闭页面上的Loading
-  bool get autoCloseLoading => false;
+  bool get autoCloseLoading => true;
 
   /// 请求基本配置
   BaseOptions get baseOptions => BaseOptions(
@@ -128,7 +130,7 @@ class FlutterHttp {
     getRequestExtra ??= GetRequestExtra();
     requestOptions.extra!['apiUrl'] = url;
     requestOptions.extra!['showErrorMessage'] = getRequestExtra.showErrorMessage ?? showErrorMessage;
-    requestOptions.extra!['closeLoading'] = getRequestExtra.closeLoading ?? autoCloseLoading;
+    requestOptions.extra!['autoCloseLoading'] = getRequestExtra.autoCloseLoading ?? autoCloseLoading;
     requestOptions.extra!['enableCache'] = getRequestExtra.enableCache ?? enableCache;
     requestOptions.extra!['useCache'] = getRequestExtra.useCache ?? useCache;
     requestOptions.extra!['cacheTime'] = getRequestExtra.cacheTime ?? cacheTime;
@@ -173,7 +175,7 @@ class FlutterHttp {
     requestOptions.extra!['apiUrl'] = url;
     requestOptions.extra!['showErrorMessage'] = postRequestExtra.showErrorMessage;
     requestOptions.extra!['showServerException'] = postRequestExtra.showServerException;
-    requestOptions.extra!['closeLoading'] = postRequestExtra.closeLoading;
+    requestOptions.extra!['autoCloseLoading'] = postRequestExtra.autoCloseLoading;
     requestOptions.extra!['useMockData'] = postRequestExtra.useMockData;
     try {
       var res = await instance.post(
@@ -215,7 +217,7 @@ class FlutterHttp {
     requestOptions.extra!['apiUrl'] = url;
     requestOptions.extra!['showErrorMessage'] = putRequestExtra.showErrorMessage;
     requestOptions.extra!['showServerException'] = putRequestExtra.showServerException;
-    requestOptions.extra!['closeLoading'] = putRequestExtra.closeLoading;
+    requestOptions.extra!['autoCloseLoading'] = putRequestExtra.autoCloseLoading;
     requestOptions.extra!['useMockData'] = putRequestExtra.useMockData;
     try {
       var res = await instance.put(
@@ -257,7 +259,7 @@ class FlutterHttp {
     requestOptions.extra!['apiUrl'] = url;
     requestOptions.extra!['showErrorMessage'] = patchRequestExtra.showErrorMessage;
     requestOptions.extra!['showServerException'] = patchRequestExtra.showServerException;
-    requestOptions.extra!['closeLoading'] = patchRequestExtra.closeLoading;
+    requestOptions.extra!['autoCloseLoading'] = patchRequestExtra.autoCloseLoading;
     requestOptions.extra!['useMockData'] = patchRequestExtra.useMockData;
     try {
       var res = await instance.patch(
@@ -299,7 +301,7 @@ class FlutterHttp {
     requestOptions.extra!['apiUrl'] = url;
     requestOptions.extra!['showErrorMessage'] = deleteRequestExtra.showErrorMessage;
     requestOptions.extra!['showServerException'] = deleteRequestExtra.showServerException;
-    requestOptions.extra!['closeLoading'] = deleteRequestExtra.closeLoading;
+    requestOptions.extra!['autoCloseLoading'] = deleteRequestExtra.autoCloseLoading;
     requestOptions.extra!['useMockData'] = deleteRequestExtra.useMockData;
     try {
       var res = await instance.delete(

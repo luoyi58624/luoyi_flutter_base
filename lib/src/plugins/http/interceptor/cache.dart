@@ -24,7 +24,9 @@ class CacheInterceptor extends Interceptor {
     _cacheTime = cacheTime;
     _showLog = showLog;
     var localStr = localStorage.getItem(_cacheKey);
-    if (localStr != null) cacheData = jsonDecode(localStr);
+    if (localStr != null) {
+      cacheData = (jsonDecode(localStr) as Map).cast<String, Map<String, dynamic>>();
+    }
   }
 
   /// 清除http缓存数据
@@ -36,16 +38,20 @@ class CacheInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     String url = options.uri.toString();
+    i(options.extra['useCache']);
     if (options.extra['useCache'] == true) {
       String key = DartUtil.md5(url);
-      if (cacheData[key] == null) return handler.next(options);
-      final modelData = ExpireLocalDataModel.fromJson(cacheData[key]!);
-      if (modelData.expire != null && modelData.expire! > 0 && modelData.expire! > DartUtil.currentMilliseconds) {
-        if (_showLog) i(url, '请求接口缓存数据');
-        if (options.extra['closeLoading'] == true) await LoadingUtil.close();
-        handler.resolve(Response(requestOptions: options, data: modelData.data));
-      } else {
+      if (cacheData[key] == null) {
         handler.next(options);
+      } else {
+        final modelData = ExpireLocalDataModel.fromJson(cacheData[key]!);
+        if (modelData.expire == null || modelData.expire! <= 0 || modelData.expire! > DartUtil.currentMilliseconds) {
+          if (_showLog) i(url, '接口缓存');
+          if (options.extra['autoCloseLoading'] == true) await LoadingUtil.close();
+          handler.resolve(Response(requestOptions: options, data: modelData.data));
+        } else {
+          handler.next(options);
+        }
       }
     } else {
       handler.next(options);

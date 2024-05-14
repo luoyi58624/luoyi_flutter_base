@@ -1,9 +1,10 @@
 import 'package:base_example/pages/all_color.dart';
 import 'package:base_example/pages/color.dart';
 import 'package:base_example/pages/hook.dart';
-import 'package:base_example/pages/root_pages/home/db.dart';
 import 'package:base_example/pages/root_pages/home/font.dart';
+import 'package:base_example/pages/root_pages/home/http/base.dart';
 import 'package:base_example/pages/root_pages/home/local_obs.dart';
+import 'package:base_example/pages/root_pages/home/test.dart';
 import 'package:base_example/pages/root_pages/home/theme.dart';
 import 'package:base_example/pages/root_pages/home/toast.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +79,26 @@ class _HomeRootPageState extends State<HomeRootPage> {
               buildListTileWidget(context, title: '本地响应式变量', page: const LocalObsPage()),
               buildListTileWidget(context, title: 'Hook测试', page: const HookPage()),
               buildListTileWidget(context, title: 'Toast测试', page: const ToastPage()),
-              buildListTileWidget(context, title: 'DB数据库测试', page: const DbPage()),
+              buildListTileWidget(context, title: 'Http测试', page: const BaseHttpPage()),
+              buildListTileWidget(context, title: '测试页面', page: const TestPage()),
+              buildListTileWidget(context, title: '获取变量真实类型', onTap: () {
+                dynamic intVar = 0;
+                dynamic doubleVar1 = 0.0;
+                dynamic doubleVar2 = 0.5;
+                dynamic stringVar = 'hello';
+                dynamic boolVar = false;
+                dynamic nullVar;
+                dynamic listVar = [1, 2, 3];
+                dynamic listVar2 = [1, '2', 3, null];
+                i(intVar.runtimeType);
+                i(doubleVar1.runtimeType);
+                i(doubleVar2.runtimeType);
+                i(stringVar.runtimeType);
+                i(boolVar.runtimeType);
+                i(nullVar.runtimeType);
+                i(listVar.runtimeType);
+                i(listVar2.runtimeType);
+              }),
               const SizedBox(height: 8),
               ButtonWidget(
                 onPressed: () {

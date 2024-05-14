@@ -17,7 +17,7 @@ import 'package:luoyi_dart_base/luoyi_dart_base.dart';
 import 'package:luoyi_flutter_font/luoyi_flutter_font.dart';
 import 'package:mini_getx/mini_getx.dart';
 
-export 'src/plugins/http/dio.dart';
+export 'src/plugins/http/http.dart';
 
 export 'package:luoyi_dart_base/luoyi_dart_base.dart';
 

@@ -21,6 +21,8 @@ dependencies:
   luoyi_color_picker: ^2.0.0
   collection: ^1.18.0
   localstorage: ^5.0.0
+  dio: ^5.4.2
+  faker: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -35,11 +37,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-  fonts:
-    - family: NotoSansSC
-      fonts:
-        - asset: packages/luoyi_flutter_font/fonts/NotoSansSC/NotoSansSC-Bold.ttf
-        - asset: packages/luoyi_flutter_font/fonts/NotoSansSC/NotoSansSC-Medium.ttf
 
 flutter_intl:
   enabled: true
