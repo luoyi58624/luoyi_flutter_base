@@ -1,6 +1,7 @@
 library luoyi_flutter_base;
 
 import 'dart:async';
+import 'dart:collection';
 import 'dart:convert';
 import 'dart:math' as math;
 

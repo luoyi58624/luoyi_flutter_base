@@ -5,43 +5,42 @@ import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:base_example/global.dart';
 
-class UserModel {
+class UserModel extends ModelSerialize {
   UserModel({this.name, this.age});
 
   String? name;
   int? age;
 
-  factory UserModel.fromJson(Map<String, dynamic> json) {
-    return UserModel(
-      name: json["name"],
-      age: DartUtil.safeInt(json["age"]),
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      "name": name,
-      "age": age,
-    };
-  }
+  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+        name: json['name'],
+        age: DartUtil.safeInt(json['age']),
+      );
 
   @override
-  String toString() {
-    return 'User{name: $name, age: $age}';
-  }
+  UserModel fromJson(Map<String, dynamic> json) => UserModel.fromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => {'name': name, 'age': age};
+
+  @override
+  String toString() => 'User{name: $name, age: $age}';
 }
 
 class _Controller extends GetxController {
   late final count1 = useLocalObs(0, 'count1');
   late final count2 = useLocalObs(0, 'count2', expire: 10000);
   late final dynamicVar = useLocalObs<dynamic>(0, 'dynamic_var');
-  late final userModel = useLocalObs(
-    UserModel(),
-    'user_model',
-    serializeFun: (model) => jsonEncode(model.toJson()),
-    deserializeFun: (json) => UserModel.fromJson(jsonDecode(json)),
-  );
-// late final userMap = useLocalMapObs<dynamic>({'name': 'luoyi', 'age': 20}, 'user_map');
+  late final userMap1 = useLocalObs<Map<dynamic, dynamic>>({'name': 'luoyi', 'age': 20}, 'user_map1');
+  late final userMap2 = useLocalObs({'name': 'luoyi', 'age': 20, 1: 'hihi', 1.5: false}, 'user_map2');
+  late final userMap3 = useLocalObs({
+    'key': 1,
+    'value': {
+      'user': 'luoyi',
+      'age': 20,
+      // 1: 'hihi',
+    },
+  }, 'user_map3');
+  late final userModel = useLocalObs(UserModel(), 'user_model');
 }
 
 class LocalObsPage extends HookWidget {
@@ -87,16 +86,43 @@ class LocalObsPage extends HookWidget {
               },
               child: Obx(() => Text(c.userModel.value.toString())),
             ),
-            // const Text('-----响应式Map对象------'),
-            // ElevatedButton(
-            //   onPressed: () {
-            //     c.userMap.value = {
-            //       'name': faker.person.firstName(),
-            //       'age': Random().nextInt(100000),
-            //     };
-            //   },
-            //   child: Obx(() => Text('userMap: ${c.userMap.value}')),
-            // ),
+            const Text('-----响应式Map对象1------'),
+            ElevatedButton(
+              onPressed: () {
+                c.userMap1.value = {
+                  'name': faker.person.firstName(),
+                  'age': Random().nextInt(100000),
+                };
+              },
+              child: Obx(() => Text('userMap: ${c.userMap1.value}')),
+            ),
+            const Text('-----响应式Map对象2------'),
+            ElevatedButton(
+              onPressed: () {
+                c.userMap2.value = {
+                  'name': faker.person.firstName(),
+                  'age': Random().nextInt(100000),
+                  1: faker.person.firstName(),
+                  1.5: !(c.userMap2.value[1.5] == true),
+                };
+              },
+              child: Obx(() => Text('userMap: ${c.userMap2.value}')),
+            ),
+            const Text('-----响应式Map对象3------'),
+            ElevatedButton(
+              onPressed: () {
+                int count = c.userMap3.value['key']! as int;
+                c.userMap3.value = {
+                  'key': count++,
+                  'value': {
+                    'name': faker.person.firstName(),
+                    'age': Random().nextInt(100000),
+                    // 1: faker.person.firstName(),
+                  },
+                };
+              },
+              child: Obx(() => Text('userMap: ${c.userMap3.value}')),
+            ),
           ],
         ),
       ),

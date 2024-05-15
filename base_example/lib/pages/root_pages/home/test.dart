@@ -13,51 +13,20 @@ class TestPage extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            final userModel = UserModel();
-            final data = demo(userModel);
-            i(data);
+            Map user = {'name': 'luoyi', 'age': 20};
+            i(user.runtimeType.toString());
+            var user2 = user.cast<String, dynamic>();
+            i(user2.runtimeType.toString());
+            Map<String, dynamic> user3 = Map.castFrom(user);
+            i(user3.runtimeType.toString());
+            var user4 = user3 as Map<String, dynamic>;
+            i(user4.runtimeType.toString());
+            Map<String, dynamic> user5 = Map.from(user);
+            i(user5.runtimeType.toString());
           },
           child: const Text('获取变量的真实类型'),
         ),
       ),
     );
-  }
-
-  dynamic demo<T>(T v) {
-    if (v is BaseModel) {
-      return v.fromJson({'name': 'luoyi', 'age': 20});
-    } else {
-      return null;
-    }
-  }
-}
-
-abstract class BaseModel {
-  BaseModel fromJson(Map<String, dynamic> json);
-
-  Map<String, dynamic> toJson();
-}
-
-class UserModel extends BaseModel {
-  String? name;
-  int? age;
-
-  UserModel({this.name, this.age});
-
-  @override
-  BaseModel fromJson(Map<String, dynamic> json) => UserModel(
-        name: json['name'],
-        age: json['age'],
-      );
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'age': age,
-      };
-
-  @override
-  String toString() {
-    return 'UserModel{name: $name, age: $age}';
   }
 }

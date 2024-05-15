@@ -42,12 +42,11 @@ extension GetxLocalObs on GetxController {
   /// 创建[Getx]响应式变量，更新时会同步至本地，重新加载时会取本地数据作为初始值
   /// * value - 初始值
   /// * key - 本地缓存key，请确保它们唯一
-  /// * clear - 清除本地缓存，此属性一般用于重置本地数据
   /// * expire - 过期时间，单位毫秒，如果小于等于 0 则表示永不过期
   /// * serializeFun - 序列化函数，如果你传入的是对象，你必须将其转换为字符串才能缓存在本地
   /// * deserializeFun - 反序列化函数，将本地存储的字符串转回目标对象
   ///
-  /// 序列化一个模型对象示例：
+  /// 序列化示例：
   /// ```dart
   /// serializeFun: (model) => jsonEncode(model.toJson()),
   /// deserializeFun: (json) => UserModel.fromJson(jsonDecode(json))
@@ -55,21 +54,12 @@ extension GetxLocalObs on GetxController {
   Rx<T> useLocalObs<T>(
     T value,
     String key, {
-    bool clear = false,
     int expire = -1,
     SerializeFun<T>? serializeFun,
     DeserializeFun<T>? deserializeFun,
   }) {
-    if (clear) localStorage.removeItem(key);
-    String valueType = T.toString();
-    bool isBaseType = DartUtil.isBaseTypeString(valueType) || value is Map;
-
-    /// 序列化Color对象
-    if (value is Color) {
-      serializeFun ??= (value) => (value as Color).toHex();
-      deserializeFun ??= (value) => value.toColor() as T;
-    }
-    assert(isBaseType || (serializeFun != null && deserializeFun != null), '请为响应式持久化变量[$key]提供序列化和反序列化函数');
+    String valueType = value.runtimeType.toString();
+    final ($s, $d) = _getSerializeFun(value, key, valueType, serializeFun, deserializeFun);
     late Rx<T> $value;
     dynamic localData = localStorage.getItem(key);
     if (localData == null) {
@@ -85,25 +75,16 @@ extension GetxLocalObs on GetxController {
         localStorage.removeItem(key);
         $value = value.obs;
       } else {
-        if (isBaseType && deserializeFun == null) {
+        if ($d == null) {
           $value = (localDataModel.data as T).obs;
         } else {
-          $value = deserializeFun!(localDataModel.data).obs;
+          $value = $d(localDataModel.data).obs;
         }
       }
     }
     // 提示：当你卸载控制器后getx会自动释放它，无须手动销毁
     ever($value, (v) {
-      localStorage.setItem(
-        key,
-        jsonEncode(
-          _LocalDataModel(
-            valueType,
-            serializeFun == null ? v : serializeFun(v),
-            expire,
-          ).toJson(),
-        ),
-      );
+      localStorage.setItem(key, jsonEncode(_LocalDataModel(valueType, $s == null ? v : $s(v), expire).toJson()));
     });
     return $value;
   }
@@ -249,4 +230,56 @@ extension GetxLocalObs on GetxController {
     });
     return $value;
   }
+}
+
+/// 获取序列化和反序列化函数
+(SerializeFun<T>?, DeserializeFun<T>?) _getSerializeFun<T>(
+  T value,
+  String key,
+  String valueType, [
+  SerializeFun<T>? serializeFun,
+  DeserializeFun<T>? deserializeFun,
+]) {
+  // 基础类型不需要序列化
+  if (DartUtil.isBaseTypeString(valueType)) return (serializeFun, deserializeFun);
+  // 如果是Map类型
+  if (value is Map) {
+    serializeFun ??= (model) {
+      var mapData = model as Map;
+      mapData = mapData.map((k, v) {
+        String newKey = k.toString();
+        return MapEntry(newKey, v);
+      });
+
+      return jsonEncode(mapData);
+    };
+    deserializeFun ??= (json) {
+      final mapData = (jsonDecode(json) as Map);
+      var newMapData = mapData.map((k, v) {
+        return MapEntry(DemoUtil.dynamicToBaseType(k), DemoUtil.dynamicToBaseType(v));
+      }).autoCast();
+      // i(newMapData);
+      // i(newMapData.runtimeType.toString());
+      return newMapData as T;
+    };
+  }
+  // 如果模型类实现了ModelSerialize，则设置默认的序列化和反序列化函数
+  else if (value is ModelSerialize) {
+    serializeFun ??= (model) => jsonEncode((model as ModelSerialize).toJson());
+    deserializeFun ??= (json) => (value as ModelSerialize).fromJson(jsonDecode(json)) as T;
+  }
+  // 序列化Color
+  else if (value is Color) {
+    serializeFun ??= (model) => (model as Color).toHex();
+    deserializeFun ??= (json) => json.toColor() as T;
+  }
+  // 序列化MaterialColor
+  else if (value is MaterialColor) {
+    serializeFun ??= (model) => (model as MaterialColor).shade500.toHex();
+    deserializeFun ??= (json) => json.toColor().toMaterialColor() as T;
+  } else {
+    assert(serializeFun != null && deserializeFun != null, '请为响应式持久化变量[$key]提供序列化和反序列化函数');
+  }
+
+  return (serializeFun, deserializeFun);
 }

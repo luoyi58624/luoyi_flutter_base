@@ -18,6 +18,7 @@ dependencies:
   luoyi_dart_base: ^1.0.0
   luoyi_flutter_font: ^1.0.0
   localstorage: ^5.0.0
+  collection: ^1.18.0
   gap: ^3.0.1
   super_sliver_list: ^0.4.1
   flutter_hooks: ^0.20.5
