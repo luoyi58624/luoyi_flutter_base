@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.4.0](https://github.com/luoyi58624/luoyi_flutter_base/compare/v1.3.0...v1.4.0) (2024-05-15)
+
+
+### Features
+
+* useLocalObs支持自动序列化model、map数据类型 ([3caa90a](https://github.com/luoyi58624/luoyi_flutter_base/commit/3caa90a2e3bd625a0bf6ad2e9fc7d43e664c61bc))
+* 修复http缓存拦截器 ([2333b05](https://github.com/luoyi58624/luoyi_flutter_base/commit/2333b050852057a70789996c767c95f11f1f9dce))
+* 抽离Map扩展函数至dart_base库 ([a7bfc80](https://github.com/luoyi58624/luoyi_flutter_base/commit/a7bfc80ca9e47153c3658243ae27bb53f5e76b28))
+* 新增http、loading等工具类 ([b62940e](https://github.com/luoyi58624/luoyi_flutter_base/commit/b62940ee780a2ad612e4dd4af6e4a1e92f1b1e63))
+* 新增toast ([f94c7d2](https://github.com/luoyi58624/luoyi_flutter_base/commit/f94c7d21f3814d2e519a862a2d86a78894eb090e))
+* 新增响应式本地变量 ([581984c](https://github.com/luoyi58624/luoyi_flutter_base/commit/581984c197a1f498ee5e22ccaec6a6c1079c19b3))
+* 默认导出一些第三方实用包 ([9f923da](https://github.com/luoyi58624/luoyi_flutter_base/commit/9f923daf1f68db0d60d3d0c324ca50c943011a92))
+
 ## [1.3.0](https://github.com/luoyi58624/luoyi_flutter_base/compare/v1.2.0...v1.3.0) (2024-05-13)
 
 
