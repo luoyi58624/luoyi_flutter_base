@@ -62,7 +62,7 @@ class AppConfigData {
     centerTitle = centerTitle ?? (GetPlatform.isMobile ? true : false);
     this.textSizeConfig = textSizeConfig ?? TextSizeConfigData.config;
     this.m2Config = m2Config ?? M2ConfigData.config;
-    this.m3Config = m3Config ?? M3ConfigData.config;
+    this.m3Config = m3Config ?? M3ConfigData.customConfig;
   }
 
   AppConfigData copyWith({

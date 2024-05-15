@@ -22,7 +22,7 @@ Widget buildScrollWidget({
 }
 
 /// 构建通用的[ListTile]组件
-Widget buildListTileWidget(
+Widget buildCellWidget(
   BuildContext context, {
   required String title,
   bool dense = true,
@@ -89,13 +89,13 @@ IndexedWidgetBuilder buildSeparatorWidget(
 }
 
 Widget buildListViewDemo({
-  int? count,
+  int? itemCount,
   ScrollPhysics? physics,
 }) {
   return ListView.builder(
-    itemCount: count,
+    itemCount: itemCount,
     physics: physics,
-    itemBuilder: (context, index) => buildListTileWidget(
+    itemBuilder: (context, index) => buildCellWidget(
       context,
       onTap: () {},
       title: '列表-${index + 1}',
@@ -103,38 +103,23 @@ Widget buildListViewDemo({
   );
 }
 
-Widget buildCardCell(
+Widget buildCardWidget(
   BuildContext context, {
-  required String title,
+  String? title,
+  List<Widget> children = const [],
 }) {
   return Card(
-    child: Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+    clipBehavior: Clip.hardEdge,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (title != null)
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            child: Text('基础组件', style: context.h4),
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+            child: Text(title, style: context.h4),
           ),
-          Column(
-            children: [
-              ListTile(
-                onTap: () {},
-                dense: true,
-                title: const Text('Button 按钮', style: TextStyle(fontSize: 15)),
-                trailing: const Icon(Icons.keyboard_arrow_right),
-              ),
-              ListTile(
-                onTap: () {},
-                dense: true,
-                title: const Text('Switch 开关', style: TextStyle(fontSize: 15)),
-                trailing: const Icon(Icons.keyboard_arrow_right),
-              ),
-            ],
-          ),
-        ],
-      ),
+        Column(children: children),
+      ],
     ),
   );
 }

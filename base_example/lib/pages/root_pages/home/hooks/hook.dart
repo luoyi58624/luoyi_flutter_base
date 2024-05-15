@@ -19,10 +19,10 @@ class HookPage extends HookWidget {
         child: Center(
           child: Column(
             children: <Widget>[
-              buildListTileWidget(context, title: '基础hook示例', page: const BaseHookPage()),
-              buildListTileWidget(context, title: 'Getx控制器hook', page: const GetxHookPage()),
-              buildListTileWidget(context, title: 'Input双向绑定示例', page: const InputHookePage()),
-              buildListTileWidget(context, title: 'UiDataHookPage', page: const UiDataHookPage()),
+              buildCellWidget(context, title: '基础hook示例', page: const BaseHookPage()),
+              buildCellWidget(context, title: 'Getx控制器hook', page: const GetxHookPage()),
+              buildCellWidget(context, title: 'Input双向绑定示例', page: const InputHookePage()),
+              buildCellWidget(context, title: 'UiDataHookPage', page: const UiDataHookPage()),
             ],
           ),
         ),

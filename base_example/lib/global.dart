@@ -6,3 +6,4 @@ export 'controllers/global.dart';
 
 export 'http/http.dart';
 export 'generated/l10n.dart';
+export 'package:easy_refresh/easy_refresh.dart';

@@ -15,6 +15,7 @@ extension ColorPickerExtension on BuildContext {
               child: Material(
                 elevation: 2,
                 borderRadius: BorderRadius.circular(6),
+                surfaceTintColor: Colors.transparent,
                 child: StatefulBuilder(
                   builder: (context, setState) {
                     return Column(

@@ -2,8 +2,7 @@ part of '../../luoyi_flutter_base.dart';
 
 extension AppDataContextExtension on BuildContext {
   /// 当前主题数据
-  AppThemeData get appTheme =>
-      Theme.of(this).extension<AppThemeData>() ?? (isDarkMode ? AppThemeData.darkTheme : AppThemeData.theme);
+  AppThemeData get appTheme => Theme.of(this).extension<AppThemeData>() ?? (isDarkMode ? AppThemeData.darkTheme : AppThemeData.theme);
 
   /// 全局配置数据
   AppConfigData get appConfig => AppData.maybeOf(this)?.config ?? AppConfigData.config;
@@ -14,9 +13,8 @@ extension AppDataContextExtension on BuildContext {
   double get appbarHeight => isM3 ? appConfig.m3Config.appbar.height : appConfig.m2Config.appbar.height;
 
   /// 导航栏默认颜色
-  Color get appbarColor => isM3
-      ? appTheme.headerColor
-      : (appConfig.m2Config.appbar.usePrimaryColor ? appTheme.primary : appTheme.headerColor);
+  Color get appbarColor =>
+      isM3 ? appTheme.headerColor : (appConfig.m2Config.appbar.usePrimaryColor ? appTheme.primary : appTheme.headerColor);
 
   /// 标题1 - 28px
   TextStyle get h1 => TextStyle(
@@ -72,16 +70,16 @@ extension FlutterThemeDataExtension on ThemeData {
   ThemeData applyAppData(BuildContext context) {
     AppData? appData = AppData.maybeOf(context);
 
-    bool isDark = brightness == Brightness.dark;
+    bool isDarkMode = brightness == Brightness.dark;
     final lightTheme = appData?.theme ?? AppThemeData.theme;
     final darkTheme = appData?.darkTheme ?? AppThemeData.darkTheme;
-    final appTheme = isDark ? darkTheme : lightTheme;
+    final appTheme = isDarkMode ? darkTheme : lightTheme;
     AppConfigData appConfig = appData?.config ?? AppConfigData.config;
     String? fontFamily = appConfig.fontFamily ?? textTheme.displayLarge?.fontFamily;
 
     bool isM3 = appConfig.useMaterial3;
 
-    Color appbarColor = isDark
+    Color appbarColor = isDarkMode
         ? appTheme.headerColor
         : isM3
             ? appTheme.headerColor
@@ -94,8 +92,7 @@ extension FlutterThemeDataExtension on ThemeData {
     } else {
       if (appConfig.m2Config.translucenceStatusBar) {
         AsyncUtil.delayed(() {
-          SystemChrome.setSystemUIOverlayStyle(
-              const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 200)));
+          SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 200)));
         }, 200);
       } else {
         AsyncUtil.delayed(() {
@@ -119,6 +116,7 @@ extension FlutterThemeDataExtension on ThemeData {
       materialTapTargetSize: MaterialTapTargetSize.padded,
       // 标准显示密度
       visualDensity: VisualDensity.standard,
+      canvasColor: appTheme.bgColors[0],
       // 统一页面过渡动画
       pageTransitionsTheme: const PageTransitionsTheme(builders: {
         TargetPlatform.android: CupertinoPageTransitionsBuilder(),
@@ -131,8 +129,7 @@ extension FlutterThemeDataExtension on ThemeData {
         centerTitle: appConfig.centerTitle,
         toolbarHeight: isM3 ? appConfig.m3Config.appbar.height : appConfig.m2Config.appbar.height,
         elevation: isM3 ? 0 : appConfig.m2Config.appbar.elevation,
-        scrolledUnderElevation:
-            isM3 ? (appConfig.m3Config.appbar.scrollShade ? 4 : 0) : appConfig.m2Config.appbar.scrollElevation,
+        scrolledUnderElevation: isM3 ? (appConfig.m3Config.appbar.scrollShade ? 4 : 0) : appConfig.m2Config.appbar.scrollElevation,
         backgroundColor: appbarColor,
         titleTextStyle: TextStyle(
           fontFamily: fontFamily,
@@ -160,7 +157,7 @@ extension FlutterThemeDataExtension on ThemeData {
         // m3会将此颜色和color进行混合从而产生一个新的material颜色 (生成一个淡淡的Primary Color)，
         // 这里将其重置为透明，表示卡片用默认color展示
         surfaceTintColor: Colors.transparent,
-        elevation: isDark ? 4 : (isM3 ? appConfig.m3Config.cardElevation : appConfig.m2Config.cardElevation),
+        elevation: isDarkMode ? 4 : (isM3 ? appConfig.m3Config.cardElevation : appConfig.m2Config.cardElevation),
         margin: const EdgeInsets.all(8),
       ),
       inputDecorationTheme: const InputDecorationTheme(
@@ -176,7 +173,7 @@ extension FlutterThemeDataExtension on ThemeData {
       popupMenuTheme: popupMenuTheme.copyWith(
         color: appTheme.bgColors[1],
         surfaceTintColor: Colors.transparent,
-        elevation: isDark ? 8 : 2,
+        elevation: isDarkMode ? 8 : 2,
         enableFeedback: true,
         textStyle: TextStyle(
           fontFamily: fontFamily,
@@ -200,6 +197,19 @@ extension FlutterThemeDataExtension on ThemeData {
         ),
         iconColor: appTheme.iconColor,
       ),
+      progressIndicatorTheme: ProgressIndicatorThemeData(
+        refreshBackgroundColor: isDarkMode ? Colors.grey.shade700 : Colors.white,
+        color: isDarkMode ? Colors.white : appTheme.primary,
+      ),
+      tabBarTheme: TabBarTheme(
+        labelStyle: TextStyle(
+          fontFamily: fontFamily,
+          fontWeight: FontUtil.medium,
+          fontSize: 16,
+          color: appbarColor.isDark ? darkTheme.textColor : lightTheme.textColor,
+        ),
+        unselectedLabelColor: appbarColor.isDark ? darkTheme.textColors[3] : lightTheme.textColor,
+      ),
     );
   }
 }
@@ -208,9 +218,8 @@ extension FlutterCupertinoThemeDataExtension on CupertinoThemeData {
   CupertinoThemeData applyAppData(BuildContext context) {
     AppData? appData = AppData.maybeOf(context);
 
-    AppThemeData theme = brightness == Brightness.light
-        ? (appData?.theme ?? AppThemeData.theme)
-        : (appData?.darkTheme ?? AppThemeData.darkTheme);
+    AppThemeData theme =
+        brightness == Brightness.light ? (appData?.theme ?? AppThemeData.theme) : (appData?.darkTheme ?? AppThemeData.darkTheme);
 
     AppConfigData config = appData?.config ?? AppConfigData.config;
     String? fontFamily = config.fontFamily ?? textTheme.textStyle.fontFamily;
@@ -228,9 +237,12 @@ extension FlutterCupertinoThemeDataExtension on CupertinoThemeData {
         navActionTextStyle: textTheme.navActionTextStyle.copyWith(
           color: theme.primary,
           fontFamily: fontFamily,
+          fontWeight: FontUtil.medium,
+          fontSize: 16,
         ),
         navTitleTextStyle: textTheme.navTitleTextStyle.copyWith(
           fontFamily: fontFamily,
+          fontWeight: FontUtil.medium,
         ),
         navLargeTitleTextStyle: textTheme.navLargeTitleTextStyle.copyWith(
           fontFamily: fontFamily,

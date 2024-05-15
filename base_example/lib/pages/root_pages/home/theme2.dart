@@ -219,7 +219,7 @@ class _ThemePage2State extends State<ThemePage2> {
         title: const Text('M2配置'),
         initiallyExpanded: true,
         children: [
-          buildListTileWidget(
+          buildCellWidget(
             context,
             onTap: () {
               AppDataController.of.config.value.m2Config = M2ConfigData.config;
@@ -227,7 +227,7 @@ class _ThemePage2State extends State<ThemePage2> {
             },
             title: '加载 M2 默认配置',
           ),
-          buildListTileWidget(
+          buildCellWidget(
             context,
             onTap: () {
               AppDataController.of.config.value.m2Config = M2ConfigData.customConfig;
@@ -248,7 +248,7 @@ class _ThemePage2State extends State<ThemePage2> {
           title: const Text('M3配置'),
           initiallyExpanded: true,
           children: [
-            buildListTileWidget(
+            buildCellWidget(
               context,
               onTap: () {
                 AppDataController.of.config.value.m3Config = M3ConfigData.config;
@@ -256,7 +256,7 @@ class _ThemePage2State extends State<ThemePage2> {
               },
               title: '加载 M3 默认配置',
             ),
-            buildListTileWidget(
+            buildCellWidget(
               context,
               onTap: () {
                 AppDataController.of.config.value.m3Config = M3ConfigData.customConfig;

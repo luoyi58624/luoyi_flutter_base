@@ -14,6 +14,9 @@ dependencies:
   luoyi_flutter_plugin:
     git:
       url: https://gitee.com/luoyi666/luoyi_flutter_plugin.git
+  easy_refresh:
+    git:
+      url: https://github.com/luoyi58624/flutter_easy_refresh.git
   mini_getx: ^5.0.0
   intl: ^0.19.0
   google_fonts: ^6.2.1
@@ -36,30 +39,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-  fonts:
-    # 谷歌开源字体，可以商用
-    - family: NotoSansSC
-      fonts:
-        - asset: packages/luoyi_flutter_base/fonts/NotoSansSC/NotoSansSC-Bold.ttf
-        - asset: packages/luoyi_flutter_base/fonts/NotoSansSC/NotoSansSC-Medium.ttf
-        - asset: packages/luoyi_flutter_base/fonts/NotoSansSC/NotoSansSC-Regular.ttf
-    # 苹方字体，Apple下的设备可以商用
-    - family: PingFang SC
-      fonts:
-        - asset: packages/luoyi_flutter_base/fonts/PingFangSC/PingFangSC-Semibold.otf
-        - asset: packages/luoyi_flutter_base/fonts/PingFangSC/PingFangSC-Medium.otf
-        - asset: packages/luoyi_flutter_base/fonts/PingFangSC/PingFangSC-Regular.otf
-    # 小米字体，可以商用
-    - family: MiSans
-      fonts:
-        - asset: packages/luoyi_flutter_base/fonts/MiSans/MiSans-Semibold.ttf
-        - asset: packages/luoyi_flutter_base/fonts/MiSans/MiSans-Medium.ttf
-    # 鸿蒙字体，可以商用
-    - family: HarmonyOS Sans SC
-      fonts:
-        - asset: packages/luoyi_flutter_base/fonts/HarmonyOS/HarmonyOS-Bold.ttf
-        - asset: packages/luoyi_flutter_base/fonts/HarmonyOS/HarmonyOS-Medium.ttf
-        - asset: packages/luoyi_flutter_base/fonts/HarmonyOS/HarmonyOS-Regular.ttf
 
 flutter_intl:
   enabled: true

@@ -14,6 +14,7 @@ import 'package:base_example/global.dart';
 import '../../../widgets/button.dart';
 import '../../button.dart';
 import 'hooks/hook.dart';
+import 'refresh.dart';
 import 'theme2.dart';
 
 class HomeRootPage extends StatefulWidget {
@@ -74,19 +75,20 @@ class _HomeRootPageState extends State<HomeRootPage> {
         child: Center(
           child: Column(
             children: [
-              buildListTileWidget(context, title: '动态字体', page: DynamicFontPage()),
-              buildListTileWidget(context, title: '主题设置', page: const ThemePage()),
-              buildListTileWidget(context, title: '主题设置2', page: const ThemePage2()),
-              buildListTileWidget(context, title: '本地响应式变量', page: const LocalObsPage()),
-              buildListTileWidget(context, title: 'Hook测试', page: const HookPage()),
-              buildListTileWidget(context, title: 'Toast测试', page: const ToastPage()),
-              buildListTileWidget(context, title: 'Http测试', page: const BaseHttpPage()),
-              buildListTileWidget(context, title: 'Device测试', page: const DeviceInfoPage()),
-              buildListTileWidget(context, title: '测试页面', page: const TestPage()),
-              buildListTileWidget(context, title: '往session_storage插入数据', onTap: () {
+              buildCellWidget(context, title: '动态字体', page: DynamicFontPage()),
+              buildCellWidget(context, title: '主题设置', page: const ThemePage()),
+              buildCellWidget(context, title: '主题设置2', page: const ThemePage2()),
+              buildCellWidget(context, title: '本地响应式变量', page: const LocalObsPage()),
+              buildCellWidget(context, title: 'Hook测试', page: const HookPage()),
+              buildCellWidget(context, title: 'Toast测试', page: const ToastPage()),
+              buildCellWidget(context, title: 'Http测试', page: const BaseHttpPage()),
+              buildCellWidget(context, title: 'Device测试', page: const DeviceInfoPage()),
+              buildCellWidget(context, title: '下拉刷新测试', page: const RefreshPage()),
+              buildCellWidget(context, title: '测试页面', page: const TestPage()),
+              buildCellWidget(context, title: '往session_storage插入数据', onTap: () {
                 sessionStorage.setItem('isLogin', 'true');
               }),
-              buildListTileWidget(context, title: '获取变量真实类型', onTap: () {
+              buildCellWidget(context, title: '获取变量真实类型', onTap: () {
                 dynamic intVar = 0;
                 dynamic doubleVar1 = 0.0;
                 dynamic doubleVar2 = 0.5;

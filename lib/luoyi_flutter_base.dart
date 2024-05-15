@@ -51,6 +51,9 @@ export 'package:super_sliver_list/super_sliver_list.dart';
 /// 与 react-hook 类似，它可以节省大量 StatefulWidget 样板代码，你甚至可以使用它来实现双向绑定 (实用性远超react-hook)
 export 'package:flutter_hooks/flutter_hooks.dart';
 
+/// 优化tab左右滑动，官方的不跟手
+export 'package:extended_tabs/extended_tabs.dart';
+
 part 'src/app/app.dart';
 
 part 'src/app/extension.dart';
@@ -169,6 +172,8 @@ Future<void> initApp({
     await initLocalStorage();
     await initSessionStorage();
   }
+  // 初始化设备信息
+  await DeviceUtil._init();
   // 初始化字体
   if (initFont) {
     _fontFamilyFallback = await FontUtil.init();
@@ -176,6 +181,4 @@ Future<void> initApp({
   }
   // 初始化http缓存拦截器
   if (initHttpCache) await CacheInterceptor.init();
-  // 初始化设备信息
-  await DeviceUtil._init();
 }

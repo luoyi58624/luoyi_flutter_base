@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:luoyi_flutter_base/luoyi_flutter_base.dart';
-import 'package:luoyi_flutter_plugin/luoyi_flutter_plugin.dart';
 import 'package:mini_getx/mini_getx.dart';
 
 class DeviceInfoPage extends StatelessWidget {
@@ -11,7 +10,7 @@ class DeviceInfoPage extends StatelessWidget {
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
         middle: Text('Device测试'),
-        previousPageTitle: '插件测试',
+        transitionBetweenRoutes: false,
       ),
       child: SafeArea(
         child: SingleChildScrollView(
@@ -53,7 +52,10 @@ class _DeviceData extends StatelessWidget {
       }
     }
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(middle: Text('设备信息')),
+      navigationBar: const CupertinoNavigationBar(
+        middle: Text('设备信息'),
+        previousPageTitle: 'Device测试',
+      ),
       child: SafeArea(
         child: SingleChildScrollView(
           child: buildCenterColumn(widgets),
