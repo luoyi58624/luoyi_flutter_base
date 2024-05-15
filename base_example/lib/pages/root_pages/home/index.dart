@@ -81,6 +81,9 @@ class _HomeRootPageState extends State<HomeRootPage> {
               buildListTileWidget(context, title: 'Toast测试', page: const ToastPage()),
               buildListTileWidget(context, title: 'Http测试', page: const BaseHttpPage()),
               buildListTileWidget(context, title: '测试页面', page: const TestPage()),
+              buildListTileWidget(context, title: '往session_storage插入数据', onTap: () {
+                sessionStorage.setItem('isLogin', 'true');
+              }),
               buildListTileWidget(context, title: '获取变量真实类型', onTap: () {
                 dynamic intVar = 0;
                 dynamic doubleVar1 = 0.0;

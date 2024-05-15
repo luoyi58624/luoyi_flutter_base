@@ -1,7 +1,6 @@
 library luoyi_flutter_base;
 
 import 'dart:async';
-import 'dart:collection';
 import 'dart:convert';
 import 'dart:math' as math;
 
@@ -17,6 +16,8 @@ import 'package:localstorage/localstorage.dart';
 import 'package:luoyi_dart_base/luoyi_dart_base.dart';
 import 'package:luoyi_flutter_font/luoyi_flutter_font.dart';
 import 'package:mini_getx/mini_getx.dart';
+
+import './src/utils/session_storage/io.dart' if (dart.library.html) './src/utils/session_storage/web.dart';
 
 export 'src/plugins/http/http.dart';
 
@@ -81,6 +82,8 @@ part 'src/pages/simple_page.dart';
 
 part 'src/extensions/modal.dart';
 
+part 'src/utils/session_storage/session_storage.dart';
+
 part 'src/utils/animation.dart';
 
 part 'src/utils/async.dart';
@@ -134,4 +137,5 @@ part 'src/widgets/cupertino/list_tile.dart';
 Future<void> initApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initLocalStorage();
+  await initSessionStorage();
 }
