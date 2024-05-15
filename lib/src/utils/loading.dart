@@ -13,20 +13,6 @@ int _loadingDuration = 0;
 class LoadingUtil {
   LoadingUtil._();
 
-  static GlobalKey<NavigatorState>? _navigatorKey;
-
-  static BuildContext? get _context => _navigatorKey?.currentContext;
-
-  /// 初始化Loading，Loading依赖于路由的[BuildContext]，所以你需要传递路由的导航key
-  /// * 路由导航key，建议使用全局导航key
-  static void init(GlobalKey<NavigatorState> navigatorKey) {
-    _navigatorKey = navigatorKey;
-  }
-
-  static void _assert() {
-    assert(_navigatorKey != null, '请先执行 LoadingUtil.init() 进行初始化');
-  }
-
   /// 显示 Loading 弹窗，如果之前打开了一个，将关闭之前的弹窗。
   ///
   /// 请注意：如果你在 initState 生命周期中使用它（例如在 initState 中执行网络请求），
@@ -57,13 +43,12 @@ class LoadingUtil {
     // 取消token，如果你需要当用户手动关闭loading时取消请求，那么请传递该token
     CancelToken? cancelToken,
   }) {
-    _assert();
     close(true);
     _isShowLoading = true;
     _loadingDuration = delayClose;
     _createLoadingStartTime = DateTime.now().millisecondsSinceEpoch;
     showDialog(
-      context: _context!,
+      context: _rootContext,
       barrierColor: Colors.black26,
       // 允许非安卓手机直接点击遮罩关闭弹窗，安卓上则必须侧滑返回关闭遮罩
       barrierDismissible: kIsWeb || !GetPlatform.isAndroid,
@@ -80,7 +65,6 @@ class LoadingUtil {
   ///
   /// immedClose - 是否立即关闭弹窗
   static Future<void> close([bool? immedClose]) async {
-    _assert();
     if (_isShowLoading) {
       _isShowLoading = false;
       if (immedClose == true) {
@@ -93,7 +77,7 @@ class LoadingUtil {
           _pop();
         } else {
           Future.delayed(Duration(milliseconds: delayCloseLoadingTime), () {
-            if (_context!.mounted) _pop();
+            if (_rootContext.mounted) _pop();
           });
         }
       }
@@ -101,7 +85,7 @@ class LoadingUtil {
   }
 
   static void _pop() {
-    Navigator.of(_context!).pop();
+    Navigator.of(_rootContext).pop();
   }
 }
 

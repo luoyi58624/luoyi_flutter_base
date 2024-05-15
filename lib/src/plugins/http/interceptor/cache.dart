@@ -38,7 +38,6 @@ class CacheInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     String url = options.uri.toString();
-    i(options.extra['useCache']);
     if (options.extra['useCache'] == true) {
       String key = DartUtil.md5(url);
       if (cacheData[key] == null) {

@@ -143,9 +143,19 @@ part 'src/widgets/cupertino/list_group.dart';
 
 part 'src/widgets/cupertino/list_tile.dart';
 
+/// 根节点导航key
+GlobalKey<NavigatorState>? _rootNavigatorKey;
+
+/// 根节点context
+BuildContext get _rootContext {
+  assert(_rootNavigatorKey != null, '请在 initApp 函数中传递rootNavigatorKey');
+  return _rootNavigatorKey!.currentContext!;
+}
+
 List<String>? _fontFamilyFallback;
 
 /// 初始化App一些通用配置
+/// * rootNavigatorKey 全局导航key，注意：如果不传递则无法使用部分api
 Future<void> initApp({
   GlobalKey<NavigatorState>? rootNavigatorKey,
   bool initStorage = true,
@@ -153,6 +163,7 @@ Future<void> initApp({
   bool initFont = true,
 }) async {
   WidgetsFlutterBinding.ensureInitialized();
+  _rootNavigatorKey = rootNavigatorKey;
   // 初始化本地存储
   if (initStorage) {
     await initLocalStorage();
@@ -167,6 +178,4 @@ Future<void> initApp({
   if (initHttpCache) await CacheInterceptor.init();
   // 初始化设备信息
   await DeviceUtil._init();
-  // 初始化全局Loading
-  if (rootNavigatorKey != null) LoadingUtil.init(rootNavigatorKey);
 }
