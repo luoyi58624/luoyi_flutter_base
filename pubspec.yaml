@@ -16,7 +16,6 @@ dependencies:
   # 封装的一个轻量级 get 插件，只保留核心响应式状态管理
   mini_getx: ^5.0.0
   luoyi_dart_base: ^1.0.0
-  luoyi_flutter_font: ^1.0.0
   localstorage: ^5.0.0
   collection: ^1.18.0
   gap: ^3.0.1
@@ -25,9 +24,11 @@ dependencies:
   fluttertoast: ^8.2.5
   path: ^1.9.0
   web: ^0.5.1
+  http: ^1.2.1
   dio: ^5.4.2
   dio_smart_retry: ^6.0.0
   path_provider: ^2.1.3
+  device_info_plus: ^10.1.0
 
 dev_dependencies:
   flutter_test:

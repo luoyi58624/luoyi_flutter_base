@@ -1,7 +1,8 @@
 import 'package:base_example/pages/all_color.dart';
 import 'package:base_example/pages/color.dart';
 import 'package:base_example/pages/hook.dart';
-import 'package:base_example/pages/root_pages/home/font.dart';
+import 'package:base_example/pages/root_pages/home/device.dart';
+import 'package:base_example/pages/root_pages/home/font/font.dart';
 import 'package:base_example/pages/root_pages/home/http/base.dart';
 import 'package:base_example/pages/root_pages/home/local_obs.dart';
 import 'package:base_example/pages/root_pages/home/test.dart';
@@ -80,6 +81,7 @@ class _HomeRootPageState extends State<HomeRootPage> {
               buildListTileWidget(context, title: 'Hook测试', page: const HookPage()),
               buildListTileWidget(context, title: 'Toast测试', page: const ToastPage()),
               buildListTileWidget(context, title: 'Http测试', page: const BaseHttpPage()),
+              buildListTileWidget(context, title: 'Device测试', page: const DeviceInfoPage()),
               buildListTileWidget(context, title: '测试页面', page: const TestPage()),
               buildListTileWidget(context, title: '往session_storage插入数据', onTap: () {
                 sessionStorage.setItem('isLogin', 'true');

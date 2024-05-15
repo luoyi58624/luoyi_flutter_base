@@ -11,16 +11,8 @@ final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 BuildContext get rootContext => rootNavigatorKey.currentContext!;
 
 void main() async {
-  await initApp();
-  var _fontFamilyFallback = await FlutterFont.init();
-  await FlutterFont.initSystemFontWeight();
-  await CacheInterceptor.init();
-  LoadingUtil.init(rootNavigatorKey);
-  Get.put(AppDataController(
-      config: AppConfigData(
-    fontFamily: FlutterFont.fontFamily,
-    fontFamilyFallback: _fontFamilyFallback,
-  )));
+  await initApp(rootNavigatorKey: rootNavigatorKey);
+  Get.put(AppDataController());
   Get.put(GlobalController());
   runApp(const MainApp());
 }

@@ -21,7 +21,7 @@ extension AppDataContextExtension on BuildContext {
   /// 标题1 - 28px
   TextStyle get h1 => TextStyle(
         fontFamily: appConfig.fontFamily,
-        fontWeight: FlutterFont.bold,
+        fontWeight: FontUtil.bold,
         fontSize: appConfig.textSizeConfig.h1,
         color: appTheme.textColor,
       );
@@ -29,7 +29,7 @@ extension AppDataContextExtension on BuildContext {
   /// 标题2 - 24px
   TextStyle get h2 => TextStyle(
         fontFamily: appConfig.fontFamily,
-        fontWeight: FlutterFont.bold,
+        fontWeight: FontUtil.bold,
         fontSize: appConfig.textSizeConfig.h2,
         color: appTheme.textColor,
       );
@@ -37,7 +37,7 @@ extension AppDataContextExtension on BuildContext {
   /// 标题3 - 20px
   TextStyle get h3 => TextStyle(
         fontFamily: appConfig.fontFamily,
-        fontWeight: FlutterFont.bold,
+        fontWeight: FontUtil.bold,
         fontSize: appConfig.textSizeConfig.h3,
         color: appTheme.textColor,
       );
@@ -45,7 +45,7 @@ extension AppDataContextExtension on BuildContext {
   /// 标题4 - 18px
   TextStyle get h4 => TextStyle(
         fontFamily: appConfig.fontFamily,
-        fontWeight: FlutterFont.bold,
+        fontWeight: FontUtil.bold,
         fontSize: appConfig.textSizeConfig.h4,
         color: appTheme.textColor,
       );
@@ -53,7 +53,7 @@ extension AppDataContextExtension on BuildContext {
   /// 标题5 - 16px
   TextStyle get h5 => TextStyle(
         fontFamily: appConfig.fontFamily,
-        fontWeight: FlutterFont.bold,
+        fontWeight: FontUtil.bold,
         fontSize: appConfig.textSizeConfig.h5,
         color: appTheme.textColor,
       );
@@ -61,7 +61,7 @@ extension AppDataContextExtension on BuildContext {
   /// 标题6 - 14px
   TextStyle get h6 => TextStyle(
         fontFamily: appConfig.fontFamily,
-        fontWeight: FlutterFont.bold,
+        fontWeight: FontUtil.bold,
         fontSize: appConfig.textSizeConfig.h6,
         color: appTheme.textColor,
       );
@@ -137,7 +137,7 @@ extension FlutterThemeDataExtension on ThemeData {
         titleTextStyle: TextStyle(
           fontFamily: fontFamily,
           fontSize: 18,
-          fontWeight: FlutterFont.medium,
+          fontWeight: FontUtil.medium,
           color: appbarColor.isDark ? darkTheme.textColor : lightTheme.textColor,
         ),
         iconTheme: IconThemeData(
@@ -180,7 +180,7 @@ extension FlutterThemeDataExtension on ThemeData {
         enableFeedback: true,
         textStyle: TextStyle(
           fontFamily: fontFamily,
-          fontWeight: FlutterFont.medium,
+          fontWeight: FontUtil.medium,
           color: appTheme.textColor,
           fontSize: 14,
         ),
@@ -188,13 +188,13 @@ extension FlutterThemeDataExtension on ThemeData {
       listTileTheme: listTileTheme.copyWith(
         titleTextStyle: TextStyle(
           fontFamily: fontFamily,
-          fontWeight: FlutterFont.medium,
+          fontWeight: FontUtil.medium,
           color: appTheme.textColor,
           fontSize: 15,
         ),
         subtitleTextStyle: TextStyle(
           fontFamily: fontFamily,
-          fontWeight: FlutterFont.medium,
+          fontWeight: FontUtil.medium,
           color: appTheme.textColors[1],
           fontSize: 13,
         ),
@@ -243,91 +243,91 @@ extension FlutterCupertinoThemeDataExtension on CupertinoThemeData {
 TextTheme _textTheme(AppThemeData theme, AppConfigData config) {
   return TextTheme(
     displayLarge: TextStyle(
-      fontWeight: FlutterFont.normal,
+      fontWeight: FontUtil.normal,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     displayMedium: TextStyle(
-      fontWeight: FlutterFont.normal,
+      fontWeight: FontUtil.normal,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     displaySmall: TextStyle(
-      fontWeight: FlutterFont.normal,
+      fontWeight: FontUtil.normal,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     headlineLarge: TextStyle(
-      fontWeight: FlutterFont.normal,
+      fontWeight: FontUtil.normal,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     headlineMedium: TextStyle(
-      fontWeight: FlutterFont.normal,
+      fontWeight: FontUtil.normal,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     headlineSmall: TextStyle(
-      fontWeight: FlutterFont.normal,
+      fontWeight: FontUtil.normal,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     titleLarge: TextStyle(
-      fontWeight: FlutterFont.bold,
+      fontWeight: FontUtil.bold,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     titleMedium: TextStyle(
-      fontWeight: FlutterFont.bold,
+      fontWeight: FontUtil.bold,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     titleSmall: TextStyle(
-      fontWeight: FlutterFont.bold,
+      fontWeight: FontUtil.bold,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     bodyLarge: TextStyle(
-      fontWeight: FlutterFont.normal,
+      fontWeight: FontUtil.normal,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     bodyMedium: TextStyle(
-      fontWeight: FlutterFont.normal,
+      fontWeight: FontUtil.normal,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     bodySmall: TextStyle(
-      fontWeight: FlutterFont.normal,
+      fontWeight: FontUtil.normal,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     labelLarge: TextStyle(
-      fontWeight: FlutterFont.medium,
+      fontWeight: FontUtil.medium,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     labelMedium: TextStyle(
-      fontWeight: FlutterFont.medium,
+      fontWeight: FontUtil.medium,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     labelSmall: TextStyle(
-      fontWeight: FlutterFont.medium,
+      fontWeight: FontUtil.medium,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,

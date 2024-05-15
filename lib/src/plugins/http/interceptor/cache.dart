@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:luoyi_flutter_base/luoyi_flutter_base.dart';
 
-/// 缓存拦截器，使用先需要先执行[init]函数初始化本地数据库
+/// 缓存拦截器
 class CacheInterceptor extends Interceptor {
   static late String _cacheKey;
   static late int _cacheTime;
@@ -11,7 +11,7 @@ class CacheInterceptor extends Interceptor {
 
   static Map<String, Map<String, dynamic>> cacheData = {};
 
-  /// 初始化http本地缓存
+  /// 初始化http本地缓存，已经默认在[initApp]中初始化，如果你需要自定义参数，可以调用此函数再次初始化
   /// * cacheKey 缓存key
   /// * cacheTime 缓存时间
   /// * showLog 是否打印日志

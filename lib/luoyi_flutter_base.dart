@@ -1,9 +1,11 @@
 library luoyi_flutter_base;
 
 import 'dart:async';
+import 'dart:collection';
 import 'dart:convert';
 import 'dart:math' as math;
 
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -14,10 +16,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:luoyi_dart_base/luoyi_dart_base.dart';
-import 'package:luoyi_flutter_font/luoyi_flutter_font.dart';
+import 'package:luoyi_flutter_base/src/plugins/http/interceptor/cache.dart';
 import 'package:mini_getx/mini_getx.dart';
 
-import './src/utils/session_storage/io.dart' if (dart.library.html) './src/utils/session_storage/web.dart';
+import 'src/utils/session_storage/web.dart' if (dart.library.io) 'src/utils/session_storage/io.dart';
+import 'src/utils/font/web.dart' if (dart.library.io) 'src/utils/font/io.dart';
 
 export 'src/plugins/http/http.dart';
 
@@ -82,11 +85,17 @@ part 'src/pages/simple_page.dart';
 
 part 'src/extensions/modal.dart';
 
+part 'src/utils/font/font.dart';
+
+part 'src/utils/font/model.dart';
+
 part 'src/utils/session_storage/session_storage.dart';
 
 part 'src/utils/animation.dart';
 
 part 'src/utils/async.dart';
+
+part 'src/utils/device.dart';
 
 part 'src/utils/flutter.dart';
 
@@ -134,8 +143,30 @@ part 'src/widgets/cupertino/list_group.dart';
 
 part 'src/widgets/cupertino/list_tile.dart';
 
-Future<void> initApp() async {
+List<String>? _fontFamilyFallback;
+
+/// 初始化App一些通用配置
+Future<void> initApp({
+  GlobalKey<NavigatorState>? rootNavigatorKey,
+  bool initStorage = true,
+  bool initHttpCache = true,
+  bool initFont = true,
+}) async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initLocalStorage();
-  await initSessionStorage();
+  // 初始化本地存储
+  if (initStorage) {
+    await initLocalStorage();
+    await initSessionStorage();
+  }
+  // 初始化字体
+  if (initFont) {
+    _fontFamilyFallback = await FontUtil.init();
+    await FontUtil.initSystemFontWeight();
+  }
+  // 初始化http缓存拦截器
+  if (initHttpCache) await CacheInterceptor.init();
+  // 初始化设备信息
+  await DeviceUtil._init();
+  // 初始化全局Loading
+  if (rootNavigatorKey != null) LoadingUtil.init(rootNavigatorKey);
 }

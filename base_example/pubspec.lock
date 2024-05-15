@@ -427,24 +427,16 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "1.3.0"
-  luoyi_flutter_font:
-    dependency: "direct main"
-    description:
-      name: luoyi_flutter_font
-      sha256: "357980da3401c2e60adb7c14b30d195c3a6bf145b4ed61b54b516cca36dcf22d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.7"
+    version: "1.4.0"
   luoyi_flutter_plugin:
     dependency: "direct main"
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "72e4c88da7f4f1884964c7e16ded3e9936735622"
-      url: "https://github.com/luoyi58624/luoyi_flutter_plugin.git"
+      resolved-ref: "714219b4f03fef0ad22c77b8d77d8596f449301c"
+      url: "https://gitee.com/luoyi666/luoyi_flutter_plugin.git"
     source: git
-    version: "1.1.0"
+    version: "1.0.0"
   matcher:
     dependency: transitive
     description:

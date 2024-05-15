@@ -44,8 +44,8 @@ class AppConfigData {
   late M3ConfigData m3Config;
 
   AppConfigData({
-    this.fontFamily,
-    this.fontFamilyFallback,
+    String? fontFamily,
+    List<String>? fontFamilyFallback,
     this.useMaterial3 = true,
     this.radius = 6,
     this.centerTitle,
@@ -57,6 +57,8 @@ class AppConfigData {
     M2ConfigData? m2Config,
     M3ConfigData? m3Config,
   }) {
+    this.fontFamily = fontFamily ?? FontUtil.fontFamily;
+    this.fontFamilyFallback = fontFamilyFallback ?? _fontFamilyFallback;
     centerTitle = centerTitle ?? (GetPlatform.isMobile ? true : false);
     this.textSizeConfig = textSizeConfig ?? TextSizeConfigData.config;
     this.m2Config = m2Config ?? M2ConfigData.config;
