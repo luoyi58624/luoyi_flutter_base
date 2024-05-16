@@ -2,14 +2,16 @@ part of '../../luoyi_flutter_base.dart';
 
 /// App全局配置
 class AppWidget extends InheritedWidget {
-  const AppWidget({
+  AppWidget({
     super.key,
     required super.child,
-    required this.data,
-  });
+    AppConfigData? data,
+  }) {
+    this.data = data ?? AppConfigData.config;
+  }
 
   /// 全局配置数据
-  final AppConfigData data;
+  late final AppConfigData data;
 
   /// 如果没有注入[AppWidget]，将得到null
   static AppConfigData? maybeOf(BuildContext context) {
