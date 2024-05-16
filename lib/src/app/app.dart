@@ -125,15 +125,20 @@ class AppWidget extends InheritedWidget {
         ),
         subtitleTextStyle: TextStyle(
           fontFamily: fontFamily,
-          fontWeight: FontUtil.medium,
+          fontWeight: FontUtil.normal,
           color: appTheme.textColors[1],
           fontSize: 13,
         ),
         iconColor: appTheme.iconColor,
       ),
-      inputDecorationTheme: const InputDecorationTheme(
-        border: OutlineInputBorder(
+      inputDecorationTheme: InputDecorationTheme(
+        border: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.grey),
+        ),
+        hintStyle: TextStyle(
+          fontFamily: fontFamily,
+          fontSize: 14,
+          fontWeight: FontUtil.normal,
         ),
       ),
       expansionTileTheme: ExpansionTileThemeData(
@@ -148,7 +153,7 @@ class AppWidget extends InheritedWidget {
         enableFeedback: true,
         textStyle: TextStyle(
           fontFamily: fontFamily,
-          fontWeight: FontUtil.medium,
+          fontWeight: FontUtil.normal,
           color: appTheme.textColor,
           fontSize: 14,
         ),
@@ -210,19 +215,19 @@ class AppWidget extends InheritedWidget {
 TextTheme _textTheme(AppThemeData theme, AppConfigData config) {
   return TextTheme(
     displayLarge: TextStyle(
-      fontWeight: FontUtil.normal,
+      fontWeight: FontUtil.bold,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     displayMedium: TextStyle(
-      fontWeight: FontUtil.normal,
+      fontWeight: FontUtil.medium,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
     ),
     displaySmall: TextStyle(
-      fontWeight: FontUtil.normal,
+      fontWeight: FontUtil.medium,
       color: theme.textColor,
       fontFamily: config.fontFamily,
       fontFamilyFallback: config.fontFamilyFallback,
