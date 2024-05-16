@@ -21,7 +21,7 @@ class AppWidget extends InheritedWidget {
     return result!.data;
   }
 
-  /// 创建[Overlay]遮罩层，若没遮罩层，那么toast、loading将无法使用
+  /// 创建[Overlay]遮罩层，若没遮罩层，那么toast将无法使用
   /// ```dart
   /// MaterialApp(
   ///   builder: AppWidget.builder(),
@@ -36,17 +36,14 @@ class AppWidget extends InheritedWidget {
   /// ```
   static Widget Function(BuildContext, Widget?) builder([TransitionBuilder? builder]) =>
       (BuildContext context, Widget? child) {
-        // 创建Overlay遮罩组件
         Widget overlayWidget = Overlay(
           initialEntries: [
             OverlayEntry(builder: (context) {
               _toast.init(context);
-              // LoadingUtil2._init(context);
               return child!;
             })
           ],
         );
-
         return builder == null ? overlayWidget : builder(context, overlayWidget);
       };
 
@@ -148,6 +145,13 @@ ThemeData _buildThemeData(
       margin: const EdgeInsets.all(8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(appData.radius),
+      ),
+    ),
+    drawerTheme: DrawerThemeData(
+      backgroundColor: appTheme.cardColor,
+      surfaceTintColor: Colors.transparent,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(0),
       ),
     ),
     listTileTheme: ListTileThemeData(

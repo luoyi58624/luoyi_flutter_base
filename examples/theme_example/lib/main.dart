@@ -21,14 +21,16 @@ class MainApp extends StatelessWidget {
       return AppWidget(
         data: c.config.value,
         child: Builder(builder: (context) {
-          return MaterialApp(
-            navigatorKey: rootNavigatorKey,
-            themeMode: c.themeMode.value,
-            theme: AppWidget.buildThemeData(context),
-            darkTheme: AppWidget.buildThemeData(context, brightness: Brightness.dark),
-            home: const HomePage(),
-            builder: AppWidget.builder(),
-          );
+          return Obx(() {
+            return MaterialApp(
+              navigatorKey: rootNavigatorKey,
+              themeMode: c.themeMode.value,
+              theme: AppWidget.buildThemeData(context),
+              darkTheme: AppWidget.buildThemeData(context, brightness: Brightness.dark),
+              home: const HomePage(),
+              builder: AppWidget.builder(),
+            );
+          });
         }),
       );
     });

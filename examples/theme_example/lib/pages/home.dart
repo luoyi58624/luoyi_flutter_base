@@ -36,6 +36,9 @@ class HomePage extends HookWidget {
             const SwitchThemeButton(),
           ],
         ),
+        drawer: Drawer(
+          child: buildListViewDemo(),
+        ),
         body: buildScrollWidget(
           child: buildCenterColumn([
             Obx(() {
