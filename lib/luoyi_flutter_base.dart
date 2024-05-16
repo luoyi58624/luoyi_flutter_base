@@ -101,6 +101,8 @@ part 'src/utils/flutter.dart';
 
 part 'src/utils/loading.dart';
 
+part 'src/utils/loading2.dart';
+
 part 'src/utils/no_ripper.dart';
 
 part 'src/utils/platform.dart';

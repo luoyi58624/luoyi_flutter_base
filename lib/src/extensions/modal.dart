@@ -18,19 +18,19 @@ extension FlutterModalExtension on BuildContext {
   }
 
   /// 显示取消、确认提示框
-  Future<bool> showConfitmModal({
+  Future<bool> showConfirmModal({
     String title = '提示',
     String? content,
-    bool preventBack = false, // 是否阻止用户返回，若为true，barrierDismissible属性将无效
-    bool barrierDismissible = false, // 是否允许用户点击遮罩关闭弹窗
+    bool canPop = true, // 是否可以通过返回键返回，若为false，barrierDismissible属性将无效
+    bool barrierDismissible = true, // 是否允许用户点击遮罩关闭弹窗
     Widget? contentWidget, // 自定义内容widget
     Widget? cancelWidget, // 取消widget
     Widget? confirmWidget, // 确认widget
     bool titleCenter = false, // 标题是否居中
     bool showCancel = true,
     bool showConfirm = true,
-    String cancelText = '取消',
-    String confirmText = '确认',
+    String cancelText = '取 消',
+    String confirmText = '确 认',
     Color? cancelColor,
     Color? confirmColor,
     Function? onCancel,
@@ -39,21 +39,14 @@ extension FlutterModalExtension on BuildContext {
     bool? result = await showDialog<bool>(
       context: this,
       barrierDismissible: barrierDismissible,
-      builder: (context) => WillPopScope(
-        onWillPop: preventBack ? () async => false : null,
+      builder: (context) => PopScope(
+        canPop: canPop,
         child: AlertDialog(
           title: Text(
             title,
             textAlign: titleCenter ? TextAlign.center : TextAlign.start,
           ),
-          content: contentWidget ??
-              Text(
-                content ?? "",
-                style: const TextStyle(
-                  height: 1.5,
-                  fontSize: 16,
-                ),
-              ),
+          content: contentWidget ?? (content != null ? Text(content) : null),
           actions: <Widget>[
             if (showCancel)
               cancelWidget ??

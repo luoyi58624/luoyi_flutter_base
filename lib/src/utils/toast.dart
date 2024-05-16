@@ -6,38 +6,6 @@ FToast _toast = FToast();
 class ToastUtil {
   ToastUtil._();
 
-  /// 初始化toast，默认情况下，直接使用ToastUtil会存在一个报错问题：Overlay is null，
-  /// 你必须手动在App下插入一个遮罩组件，使用方式如下：
-  /// ```dart
-  /// MaterialApp(
-  ///   builder: ToastUtil.builder(),
-  /// );
-  ///
-  /// // 插入你自己自定义的builder方法
-  /// MaterialApp(
-  ///   builder: ToastUtil.builder(
-  ///     (context, child) => SizeBox(child: child!),
-  ///   ),
-  /// );
-  /// ```
-  /// https://github.com/ponnamkarthik/ToastUtil/issues/393
-  ///
-  static Widget Function(BuildContext, Widget?) builder([TransitionBuilder? builder]) =>
-      (BuildContext context, Widget? child) {
-        // 创建Overlay遮罩组件
-        Widget overlayWidget = Overlay(
-          initialEntries: [
-            OverlayEntry(builder: (context) {
-              // 顺便初始化toast需要的context
-              _toast.init(context);
-              return child!;
-            })
-          ],
-        );
-
-        return builder == null ? overlayWidget : builder(context, overlayWidget);
-      };
-
   /// 默认toast的透明度
   static double _opacity = 0.75;
 

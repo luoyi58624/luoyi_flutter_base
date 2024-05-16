@@ -2,7 +2,7 @@ part of '../../luoyi_flutter_base.dart';
 
 extension AppDataContextExtension on BuildContext {
   /// 全局配置数据
-  AppConfigData get appConfig => AppWidget.maybeOf(this) ?? AppConfigData.config;
+  AppConfigData get appConfig => AppWidget.of(this);
 
   /// 当前主题数据
   AppThemeData get appTheme =>

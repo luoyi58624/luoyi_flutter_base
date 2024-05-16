@@ -1,17 +1,20 @@
 part of '../../luoyi_flutter_base.dart';
 
-/// 判断当前页面是否已经打开loading，如果有，则下次打开新的loading需要移除上一个loading
-bool _isShowLoading = false;
-
-/// 创建loading的时间
-int _createLoadingStartTime = 0;
-
-/// loading持续时间
-int _loadingDuration = 0;
-
 /// loading加载框
 class LoadingUtil {
   LoadingUtil._();
+
+  /// 判断当前页面是否已经打开loading，如果有，则下次打开新的loading需要移除上一个loading
+  static bool _isShowLoading = false;
+
+  /// 创建loading的时间
+  static int _createLoadingStartTime = 0;
+
+  /// loading持续时间
+  static int _loadingDuration = 0;
+
+  /// 是否显示请求关闭loading提示框
+  static bool _isShowConfirm = false;
 
   /// 显示 Loading 弹窗，如果之前打开了一个，将关闭之前的弹窗。
   ///
@@ -30,7 +33,7 @@ class LoadingUtil {
   ///     });
   ///  }
   /// ```
-  static void show(
+  static Future<void> show(
     String title, {
     // 延迟关闭loading，它可以防止异步逻辑执行过快造成视觉闪烁，例如异步逻辑执行了50毫秒，
     // 那么loading会在50毫秒后关闭，页面会突然闪出一个弹窗然后瞬间关闭，此时用户体验非常不好；
@@ -42,23 +45,23 @@ class LoadingUtil {
     int delayClose = 0,
     // 取消token，如果你需要当用户手动关闭loading时取消请求，那么请传递该token
     CancelToken? cancelToken,
-  }) {
-    close(true);
+  }) async {
+    await close(true);
     _isShowLoading = true;
     _loadingDuration = delayClose;
     _createLoadingStartTime = DateTime.now().millisecondsSinceEpoch;
-    showDialog(
-      context: _rootContext,
-      barrierColor: Colors.black26,
-      // 允许非安卓手机直接点击遮罩关闭弹窗，安卓上则必须侧滑返回关闭遮罩
-      barrierDismissible: kIsWeb || !GetPlatform.isAndroid,
-      builder: (context) {
-        return _LoadingWidget(
-          title: title,
-          cancelToken: cancelToken,
-        );
-      },
-    );
+    if (_rootContext.mounted) {
+      showDialog(
+        context: _rootContext,
+        barrierColor: Colors.black26,
+        builder: (context) {
+          return _LoadingWidget(
+            title: title,
+            cancelToken: cancelToken,
+          );
+        },
+      );
+    }
   }
 
   /// 如果页面上存在loading弹窗，则关闭。
@@ -66,6 +69,11 @@ class LoadingUtil {
   /// immedClose - 是否立即关闭弹窗
   static Future<void> close([bool? immedClose]) async {
     if (_isShowLoading) {
+      if (_isShowConfirm) {
+        _pop();
+        await 0.05.delay();
+      }
+      _isShowConfirm = false;
       _isShowLoading = false;
       if (immedClose == true) {
         _pop();
@@ -101,18 +109,27 @@ class _LoadingWidget extends StatefulWidget {
 }
 
 class _LoadingWidgetState extends State<_LoadingWidget> {
+  Future<bool> showConfirm() async {
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        // 如果是非正常关闭（安卓用户直接执行返回、苹果用户点击遮罩取消loading），则执行取消请求token
-        if (_isShowLoading) {
-          _isShowLoading = false;
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) async {
+        if (didPop) {
+          return;
+        }
+        LoadingUtil._isShowConfirm = true;
+        LoadingUtil._isShowConfirm = await context.showConfirmModal(title: '你要关闭 loading 吗？');
+        if (context.mounted && LoadingUtil._isShowConfirm) {
+          LoadingUtil._isShowLoading = false;
           if (widget.cancelToken != null) {
             widget.cancelToken!.cancel();
           }
+          Navigator.pop(context);
         }
-        return true;
       },
       child: Material(
         type: MaterialType.transparency,
@@ -130,23 +147,14 @@ class _LoadingWidgetState extends State<_LoadingWidget> {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const CircularProgressIndicator(
-                  color: Colors.white,
-                ),
+                const CircularProgressIndicator(color: Colors.white),
                 const SizedBox(height: 24),
                 Container(
-                  constraints: const BoxConstraints(
-                    minWidth: 120,
-                    maxWidth: 150,
-                  ),
+                  constraints: const BoxConstraints(minWidth: 120, maxWidth: 150),
                   child: Text(
                     widget.title,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: const TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],

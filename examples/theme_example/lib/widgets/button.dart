@@ -13,6 +13,10 @@ class ButtonWidgets extends HookWidget {
           onPressed: () => count.value++,
           child: Text('count: ${count.value}'),
         ),
+        FilledButton(
+          onPressed: () => count.value++,
+          child: Text('count: ${count.value}'),
+        ),
         TextButton(
           onPressed: () => count.value++,
           child: Text('count: ${count.value}'),

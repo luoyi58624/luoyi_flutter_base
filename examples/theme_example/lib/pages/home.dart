@@ -1,5 +1,6 @@
 import 'package:styled_widget/styled_widget.dart';
 import 'package:theme_example/global.dart';
+import 'package:theme_example/pages/loading.dart';
 
 import '../widgets/button.dart';
 import '../widgets/home_action.dart';
@@ -60,8 +61,13 @@ class HomePage extends HookWidget {
               children: inputWidgets,
             ).padding(all: 16),
             buildCardWidget(context, title: '卡片', children: [
-              buildCellWidget(context, title: 'Button 按钮'),
-              buildCellWidget(context, title: 'Switch 开关'),
+              buildCellWidget(context, title: 'Loading 页面', page: const LoadingPage()),
+              buildCellWidget(context, title: '显示 Toast', onTap: () {
+                ToastUtil.show('hello，你好');
+              }),
+              buildCellWidget(context, title: '显示提示框', onTap: () {
+                context.showConfirmModal(content: '这是一段文字');
+              }),
             ]),
             ...List.generate(20, (index) => buildCellWidget(context, title: '列表 - ${index + 1}')),
           ]),

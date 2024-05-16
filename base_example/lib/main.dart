@@ -48,7 +48,7 @@ class MainApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: S.delegate.supportedLocales,
-          builder: ToastUtil.builder(
+          builder: AppWidget.builder(
             (context, child) => Material(
               child: CupertinoTheme(
                 data: AppWidget.buildCupertinoThemeData(context, brightness: context.theme.brightness),
