@@ -137,7 +137,6 @@ class AppWidget extends InheritedWidget {
         ),
         hintStyle: TextStyle(
           fontFamily: fontFamily,
-          fontSize: 14,
           fontWeight: FontUtil.normal,
         ),
       ),
