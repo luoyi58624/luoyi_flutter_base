@@ -23,10 +23,8 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      return AppData(
-        theme: AppDataController.of.theme.value,
-        darkTheme: AppDataController.of.darkTheme.value,
-        config: AppDataController.of.config.value,
+      return AppWidget(
+        data: AppDataController.of.config.value,
         child: materialApp(),
       );
     });
@@ -39,8 +37,8 @@ class MainApp extends StatelessWidget {
           navigatorKey: rootNavigatorKey,
           onGenerateTitle: (context) => S.of(context).title,
           themeMode: AppDataController.of.themeMode.value,
-          theme: ThemeData(brightness: Brightness.light).applyAppData(context),
-          darkTheme: ThemeData(brightness: Brightness.dark).applyAppData(context),
+          theme: AppWidget.buildThemeData(context),
+          darkTheme: AppWidget.buildThemeData(context, brightness: Brightness.dark),
           showPerformanceOverlay: GlobalController.of.showPerformanceOverlay.value,
           home: const RootPage(),
           localizationsDelegates: const [
@@ -53,7 +51,7 @@ class MainApp extends StatelessWidget {
           builder: ToastUtil.builder(
             (context, child) => Material(
               child: CupertinoTheme(
-                data: CupertinoThemeData(brightness: context.theme.brightness).applyAppData(context),
+                data: AppWidget.buildCupertinoThemeData(context, brightness: context.theme.brightness),
                 child: child!,
               ),
             ),

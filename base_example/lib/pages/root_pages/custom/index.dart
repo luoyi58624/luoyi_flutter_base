@@ -25,10 +25,10 @@ class _CustomRootPageState extends State<CustomRootPage> {
           SliverAppBar(
             pinned: true,
             expandedHeight: 120,
-            collapsedHeight: context.appbarHeight,
-            toolbarHeight: context.appbarHeight,
+            collapsedHeight: context.appConfig.appbarHeight,
+            toolbarHeight: context.appConfig.appbarHeight,
             flexibleSpace: FlexibleSpaceBar(
-              titlePadding: EdgeInsets.symmetric(vertical: context.appbarHeight / 4),
+              titlePadding: EdgeInsets.symmetric(vertical: context.appConfig.appbarHeight / 4),
               title: Text(
                 S.of(context).appbarLabelCustom,
               ),

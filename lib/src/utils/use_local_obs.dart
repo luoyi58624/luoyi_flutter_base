@@ -75,10 +75,15 @@ extension GetxLocalObs on GetxController {
         localStorage.removeItem(key);
         $value = value.obs;
       } else {
-        if ($d == null) {
-          $value = (localDataModel.data as T).obs;
-        } else {
-          $value = $d(localDataModel.data).obs;
+        try {
+          if ($d == null) {
+            $value = (localDataModel.data as T).obs;
+          } else {
+            $value = $d(localDataModel.data).obs;
+          }
+        } catch (error) {
+          localStorage.removeItem(key);
+          $value = value.obs;
         }
       }
     }
@@ -92,20 +97,16 @@ extension GetxLocalObs on GetxController {
   /// 创建[Getx]响应式[List]，更新时会同步至本地，重新加载时会取本地数据作为初始值
   /// * value - 初始值
   /// * key - 本地缓存key，请确保它们唯一
-  ///
-  /// * clear - 清除本地缓存，此属性一般用于重置本地数据
-  /// * expire - 过期时间，单位秒，如果小于等于 0 则表示永不过期
+  /// * expire - 过期时间，单位毫秒，如果小于等于 0 则表示永不过期
   /// * serializeFun - 序列化函数，如果你传入的是对象，你必须将其转换为字符串才能缓存在本地
   /// * deserializeFun - 反序列化函数，将本地存储的字符串转回目标对象
   RxList<T> useLocalListObs<T>(
     List<T> value,
     String key, {
-    bool clear = false,
     int expire = -1,
     SerializeFun<T>? serializeFun,
     DeserializeFun<T>? deserializeFun,
   }) {
-    if (clear) localStorage.removeItem(key);
     String valueType = T.toString();
     bool isBaseType = DartUtil.isBaseTypeString(valueType) || value is List<Map>;
     assert(isBaseType || (serializeFun != null && deserializeFun != null), '请为响应式持久化变量[$key]提供序列化和反序列化函数');
@@ -160,9 +161,7 @@ extension GetxLocalObs on GetxController {
   /// 创建[Getx]响应式[Map]，key强制为String，更新时会同步至本地，重新加载时会取本地数据作为初始值
   /// * value - 初始值
   /// * key - 本地缓存key，请确保它们唯一
-  ///
-  /// * clear - 清除本地缓存，此属性一般用于重置本地数据
-  /// * expireFun - 过期时间函数，默认返回-1，表示永不过期，每次更新变量时都会调用此函数
+  /// * expire - 过期时间，单位毫秒，如果小于等于 0 则表示永不过期
   /// * serializeFun - 序列化函数，如果你传入的是对象，你必须将其转换为字符串才能缓存在本地
   /// * deserializeFun - 反序列化函数，将本地存储的字符串转回目标对象
   ///
@@ -182,12 +181,10 @@ extension GetxLocalObs on GetxController {
   RxMap<String, T> useLocalMapObs<T>(
     Map<String, T> value,
     String key, {
-    bool clear = false,
     int expire = -1,
     SerializeFun<T>? serializeFun,
     DeserializeFun<T>? deserializeFun,
   }) {
-    if (clear) localStorage.removeItem(key);
     String valueType = T.toString();
     i(valueType);
     bool isBaseType = DartUtil.isBaseTypeString(valueType) || valueType.contains('Map');
@@ -242,15 +239,17 @@ extension GetxLocalObs on GetxController {
 ]) {
   // 基础类型不需要序列化
   if (DartUtil.isBaseTypeString(valueType)) return (serializeFun, deserializeFun);
+  if (value is List) {
+    return (serializeFun, deserializeFun);
+  }
   // 如果是Map类型
-  if (value is Map) {
+  else if (value is Map) {
     serializeFun ??= (model) {
       var mapData = model as Map;
       mapData = mapData.map((k, v) {
         String newKey = k.toString();
         return MapEntry(newKey, v);
       });
-
       return jsonEncode(mapData);
     };
     deserializeFun ??= (json) {

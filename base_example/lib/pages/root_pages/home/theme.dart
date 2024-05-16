@@ -1,5 +1,4 @@
 import 'package:base_example/extensions/context.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:luoyi_color_picker/luoyi_color_picker.dart';
 
@@ -26,49 +25,7 @@ class _ThemePageState extends State<ThemePage> {
           slivers: [
             SliverToBoxAdapter(child: buildDarkCell()),
             SliverToBoxAdapter(child: buildConfigCell()),
-            SliverToBoxAdapter(child: buildM2ConfigCell()),
-            SliverToBoxAdapter(child: buildM3ConfigCell()),
             SliverToBoxAdapter(child: buildBaseThemeCell(context)),
-            SliverToBoxAdapter(
-              child: _LayoutTheme(
-                title: 'bgColor',
-                color: context.appTheme.bgColor,
-                colors: context.appTheme.bgColors,
-                colorPicker: _ColorPicker(
-                  color: context.appTheme.bgColor,
-                  onChange: (color) {
-                    // count++;
-                    // i(count);
-                    if (context.isDarkMode) {
-                      AppDataController.of.darkTheme.value.bgColor = color;
-                      AppDataController.of.darkTheme.refresh();
-                    } else {
-                      AppDataController.of.theme.value.bgColor = color;
-                      AppDataController.of.darkTheme.refresh();
-                    }
-                  },
-                ),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: _LayoutTheme(
-                title: 'headerColor',
-                color: context.appTheme.headerColor,
-                colors: context.appTheme.headerColors,
-                colorPicker: _ColorPicker(
-                  color: context.appTheme.headerColor,
-                  onChange: (color) {
-                    if (context.isDarkMode) {
-                      AppDataController.of.darkTheme.value.headerColor = color;
-                      AppDataController.of.darkTheme.refresh();
-                    } else {
-                      AppDataController.of.theme.value.headerColor = color;
-                      AppDataController.of.darkTheme.refresh();
-                    }
-                  },
-                ),
-              ),
-            ),
             SliverToBoxAdapter(
               child: _LayoutTheme(
                 title: 'textColor',
@@ -206,9 +163,9 @@ class _ThemePageState extends State<ThemePage> {
             title: const Text('M2开启半透明状态栏'),
             trailing: Obx(
               () => Switch(
-                value: AppDataController.of.config.value.m2Config.translucenceStatusBar,
+                value: AppDataController.of.config.value.translucenceStatusBar,
                 onChanged: (v) {
-                  AppDataController.of.config.value.m2Config.translucenceStatusBar = v;
+                  AppDataController.of.config.value.translucenceStatusBar = v;
                   AppDataController.of.config.refresh();
                 },
               ),
@@ -217,63 +174,6 @@ class _ThemePageState extends State<ThemePage> {
         ],
       ),
     );
-  }
-
-  Widget buildM2ConfigCell() {
-    return Card(
-      clipBehavior: Clip.hardEdge,
-      child: ExpansionTile(
-        leading: const Icon(Icons.looks_two_outlined),
-        title: const Text('M2配置'),
-        initiallyExpanded: true,
-        children: [
-          buildCellWidget(
-            context,
-            onTap: () {
-              AppDataController.of.config.value.m2Config = M2ConfigData.config;
-              AppDataController.of.config.refresh();
-            },
-            title: '加载 M2 默认配置',
-          ),
-          buildCellWidget(
-            context,
-            onTap: () {
-              AppDataController.of.config.value.m2Config = M2ConfigData.customConfig;
-              AppDataController.of.config.refresh();
-            },
-            title: '加载 M2 自定义配置',
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildM3ConfigCell() {
-    return Card(
-        clipBehavior: Clip.hardEdge,
-        child: ExpansionTile(
-          leading: const Icon(Icons.looks_3_outlined),
-          title: const Text('M3配置'),
-          initiallyExpanded: true,
-          children: [
-            buildCellWidget(
-              context,
-              onTap: () {
-                AppDataController.of.config.value.m3Config = M3ConfigData.config;
-                AppDataController.of.config.refresh();
-              },
-              title: '加载 M3 默认配置',
-            ),
-            buildCellWidget(
-              context,
-              onTap: () {
-                AppDataController.of.config.value.m3Config = M3ConfigData.customConfig;
-                AppDataController.of.config.refresh();
-              },
-              title: '加载 M3 自定义配置',
-            ),
-          ],
-        ));
   }
 
   Widget buildBaseThemeCell(BuildContext context) {

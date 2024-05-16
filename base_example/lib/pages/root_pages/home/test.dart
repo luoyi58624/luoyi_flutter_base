@@ -19,7 +19,7 @@ class TestPage extends StatelessWidget {
             i(map2.runtimeType.toString());
             Map<String, dynamic> user3 = Map.castFrom(map);
             i(user3.runtimeType.toString());
-            var user4 = user3 as Map<String, dynamic>;
+            var user4 = user3;
             i(user4.runtimeType.toString());
             Map<String, dynamic> user5 = Map.from(map);
             i(user5.runtimeType.toString());

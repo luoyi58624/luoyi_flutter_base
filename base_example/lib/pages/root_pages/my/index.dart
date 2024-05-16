@@ -21,13 +21,13 @@ class _MyRootPageState extends State<MyRootPage> {
             floating: false,
             snap: false,
             expandedHeight: 200.0,
-            collapsedHeight: context.appbarHeight,
-            toolbarHeight: context.appbarHeight,
+            collapsedHeight: context.appConfig.appbarHeight,
+            toolbarHeight: context.appConfig.appbarHeight,
             flexibleSpace: FlexibleSpaceBar(
               title: FlexibleTitleWidget(child: Text(S.of(context).appbarLabelUser)),
               background: const ImageWidget(asset: "assets/images/bg.png", fit: BoxFit.fill),
               collapseMode: CollapseMode.pin,
-              titlePadding: EdgeInsets.symmetric(vertical: context.appbarHeight / 4),
+              titlePadding: EdgeInsets.symmetric(vertical: context.appConfig.appbarHeight / 4),
             ),
             iconTheme: const IconThemeData(color: Colors.white),
             actions: <Widget>[

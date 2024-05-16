@@ -15,7 +15,6 @@ import '../../../widgets/button.dart';
 import '../../button.dart';
 import 'hooks/hook.dart';
 import 'refresh.dart';
-import 'theme2.dart';
 
 class HomeRootPage extends StatefulWidget {
   const HomeRootPage({super.key});
@@ -47,12 +46,13 @@ class _HomeRootPageState extends State<HomeRootPage> {
                     .copyWith(useMaterial3: !(AppDataController.of.config.value.useMaterial3));
               },
               icon: Icon(
-                  AppDataController.of.config.value.useMaterial3 ? Icons.looks_3_outlined : Icons.looks_two_outlined),
+                AppDataController.of.config.value.useMaterial3 ? Icons.looks_3_outlined : Icons.looks_two_outlined,
+              ),
             ),
           ),
           PopupMenuButton<String>(
             enableFeedback: true,
-            offset: Offset(0, context.appbarHeight + 4),
+            offset: Offset(0, context.appConfig.appbarHeight + 4),
             popUpAnimationStyle: AnimationStyle.noAnimation,
             icon: const Icon(Icons.translate),
             onSelected: (value) {
@@ -77,7 +77,6 @@ class _HomeRootPageState extends State<HomeRootPage> {
             children: [
               buildCellWidget(context, title: '动态字体', page: DynamicFontPage()),
               buildCellWidget(context, title: '主题设置', page: const ThemePage()),
-              buildCellWidget(context, title: '主题设置2', page: const ThemePage2()),
               buildCellWidget(context, title: '本地响应式变量', page: const LocalObsPage()),
               buildCellWidget(context, title: 'Hook测试', page: const HookPage()),
               buildCellWidget(context, title: 'Toast测试', page: const ToastPage()),

@@ -1,5 +1,4 @@
 import 'package:base_example/global.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 import 'large_text.dart';
@@ -24,7 +23,7 @@ class DynamicFontPage extends HookWidget {
         actions: [
           PopupMenuButton<int>(
             enableFeedback: true,
-            offset: Offset(0, context.appbarHeight + 4),
+            offset: Offset(0, context.appConfig.appbarHeight + 4),
             popUpAnimationStyle: AnimationStyle.noAnimation,
             icon: const Icon(Icons.language),
             onSelected: (value) async {

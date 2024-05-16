@@ -28,7 +28,7 @@ class _MaterialRootPageState extends State<MaterialRootPage> {
               buildCellWidget(context, title: 'Button 按钮', page: const ButtonPage()),
               buildCellWidget(context, title: 'Switch 开关', page: const SwitchPage()),
               buildCellWidget(context, title: 'Form 表单', page: const FormPage()),
-              buildCellWidget(context, title: 'Refersh 刷新器', page: const RefreshPage()),
+              buildCellWidget(context, title: 'Refresh 刷新器', page: const RefreshPage()),
             ]),
             buildCardWidget(context, title: '布局组件', children: [
               buildCellWidget(context, title: 'Tab 标签导航', page: const TabPage()),

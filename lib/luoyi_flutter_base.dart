@@ -26,6 +26,9 @@ export 'src/plugins/http/http.dart';
 
 export 'package:luoyi_dart_base/luoyi_dart_base.dart';
 
+/// dart官方增强List、Map库
+export 'package:collection/collection.dart';
+
 /// 一个非常轻量的 key-value 本地存储，整个包的源代码不超过100行，不依赖任何本机插件
 /// ```dart
 /// localStorage.setItem('name', 'xxx');
@@ -56,17 +59,11 @@ export 'package:extended_tabs/extended_tabs.dart';
 
 part 'src/app/app.dart';
 
+part 'src/app/config.dart';
+
+part 'src/app/theme.dart';
+
 part 'src/app/extension.dart';
-
-part 'src/app/controller.dart';
-
-part 'src/app/config/config.dart';
-
-part 'src/app/config/m2_config.dart';
-
-part 'src/app/config/m3_config.dart';
-
-part 'src/app/theme/theme.dart';
 
 part 'src/builders/hover.dart';
 
