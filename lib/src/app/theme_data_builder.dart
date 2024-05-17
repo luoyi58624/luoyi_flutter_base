@@ -121,9 +121,9 @@ ThemeData _buildThemeData(AppConfigData appData, Brightness brightness) {
       iconColor: appTheme.iconColor,
     ),
     inputDecorationTheme: InputDecorationTheme(
-      border: const OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.grey),
-      ),
+      // border: const OutlineInputBorder(
+      //   borderSide: BorderSide(color: Colors.grey),
+      // ),
       labelStyle: const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w500,
@@ -132,7 +132,6 @@ ThemeData _buildThemeData(AppConfigData appData, Brightness brightness) {
         fontFamily: fontFamily,
         fontWeight: FontUtil.normal,
       ),
-      contentPadding: const EdgeInsets.only(top: 8, bottom: 8, left: 16, right: 16),
     ),
     expansionTileTheme: ExpansionTileThemeData(
       textColor: appTheme.primary,

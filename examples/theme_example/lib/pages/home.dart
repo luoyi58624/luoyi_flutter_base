@@ -5,6 +5,7 @@ import 'package:theme_example/pages/loading.dart';
 import '../widgets/button.dart';
 import '../widgets/cupertino.dart';
 import '../widgets/home_action.dart';
+import '../widgets/form.dart';
 import '../widgets/input.dart';
 
 class HomePage extends HookWidget {
@@ -42,34 +43,10 @@ class HomePage extends HookWidget {
         ),
         body: buildScrollWidget(
           child: buildCenterColumn([
-            Obx(() {
-              return ElevatedButton(
-                onPressed: () {
-                  AppController.of.themeMode.value =
-                      AppController.of.themeMode.value == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
-                },
-                child: Text(AppController.of.themeMode.value.toString()),
-              );
-            }),
-            const Icon(Icons.home),
-            const SwitchThemeButton(),
+            const Gap(8),
             const ButtonWidgets(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Switch(value: false, onChanged: (v) {}),
-                Switch(value: true, onChanged: (v) {}),
-              ],
-            ),
-            Column(children: inputWidgets).padding(all: 16),
-            Container(
-              height: 50,
-              margin: EdgeInsets.symmetric(horizontal: 16),
-              decoration: ShapeDecoration(
-                color: Colors.grey,
-                shape: StadiumBorder(),
-              ),
-            ),
+            const InputWidgets(),
+            const FormWidgets(),
             buildCardWidget(context, title: '卡片', children: [
               buildCellWidget(context, title: 'Loading 页面', page: const LoadingPage()),
               buildCellWidget(context, title: '显示 Toast', onTap: () {
