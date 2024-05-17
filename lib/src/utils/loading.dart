@@ -10,8 +10,8 @@ class LoadingUtil {
   /// 创建loading的时间
   static int _createLoadingStartTime = 0;
 
-  /// loading持续时间
-  static int _loadingDuration = 0;
+  /// loading延迟关闭时间
+  static int _delayCloseTime = 0;
 
   /// 是否显示请求关闭loading提示框
   static bool _isShowConfirm = false;
@@ -33,8 +33,8 @@ class LoadingUtil {
   ///     });
   ///  }
   /// ```
-  static Future<void> show(
-    String title, {
+  static void show(
+    String text, {
     // 延迟关闭loading，它可以防止异步逻辑执行过快造成视觉闪烁，例如异步逻辑执行了50毫秒，
     // 那么loading会在50毫秒后关闭，页面会突然闪出一个弹窗然后瞬间关闭，此时用户体验非常不好；
 
@@ -43,20 +43,23 @@ class LoadingUtil {
     // 所以，如果你执行完异步逻辑后需要返回上一页，你必须等待loading关闭后再执行 router.back() 进行返回操作，
     // 否则你只是直接关闭了loading。
     int delayClose = 0,
+    // 取消请求提示文字
+    String cancelText = '你要关闭 Loading 吗?',
     // 取消token，如果你需要当用户手动关闭loading时取消请求，那么请传递该token
     CancelToken? cancelToken,
   }) async {
-    await close(true);
+    close(true);
     _isShowLoading = true;
-    _loadingDuration = delayClose;
-    _createLoadingStartTime = DateTime.now().millisecondsSinceEpoch;
+    _delayCloseTime = math.max(delayClose, 0);
+    _createLoadingStartTime = DartUtil.currentMilliseconds;
     if (_rootContext.mounted) {
       showDialog(
         context: _rootContext,
         barrierColor: Colors.black26,
         builder: (context) {
           return _LoadingWidget(
-            title: title,
+            title: text,
+            cancelText: cancelText,
             cancelToken: cancelToken,
           );
         },
@@ -69,67 +72,55 @@ class LoadingUtil {
   /// immedClose - 是否立即关闭弹窗
   static Future<void> close([bool? immedClose]) async {
     if (_isShowLoading) {
-      if (_isShowConfirm) {
-        _pop();
-        await 0.05.delay();
-      }
-      _isShowConfirm = false;
-      _isShowLoading = false;
       if (immedClose == true) {
         _pop();
       } else {
-        var endTime = DateTime.now().millisecondsSinceEpoch;
-        var delayCloseLoadingTime =
-            math.max<int>((_loadingDuration - math.min(endTime - _createLoadingStartTime, 1000)), 0);
+        var delayCloseLoadingTime = math.max<int>(
+            (_delayCloseTime - math.min(DartUtil.currentMilliseconds - _createLoadingStartTime, 1000)), 0);
         if (delayCloseLoadingTime <= 0) {
           _pop();
         } else {
-          Future.delayed(Duration(milliseconds: delayCloseLoadingTime), () {
-            if (_rootContext.mounted) _pop();
-          });
+          await (delayCloseLoadingTime / 1000).delay();
+          if (_isShowLoading) _pop();
         }
       }
     }
   }
 
   static void _pop() {
-    Navigator.of(_rootContext).pop();
+    // 如果有提示窗，则先关闭提示窗
+    if (_isShowConfirm) _rootContext.pop();
+    _isShowConfirm = false;
+    _delayCloseTime = 0;
+    _isShowLoading = false;
+    if (_rootContext.mounted) _rootContext.pop();
   }
 }
 
 /// 构建loading组件
-class _LoadingWidget extends StatefulWidget {
-  const _LoadingWidget({required this.title, this.cancelToken});
+class _LoadingWidget extends StatelessWidget {
+  const _LoadingWidget({required this.title, required this.cancelText, this.cancelToken});
 
   final String title;
+  final String cancelText;
   final CancelToken? cancelToken;
-
-  @override
-  State<_LoadingWidget> createState() => _LoadingWidgetState();
-}
-
-class _LoadingWidgetState extends State<_LoadingWidget> {
-  Future<bool> showConfirm() async {
-    return false;
-  }
 
   @override
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) async {
-        if (didPop) {
-          return;
-        }
+        if (didPop) return;
         LoadingUtil._isShowConfirm = true;
-        LoadingUtil._isShowConfirm = await context.showConfirmModal(title: '你要关闭 loading 吗？');
-        if (context.mounted && LoadingUtil._isShowConfirm) {
-          LoadingUtil._isShowLoading = false;
-          if (widget.cancelToken != null) {
-            widget.cancelToken!.cancel();
-          }
-          Navigator.pop(context);
-        }
+        await context.showConfirmModal(
+          title: cancelText,
+          onConfirm: () {
+            LoadingUtil._isShowLoading = false;
+            if (cancelToken != null) cancelToken!.cancel();
+            context.pop();
+          },
+        );
+        LoadingUtil._isShowConfirm = false;
       },
       child: Material(
         type: MaterialType.transparency,
@@ -152,7 +143,7 @@ class _LoadingWidgetState extends State<_LoadingWidget> {
                 Container(
                   constraints: const BoxConstraints(minWidth: 120, maxWidth: 150),
                   child: Text(
-                    widget.title,
+                    title,
                     textAlign: TextAlign.center,
                     style: const TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
                   ),

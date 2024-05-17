@@ -30,6 +30,13 @@ class LoadingPage extends HookWidget {
             },
             child: const Text('显示多个loading'),
           ),
+          ElevatedButton(
+            onPressed: () async {
+              LoadingUtil.show('加载中', delayClose: 1000);
+              LoadingUtil.close();
+            },
+            child: const Text('延迟关闭loading'),
+          ),
         ]));
   }
 }
