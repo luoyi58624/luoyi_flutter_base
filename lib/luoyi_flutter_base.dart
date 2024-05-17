@@ -26,6 +26,9 @@ export 'src/plugins/http/http.dart';
 
 export 'package:luoyi_dart_base/luoyi_dart_base.dart';
 
+/// flutter国际化
+export 'package:flutter_localizations/flutter_localizations.dart';
+
 /// dart官方增强List、Map库
 export 'package:collection/collection.dart';
 
