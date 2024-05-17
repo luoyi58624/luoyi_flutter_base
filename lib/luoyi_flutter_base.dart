@@ -64,9 +64,11 @@ part 'src/app/app.dart';
 
 part 'src/app/config.dart';
 
+part 'src/app/extension.dart';
+
 part 'src/app/theme.dart';
 
-part 'src/app/extension.dart';
+part 'src/app/theme_data_builder.dart';
 
 part 'src/builders/hover.dart';
 
@@ -158,7 +160,7 @@ BuildContext get _rootContext {
 List<String>? _fontFamilyFallback;
 
 /// 初始化App一些通用配置
-/// * rootNavigatorKey 全局导航key，注意：如果不传递则无法使用部分api
+/// * rootNavigatorKey 全局导航key，如果不传递则无法使用：LoadingUtil
 Future<void> initApp({
   GlobalKey<NavigatorState>? rootNavigatorKey,
   bool initStorage = true,

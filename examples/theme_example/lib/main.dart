@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:theme_example/global.dart';
 
 import 'pages/home.dart';
@@ -20,18 +21,22 @@ class MainApp extends StatelessWidget {
     return Obx(() {
       return AppWidget(
         data: c.config.value,
-        child: Builder(builder: (context) {
-          return Obx(() {
-            return MaterialApp(
-              navigatorKey: rootNavigatorKey,
-              themeMode: c.themeMode.value,
-              theme: AppWidget.buildThemeData(context),
-              darkTheme: AppWidget.buildThemeData(context, brightness: Brightness.dark),
-              home: const HomePage(),
-              builder: AppWidget.builder(),
-            );
-          });
-        }),
+        child: MaterialApp(
+          navigatorKey: rootNavigatorKey,
+          debugShowCheckedModeBanner: false,
+          themeMode: c.themeMode.value,
+          theme: AppWidget.buildThemeData(data: c.config.value, brightness: Brightness.light),
+          darkTheme: AppWidget.buildThemeData(data: c.config.value, brightness: Brightness.dark),
+          home: const HomePage(),
+          builder: AppWidget.builder(
+            (context, child) => Material(
+              child: CupertinoTheme(
+                data: AppWidget.buildCupertinoThemeData(data: c.config.value, brightness: context.theme.brightness),
+                child: child!,
+              ),
+            ),
+          ),
+        ),
       );
     });
   }

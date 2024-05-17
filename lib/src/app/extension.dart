@@ -1,12 +1,11 @@
 part of '../../luoyi_flutter_base.dart';
 
-extension AppDataContextExtension on BuildContext {
+extension AppContextExtension on BuildContext {
   /// 全局配置数据
   AppConfigData get appConfig => AppWidget.of(this);
 
   /// 当前主题数据
-  AppThemeData get appTheme =>
-      Theme.of(this).extension<AppThemeData>() ?? (isDarkMode ? appConfig.darkTheme : appConfig.theme);
+  AppThemeData get appTheme => isDarkMode ? appConfig.darkTheme : appConfig.theme;
 
   /// 标题1 - 28px
   TextStyle get h1 => TextStyle(

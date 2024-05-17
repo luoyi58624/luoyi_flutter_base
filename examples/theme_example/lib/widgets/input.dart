@@ -7,4 +7,9 @@ List<Widget> get inputWidgets => [
           hintText: '请输入验证码',
         ),
       ),
+      const Gap(8),
+      const FormTextFieldWidget(
+        label: '表单',
+        placeholder: '请输入验证码',
+      ),
     ];

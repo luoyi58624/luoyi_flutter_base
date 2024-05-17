@@ -15,10 +15,11 @@ class AppController extends GetxController {
   late final selectPresetTheme = useLocalObs(0, 'selected_preset_theme');
 
   AppConfigData getAppConfig(int index) {
-    if (index == 0) return AppConfigData.m2Config;
-    if (index == 1) return AppConfigData.m2FlatConfig;
-    if (index == 2) return AppConfigData.m3Config;
-    if (index == 3) return AppConfigData.m3FlatConfig;
+    if (index == 0) return AppConfigData.config;
+    if (index == 1) return AppConfigData.m2Config;
+    if (index == 2) return AppConfigData.m2FlatConfig;
+    if (index == 3) return AppConfigData.m3Config;
+    if (index == 4) return AppConfigData.m3FlatConfig;
     return AppConfigData.config;
   }
 

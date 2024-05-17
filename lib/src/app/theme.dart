@@ -1,7 +1,7 @@
 part of '../../luoyi_flutter_base.dart';
 
 /// 主题数据
-class AppThemeData extends ThemeExtension<AppThemeData> {
+class AppThemeData {
   /// 默认亮色主题对象
   static AppThemeData theme = AppThemeData();
 
@@ -38,13 +38,13 @@ class AppThemeData extends ThemeExtension<AppThemeData> {
   /// icon颜色
   Color iconColor;
 
-  /// 根据字体颜色自动创建一组次级颜色
+  /// 根据字体颜色自动创建一组次级颜色: 0 - 5
   List<Color> get textColors =>
-      List.generate(4, (index) => textColor.deepen(5 * (index + 1), darkScale: 8 * (index + 1)));
+      List.generate(6, (index) => textColor.deepen(5 * (index + 1), darkScale: 8 * (index + 1)));
 
-  /// 根据字体颜色自动创建一组次级颜色
+  /// 根据图标颜色自动创建一组次级颜色: 0 - 5
   List<Color> get iconColors =>
-      List.generate(4, (index) => iconColor.deepen(5 * (index + 1), darkScale: 8 * (index + 1)));
+      List.generate(6, (index) => iconColor.deepen(5 * (index + 1), darkScale: 8 * (index + 1)));
 
   /// 默认的亮色主题构造函数
   AppThemeData({
@@ -74,7 +74,6 @@ class AppThemeData extends ThemeExtension<AppThemeData> {
     this.iconColor = const Color(0xfff6f6f6),
   });
 
-  @override
   AppThemeData copyWith({
     Color? primary,
     Color? success,
@@ -97,10 +96,5 @@ class AppThemeData extends ThemeExtension<AppThemeData> {
       textColor: textColor ?? this.textColor,
       iconColor: iconColor ?? this.iconColor,
     );
-  }
-
-  @override
-  ThemeExtension<AppThemeData> lerp(covariant ThemeExtension<AppThemeData>? other, double t) {
-    return this;
   }
 }

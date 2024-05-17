@@ -3,6 +3,7 @@ import 'package:theme_example/global.dart';
 import 'package:theme_example/pages/loading.dart';
 
 import '../widgets/button.dart';
+import '../widgets/cupertino.dart';
 import '../widgets/home_action.dart';
 import '../widgets/input.dart';
 
@@ -60,9 +61,15 @@ class HomePage extends HookWidget {
                 Switch(value: true, onChanged: (v) {}),
               ],
             ),
-            Column(
-              children: inputWidgets,
-            ).padding(all: 16),
+            Column(children: inputWidgets).padding(all: 16),
+            Container(
+              height: 50,
+              margin: EdgeInsets.symmetric(horizontal: 16),
+              decoration: ShapeDecoration(
+                color: Colors.grey,
+                shape: StadiumBorder(),
+              ),
+            ),
             buildCardWidget(context, title: '卡片', children: [
               buildCellWidget(context, title: 'Loading 页面', page: const LoadingPage()),
               buildCellWidget(context, title: '显示 Toast', onTap: () {
@@ -72,6 +79,7 @@ class HomePage extends HookWidget {
                 context.showConfirmModal(content: '这是一段文字');
               }),
             ]),
+            const CupertinoWidgets(),
             ...List.generate(20, (index) => buildCellWidget(context, title: '列表 - ${index + 1}')),
           ]),
         ),

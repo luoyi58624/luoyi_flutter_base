@@ -15,7 +15,7 @@ class SwitchThemeButton extends StatelessWidget {
         AppController.of.selectPresetTheme.value = value;
       },
       itemBuilder: (context) {
-        return ['M2默认主题', 'M2扁平化配置', 'M3默认主题', 'M3扁平化配置']
+        return ['默认配置', 'M2默认主题', 'M2扁平化配置', 'M3默认主题', 'M3扁平化配置']
             .mapIndexed((index, value) => PopupMenuItem(
                   height: 40,
                   value: index,
