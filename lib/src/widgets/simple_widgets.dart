@@ -92,7 +92,7 @@ Widget buildListViewDemo({
   int? itemCount,
   ScrollPhysics? physics,
 }) {
-  return ListView.builder(
+  return SuperListView.builder(
     itemCount: itemCount,
     physics: physics,
     itemBuilder: (context, index) => buildCellWidget(

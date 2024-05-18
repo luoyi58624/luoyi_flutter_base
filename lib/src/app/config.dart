@@ -18,6 +18,7 @@ class AppConfigData {
     appbarHeight: 56,
     appbarElevation: 4,
     appbarScrollElevation: 4,
+    centerTitle: false,
     cardElevation: 2,
     cardRadius: 6,
     translucenceStatusBar: true,
@@ -43,6 +44,7 @@ class AppConfigData {
     appbarHeight: 50,
     appbarElevation: 0,
     appbarScrollElevation: 4,
+    centerTitle: false,
     cardElevation: 1,
     cardRadius: 12,
   );

@@ -1,12 +1,14 @@
-import 'package:styled_widget/styled_widget.dart';
 import 'package:theme_example/global.dart';
+import 'package:theme_example/pages/hook.dart';
 import 'package:theme_example/pages/loading.dart';
+import 'package:theme_example/pages/state_hook.dart';
+import 'package:theme_example/state.dart';
 
+import '../widgets/tab.dart';
 import '../widgets/button.dart';
 import '../widgets/cupertino.dart';
 import '../widgets/home_action.dart';
 import '../widgets/form.dart';
-import '../widgets/input.dart';
 
 class HomePage extends HookWidget {
   const HomePage({super.key});
@@ -18,6 +20,15 @@ class HomePage extends HookWidget {
         appBar: AppBar(
           title: const Text('首页'),
           actions: [
+            ValueListenableBuilder(
+              valueListenable: GlobalState.showPerformanceOverlay,
+              builder: (context, value, child) {
+                return Switch(
+                  value: value,
+                  onChanged: (v) => GlobalState.showPerformanceOverlay.value = v,
+                );
+              },
+            ),
             IconButton(
               onPressed: () {
                 AppController.of.themeMode.value = context.isDarkMode ? ThemeMode.light : ThemeMode.dark;
@@ -39,16 +50,18 @@ class HomePage extends HookWidget {
           ],
         ),
         drawer: Drawer(
-          child: buildListViewDemo(),
+          child: buildListViewDemo(itemCount: 10000),
         ),
         body: buildScrollWidget(
           child: buildCenterColumn([
             const Gap(8),
             const ButtonWidgets(),
-            const InputWidgets(),
             const FormWidgets(),
+            const TabWidget(),
             buildCardWidget(context, title: '卡片', children: [
               buildCellWidget(context, title: 'Loading 页面', page: const LoadingPage()),
+              buildCellWidget(context, title: 'Hook 页面', page: const HookDemoPage()),
+              buildCellWidget(context, title: '有状态 Hook 页面', page: const StatefulHookPage()),
               buildCellWidget(context, title: '显示 Toast', onTap: () {
                 ToastUtil.show('hello，你好');
               }),

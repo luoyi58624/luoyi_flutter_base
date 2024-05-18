@@ -9,157 +9,168 @@ class ButtonWidgets extends HookWidget {
     final count = useState(0);
     final selects = useState({0});
     return ComponentDecoration(title: 'Buttons', children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      RowCell(
         children: [
           ElevatedButton(
             onPressed: () => count.value++,
             child: Text('count: ${count.value}'),
           ),
+          const Gap(10),
           ElevatedButton.icon(
             onPressed: () => count.value++,
             icon: const Icon(Icons.add),
             label: Text('count: ${count.value}'),
           ),
+          const Gap(10),
           ElevatedButton(
             onPressed: null,
             child: Text('count: ${count.value}'),
           ),
         ],
       ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      RowCell(
         children: [
           FilledButton(
             onPressed: () => count.value++,
             child: Text('count: ${count.value}'),
           ),
+          const Gap(10),
           FilledButton.icon(
             onPressed: () => count.value++,
             icon: const Icon(Icons.add),
             label: Text('count: ${count.value}'),
           ),
+          const Gap(10),
           FilledButton(
             onPressed: null,
             child: Text('count: ${count.value}'),
           ),
         ],
       ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      RowCell(
         children: [
           FilledButton.tonal(
             onPressed: () => count.value++,
             child: Text('count: ${count.value}'),
           ),
+          const Gap(10),
           FilledButton.tonalIcon(
             onPressed: () => count.value++,
             icon: const Icon(Icons.add),
             label: Text('count: ${count.value}'),
           ),
+          const Gap(10),
           FilledButton.tonal(
             onPressed: null,
             child: Text('count: ${count.value}'),
           ),
         ],
       ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      RowCell(
         children: [
           OutlinedButton(
             onPressed: () => count.value++,
             child: Text('count: ${count.value}'),
           ),
+          const Gap(10),
           OutlinedButton.icon(
             onPressed: () => count.value++,
             icon: const Icon(Icons.add),
             label: Text('count: ${count.value}'),
           ),
+          const Gap(10),
           OutlinedButton(
             onPressed: null,
             child: Text('count: ${count.value}'),
           ),
         ],
       ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      RowCell(
         children: [
           TextButton(
             onPressed: () => count.value++,
             child: Text('count: ${count.value}'),
           ),
+          const Gap(10),
           TextButton.icon(
             onPressed: () => count.value++,
             icon: const Icon(Icons.add),
             label: Text('count: ${count.value}'),
           ),
+          const Gap(10),
           TextButton(
             onPressed: null,
             child: Text('count: ${count.value}'),
           ),
         ],
       ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      RowCell(
         children: [
           IconButton(
             onPressed: () => count.value++,
             icon: const Icon(Icons.add),
           ),
+          const Gap(10),
           IconButton.filled(
             onPressed: () => count.value++,
             icon: const Icon(Icons.add),
           ),
+          const Gap(10),
           IconButton.filledTonal(
             onPressed: () => count.value++,
             icon: const Icon(Icons.add),
           ),
+          const Gap(10),
           IconButton.outlined(
             onPressed: () => count.value++,
             icon: const Icon(Icons.add),
           ),
         ],
       ),
-      const Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      const RowCell(
         children: [
           IconButton(
             onPressed: null,
             icon: Icon(Icons.add),
           ),
+          Gap(10),
           IconButton.filled(
             onPressed: null,
             icon: Icon(Icons.add),
           ),
+          Gap(10),
           IconButton.filledTonal(
             onPressed: null,
             icon: Icon(Icons.add),
           ),
+          Gap(10),
           IconButton.outlined(
             onPressed: null,
             icon: Icon(Icons.add),
           ),
         ],
       ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      RowCell(
         children: [
           FloatingActionButton(
             onPressed: () => count.value++,
             heroTag: null,
             child: const Icon(Icons.add),
           ),
+          const Gap(10),
           FloatingActionButton.extended(
             onPressed: () => count.value++,
             heroTag: null,
             icon: const Icon(Icons.add),
             label: Text('count: ${count.value}'),
           ),
+          const Gap(10),
           FloatingActionButton.small(
             onPressed: () => count.value++,
             heroTag: null,
             child: const Icon(Icons.add),
           ),
+          const Gap(10),
           FloatingActionButton.large(
             onPressed: () => count.value++,
             heroTag: null,
@@ -195,19 +206,3 @@ class ButtonWidgets extends HookWidget {
   }
 }
 
-Widget useButton() {
-  final count = useState(0);
-  return ElevatedButton(
-    onPressed: () => count.value++,
-    child: Text('count: ${count.value}'),
-  );
-}
-
-class ButtonDemo extends HookWidget {
-  const ButtonDemo({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return useButton();
-  }
-}

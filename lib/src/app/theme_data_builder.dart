@@ -81,13 +81,28 @@ ThemeData _buildThemeData(AppConfigData appData, Brightness brightness) {
       ),
     ),
     tabBarTheme: TabBarTheme(
+      unselectedLabelStyle: TextStyle(
+        fontFamily: fontFamily,
+        fontWeight: FontUtil.medium,
+        fontSize: 14,
+      ),
       labelStyle: TextStyle(
         fontFamily: fontFamily,
         fontWeight: FontUtil.medium,
-        fontSize: 16,
+        fontSize: 14,
         color: appbarColor.isDark ? darkTheme.textColor : lightTheme.textColor,
       ),
+
       unselectedLabelColor: appbarColor.isDark ? darkTheme.textColors[3] : lightTheme.textColor,
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      elevation: 2,
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: appTheme.headerColor,
+      unselectedLabelStyle: TextStyle(fontSize: 12, fontWeight: FontUtil.medium),
+      selectedLabelStyle: TextStyle(fontSize: 12, fontWeight: FontUtil.bold, color: appTheme.primary),
+      unselectedIconTheme: const IconThemeData(size: 26),
+      selectedIconTheme: IconThemeData(color: appTheme.primary, size: 26),
     ),
     cardTheme: CardTheme(
       color: appTheme.cardColor,

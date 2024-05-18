@@ -68,7 +68,7 @@ extension FlutterModalExtension on BuildContext {
                       if (onConfirm != null) onConfirm();
                     },
                     style: TextButton.styleFrom(
-                      foregroundColor: confirmColor ?? Theme.of(context).primaryColor,
+                      foregroundColor: confirmColor ?? context.appTheme.primary,
                     ),
                     child: Text(confirmText),
                   ),

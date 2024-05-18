@@ -19,6 +19,7 @@ import 'package:luoyi_dart_base/luoyi_dart_base.dart';
 import 'package:luoyi_flutter_base/src/plugins/http/interceptor/cache.dart';
 import 'package:mini_getx/mini_getx.dart';
 
+import 'luoyi_flutter_base.dart';
 import 'src/utils/session_storage/web.dart' if (dart.library.io) 'src/utils/session_storage/io.dart';
 import 'src/utils/font/web.dart' if (dart.library.io) 'src/utils/font/io.dart';
 
