@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:theme_example/global.dart';
 import 'package:theme_example/state.dart';
 
@@ -36,7 +35,8 @@ class MainApp extends StatelessWidget {
                     builder: AppWidget.builder(
                       (context, child) => Material(
                         child: CupertinoTheme(
-                          data: AppWidget.buildCupertinoThemeData(data: c.config.value, brightness: context.theme.brightness),
+                          data: AppWidget.buildCupertinoThemeData(
+                              data: c.config.value, brightness: context.theme.brightness),
                           child: child!,
                         ),
                       ),

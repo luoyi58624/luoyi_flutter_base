@@ -1,7 +1,7 @@
 import 'package:theme_example/global.dart';
 import 'package:theme_example/pages/hook.dart';
 import 'package:theme_example/pages/loading.dart';
-import 'package:theme_example/pages/state_hook.dart';
+import 'package:theme_example/pages/route.dart';
 import 'package:theme_example/state.dart';
 
 import '../widgets/tab.dart';
@@ -19,6 +19,7 @@ class HomePage extends HookWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('首页'),
+          centerTitle: false,
           actions: [
             ValueListenableBuilder(
               valueListenable: GlobalState.showPerformanceOverlay,
@@ -61,7 +62,7 @@ class HomePage extends HookWidget {
             buildCardWidget(context, title: '卡片', children: [
               buildCellWidget(context, title: 'Loading 页面', page: const LoadingPage()),
               buildCellWidget(context, title: 'Hook 页面', page: const HookDemoPage()),
-              buildCellWidget(context, title: '有状态 Hook 页面', page: const StatefulHookPage()),
+              buildCellWidget(context, title: 'Route 页面', page: const RoutePage()),
               buildCellWidget(context, title: '显示 Toast', onTap: () {
                 ToastUtil.show('hello，你好');
               }),

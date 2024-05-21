@@ -155,12 +155,12 @@ class FormWidgetState extends State<FormWidget> {
   }
 
   bool validate() {
-    FlutterUtil.unfocus();
+    FlutterUtil.unFocus();
     return formKey.currentState?.validate() ?? false;
   }
 
   void reset() {
-    FlutterUtil.unfocus();
+    FlutterUtil.unFocus();
     formKey.currentState?.reset();
   }
 }

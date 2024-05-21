@@ -1,7 +1,5 @@
 part of '../../luoyi_flutter_base.dart';
 
-extension FlutterMapExtension<K, V> on Map<K, V> {}
-
 extension FlutterStringExtension on String {
   bool get isInt => int.tryParse(this) != null;
 

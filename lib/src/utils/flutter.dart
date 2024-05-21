@@ -16,17 +16,17 @@ class FlutterUtil {
   }
 
   /// 隐藏手机软键盘但保留焦点
-  static Future<void> hideKeybord() async {
+  static Future<void> hideKeyboard() async {
     await SystemChannels.textInput.invokeMethod('TextInput.hide');
   }
 
   /// 显示手机软键盘
-  static Future<void> showKeybord() async {
+  static Future<void> showKeyboard() async {
     await SystemChannels.textInput.invokeMethod('TextInput.show');
   }
 
   /// 隐藏手机软键盘并失去焦点
-  static Future<void> unfocus() async {
+  static Future<void> unFocus() async {
     FocusManager.instance.primaryFocus?.unfocus();
   }
 

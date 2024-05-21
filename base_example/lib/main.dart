@@ -22,23 +22,16 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppDataController c = Get.find();
     return Obx(() {
       return AppWidget(
-        data: AppDataController.of.config.value,
-        child: materialApp(),
-      );
-    });
-  }
-
-  Widget materialApp() {
-    return Builder(builder: (context) {
-      return Obx(() {
-        return MaterialApp(
+        data: c.config.value,
+        child: MaterialApp(
           navigatorKey: rootNavigatorKey,
           onGenerateTitle: (context) => S.of(context).title,
-          themeMode: AppDataController.of.themeMode.value,
-          theme: AppWidget.buildThemeData(context),
-          darkTheme: AppWidget.buildThemeData(context, brightness: Brightness.dark),
+          themeMode: c.themeMode.value,
+          theme: AppWidget.buildThemeData(data: c.config.value),
+          darkTheme: AppWidget.buildThemeData(data: c.config.value, brightness: Brightness.dark),
           showPerformanceOverlay: GlobalController.of.showPerformanceOverlay.value,
           home: const RootPage(),
           localizationsDelegates: const [
@@ -51,13 +44,13 @@ class MainApp extends StatelessWidget {
           builder: AppWidget.builder(
             (context, child) => Material(
               child: CupertinoTheme(
-                data: AppWidget.buildCupertinoThemeData(context, brightness: context.theme.brightness),
+                data: AppWidget.buildCupertinoThemeData(data: c.config.value, brightness: context.theme.brightness),
                 child: child!,
               ),
             ),
           ),
-        );
-      });
+        ),
+      );
     });
   }
 }

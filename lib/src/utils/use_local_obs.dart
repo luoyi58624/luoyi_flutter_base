@@ -32,7 +32,7 @@ typedef SerializeFun<T> = String Function(T model);
 /// 反序列化函数类型声明
 typedef DeserializeFun<T> = T Function(String json);
 
-/// Getx本地响应式变量，注意：使用前需要初始化[localStorage]
+/// Getx本地响应式变量
 /// ```dart
 /// class Controller extends GetxController {
 ///   late final count = useLocalObs(0, 'local_count');
@@ -257,8 +257,6 @@ extension GetxLocalObs on GetxController {
       var newMapData = mapData.map((k, v) {
         return MapEntry(DartUtil.dynamicToBaseType(k), DartUtil.dynamicToBaseType(v));
       }).toPractical();
-      // i(newMapData);
-      // i(newMapData.runtimeType.toString());
       return newMapData as T;
     };
   }

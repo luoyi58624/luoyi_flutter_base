@@ -110,7 +110,7 @@ class FontUtil {
       if (fontModel != null && fontModel.fontFamily != '') {
         return await initFont(fontModel);
       } else {
-        // 如果不传递自定义字体，则加载谷歌在线字体，注意：这仅限于上面指定 fontModel 的平台
+        // 如果不传递自定义字体，则加载谷歌在线字体，这仅限于上面指定 fontModel 的平台
         return await initFont(const FontModel(fontFamily: 'NotoSansSC', fontWeights: {
           500: 'https://fonts.gstatic.com/s/a/5383032c8e54fc5fa09773ce16483f64d9cdb7d1f8e87073a556051eb60f8529.ttf',
           700: 'https://fonts.gstatic.com/s/a/a7a29b6d611205bb39b9a1a5c2be5a48416fbcbcfd7e6de98976e73ecb48720b.ttf',
@@ -177,7 +177,7 @@ class FontUtil {
   /// 动态加载全局字体，如果加载成功则返回true
   ///
   /// 注意：此函数不会更新你的页面，你应当使用状态管理保存当前选中的字体，
-  /// 每次加载完字体后通过[FlutterFont.fontFamily]变量更新你的状态
+  /// 每次加载完字体后通过[FontUtil.fontFamily]变量更新你的状态
   static Future<bool> loadFont(FontModel fontModel) async {
     // 如果加载的fontUrl、fontWeights都为空，则那么跳过网络解析
     if (fontModel.fontUrl == null && (fontModel.fontWeights == null || fontModel.fontWeights!.isEmpty)) {
@@ -226,7 +226,8 @@ class FontUtil {
   /// * 小米 - normal: w500
   /// * 华为 - bold: w600
   ///
-  /// 提示：此函数是可选的，它只作用于[FlutterFont.normal]、[FlutterFont.medium]、[FlutterFont.bold]等变量
+  /// 提示：此函数是可选的，它只作用于[FontUtil.normal]、[FontUtil.medium]、[FontUtil.bold]等变量，它默认在[initApp]函数中初始化，
+  /// 如果需要自定义，可以再次执行此函数覆盖上一次配置
   static Future<void> initSystemFontWeight({
     FontWeight? normal,
     FontWeight? medium,
@@ -239,9 +240,12 @@ class FontUtil {
       ___medium = medium;
       ___bold = bold;
       if (GetPlatform.isAndroid) {
+        // 小米手机400字重太细了，将normal设置为500
         if (DeviceUtil.isXiaomi) {
           _setFontWeight(FontWeight.w500, FontWeight.w500, FontWeight.bold);
-        } else if (DeviceUtil.isHUAWEI) {
+        }
+        // 华为手机700字重太重了，将bold设置为600
+        else if (DeviceUtil.isHUAWEI) {
           _setFontWeight(FontWeight.w400, FontWeight.w500, FontWeight.w600);
         }
       }

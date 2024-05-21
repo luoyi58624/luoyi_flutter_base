@@ -15,7 +15,7 @@ export 'interceptor/retry.dart';
 /// Http请求类，包含重试请求、错误拦截、请求缓存、数据mock拦截等功能，其底层基于[Dio]，如果你要使用它，请先安装Dio的依赖包
 /// 扩展示例：
 /// ```dart
-/// class Http extends FlutterHttp {
+/// class Http extends BaseHttp {
 ///   Http() {
 ///     // 设置服务接口地址
 ///     instance.options.baseUrl = 'https://jsonplaceholder.typicode.com';

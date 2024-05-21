@@ -83,17 +83,16 @@ ThemeData _buildThemeData(AppConfigData appData, Brightness brightness) {
     tabBarTheme: TabBarTheme(
       unselectedLabelStyle: TextStyle(
         fontFamily: fontFamily,
-        fontWeight: FontUtil.medium,
-        fontSize: 14,
+        fontWeight: FontUtil.bold,
+        fontSize: 15,
       ),
       labelStyle: TextStyle(
         fontFamily: fontFamily,
-        fontWeight: FontUtil.medium,
-        fontSize: 14,
-        color: appbarColor.isDark ? darkTheme.textColor : lightTheme.textColor,
+        fontWeight: FontUtil.bold,
+        fontSize: 15,
+        color: appTheme.primary,
       ),
-
-      unselectedLabelColor: appbarColor.isDark ? darkTheme.textColors[3] : lightTheme.textColor,
+      unselectedLabelColor: appbarColor.isDark ? darkTheme.textColors[1] : lightTheme.textColor,
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       elevation: 2,
@@ -139,14 +138,8 @@ ThemeData _buildThemeData(AppConfigData appData, Brightness brightness) {
       // border: const OutlineInputBorder(
       //   borderSide: BorderSide(color: Colors.grey),
       // ),
-      labelStyle: const TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.w500,
-      ),
-      hintStyle: TextStyle(
-        fontFamily: fontFamily,
-        fontWeight: FontUtil.normal,
-      ),
+      labelStyle: TextStyle(fontFamily: fontFamily, fontSize: 16, fontWeight: FontUtil.medium),
+      hintStyle: TextStyle(fontFamily: fontFamily, fontSize: 14, fontWeight: FontUtil.medium),
     ),
     expansionTileTheme: ExpansionTileThemeData(
       textColor: appTheme.primary,

@@ -12,11 +12,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:localstorage/localstorage.dart';
-import 'package:luoyi_dart_base/luoyi_dart_base.dart';
-import 'package:luoyi_flutter_base/src/plugins/http/interceptor/cache.dart';
 import 'package:mini_getx/mini_getx.dart';
 
 import 'luoyi_flutter_base.dart';
@@ -41,15 +38,6 @@ export 'package:collection/collection.dart';
 export 'package:localstorage/localstorage.dart' hide initLocalStorage, LocalStorage;
 
 /// 轻松地在行或列小部件内添加间隙，它会自动适配元素排列方向，是 SizedBox 的替代品
-/// ```dart
-/// Column(
-///   children: [
-///     Text(''),
-///     const Gap(4),
-///     Text(''),
-///   ],
-/// )
-/// ```
 export 'package:gap/gap.dart';
 
 /// ListView、SliverListView增强插件，api和官方一样，支持高性能渲染不定高子元素列表，高性能拖动滚动条滚动

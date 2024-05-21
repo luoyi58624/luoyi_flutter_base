@@ -1,4 +1,3 @@
-import 'package:styled_widget/styled_widget.dart';
 import 'package:theme_example/global.dart';
 
 class SwitchThemeButton extends StatelessWidget {

@@ -9,8 +9,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  luoyi_flutter_base:
-    path: ../..
+  flutter_webview:
+    git:
+      url: https://gitee.com/luoyi666/flutter_webview
   mini_getx: ^5.0.0
   styled_widget: ^0.4.1
 
@@ -18,6 +19,10 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
+
+dependency_overrides:
+  luoyi_flutter_base:
+    path: ../..
 
 flutter:
   uses-material-design: true
