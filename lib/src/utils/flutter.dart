@@ -48,28 +48,12 @@ class FlutterUtil {
     return getAncestorElement<T>(context) != null;
   }
 
-  static FontWeight loadFontWeight(int index) {
-    switch (index) {
-      case 100:
-        return FontWeight.w100;
-      case 200:
-        return FontWeight.w200;
-      case 300:
-        return FontWeight.w300;
-      case 400:
-        return FontWeight.w400;
-      case 500:
-        return FontWeight.w500;
-      case 600:
-        return FontWeight.w600;
-      case 700:
-        return FontWeight.w700;
-      case 800:
-        return FontWeight.w800;
-      case 900:
-        return FontWeight.w900;
-      default:
-        return FontWeight.w400;
-    }
-  }
+  /// 是否是苹果平台：macos、ios
+  static bool get isApple => GetPlatform.isMacOS || GetPlatform.isIOS;
+
+  /// 是否是移动客户端平台
+  static bool get isMobileClient => !kIsWeb && GetPlatform.isMobile;
+
+  /// 是否是桌面客户端平台
+  static bool get isDesktopClient => !kIsWeb && GetPlatform.isDesktop;
 }

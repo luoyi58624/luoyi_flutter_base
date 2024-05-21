@@ -1,6 +1,6 @@
 part of '../../luoyi_flutter_base.dart';
 
-class _LocalDataModel extends ExpireLocalDataModel {
+class _LocalDataModel extends _ExpireLocalDataModel {
   /// 持久化数据类型字符串，如果类型发生变化将清除旧的本地数据
   late String type;
 
@@ -32,7 +32,7 @@ typedef SerializeFun<T> = String Function(T model);
 /// 反序列化函数类型声明
 typedef DeserializeFun<T> = T Function(String json);
 
-/// Getx本地响应式变量
+/// Getx本地响应式变量，仅限 mini_getx
 /// ```dart
 /// class Controller extends GetxController {
 ///   late final count = useLocalObs(0, 'local_count');

@@ -1,6 +1,8 @@
 part of '../../luoyi_flutter_base.dart';
 
-/// 注入Getx控制器hook
+/// 注入控制器hook，当页面移除后将自动销毁控制器，注意：仅限mini_getx
+/// * tag 控制器标签
+/// * showLog 注入控制器、销毁控制器时是否打印日志
 T useGetx<T extends GetxController>(
   T controller, {
   String? tag,

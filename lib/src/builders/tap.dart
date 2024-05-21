@@ -39,7 +39,7 @@ class _TapBuilderState extends State<TapBuilder> {
                 _timer!.cancel();
                 _timer = null;
                 update(false);
-                AsyncUtil.delayed(() => update(true), 16);
+                DartUtil.delayed(() => update(true), 16);
               } else {
                 update(true);
               }
@@ -47,7 +47,7 @@ class _TapBuilderState extends State<TapBuilder> {
       onTapUp: (widget.delay == 0 || widget.disabled)
           ? null
           : (e) {
-              _timer = AsyncUtil.delayed(() {
+              _timer = DartUtil.delayed(() {
                 update(false);
                 _timer = null;
               }, widget.delay);
@@ -55,7 +55,7 @@ class _TapBuilderState extends State<TapBuilder> {
       onTapCancel: (widget.delay == 0 || widget.disabled)
           ? null
           : () {
-              _timer = AsyncUtil.delayed(() {
+              _timer = DartUtil.delayed(() {
                 update(false);
                 _timer = null;
               }, widget.delay);
