@@ -45,6 +45,8 @@ part 'src/utils/use_local_obs.dart';
 
 part 'src/widgets/animation.dart';
 
+part 'src/widgets/brightness.dart';
+
 /// 根节点导航key，使用前必须将它添加到App中
 /// ```dart
 /// MaterialApp(
