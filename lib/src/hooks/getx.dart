@@ -1,8 +1,27 @@
 part of '../../luoyi_flutter_base.dart';
 
-/// 注入控制器hook，当页面移除后将自动销毁控制器，注意：仅限mini_getx
+/// 自动注入、销毁[Getx]控制器hook，注意：仅限mini_getx
 /// * tag 控制器标签
-/// * showLog 注入控制器、销毁控制器时是否打印日志
+/// * showLog 注入控制器、销毁控制器时是否在控制台显示日志
+///
+/// ```dart
+/// class Controller extends GetxController {
+///   final count = 0.obs;
+/// }
+///
+/// class GetxHook extends HookWidget {
+///   const GetxHook({super.key});
+///
+///   @override
+///   Widget build(BuildContext context) {
+///     final c = useGetx(Controller());
+///     return ElevatedButton(
+///       onPressed: () => c.count.value++,
+///       child: Obx(() => Text('count: ${c.count.value}')),
+///     );
+///   }
+/// }
+/// ```
 T useGetx<T extends GetxController>(
   T controller, {
   String? tag,
@@ -31,5 +50,22 @@ class _ControllerState<T extends GetxController> extends HookState<T, _Controlle
   @override
   void dispose() {
     Get.delete<T>(tag: hook.tag);
+  }
+}
+
+class Controller extends GetxController {
+  final count = 0.obs;
+}
+
+class GetxHook extends HookWidget {
+  const GetxHook({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final c = useGetx(Controller());
+    return ElevatedButton(
+      onPressed: () => c.count.value++,
+      child: Obx(() => Text('count: ${c.count.value}')),
+    );
   }
 }

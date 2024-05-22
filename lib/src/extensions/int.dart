@@ -2,7 +2,7 @@ part of '../../luoyi_flutter_base.dart';
 
 extension FlutterIntExtension on int {
   /// int转[FontWeight]
-  FontWeight toFontWeight() {
+  FontWeight toFontWeight([FontWeight? defaultFontWeight]) {
     switch (this) {
       case 100:
         return FontWeight.w100;
@@ -23,7 +23,7 @@ extension FlutterIntExtension on int {
       case 900:
         return FontWeight.w900;
       default:
-        return FontWeight.w400;
+        return defaultFontWeight ?? FontWeight.normal;
     }
   }
 }

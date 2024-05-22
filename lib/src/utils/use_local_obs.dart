@@ -19,20 +19,19 @@ class _LocalDataModel extends _ExpireLocalDataModel {
   }
 }
 
-/// 序列化函数类型声明，[LocalStorage]可以自动转换基础数据类型、List、Map，但模型对象需要你手动转换，
-/// 示例：
+/// 序列化函数，将对象转换成String
 /// ```dart
-/// // 创建的模型对象提供 toJson、fromJson 两种序列化方法即可，它们均可以自动生成
-/// serializeFun: (model) => jsonEncode(model.toJson()),
-/// deserializeFun: (json) => UserModel.fromJson(jsonDecode(json))
+/// serializeFun: (model) => jsonEncode(model.toJson())
 /// ```
-/// 注意：List、Map如果存放的是模型对象，你也必须进行手动转换
 typedef SerializeFun<T> = String Function(T model);
 
-/// 反序列化函数类型声明
+/// 反序列化函数，将String转回对象
+/// ```dart
+/// deserializeFun: (json) => UserModel.fromJson(jsonDecode(json))
+/// ```
 typedef DeserializeFun<T> = T Function(String json);
 
-/// Getx本地响应式变量，仅限 mini_getx
+/// Getx本地响应式变量，本地缓存基于[LocalStorage]，仅限 mini_getx
 /// ```dart
 /// class Controller extends GetxController {
 ///   late final count = useLocalObs(0, 'local_count');
@@ -42,15 +41,9 @@ extension GetxLocalObs on GetxController {
   /// 创建[Getx]响应式变量，更新时会同步至本地，重新加载时会取本地数据作为初始值
   /// * value - 初始值
   /// * key - 本地缓存key，请确保它们唯一
-  /// * expire - 过期时间，单位毫秒，如果小于等于 0 则表示永不过期
-  /// * serializeFun - 序列化函数，如果你传入的是对象，你必须将其转换为字符串才能缓存在本地
-  /// * deserializeFun - 反序列化函数，将本地存储的字符串转回目标对象
-  ///
-  /// 序列化示例：
-  /// ```dart
-  /// serializeFun: (model) => jsonEncode(model.toJson()),
-  /// deserializeFun: (json) => UserModel.fromJson(jsonDecode(json))
-  /// ```
+  /// * expire - 过期时间，单位毫秒，小于等于 0 表示永不过期
+  /// * serializeFun - 序列化函数，将对象转换成String
+  /// * deserializeFun - 反序列化函数，将String转回对象
   Rx<T> useLocalObs<T>(
     T value,
     String key, {
@@ -94,12 +87,7 @@ extension GetxLocalObs on GetxController {
     return $value;
   }
 
-  /// 创建[Getx]响应式[List]，更新时会同步至本地，重新加载时会取本地数据作为初始值
-  /// * value - 初始值
-  /// * key - 本地缓存key，请确保它们唯一
-  /// * expire - 过期时间，单位毫秒，如果小于等于 0 则表示永不过期
-  /// * serializeFun - 序列化函数，如果你传入的是对象，你必须将其转换为字符串才能缓存在本地
-  /// * deserializeFun - 反序列化函数，将本地存储的字符串转回目标对象
+  /// [Getx]响应式[List]
   RxList<T> useLocalListObs<T>(
     List<T> value,
     String key, {
@@ -158,12 +146,7 @@ extension GetxLocalObs on GetxController {
     return $value;
   }
 
-  /// 创建[Getx]响应式[Map]，key强制为String，更新时会同步至本地，重新加载时会取本地数据作为初始值
-  /// * value - 初始值
-  /// * key - 本地缓存key，请确保它们唯一
-  /// * expire - 过期时间，单位毫秒，如果小于等于 0 则表示永不过期
-  /// * serializeFun - 序列化函数，如果你传入的是对象，你必须将其转换为字符串才能缓存在本地
-  /// * deserializeFun - 反序列化函数，将本地存储的字符串转回目标对象
+  /// [Getx]响应式[Map]
   ///
   /// 示例：
   /// ```dart
@@ -254,9 +237,9 @@ extension GetxLocalObs on GetxController {
     };
     deserializeFun ??= (json) {
       final mapData = (jsonDecode(json) as Map);
-      var newMapData = mapData.map((k, v) {
+      var newMapData = DartUtil.mapAutoCast(mapData.map((k, v) {
         return MapEntry(DartUtil.dynamicToBaseType(k), DartUtil.dynamicToBaseType(v));
-      }).toPractical();
+      }));
       return newMapData as T;
     };
   }

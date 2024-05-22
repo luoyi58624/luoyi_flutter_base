@@ -14,11 +14,14 @@ import 'src/utils/session_storage/web.dart' if (dart.library.io) 'src/utils/sess
 
 export 'package:luoyi_dart_base/luoyi_dart_base.dart';
 
-/// 一个非常轻量的 key-value 本地存储，整个包的源代码不超过100行，不依赖任何本机插件
+// 一个非常轻量的 key-value 本地存储，整个包的源代码不超过100行，不依赖任何本机插件
 export 'package:localstorage/localstorage.dart' hide initLocalStorage, LocalStorage;
 
-/// 与 react-hook 类似，它可以节省大量 StatefulWidget 样板代码，你甚至可以使用它来实现双向绑定 (实用性远超react-hook)
+// 与 react-hook 类似，它可以节省大量 StatefulWidget 样板代码，你甚至可以使用它来实现双向绑定
 export 'package:flutter_hooks/flutter_hooks.dart';
+
+// 轻松地在行或列小部件内添加间隙，它会自动适配元素排列方向，不必使用 SizedBox 手动定义width、height来控制元素间隙
+export 'package:gap/gap.dart';
 
 part 'src/builders/hover.dart';
 
@@ -27,8 +30,6 @@ part 'src/builders/tap.dart';
 part 'src/commons/model.dart';
 
 part 'src/extensions/color.dart';
-
-part 'src/extensions/string.dart';
 
 part 'src/extensions/int.dart';
 
@@ -44,7 +45,7 @@ part 'src/utils/use_local_obs.dart';
 
 part 'src/widgets/animation.dart';
 
-/// 根节点导航key
+/// 根节点导航key，使用前必须将它添加到App中
 /// ```dart
 /// MaterialApp(
 ///   navigatorKey: rootNavigatorKey,
