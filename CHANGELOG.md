@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/luoyi58624/luoyi_flutter_base/compare/v2.0.0...v2.0.1) (2024-05-22)
+
+
+### Bug Fixes
+
+* 公开ExpireLocalDataModel ([bd6d679](https://github.com/luoyi58624/luoyi_flutter_base/commit/bd6d679be6bea06b6fd14d91dd5495e9ea6f816b))
+
 ## [2.0.0](https://github.com/luoyi58624/luoyi_flutter_base/compare/v1.4.0...v2.0.0) (2024-05-22)
 
 
