@@ -1,6 +1,6 @@
 part of '../../luoyi_flutter_base.dart';
 
-class _LocalDataModel extends _ExpireLocalDataModel {
+class _LocalDataModel extends ExpireLocalDataModel {
   /// 持久化数据类型字符串，如果类型发生变化将清除旧的本地数据
   late String type;
 
