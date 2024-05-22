@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/luoyi58624/luoyi_flutter_base/compare/v2.0.1...v2.1.0) (2024-05-22)
+
+
+### Features
+
+* 新增BrightnessWidget ([86fe920](https://github.com/luoyi58624/luoyi_flutter_base/commit/86fe920a5e28d0e5b99e3abbddad99b688864fe2))
+
 ## [2.0.1](https://github.com/luoyi58624/luoyi_flutter_base/compare/v2.0.0...v2.0.1) (2024-05-22)
 
 
