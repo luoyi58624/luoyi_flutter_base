@@ -57,7 +57,9 @@ GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 
 /// 根节点context
 BuildContext get rootContext {
-  assert(rootNavigatorKey.currentContext != null, 'rootContext is null');
+  assert(rootNavigatorKey.currentWidget != null, 'Please configured rootNavigatorKey before use rootContext');
+  assert(rootNavigatorKey.currentWidget is Navigator,
+      'Whether you right configured rootNavigatorKey? rootNavigatorKey not Navigator!');
   return rootNavigatorKey.currentContext!;
 }
 
