@@ -1,5 +1,30 @@
 # Changelog
 
+## [2.0.0](https://github.com/luoyi58624/luoyi_flutter_base/compare/v1.4.0...v2.0.0) (2024-05-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* 发布2.0.0
+
+### Features
+
+* buildThemeData不接收context,直接传递配置数据即可 ([944a9bf](https://github.com/luoyi58624/luoyi_flutter_base/commit/944a9bf8e4cb335b0d935e739798d2adea0d7e9a))
+* 优化drawer主题样式 ([1ff96da](https://github.com/luoyi58624/luoyi_flutter_base/commit/1ff96dae07cbcb69fe1fa767a44c31c968e9e5e9))
+* 修复延迟关闭loading的bug ([ee1e5cb](https://github.com/luoyi58624/luoyi_flutter_base/commit/ee1e5cbcecababf65f38469bfe79971c083cbf6b))
+* 关闭loading新增提示，优化material3提示样式 ([8a1f722](https://github.com/luoyi58624/luoyi_flutter_base/commit/8a1f722f0b2ee4a16e735b166c6656bc2e157ad0))
+* 删除大量公共性不强的代码 ([cbab4ea](https://github.com/luoyi58624/luoyi_flutter_base/commit/cbab4ea9a495eacddab575d8b78357744bbd0bc3))
+* 发布2.0.0 ([2dbe399](https://github.com/luoyi58624/luoyi_flutter_base/commit/2dbe399864b19a5962ea86d5d67e720e056b68a1))
+* 导出flutter_localizations ([4d5ac6b](https://github.com/luoyi58624/luoyi_flutter_base/commit/4d5ac6bcee7733eaa531dae4a2c0aa8098a59af1))
+* 将flutter_font迁移进来，降低维护压力 ([84a9f96](https://github.com/luoyi58624/luoyi_flutter_base/commit/84a9f9692725fb215152370553288fe910773ecf))
+* 整理主题代码，将亮色主题、暗色主题颜色合并至config，移除m2、m3配置项 ([67617e6](https://github.com/luoyi58624/luoyi_flutter_base/commit/67617e62a3cf594785bd73c7e6b9ff0e2cb607dc))
+* 新增session_storage ([bd28467](https://github.com/luoyi58624/luoyi_flutter_base/commit/bd284673ef82c5081efbeba287e4d23caedff59e))
+
+
+### Bug Fixes
+
+* 新增私有的_rootNavigatorKey配置 ([600e5e4](https://github.com/luoyi58624/luoyi_flutter_base/commit/600e5e4a2cc66903df8ba05f7146f4e72d547909))
+
 ## [1.4.0](https://github.com/luoyi58624/luoyi_flutter_base/compare/v1.3.0...v1.4.0) (2024-05-15)
 
 
