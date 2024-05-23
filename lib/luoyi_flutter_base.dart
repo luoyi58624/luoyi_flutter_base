@@ -47,6 +47,8 @@ part 'src/widgets/animation.dart';
 
 part 'src/widgets/brightness.dart';
 
+part 'src/widgets/simple_widgets.dart';
+
 /// 根节点导航key，使用前必须将它添加到App中
 /// ```dart
 /// MaterialApp(
