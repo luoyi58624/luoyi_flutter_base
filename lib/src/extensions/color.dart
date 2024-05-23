@@ -91,8 +91,8 @@ extension FlutterColorExtension on Color {
   }
 
   /// 当用户鼠标悬停时的颜色
-  Color onHover(BuildContext context, bool flag, [int? scale]) => flag ? deepen(scale ?? 8) : this;
+  Color onHover(BuildContext context, bool flag, [int? scale]) => flag ? deepen(scale ?? 6) : this;
 
   /// 当用户鼠标、手指按下时的颜色
-  Color onTap(BuildContext context, bool flag, [int? scale]) => flag ? deepen(scale ?? 14) : this;
+  Color onTap(BuildContext context, bool flag, [int? scale]) => flag ? deepen(scale ?? 10) : this;
 }

@@ -167,17 +167,17 @@ packages:
     dependency: transitive
     description:
       name: luoyi_dart_base
-      sha256: b5f672f5539a4c5dca8fbc87f4cb9a10fc67b47be2b4c3273ab41516a499b25e
+      sha256: da999282d8ecfd0befb3a3448c95b999a1a2b4ddd7b5f6525e155ba2d709e52d
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.1"
+    version: "1.6.0"
   luoyi_flutter_base:
     dependency: "direct main"
     description:
       path: ".."
       relative: true
     source: path
-    version: "2.0.0"
+    version: "2.1.0"
   matcher:
     dependency: transitive
     description:
@@ -401,4 +401,4 @@ packages:
     version: "1.0.4"
 sdks:
   dart: ">=3.4.0 <4.0.0"
-  flutter: ">=3.18.0-18.0.pre.54"
+  flutter: ">=3.22.0"
