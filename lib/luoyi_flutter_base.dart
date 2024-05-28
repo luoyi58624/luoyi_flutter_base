@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:localstorage/localstorage.dart';
+import 'package:luoyi_flutter_font/luoyi_flutter_font.dart';
 import 'package:mini_getx/mini_getx.dart';
 
 import 'luoyi_flutter_base.dart';
@@ -22,6 +23,16 @@ export 'package:flutter_hooks/flutter_hooks.dart';
 
 // 轻松地在行或列小部件内添加间隙，它会自动适配元素排列方向，不必使用 SizedBox 手动定义width、height来控制元素间隙
 export 'package:gap/gap.dart';
+
+part 'src/apps/brightness.dart';
+
+part 'src/apps/responsive.dart';
+
+part 'src/apps/config.dart';
+
+part 'src/apps/theme.dart';
+
+part 'src/apps/typography.dart';
 
 part 'src/builders/hover.dart';
 
@@ -45,9 +56,9 @@ part 'src/utils/use_local_obs.dart';
 
 part 'src/widgets/animation.dart';
 
-part 'src/widgets/brightness.dart';
-
 part 'src/widgets/simple_widgets.dart';
+
+const bool isWeb = kIsWeb;
 
 /// 根节点导航key，使用前必须将它添加到App中
 /// ```dart

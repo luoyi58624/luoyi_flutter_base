@@ -10,8 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  mini_getx: ^5.0.0
+  mini_getx: ^5.0.6
   luoyi_dart_base: ^1.6.0
+  luoyi_flutter_font: ^1.0.9
   web: ^0.5.1
   path: ^1.9.0
   path_provider: ^2.1.3
