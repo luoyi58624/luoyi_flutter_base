@@ -227,10 +227,10 @@ packages:
     dependency: transitive
     description:
       name: luoyi_flutter_font
-      sha256: "94c02750ad3932c4ce72ca545d1626e0b9861d56c6d9c79bbcd9b020d7641537"
+      sha256: "2d5d8e9d5991978ecd60c73cb971d41e142ca08229fd7f85e5a623e8c716750f"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.10"
+    version: "1.0.11"
   matcher:
     dependency: transitive
     description:
@@ -335,6 +335,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.8"
+  simple_widget:
+    dependency: "direct main"
+    description:
+      path: "../simple_widget"
+      relative: true
+    source: path
+    version: "0.0.1"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -461,5 +468,5 @@ packages:
     source: hosted
     version: "1.0.4"
 sdks:
-  dart: ">=3.4.0 <4.0.0"
+  dart: ">=3.4.1 <4.0.0"
   flutter: ">=3.22.0"

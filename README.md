@@ -31,7 +31,8 @@
 > flutter build apk --flavor dev -t lib/main_dev.dart --target-platform android-arm64
 > flutter install --use-application-binary build/app/outputs/flutter-apk/app-dev-release.apk
 
-> flutter build apk --flavor prod -t lib/main_prod.dart --target-platform android-arm64 --no-tree-shake-icons
+> flutter build apk --flavor prod -t lib/main_prod.dart --target-platform android-arm64
+> --no-tree-shake-icons
 > flutter install --use-application-binary build/app/outputs/flutter-apk/app-prod-release.apk
 
 - 打包web
@@ -49,6 +50,10 @@
 - 添加指定平台
 
 > flutter create --platforms=windows,macos,linux,web
+
+- 创建包
+
+> flutter create --template=package 
 
 - android minsdk>23需要手动在android下设置以下属性才能压缩安装包
 

@@ -11,6 +11,8 @@ dependencies:
     sdk: flutter
   luoyi_flutter_base:
     path: ..
+  simple_widget:
+    path: ../simple_widget
 
 dev_dependencies:
   flutter_test:

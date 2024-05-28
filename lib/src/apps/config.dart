@@ -48,8 +48,8 @@ class AppConfigData {
     String? fontFamily,
     List<String>? fontFamilyFallback,
     bool? centerTitle,
-    this.cardRadius = 8,
-    this.buttonRadius = 6,
+    this.cardRadius = 6,
+    this.buttonRadius = 4,
   }) {
     this.fontFamily = fontFamily ?? FlutterFont.fontFamily;
     this.fontFamilyFallback = fontFamilyFallback ?? FlutterFont.fontFamilyFallback;
