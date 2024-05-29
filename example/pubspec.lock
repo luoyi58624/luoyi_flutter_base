@@ -335,13 +335,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.8"
-  simple_widget:
-    dependency: "direct main"
-    description:
-      path: "../simple_widget"
-      relative: true
-    source: path
-    version: "0.0.1"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -468,5 +461,5 @@ packages:
     source: hosted
     version: "1.0.4"
 sdks:
-  dart: ">=3.4.1 <4.0.0"
+  dart: ">=3.4.0 <4.0.0"
   flutter: ">=3.22.0"

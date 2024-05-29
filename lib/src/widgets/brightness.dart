@@ -1,8 +1,8 @@
 part of '../../luoyi_flutter_base.dart';
 
-extension AppBrightnessContextExtension on BuildContext {
+extension BrightnessContextExtension on BuildContext {
   /// 当前环境是否是暗黑模式，如果你没有注入[BrightnessWidget]，则跟随系统
-  bool get isDark => AppBrightnessWidget.isDark(this);
+  bool get isDark => BrightnessWidget.isDark(this);
 }
 
 /// 平台亮度小部件，抹平[MaterialApp]、[CupertinoApp]等不同主题系统获取暗黑主题的差异
@@ -35,8 +35,8 @@ extension AppBrightnessContextExtension on BuildContext {
 ///   ),
 /// );
 /// ```
-class AppBrightnessWidget extends InheritedWidget {
-  const AppBrightnessWidget({
+class BrightnessWidget extends InheritedWidget {
+  const BrightnessWidget({
     super.key,
     required super.child,
     this.brightness,
@@ -50,9 +50,9 @@ class AppBrightnessWidget extends InheritedWidget {
 
   /// 通过上下文获取[Brightness]，如果你没有注入此小部件，则跟随系统
   static Brightness of(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<AppBrightnessWidget>()?.brightness ??
+      context.dependOnInheritedWidgetOfExactType<BrightnessWidget>()?.brightness ??
       MediaQuery.of(context).platformBrightness;
 
   @override
-  bool updateShouldNotify(AppBrightnessWidget oldWidget) => true;
+  bool updateShouldNotify(BrightnessWidget oldWidget) => true;
 }

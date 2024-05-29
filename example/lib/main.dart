@@ -1,6 +1,6 @@
+import 'package:example/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:luoyi_flutter_base/luoyi_flutter_base.dart';
-import 'package:simple_widget/simple_widget.dart';
 
 void main() {
   runApp(const _App());
@@ -24,11 +24,15 @@ class HomePage extends HookWidget {
       color: const Color(0xffffffff),
       child: Directionality(
         textDirection: TextDirection.ltr,
-        child: Scrollbar(
-          child: SingleChildScrollView(
-            child: Column(
-              children: List.generate(100, (index) => const _Child()),
-            ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              ElevatedButton(
+                onPressed: () {},
+                child: Text(''),
+              ),
+              ...List.generate(100, (index) => const _Child()),
+            ],
           ),
         ),
       ),
@@ -42,17 +46,14 @@ class _Child extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final count = useState(0);
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: SizedBox(
-        width: double.maxFinite,
-        child: Center(
-          child: Button(
-            onPressed: () {
-              count.value++;
-            },
-            child: Text('count: ${count.value}'),
-          ),
+    return SizedBox(
+      width: double.maxFinite,
+      child: Center(
+        child: MyButton(
+          onPressed: () {
+            count.value++;
+          },
+          child: Text('count: ${count.value}'),
         ),
       ),
     );

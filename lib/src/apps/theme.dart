@@ -3,7 +3,7 @@ part of '../../luoyi_flutter_base.dart';
 extension AppThemeContextExtension on BuildContext {
   /// 当前主题数据
   AppThemeData get appTheme =>
-      AppBrightnessWidget.isDark(this) ? AppThemeWidget.darkTheme(this) : AppThemeWidget.theme(this);
+      BrightnessWidget.isDark(this) ? AppThemeWidget.darkTheme(this) : AppThemeWidget.theme(this);
 }
 
 /// 注入全局主题数据

@@ -24,7 +24,7 @@ export 'package:flutter_hooks/flutter_hooks.dart';
 // 轻松地在行或列小部件内添加间隙，它会自动适配元素排列方向，不必使用 SizedBox 手动定义width、height来控制元素间隙
 export 'package:gap/gap.dart';
 
-part 'src/apps/brightness.dart';
+part 'src/widgets/brightness.dart';
 
 part 'src/apps/responsive.dart';
 
