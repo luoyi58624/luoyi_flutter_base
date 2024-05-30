@@ -1,4 +1,3 @@
-import 'package:example/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:luoyi_flutter_base/luoyi_flutter_base.dart';
 
@@ -49,7 +48,7 @@ class _Child extends HookWidget {
     return SizedBox(
       width: double.maxFinite,
       child: Center(
-        child: MyButton(
+        child: ElevatedButton(
           onPressed: () {
             count.value++;
           },
