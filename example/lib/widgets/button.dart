@@ -73,7 +73,7 @@ abstract class BaseButton extends HookWidget {
             builder: (isTap) {
               return DecoratedBox(
                 decoration: BoxDecoration(
-                  color: backgroundColor.onTap(context, isTap),
+                  color: backgroundColor.onTap(isTap),
                   border: border,
                   borderRadius: borderRadius ?? BorderRadius.circular(context.appConfig.buttonRadius),
                   gradient: gradient,
