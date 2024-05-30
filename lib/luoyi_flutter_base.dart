@@ -11,6 +11,7 @@ import 'package:luoyi_flutter_font/luoyi_flutter_font.dart';
 import 'package:mini_getx/mini_getx.dart';
 
 import 'luoyi_flutter_base.dart';
+import 'src/utils/platform/platform_web.dart' if (dart.library.io) 'src/utils/platform/platform_io.dart';
 import 'src/utils/session_storage/web.dart' if (dart.library.io) 'src/utils/session_storage/io.dart';
 
 export 'package:luoyi_dart_base/luoyi_dart_base.dart';
@@ -34,6 +35,10 @@ part 'src/apps/theme.dart';
 
 part 'src/apps/typography.dart';
 
+part 'src/builders/hover.dart';
+
+part 'src/builders/tap.dart';
+
 part 'src/commons/model.dart';
 
 part 'src/extensions/color.dart';
@@ -41,6 +46,8 @@ part 'src/extensions/color.dart';
 part 'src/extensions/int.dart';
 
 part 'src/hooks/getx.dart';
+
+part 'src/utils/platform/platform.dart';
 
 part 'src/utils/session_storage/session_storage.dart';
 
