@@ -35,8 +35,6 @@ part 'src/apps/config.dart';
 
 part 'src/apps/theme.dart';
 
-part 'src/apps/typography.dart';
-
 part 'src/builders/hover.dart';
 
 part 'src/builders/tap.dart';
