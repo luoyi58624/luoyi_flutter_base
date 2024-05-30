@@ -1,16 +1,18 @@
 library luoyi_flutter_base;
 
 import 'dart:async';
+import 'dart:collection';
 import 'dart:convert';
 
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:localstorage/localstorage.dart';
-import 'package:luoyi_flutter_font/luoyi_flutter_font.dart';
 import 'package:mini_getx/mini_getx.dart';
 
 import 'luoyi_flutter_base.dart';
+import 'src/utils/font/font_web.dart' if (dart.library.io) 'src/utils/font/font_io.dart';
 import 'src/utils/platform/platform_web.dart' if (dart.library.io) 'src/utils/platform/platform_io.dart';
 import 'src/utils/session_storage/web.dart' if (dart.library.io) 'src/utils/session_storage/io.dart';
 
@@ -47,9 +49,15 @@ part 'src/extensions/int.dart';
 
 part 'src/hooks/getx.dart';
 
+part 'src/utils/font/font.dart';
+
+part 'src/utils/font/model.dart';
+
 part 'src/utils/platform/platform.dart';
 
 part 'src/utils/session_storage/session_storage.dart';
+
+part 'src/utils/device.dart';
 
 part 'src/utils/flutter.dart';
 
