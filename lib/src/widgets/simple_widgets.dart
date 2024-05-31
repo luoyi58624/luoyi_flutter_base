@@ -1,5 +1,34 @@
 part of '../../luoyi_flutter_base.dart';
 
+class NoDefaultScrollbarWidget extends StatelessWidget {
+  /// 没有默认滚动条小部件
+  const NoDefaultScrollbarWidget({super.key, required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return ScrollConfiguration(behavior: const _NoScrollBehavior(), child: child);
+  }
+}
+
+class _NoScrollBehavior extends ScrollBehavior {
+  const _NoScrollBehavior();
+
+  @override
+  Widget buildScrollbar(BuildContext context, Widget child, ScrollableDetails details) {
+    switch (getPlatform(context)) {
+      case TargetPlatform.linux:
+      case TargetPlatform.macOS:
+      case TargetPlatform.windows:
+      case TargetPlatform.android:
+      case TargetPlatform.fuchsia:
+      case TargetPlatform.iOS:
+        return child;
+    }
+  }
+}
+
 class DividerWidget extends StatelessWidget {
   /// 构建通用分割线Widget
   const DividerWidget({
