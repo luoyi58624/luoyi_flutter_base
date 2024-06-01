@@ -1,14 +1,28 @@
 part of '../../../luoyi_flutter_base.dart';
 
 /// Flutter字体工具类
-class FlutterFont {
-  FlutterFont._();
+class FontUtil {
+  FontUtil._();
 
   /// 系统字体
   static const FontModel systemFont = FontModel(fontFamily: '');
 
   /// 初始化的字体
-  static FontModel get initialFont => FlutterFont._initialFontModel;
+  static FontModel get initialFont => FontUtil._initialFontModel;
+
+  /// 加载谷歌中文字体，包含100-900字重
+  static FontModel notoSansSc([List<FontWeight>? fontWeights]) {
+    return FontModel(
+      fontFamily: 'NotoSansSC',
+      fontWeights: DartUtil.mapFilterFromKeys(_GoogleFonts.notoSansSc, (fontWeights ?? []).map((e) => e.value).toList()),
+    );
+  }
+
+  /// 谷歌斜体中文字体
+  static FontModel longCang() => FontModel(
+        fontFamily: 'LongCang',
+        fontUrl: _GoogleFonts.baseUrl('f626a05f45d156332017025fc68902a92f57f51ac57bb4a79097ee7bb1a97352'),
+      );
 
   static late FontModel _initialFontModel;
 
@@ -83,15 +97,7 @@ class FlutterFont {
       linuxWeb: linuxWeb,
     );
     if (allowLoadCustomFont) {
-      if (fontModel != null && fontModel.fontFamily != '') {
-        await initFont(fontModel);
-      } else {
-        // 如果不传递自定义字体，则加载谷歌在线字体，这仅限于上面指定 fontModel 的平台
-        await initFont(const FontModel(fontFamily: 'NotoSansSC', fontWeights: {
-          500: 'https://fonts.gstatic.com/s/a/5383032c8e54fc5fa09773ce16483f64d9cdb7d1f8e87073a556051eb60f8529.ttf',
-          700: 'https://fonts.gstatic.com/s/a/a7a29b6d611205bb39b9a1a5c2be5a48416fbcbcfd7e6de98976e73ecb48720b.ttf',
-        }));
-      }
+      fontModel != null && fontModel.fontFamily != '' ? await initFont(fontModel) : await initFont(notoSansSc([FontWeight.normal]));
     } else {
       await initFont(systemFont);
     }
@@ -150,7 +156,7 @@ class FlutterFont {
   /// 动态加载全局字体，如果加载成功则返回true
   ///
   /// 注意：此函数不会更新你的页面，你应当使用状态管理保存当前选中的字体，
-  /// 每次加载完字体后通过[FlutterFont.fontFamily]变量更新你的状态
+  /// 每次加载完字体后通过[FontUtil.fontFamily]变量更新你的状态
   static Future<bool> loadFont([FontModel? fontModel]) async {
     fontModel ??= systemFont;
     // 如果加载的fontUrl、fontWeights都为空，则那么跳过网络解析
@@ -172,20 +178,18 @@ class FlutterFont {
           fontByteDataList.add(result);
         }
       } else {
+        List<int> needLoadFonts = [];
         for (int key in fontModel.fontWeights!.keys) {
-          // 包含字重已加载的fontFamily键
-          String loadKey = '${fontModel.fontFamily}_$key';
-          if (!loadFonts.contains(loadKey)) {
-            var result = await generalLoadNetworkFont(
-              fontModel.fontWeights![key]!,
-              fontModel: fontModel,
-              localKey: loadKey,
-            );
-            if (result == null) return false;
-            fontFamilyList.add(loadKey);
-            fontByteDataList.add(result);
-          }
+          if (!loadFonts.contains('${fontModel.fontFamily}_$key')) needLoadFonts.add(key);
         }
+        var result = await Future.wait(needLoadFonts.map((key) => generalLoadNetworkFont(
+              fontModel!.fontWeights![key]!,
+              fontModel: fontModel,
+              localKey: '${fontModel.fontFamily}_$key',
+            )));
+        if (result.contains(null)) return false;
+        fontFamilyList.addAll(needLoadFonts.map((key) => '${fontModel!.fontFamily}_$key'));
+        fontByteDataList.addAll(result.cast<ByteData>());
       }
       // 注入字体失败，返回false结束运行
       if (!(await _loadFont(fontModel.fontFamily, fontByteDataList))) return false;
@@ -200,7 +204,7 @@ class FlutterFont {
   /// * 小米 - normal: w500
   /// * 华为 - bold: w600
   ///
-  /// 提示：此函数是可选的，它只作用于[FlutterFont.normal]、[FlutterFont.medium]、[FlutterFont.bold]等变量
+  /// 提示：此函数是可选的，它只作用于[FontUtil.normal]、[FontUtil.medium]、[FontUtil.bold]等变量
   static Future<void> initSystemFontWeight({
     FontWeight? normal,
     FontWeight? medium,

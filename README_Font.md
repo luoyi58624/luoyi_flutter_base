@@ -17,8 +17,8 @@ final ValueNotifier<String?> fontFamily = ValueNotifier<String?>(null);
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await FlutterFont.init();
-  fontFamily.value = FlutterFont.fontFamily;
+  await FontUtil.init();
+  fontFamily.value = FontUtil.fontFamily;
   runApp(const _App());
 }
 
@@ -33,7 +33,7 @@ class _App extends StatelessWidget {
         return MaterialApp(
           theme: ThemeData(
             fontFamily: value,
-            fontFamilyFallback: FlutterFont.fontFamilyFallback,
+            fontFamilyFallback: FontUtil.fontFamilyFallback,
             materialTapTargetSize: MaterialTapTargetSize.padded,
           ),
           home: const HomePage(),
@@ -49,24 +49,24 @@ class _App extends StatelessWidget {
 void test() {
   // 调用loadFont函数动态加载字体，根据结果刷新页面状态
   // 加载系统字体
-  bool result = FlutterFont.loadFont(FlutterFontModel.systemFont);
+  bool result = FontUtil.loadFont(FontModel.systemFont);
   if (result == true) {
-    fontFamily.value = FlutterFont.fontFamily;
+    fontFamily.value = FontUtil.fontFamily;
   }
 
   // 加载资产包中的字体，不要定义 fontUrl 和 fontWeights
-  FlutterFont.loadFont(FlutterFontModel(
+  FontUtil.loadFont(FontModel(
     fontFamily: 'my_font',
   ));
 
   // 加载在线字体
-  FlutterFont.loadFont(FlutterFontModel(
+  FontUtil.loadFont(FontModel(
     fontFamily: 'LongCang',
     fontUrl: 'https://fonts.gstatic.com/s/a/f626a05f45d156332017025fc68902a92f57f51ac57bb4a79097ee7bb1a97352.ttf',
   ));
 
   // 加载多种字重在线字体
-  FlutterFont.loadFont(FlutterFontModel(
+  FontUtil.loadFont(FontModel(
     fontFamily: 'NotoSansSC',
     fontWeights: {
       400: 'https://fonts.gstatic.com/s/a/eacedb2999b6cd30457f3820f277842f0dfbb28152a246fca8161779a8945425.ttf',

@@ -51,8 +51,8 @@ class AppConfigData {
     this.cardRadius = 6,
     this.buttonRadius = 4,
   }) {
-    this.fontFamily = fontFamily ?? FlutterFont.fontFamily;
-    this.fontFamilyFallback = fontFamilyFallback ?? FlutterFont.fontFamilyFallback;
+    this.fontFamily = fontFamily ?? FontUtil.fontFamily;
+    this.fontFamilyFallback = fontFamilyFallback ?? FontUtil.fontFamilyFallback;
   }
 
   AppConfigData copyWith({

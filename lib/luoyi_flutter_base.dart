@@ -49,6 +49,8 @@ part 'src/hooks/getx.dart';
 
 part 'src/utils/font/font.dart';
 
+part 'src/utils/font/google_font.dart';
+
 part 'src/utils/font/model.dart';
 
 part 'src/utils/platform/platform.dart';
@@ -80,8 +82,7 @@ GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 /// 根节点context
 BuildContext get rootContext {
   assert(rootNavigatorKey.currentWidget != null, 'Please configured rootNavigatorKey before use rootContext');
-  assert(rootNavigatorKey.currentWidget is Navigator,
-      'Whether you right configured rootNavigatorKey? rootNavigatorKey not Navigator!');
+  assert(rootNavigatorKey.currentWidget is Navigator, 'Whether you right configured rootNavigatorKey? rootNavigatorKey not Navigator!');
   return rootNavigatorKey.currentContext!;
 }
 
