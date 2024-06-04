@@ -8,6 +8,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:mini_getx/mini_getx.dart';
 
@@ -20,12 +21,6 @@ export 'package:luoyi_dart_base/luoyi_dart_base.dart';
 
 // 一个非常轻量的 key-value 本地存储，整个包的源代码不超过100行，不依赖任何本机插件
 export 'package:localstorage/localstorage.dart' hide initLocalStorage, LocalStorage;
-
-// 与 react-hook 类似，它可以节省大量 StatefulWidget 样板代码，你甚至可以使用它来实现双向绑定
-export 'package:flutter_hooks/flutter_hooks.dart';
-
-// 轻松地在行或列小部件内添加间隙，它会自动适配元素排列方向，不必使用 SizedBox 手动定义width、height来控制元素间隙
-export 'package:gap/gap.dart';
 
 part 'src/widgets/brightness.dart';
 
@@ -78,7 +73,8 @@ GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 /// 根节点context
 BuildContext get rootContext {
   assert(rootNavigatorKey.currentWidget != null, 'Please configured rootNavigatorKey before use rootContext');
-  assert(rootNavigatorKey.currentWidget is Navigator, 'Whether you right configured rootNavigatorKey? rootNavigatorKey not Navigator!');
+  assert(rootNavigatorKey.currentWidget is Navigator,
+      'Whether you right configured rootNavigatorKey? rootNavigatorKey not Navigator!');
   return rootNavigatorKey.currentContext!;
 }
 
