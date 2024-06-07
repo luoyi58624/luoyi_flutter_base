@@ -18,8 +18,7 @@ dependencies:
   localstorage: ^5.0.0
   flutter_hooks: ^0.20.5
   gap: ^3.0.1
-  http: ^1.2.1
-  device_info_plus: ^10.1.0
+
 
 dev_dependencies:
   flutter_test:

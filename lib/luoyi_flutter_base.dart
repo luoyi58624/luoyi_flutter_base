@@ -1,11 +1,8 @@
 library luoyi_flutter_base;
 
 import 'dart:async';
-import 'dart:collection';
 import 'dart:convert';
 
-import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -13,8 +10,6 @@ import 'package:localstorage/localstorage.dart';
 import 'package:mini_getx/mini_getx.dart';
 
 import 'luoyi_flutter_base.dart';
-import 'src/utils/font/font_web.dart' if (dart.library.io) 'src/utils/font/font_io.dart';
-import 'src/utils/platform/platform_web.dart' if (dart.library.io) 'src/utils/platform/platform_io.dart';
 import 'src/utils/session_storage/web.dart' if (dart.library.io) 'src/utils/session_storage/io.dart';
 
 export 'package:luoyi_dart_base/luoyi_dart_base.dart';
@@ -30,17 +25,7 @@ part 'src/extensions/int.dart';
 
 part 'src/hooks/getx.dart';
 
-part 'src/utils/font/font.dart';
-
-part 'src/utils/font/google_font.dart';
-
-part 'src/utils/font/model.dart';
-
-part 'src/utils/platform/platform.dart';
-
 part 'src/utils/session_storage/session_storage.dart';
-
-part 'src/utils/device.dart';
 
 part 'src/utils/flutter.dart';
 
@@ -49,8 +34,6 @@ part 'src/utils/no_ripper.dart';
 part 'src/utils/use_local_obs.dart';
 
 part 'src/widgets/animation.dart';
-
-const bool isWeb = kIsWeb;
 
 /// 根节点导航key，使用前必须将它添加到App中
 /// ```dart
