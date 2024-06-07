@@ -5,7 +5,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:mini_getx/mini_getx.dart';
 
@@ -13,6 +12,8 @@ import 'luoyi_flutter_base.dart';
 import 'src/utils/session_storage/web.dart' if (dart.library.io) 'src/utils/session_storage/io.dart';
 
 export 'package:luoyi_dart_base/luoyi_dart_base.dart';
+export 'package:flutter_hooks/flutter_hooks.dart';
+export 'package:gap/gap.dart';
 
 // 一个非常轻量的 key-value 本地存储，整个包的源代码不超过100行，不依赖任何本机插件
 export 'package:localstorage/localstorage.dart' hide initLocalStorage, LocalStorage;
