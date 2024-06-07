@@ -1,4 +1,30 @@
-part of '../../luoyi_flutter_base.dart';
+import 'package:luoyi_dart_base/luoyi_dart_base.dart';
+
+/// 数据模型序列化，一般用于本地持久化缓存
+/// ```dart
+/// class UserModel extends ModelSerialize {
+///   UserModel({this.name, this.age});
+///
+///   String? name;
+///   int? age;
+///
+///   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+///         name: json['name'],
+///         age: DartUtil.safeInt(json['age']),
+///       );
+///
+///   @override
+///   UserModel fromJson(Map<String, dynamic> json) => UserModel.fromJson(json);
+///
+///   @override
+///   Map<String, dynamic> toJson() => {'name': name, 'age': age};
+/// }
+/// ```
+abstract class ModelSerialize {
+  ModelSerialize fromJson(Map<String, dynamic> json);
+
+  Map<String, dynamic> toJson();
+}
 
 /// 包含过期时间本地数据模型
 class ExpireLocalDataModel extends ModelSerialize {

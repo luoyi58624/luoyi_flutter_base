@@ -1,4 +1,4 @@
-part of '../../luoyi_flutter_base.dart';
+import 'package:flutter/material.dart';
 
 /// 禁止组件水波纹
 ///

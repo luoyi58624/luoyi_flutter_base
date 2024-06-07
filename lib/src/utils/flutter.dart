@@ -1,4 +1,5 @@
-part of '../../luoyi_flutter_base.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class FlutterUtil {
   FlutterUtil._();

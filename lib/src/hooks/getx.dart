@@ -1,4 +1,6 @@
-part of '../../luoyi_flutter_base.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:mini_getx/mini_getx.dart';
 
 /// 自动注入、销毁[Getx]控制器hook，注意：仅限mini_getx
 /// * tag 控制器标签
@@ -55,17 +57,4 @@ class _ControllerState<T extends GetxController> extends HookState<T, _Controlle
 
 class Controller extends GetxController {
   final count = 0.obs;
-}
-
-class GetxHook extends HookWidget {
-  const GetxHook({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final c = useGetx(Controller());
-    return ElevatedButton(
-      onPressed: () => c.count.value++,
-      child: Obx(() => Text('count: ${c.count.value}')),
-    );
-  }
 }

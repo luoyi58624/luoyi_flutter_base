@@ -1,4 +1,4 @@
-part of '../../luoyi_flutter_base.dart';
+import 'package:flutter/material.dart';
 
 /// 拥有过渡动画的颜色盒子
 class AnimatedColoredBox extends ImplicitlyAnimatedWidget {

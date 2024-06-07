@@ -1,4 +1,4 @@
-part of '../../luoyi_flutter_base.dart';
+import 'package:flutter/material.dart';
 
 extension FlutterColorStringExtension on String {
   /// 将16进制字符串颜色转成Color对象

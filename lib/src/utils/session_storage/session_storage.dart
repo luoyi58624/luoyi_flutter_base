@@ -1,10 +1,12 @@
-part of '../../../luoyi_flutter_base.dart';
+import 'package:localstorage/localstorage.dart';
+
+import 'web.dart' if (dart.library.io) 'io.dart';
 
 bool _initialized = false;
 late LocalStorage _sessionStorage;
 
 /// Initialize the [LocalStorage].
-Future<void> _initSessionStorage() async {
+Future<void> initSessionStorage() async {
   if (_initialized) return;
 
   _sessionStorage = await generaInitSessionStorage();

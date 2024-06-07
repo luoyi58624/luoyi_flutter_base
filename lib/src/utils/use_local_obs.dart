@@ -1,4 +1,12 @@
-part of '../../luoyi_flutter_base.dart';
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:localstorage/localstorage.dart';
+import 'package:luoyi_dart_base/luoyi_dart_base.dart';
+import 'package:luoyi_flutter_base/src/extensions/color.dart';
+import 'package:mini_getx/mini_getx.dart';
+
+import '../commons/model.dart';
 
 class _LocalDataModel extends ExpireLocalDataModel {
   /// 持久化数据类型字符串，如果类型发生变化将清除旧的本地数据
