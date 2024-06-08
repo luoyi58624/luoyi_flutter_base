@@ -36,7 +36,7 @@ class ExpireLocalDataModel extends ModelSerialize {
 
   ExpireLocalDataModel(this.data, [int? expire]) {
     if (expire != null && expire > 0) {
-      this.expire = DartUtil.currentMilliseconds + expire;
+      this.expire = currentMilliseconds + expire;
     } else {
       this.expire = -1;
     }

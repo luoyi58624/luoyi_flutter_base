@@ -245,9 +245,9 @@ extension GetxLocalObs on GetxController {
     };
     deserializeFun ??= (json) {
       final mapData = (jsonDecode(json) as Map);
-      var newMapData = DartUtil.mapAutoCast(mapData.map((k, v) {
+      var newMapData = mapData.map((k, v) {
         return MapEntry(DartUtil.dynamicToBaseType(k), DartUtil.dynamicToBaseType(v));
-      }));
+      }).autoCast();
       return newMapData as T;
     };
   }
