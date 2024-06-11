@@ -18,6 +18,7 @@ export 'src/hooks/getx.dart';
 export 'src/utils/flutter.dart';
 export 'src/utils/no_ripper.dart';
 export 'src/utils/use_local_obs.dart';
+export 'src/utils/platform/platform.dart';
 export 'src/utils/session_storage/session_storage.dart';
 export 'src/widgets/animation.dart';
 
