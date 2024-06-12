@@ -19,8 +19,11 @@ export 'src/utils/flutter.dart';
 export 'src/utils/no_ripper.dart';
 export 'src/utils/scroll_behavior.dart';
 export 'src/utils/use_local_obs.dart';
+export 'src/utils/device.dart';
 export 'src/utils/platform/platform.dart';
 export 'src/utils/session_storage/session_storage.dart';
+export 'src/utils/font/font.dart' show FontUtil;
+export 'src/utils/font/model.dart';
 export 'src/widgets/animation.dart';
 
 /// 初始化 LocalStorage 和 SessionStorage
