@@ -29,6 +29,8 @@ export 'src/utils/session_storage/session_storage.dart';
 export 'src/utils/font/font.dart' show FontUtil;
 export 'src/utils/font/model.dart';
 export 'src/widgets/animation.dart';
+export 'src/widgets/brightness.dart';
+export 'src/widgets/typography.dart';
 
 /// 初始化 LocalStorage 和 SessionStorage
 Future<void> initStorage() async {
