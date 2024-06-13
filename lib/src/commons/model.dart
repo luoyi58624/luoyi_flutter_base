@@ -48,7 +48,8 @@ class ExpireLocalDataModel extends ModelSerialize {
   }
 
   @override
-  ModelSerialize fromJson(Map<String, dynamic> json) => ExpireLocalDataModel.fromJson(json);
+  ModelSerialize fromJson(Map<String, dynamic> json) =>
+      ExpireLocalDataModel.fromJson(json);
 
   @override
   Map<String, dynamic> toJson() => {'data': data, 'expire': expire};

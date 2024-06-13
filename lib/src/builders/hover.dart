@@ -35,8 +35,12 @@ class HoverBuilder extends HookWidget {
         ? _HoverInheritedWidget(
             isHover: isHover.value,
             child: MouseRegion(
-              onEnter: ($disabled || onlyCursor || disabled) ? null : (event) => isHover.value = true,
-              onExit: ($disabled || onlyCursor || disabled) ? null : (event) => isHover.value = false,
+              onEnter: ($disabled || onlyCursor || disabled)
+                  ? null
+                  : (event) => isHover.value = true,
+              onExit: ($disabled || onlyCursor || disabled)
+                  ? null
+                  : (event) => isHover.value = false,
               cursor: $disabled
                   ? SystemMouseCursors.basic
                   : disabled
@@ -58,7 +62,8 @@ class _HoverInheritedWidget extends InheritedWidget {
   final bool isHover;
 
   static bool of(BuildContext context) {
-    final _HoverInheritedWidget? result = context.dependOnInheritedWidgetOfExactType<_HoverInheritedWidget>();
+    final _HoverInheritedWidget? result =
+        context.dependOnInheritedWidgetOfExactType<_HoverInheritedWidget>();
     return result == null ? false : result.isHover;
   }
 
@@ -117,8 +122,8 @@ class _DisabledHoverInheritedWidget extends InheritedWidget {
   final bool disabled;
   final void Function(bool value) setDisabled;
 
-  static _DisabledHoverInheritedWidget? maybeOf(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<_DisabledHoverInheritedWidget>();
+  static _DisabledHoverInheritedWidget? maybeOf(BuildContext context) => context
+      .dependOnInheritedWidgetOfExactType<_DisabledHoverInheritedWidget>();
 
   @override
   bool updateShouldNotify(_DisabledHoverInheritedWidget oldWidget) => true;

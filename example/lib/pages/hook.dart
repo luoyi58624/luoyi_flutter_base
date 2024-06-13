@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:example/global.dart';
 
@@ -37,27 +36,6 @@ class HookDemoPage extends HookWidget {
               ),
             ]),
           ]),
-          Text.rich(
-            TextSpan(
-              children: [
-                const TextSpan(
-                  text: "隐私条款 ",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black),
-                ),
-                TextSpan(
-                    text: "https://www.baidu.com",
-                    style:
-                        const TextStyle(fontSize: 18, color: Colors.redAccent),
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        print("查看条款");
-                      }),
-              ],
-            ),
-          ),
         ]),
       ),
     );

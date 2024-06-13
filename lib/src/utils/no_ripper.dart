@@ -37,7 +37,10 @@ class _NoRipperFactory extends InteractiveInkFeatureFactory {
     VoidCallback? onRemoved,
   }) {
     return _NoInteractiveInkFeature(
-        controller: controller, referenceBox: referenceBox, color: color, onRemoved: onRemoved);
+        controller: controller,
+        referenceBox: referenceBox,
+        color: color,
+        onRemoved: onRemoved);
   }
 }
 

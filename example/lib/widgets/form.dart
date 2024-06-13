@@ -43,32 +43,54 @@ class FormWidgets extends HookWidget {
           border: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.grey),
           ),
-          contentPadding: EdgeInsets.only(top: 8, bottom: 8, left: 16, right: 16),
+          contentPadding:
+              EdgeInsets.only(top: 8, bottom: 8, left: 16, right: 16),
         ),
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Switch(value: false, onChanged: (v) {}),
-          Switch(value: switchValue.value, onChanged: (v) => switchValue.value = v),
+          Switch(
+              value: switchValue.value,
+              onChanged: (v) => switchValue.value = v),
           CupertinoSwitch(value: false, onChanged: (v) {}),
-          CupertinoSwitch(value: switchValue.value, onChanged: (v) => switchValue.value = v),
+          CupertinoSwitch(
+              value: switchValue.value,
+              onChanged: (v) => switchValue.value = v),
         ],
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Radio(value: 0, groupValue: radioValue.value, onChanged: (v) => radioValue.value = v!),
-          Radio(value: 1, groupValue: radioValue.value, onChanged: (v) => radioValue.value = v!),
-          Radio(value: 2, groupValue: radioValue.value, onChanged: (v) => radioValue.value = v!),
-          Radio(value: 3, groupValue: radioValue.value, onChanged: (v) => radioValue.value = v!),
+          Radio(
+              value: 0,
+              groupValue: radioValue.value,
+              onChanged: (v) => radioValue.value = v!),
+          Radio(
+              value: 1,
+              groupValue: radioValue.value,
+              onChanged: (v) => radioValue.value = v!),
+          Radio(
+              value: 2,
+              groupValue: radioValue.value,
+              onChanged: (v) => radioValue.value = v!),
+          Radio(
+              value: 3,
+              groupValue: radioValue.value,
+              onChanged: (v) => radioValue.value = v!),
         ],
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Checkbox(value: checkboxValue.value, onChanged: (v) => checkboxValue.value = v!),
-          Checkbox(value: !checkboxValue.value, isError: true, onChanged: (v) => checkboxValue.value = v!),
+          Checkbox(
+              value: checkboxValue.value,
+              onChanged: (v) => checkboxValue.value = v!),
+          Checkbox(
+              value: !checkboxValue.value,
+              isError: true,
+              onChanged: (v) => checkboxValue.value = v!),
           Checkbox(
               value: tristateCheckboxValue.value,
               tristate: true,
@@ -111,7 +133,9 @@ class FormWidgets extends HookWidget {
       Column(
         children: [
           CheckboxListTile(
-              title: const Text('Option 1'), value: checkboxValue.value, onChanged: (v) => checkboxValue.value = v!),
+              title: const Text('Option 1'),
+              value: checkboxValue.value,
+              onChanged: (v) => checkboxValue.value = v!),
           CheckboxListTile(
             title: const Text('Option 1'),
             value: !checkboxValue.value,
@@ -131,7 +155,10 @@ class FormWidgets extends HookWidget {
                   tristateCheckboxValue.value = null;
                 }
               }),
-          CheckboxListTile(title: const Text('Option 1'), value: checkboxValue.value, onChanged: null),
+          CheckboxListTile(
+              title: const Text('Option 1'),
+              value: checkboxValue.value,
+              onChanged: null),
         ],
       ),
       buildProgressWidget(),

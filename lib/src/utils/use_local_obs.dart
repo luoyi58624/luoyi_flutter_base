@@ -60,7 +60,8 @@ extension GetxLocalObs on GetxController {
     DeserializeFun<T>? deserializeFun,
   }) {
     String valueType = value.runtimeType.toString();
-    final ($s, $d) = _getSerializeFun(value, key, valueType, serializeFun, deserializeFun);
+    final ($s, $d) =
+        _getSerializeFun(value, key, valueType, serializeFun, deserializeFun);
     late Rx<T> $value;
     dynamic localData = localStorage.getItem(key);
     if (localData == null) {
@@ -71,7 +72,8 @@ extension GetxLocalObs on GetxController {
         // 如果更改了响应式变量类型，则清除旧数据
         localStorage.removeItem(key);
         $value = value.obs;
-      } else if (localDataModel.expire! > 0 && localDataModel.expire! < DateTime.now().millisecondsSinceEpoch) {
+      } else if (localDataModel.expire! > 0 &&
+          localDataModel.expire! < DateTime.now().millisecondsSinceEpoch) {
         // 如果用户设置了过期时间，同时过期时间小于当前时间，则清除旧数据
         localStorage.removeItem(key);
         $value = value.obs;
@@ -90,7 +92,10 @@ extension GetxLocalObs on GetxController {
     }
     // 提示：当你卸载控制器后getx会自动释放它，无须手动销毁
     ever($value, (v) {
-      localStorage.setItem(key, jsonEncode(_LocalDataModel(valueType, $s == null ? v : $s(v), expire).toJson()));
+      localStorage.setItem(
+          key,
+          jsonEncode(_LocalDataModel(valueType, $s == null ? v : $s(v), expire)
+              .toJson()));
     });
     return $value;
   }
@@ -104,8 +109,10 @@ extension GetxLocalObs on GetxController {
     DeserializeFun<T>? deserializeFun,
   }) {
     String valueType = T.toString();
-    bool isBaseType = DartUtil.isBaseTypeString(valueType) || value is List<Map>;
-    assert(isBaseType || (serializeFun != null && deserializeFun != null), '请为响应式持久化变量[$key]提供序列化和反序列化函数');
+    bool isBaseType =
+        DartUtil.isBaseTypeString(valueType) || value is List<Map>;
+    assert(isBaseType || (serializeFun != null && deserializeFun != null),
+        '请为响应式持久化变量[$key]提供序列化和反序列化函数');
     late RxList<T> $value;
     dynamic localData = localStorage.getItem(key);
     if (localData == null) {
@@ -116,7 +123,8 @@ extension GetxLocalObs on GetxController {
         // 如果更改了响应式变量类型，则清除旧数据
         localStorage.removeItem(key);
         $value = value.obs;
-      } else if (localDataModel.expire! > 0 && localDataModel.expire! < DateTime.now().millisecondsSinceEpoch) {
+      } else if (localDataModel.expire! > 0 &&
+          localDataModel.expire! < DateTime.now().millisecondsSinceEpoch) {
         // 如果用户设置了过期时间，同时过期时间小于当前时间，则清除旧数据
         localStorage.removeItem(key);
         $value = value.obs;
@@ -126,7 +134,11 @@ extension GetxLocalObs on GetxController {
         if (isBaseType && deserializeFun == null) {
           $value = listData.cast<T>().obs;
         } else {
-          $value = listData.map((value) => deserializeFun!(value)).cast<T>().toList().obs;
+          $value = listData
+              .map((value) => deserializeFun!(value))
+              .cast<T>()
+              .toList()
+              .obs;
         }
       }
     }
@@ -178,8 +190,10 @@ extension GetxLocalObs on GetxController {
   }) {
     String valueType = T.toString();
     i(valueType);
-    bool isBaseType = DartUtil.isBaseTypeString(valueType) || valueType.contains('Map');
-    assert(isBaseType || (serializeFun != null && deserializeFun != null), '请为响应式持久化变量[$key]提供序列化和反序列化函数');
+    bool isBaseType =
+        DartUtil.isBaseTypeString(valueType) || valueType.contains('Map');
+    assert(isBaseType || (serializeFun != null && deserializeFun != null),
+        '请为响应式持久化变量[$key]提供序列化和反序列化函数');
     late RxMap<String, T> $value;
     dynamic localData = localStorage.getItem(key);
     if (localData == null) {
@@ -190,7 +204,8 @@ extension GetxLocalObs on GetxController {
         // 如果更改了响应式变量类型，则清除旧数据
         localStorage.removeItem(key);
         $value = value.obs;
-      } else if (localDataModel.expire! > 0 && localDataModel.expire! < DateTime.now().millisecondsSinceEpoch) {
+      } else if (localDataModel.expire! > 0 &&
+          localDataModel.expire! < DateTime.now().millisecondsSinceEpoch) {
         // 如果用户设置了过期时间，同时过期时间小于当前时间，则清除旧数据
         localStorage.removeItem(key);
         $value = value.obs;
@@ -200,7 +215,10 @@ extension GetxLocalObs on GetxController {
         if (isBaseType && deserializeFun == null) {
           $value = mapData.cast<String, T>().obs;
         } else {
-          $value = mapData.map((key, value) => MapEntry(key, deserializeFun!(value))).cast<String, T>().obs;
+          $value = mapData
+              .map((key, value) => MapEntry(key, deserializeFun!(value)))
+              .cast<String, T>()
+              .obs;
         }
       }
     }
@@ -210,7 +228,9 @@ extension GetxLocalObs on GetxController {
         jsonEncode(
           _LocalDataModel(
             valueType,
-            serializeFun == null ? v : v.map((key, value) => MapEntry(key, serializeFun(value))),
+            serializeFun == null
+                ? v
+                : v.map((key, value) => MapEntry(key, serializeFun(value))),
             expire,
           ).toJson(),
         ),
@@ -229,7 +249,8 @@ extension GetxLocalObs on GetxController {
   DeserializeFun<T>? deserializeFun,
 ]) {
   // 基础类型不需要序列化
-  if (DartUtil.isBaseTypeString(valueType)) return (serializeFun, deserializeFun);
+  if (DartUtil.isBaseTypeString(valueType))
+    return (serializeFun, deserializeFun);
   if (value is List) {
     return (serializeFun, deserializeFun);
   }
@@ -246,7 +267,8 @@ extension GetxLocalObs on GetxController {
     deserializeFun ??= (json) {
       final mapData = (jsonDecode(json) as Map);
       var newMapData = mapData.map((k, v) {
-        return MapEntry(DartUtil.dynamicToBaseType(k), DartUtil.dynamicToBaseType(v));
+        return MapEntry(
+            DartUtil.dynamicToBaseType(k), DartUtil.dynamicToBaseType(v));
       }).autoCast();
       return newMapData as T;
     };
@@ -254,7 +276,8 @@ extension GetxLocalObs on GetxController {
   // 如果模型类实现了ModelSerialize，则设置默认的序列化和反序列化函数
   else if (value is ModelSerialize) {
     serializeFun ??= (model) => jsonEncode((model as ModelSerialize).toJson());
-    deserializeFun ??= (json) => (value as ModelSerialize).fromJson(jsonDecode(json)) as T;
+    deserializeFun ??=
+        (json) => (value as ModelSerialize).fromJson(jsonDecode(json)) as T;
   }
   // 序列化Color
   else if (value is Color) {
@@ -266,7 +289,8 @@ extension GetxLocalObs on GetxController {
     serializeFun ??= (model) => (model as MaterialColor).shade500.toHex();
     deserializeFun ??= (json) => json.toColor().toMaterialColor() as T;
   } else {
-    assert(serializeFun != null && deserializeFun != null, '请为响应式持久化变量[$key]提供序列化和反序列化函数');
+    assert(serializeFun != null && deserializeFun != null,
+        '请为响应式持久化变量[$key]提供序列化和反序列化函数');
   }
 
   return (serializeFun, deserializeFun);

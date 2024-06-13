@@ -2,8 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:luoyi_flutter_base/luoyi_flutter_base.dart';
 
-import 'model.dart';
-
 /// 是否允许加载自定义字体，不允许的平台使用系统字体
 bool getAllowLoadCustomFont({
   bool canvaskit = true,

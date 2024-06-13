@@ -85,7 +85,10 @@ extension FlutterGoRouterExtension on BuildContext {
   Page<dynamic> pageBuilder<T>(GoRouterState state, Widget page) => _Page<void>(
         key: state.pageKey,
         name: state.name ?? state.path,
-        arguments: <String, String>{...state.pathParameters, ...state.uri.queryParameters},
+        arguments: <String, String>{
+          ...state.pathParameters,
+          ...state.uri.queryParameters
+        },
         restorationId: state.pageKey.value,
         child: page,
       );

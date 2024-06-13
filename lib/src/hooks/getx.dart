@@ -43,8 +43,10 @@ class _Controller<T extends GetxController> extends Hook<T> {
   _ControllerState<T> createState() => _ControllerState();
 }
 
-class _ControllerState<T extends GetxController> extends HookState<T, _Controller<T>> {
-  late final T c = Get.put(hook.controller, tag: hook.tag, showLog: hook.showLog);
+class _ControllerState<T extends GetxController>
+    extends HookState<T, _Controller<T>> {
+  late final T c =
+      Get.put(hook.controller, tag: hook.tag, showLog: hook.showLog);
 
   @override
   T build(BuildContext context) => c;

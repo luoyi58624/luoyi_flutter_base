@@ -18,7 +18,8 @@ extension FlutterColorExtension on Color {
   /// 返回一个颜色的hsp (颜色的感知亮度)
   ///
   /// http://www.w3.org/TR/AERT#color-contrast
-  int get hsp => ((red * 299 + green * 587 + blue * 114) / 1000).ceilToDouble().toInt();
+  int get hsp =>
+      ((red * 299 + green * 587 + blue * 114) / 1000).ceilToDouble().toInt();
 
   /// 根据明亮度获取一个新的颜色，lightness以1为基准，小于1则颜色变暗，大于1则颜色变亮
   Color getLightnessColor(double lightness) {
@@ -66,8 +67,8 @@ extension FlutterColorExtension on Color {
   Color brighten(int scale) {
     assert(scale >= 0 && scale <= 100);
     var p = scale / 100;
-    return Color.fromARGB(
-        alpha, red + ((255 - red) * p).round(), green + ((255 - green) * p).round(), blue + ((255 - blue) * p).round());
+    return Color.fromARGB(alpha, red + ((255 - red) * p).round(),
+        green + ((255 - green) * p).round(), blue + ((255 - blue) * p).round());
   }
 
   /// 将颜色变得更暗
@@ -75,7 +76,8 @@ extension FlutterColorExtension on Color {
   Color darken(int scale) {
     assert(scale >= 0 && scale <= 100);
     var f = 1 - scale / 100;
-    return Color.fromARGB(alpha, (red * f).round(), (green * f).round(), (blue * f).round());
+    return Color.fromARGB(
+        alpha, (red * f).round(), (green * f).round(), (blue * f).round());
   }
 
   /// 将颜色变得深，如果当前颜色是亮色，颜色会变暗，但如果当前颜色是暗色，则颜色会变亮
@@ -91,7 +93,8 @@ extension FlutterColorExtension on Color {
   }
 
   /// 当用户鼠标悬停时的颜色
-  Color onHover(bool isHover, [int? scale]) => isHover ? deepen(scale ?? 6) : this;
+  Color onHover(bool isHover, [int? scale]) =>
+      isHover ? deepen(scale ?? 6) : this;
 
   /// 当用户鼠标、手指按下时的颜色
   Color onTap(bool isTap, [int? scale]) => isTap ? deepen(scale ?? 10) : this;

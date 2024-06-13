@@ -183,9 +183,18 @@ class ButtonWidgets extends HookWidget {
       const Gap(16),
       SegmentedButton<int>(
         segments: const <ButtonSegment<int>>[
-          ButtonSegment(value: 0, label: Text('选项一'), icon: Icon(Icons.calendar_view_day)),
-          ButtonSegment(value: 1, label: Text('选项二'), icon: Icon(Icons.calendar_view_week)),
-          ButtonSegment(value: 2, label: Text('选项三'), icon: Icon(Icons.calendar_view_month)),
+          ButtonSegment(
+              value: 0,
+              label: Text('选项一'),
+              icon: Icon(Icons.calendar_view_day)),
+          ButtonSegment(
+              value: 1,
+              label: Text('选项二'),
+              icon: Icon(Icons.calendar_view_week)),
+          ButtonSegment(
+              value: 2,
+              label: Text('选项三'),
+              icon: Icon(Icons.calendar_view_month)),
         ],
         selected: selects.value,
         onSelectionChanged: (v) {

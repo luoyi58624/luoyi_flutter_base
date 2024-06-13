@@ -20,11 +20,11 @@ class _App extends StatelessWidget {
       theme: buildM2ThemeData(Brightness.light, ElTheme.defaultThemeData),
       home: const HomePage(),
       builder: (context, child) => ElTheme(
-        child: child!,
         data: ElThemeData(
             config: ElConfigData(
                 // scrollConfiguration:
                 )),
+        child: child!,
       ),
     );
   }

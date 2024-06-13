@@ -1,3 +1,4 @@
+// ignore: depend_on_referenced_packages
 export 'package:luoyi_flutter_base/luoyi_flutter_base.dart';
 export 'package:flutter_element_ui/flutter_element_ui.dart';
 export 'package:mini_getx/mini_getx.dart';

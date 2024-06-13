@@ -6,7 +6,8 @@ import 'package:localstorage/localstorage.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
-const kStorageFileName = 'session-storage-61f76cb0-842b-4318-a644-e245f50a0b5a.json';
+const kStorageFileName =
+    'session-storage-61f76cb0-842b-4318-a644-e245f50a0b5a.json';
 
 Future<LocalStorage> generaInitSessionStorage() async {
   final dir = await getApplicationDocumentsDirectory();

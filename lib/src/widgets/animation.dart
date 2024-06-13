@@ -13,10 +13,12 @@ class AnimatedColoredBox extends ImplicitlyAnimatedWidget {
   final Widget child;
 
   @override
-  AnimatedWidgetBaseState<AnimatedColoredBox> createState() => _AnimatedColoredBoxState();
+  AnimatedWidgetBaseState<AnimatedColoredBox> createState() =>
+      _AnimatedColoredBoxState();
 }
 
-class _AnimatedColoredBoxState extends AnimatedWidgetBaseState<AnimatedColoredBox> {
+class _AnimatedColoredBoxState
+    extends AnimatedWidgetBaseState<AnimatedColoredBox> {
   ColorTween? _color;
 
   @override
@@ -29,7 +31,8 @@ class _AnimatedColoredBoxState extends AnimatedWidgetBaseState<AnimatedColoredBo
 
   @override
   void forEachTween(TweenVisitor<dynamic> visitor) {
-    _color = visitor(_color, widget.color, (dynamic value) => ColorTween(begin: value as Color)) as ColorTween;
+    _color = visitor(_color, widget.color,
+        (dynamic value) => ColorTween(begin: value as Color)) as ColorTween;
   }
 }
 
@@ -66,10 +69,12 @@ class AnimatedRefreshProgressIndicator extends ImplicitlyAnimatedWidget {
   final EdgeInsetsGeometry indicatorPadding;
 
   @override
-  AnimatedWidgetBaseState<AnimatedRefreshProgressIndicator> createState() => _AnimatedRefreshProgressIndicatorState();
+  AnimatedWidgetBaseState<AnimatedRefreshProgressIndicator> createState() =>
+      _AnimatedRefreshProgressIndicatorState();
 }
 
-class _AnimatedRefreshProgressIndicatorState extends AnimatedWidgetBaseState<AnimatedRefreshProgressIndicator> {
+class _AnimatedRefreshProgressIndicatorState
+    extends AnimatedWidgetBaseState<AnimatedRefreshProgressIndicator> {
   ColorTween? _color;
   ColorTween? _backgroundColor;
 
@@ -93,9 +98,9 @@ class _AnimatedRefreshProgressIndicatorState extends AnimatedWidgetBaseState<Ani
 
   @override
   void forEachTween(TweenVisitor<dynamic> visitor) {
-    _color = visitor(_color, widget.color, (dynamic value) => ColorTween(begin: value as Color)) as ColorTween?;
-    _backgroundColor =
-        visitor(_backgroundColor, widget.backgroundColor, (dynamic value) => ColorTween(begin: value as Color))
-            as ColorTween?;
+    _color = visitor(_color, widget.color,
+        (dynamic value) => ColorTween(begin: value as Color)) as ColorTween?;
+    _backgroundColor = visitor(_backgroundColor, widget.backgroundColor,
+        (dynamic value) => ColorTween(begin: value as Color)) as ColorTween?;
   }
 }

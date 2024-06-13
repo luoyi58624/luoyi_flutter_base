@@ -14,7 +14,8 @@ class GeneralPlatform {
 
   static final bool isFuchsia = Platform.isFuchsia;
 
-  static final bool isDesktop = Platform.isMacOS || Platform.isWindows || Platform.isLinux;
+  static final bool isDesktop =
+      Platform.isMacOS || Platform.isWindows || Platform.isLinux;
 
   static final bool isApple = isMacOS || isIOS;
 
