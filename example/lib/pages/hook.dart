@@ -7,9 +7,6 @@ class HookDemoPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    var m1 = const TypographyModel();
-    var m2 = const TypographyModel();
-    i(m1 == m2);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Hook测试页面'),
@@ -24,11 +21,12 @@ class HookDemoPage extends HookWidget {
           const H5('五级Title'),
           const H6('六级Title'),
           const P('普通文本'),
-          const A('https://www.baidu.com'),
-          P([
-            const P('富文本'),
-            const P('红色文本', color: Colors.red),
-            const Icon(Icons.home),
+          const A('https://www.baidu.com', href: 'https://www.baidu.com'),
+          const P(['这是一段文字，里面包含', B('加粗'), '、', I('斜体'), '、', '文字']),
+          const P([
+            '富文本',
+            P('红色文本', color: Colors.red),
+            Icon(Icons.home),
             H1('一级Title'),
             H1('一级Title', color: Colors.purple),
             H2([
@@ -38,11 +36,6 @@ class HookDemoPage extends HookWidget {
                 style: TextStyle(color: Colors.green),
               ),
             ]),
-            // ...List.generate(
-            //   3000,
-            //   (index) => P('xx闲杂洒下行啊伤心啊伤心啊剩下阿萨xxx'),
-            // ),
-            Text(List.generate(10000, (index) => 'xxxx').toList().toString()),
           ]),
           Text.rich(
             TextSpan(

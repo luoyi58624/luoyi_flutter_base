@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:luoyi_flutter_base/src/widgets/brightness.dart';
-
-import '../utils/font/font.dart';
+import 'package:luoyi_flutter_base/luoyi_flutter_base.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 /// 文字排版模型对象
 class TypographyModel {
@@ -72,6 +71,8 @@ abstract class _Typography extends StatelessWidget {
     this.size,
     this.color,
     this.weight,
+    this.underline = false,
+    this.italic = false,
   });
 
   /// * 如果是[List]，则当做富文本渲染；
@@ -87,18 +88,38 @@ abstract class _Typography extends StatelessWidget {
   /// 文字字重
   final FontWeight? weight;
 
+  /// 文字下划线
+  final bool underline;
+
+  /// 文本倾斜
+  final bool italic;
+
   Widget buildTypography(
     BuildContext context,
     double size,
     Color color,
     FontWeight weight,
   ) {
+    TextStyle style = TextStyle(
+      fontSize: size,
+      color: color,
+      fontWeight: weight,
+    );
+    if (underline) {
+      style = style.copyWith(decoration: TextDecoration.underline);
+    }
+    if (italic) {
+      style = style.copyWith(fontStyle: FontStyle.italic);
+    }
     return DefaultTextStyle.merge(
-      style: TextStyle(fontSize: size, color: color, fontWeight: weight),
-      child: data is List<Widget>
+      style: style,
+      child: data is List
           ? Wrap(
-              children: data,
               crossAxisAlignment: WrapCrossAlignment.center,
+              children: (data as List).map((e) {
+                if (e is Widget) return e;
+                return Text('$e');
+              }).toList(),
             )
           : Text('$data'),
     );
@@ -107,7 +128,7 @@ abstract class _Typography extends StatelessWidget {
 
 /// 渲染标题类型文字
 abstract class _Title extends _Typography {
-  const _Title(super.data, {super.key, super.size, super.color, super.weight});
+  const _Title(super.data, {super.key, super.size, super.color});
 
   Widget buildTitle(
     BuildContext context, {
@@ -123,7 +144,15 @@ abstract class _Title extends _Typography {
 
 /// 渲染普通类型文字
 abstract class _Text extends _Typography {
-  const _Text(super.data, {super.key, super.size, super.color, super.weight});
+  const _Text(
+    super.data, {
+    super.key,
+    super.size,
+    super.color,
+    super.weight,
+    super.underline,
+    super.italic,
+  });
 
   Widget buildText(
     BuildContext context, {
@@ -206,7 +235,15 @@ class H6 extends _Title {
 
 /// 普通段落文本
 class P extends _Text {
-  const P(super.data, {super.key, super.size, super.color, super.weight});
+  const P(
+    super.data, {
+    super.key,
+    super.size,
+    super.color,
+    super.weight,
+    super.underline,
+    super.italic,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -228,40 +265,48 @@ class A extends _Text {
     super.size,
     super.color,
     super.weight,
-    this.underline = true,
+    this.href,
+    super.underline = true,
+    super.italic,
   });
 
-  /// 是否显示下划线
-  final bool underline;
+  final String? href;
 
   @override
   Widget build(BuildContext context) {
     final model = TypographyInheritedWidget.of(context);
     final $color =
         color ?? (context.isDark ? model.hrefDarkColor : model.hrefColor);
-    return Stack(
-      children: [
-        buildText(
-          context,
-          size: size ?? model.p,
-          color: $color,
-          weight: weight,
-        ),
-        if (underline)
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: Container(height: 0.8, color: $color),
-          )
-      ],
-    );
+    return HoverBuilder(builder: (isHover) {
+      return TapBuilder(
+        onTap: href == null
+            ? null
+            : () {
+                launchUrl(Uri.parse(href!));
+              },
+        builder: (isTap) {
+          return buildText(
+            context,
+            size: size ?? model.p,
+            color: $color.onHover(isHover, 20).onTap(isTap, 50),
+            weight: weight,
+          );
+        },
+      );
+    });
   }
 }
 
 /// 加粗文本
 class B extends _Text {
-  const B(super.data, {super.key, super.size, super.color});
+  const B(
+    super.data, {
+    super.key,
+    super.size,
+    super.color,
+    super.italic,
+    super.underline,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -271,6 +316,29 @@ class B extends _Text {
       size: size ?? model.p,
       color: color,
       weight: FontUtil.bold,
+    );
+  }
+}
+
+/// 斜体文本
+class I extends _Text {
+  const I(
+    super.data, {
+    super.key,
+    super.size,
+    super.color,
+    super.weight,
+    super.underline,
+  }) : super(italic: true);
+
+  @override
+  Widget build(BuildContext context) {
+    final model = TypographyInheritedWidget.of(context);
+    return buildText(
+      context,
+      size: size ?? model.p,
+      color: color,
+      weight: weight,
     );
   }
 }
