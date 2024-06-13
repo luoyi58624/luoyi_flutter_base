@@ -35,7 +35,7 @@ class ResponsiveData {
   }
 }
 
-extension ElResponsiveExtension on BuildContext {
+extension ResponsiveExtension on BuildContext {
   /// 移动端设备
   bool get sm => MediaQuery.sizeOf(this).width < ResponsiveWidget.of(this).sm;
 

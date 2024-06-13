@@ -13,6 +13,7 @@ export 'src/utils/session_storage/session_storage.dart' show sessionStorage;
 export 'package:flutter_hooks/flutter_hooks.dart';
 export 'package:gap/gap.dart';
 export 'package:super_sliver_list/super_sliver_list.dart';
+export 'package:go_router/go_router.dart' hide GoRouterHelper;
 
 export 'src/builders/hover.dart';
 export 'src/builders/tap.dart';
