@@ -1,5 +1,32 @@
 # Changelog
 
+## [2.2.0](https://github.com/luoyi58624/luoyi_flutter_base/compare/v2.1.0...v2.2.0) (2024-06-13)
+
+
+### Features
+
+* HoverBuilder、TapBuilder新增InheritedWidget，新增PlatformUtil ([adb4d39](https://github.com/luoyi58624/luoyi_flutter_base/commit/adb4d3958c7a7d08fa14aad863cd5ef8fa076142))
+* 优化rootContext的断言 ([7c10a62](https://github.com/luoyi58624/luoyi_flutter_base/commit/7c10a629bd1ea347b96890d97cdd8c8287953170))
+* 加载多个字重字体使用并行加载 ([a93a112](https://github.com/luoyi58624/luoyi_flutter_base/commit/a93a1126bec3ae3e456165357ffcecd212427108))
+* 完善各种字体排版小部件 ([35a68f4](https://github.com/luoyi58624/luoyi_flutter_base/commit/35a68f4faf87ceef18e8e5af3aa4b8beeb2d89d3))
+* 导出go_router并隐藏GoRouterHelper ([dcdd0f3](https://github.com/luoyi58624/luoyi_flutter_base/commit/dcdd0f379b3b6757ea3e06e3bfed1e6615bbbe3b))
+* 导出platform ([fe1fa47](https://github.com/luoyi58624/luoyi_flutter_base/commit/fe1fa47eb5dad8f57f9645feab82eed15ba0b3bf))
+* 新增config、theme、responsive等基础api ([2ae82b7](https://github.com/luoyi58624/luoyi_flutter_base/commit/2ae82b712a85d258403118ae52f8284f276dc891))
+* 新增DividerWidget ([8494a0c](https://github.com/luoyi58624/luoyi_flutter_base/commit/8494a0cd6a9c6a501758478f35047ed842b51fdd))
+* 新增DragScrollbarDisabledHover ([a7e62a6](https://github.com/luoyi58624/luoyi_flutter_base/commit/a7e62a667697881fb2cc2c3d95b21be167be6095))
+* 新增Font工具类 ([951bfd3](https://github.com/luoyi58624/luoyi_flutter_base/commit/951bfd3396aecc55123afd11dfef13aa38ffe568))
+* 新增NoDefaultScrollbarWidget ([1e683a7](https://github.com/luoyi58624/luoyi_flutter_base/commit/1e683a7391e36ead9b3ced59323983173a174044))
+* 新增NoScrollBehavior ([d0cb80e](https://github.com/luoyi58624/luoyi_flutter_base/commit/d0cb80e10667063ae93257c51b9cb07de5ec3c81))
+* 新增Typography字体排版类 ([41345ec](https://github.com/luoyi58624/luoyi_flutter_base/commit/41345ec90ac026cc1b0520821d5cda848ab4c78f))
+* 移除part，使用export导出依赖 ([a58c182](https://github.com/luoyi58624/luoyi_flutter_base/commit/a58c18259b728c487a208ab3bfc58199327e04af))
+
+
+### Bug Fixes
+
+* onHover、onTap移除BuildContext参数 ([0aa910f](https://github.com/luoyi58624/luoyi_flutter_base/commit/0aa910fa00ecc610cdd16d87d84b45f01e7e8b48))
+* 修复未导出的依赖 ([e87b1b8](https://github.com/luoyi58624/luoyi_flutter_base/commit/e87b1b82d77b8e2ac8bd4216fc22986c0a03a2ad))
+* 移除HoverBuild、TapBuilder ([fbe1940](https://github.com/luoyi58624/luoyi_flutter_base/commit/fbe19405311a8a046d9f324d234599f96c78fbc0))
+
 ## [2.1.0](https://github.com/luoyi58624/luoyi_flutter_base/compare/v2.0.1...v2.1.0) (2024-05-22)
 
 
