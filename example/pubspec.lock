@@ -123,7 +123,7 @@ packages:
     description:
       path: "packages/flutter_element_annotation"
       ref: HEAD
-      resolved-ref: "8d36d8f26f81e9dd34a680468ef2990187b98ac4"
+      resolved-ref: "95f8cdf1fb9b40752d238b63754fc22f42f04f07"
       url: "https://github.com/luoyi58624/flutter_element_ui.git"
     source: git
     version: "0.0.1"
@@ -132,7 +132,7 @@ packages:
     description:
       path: "packages/flutter_element_ui"
       ref: HEAD
-      resolved-ref: "8d36d8f26f81e9dd34a680468ef2990187b98ac4"
+      resolved-ref: "95f8cdf1fb9b40752d238b63754fc22f42f04f07"
       url: "https://github.com/luoyi58624/flutter_element_ui.git"
     source: git
     version: "0.0.1"
@@ -301,10 +301,10 @@ packages:
     dependency: "direct main"
     description:
       name: mini_getx
-      sha256: "892231b3f1cf486b70b65eceada2ca5b10d36ccf517f1e82d08701d70cad0c80"
+      sha256: f3b81e9ce549927292122f372d3e6170e9a4a4ebbafe84696ed0fe074f2492b8
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.7"
+    version: "5.0.9"
   path:
     dependency: transitive
     description:
