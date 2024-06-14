@@ -9,29 +9,23 @@ import 'package:luoyi_flutter_base/luoyi_flutter_base.dart';
 Timer? _timer;
 
 class TapBuilder extends StatefulWidget {
-  /// 按下事件构造器
-  TapBuilder({
+  /// 按下事件构造器，该组件是对[GestureDetector]进行的包装
+  const TapBuilder({
     super.key,
     required this.builder,
     this.onTap,
-    int? delay,
+    this.delay = 100,
     this.disabled = false,
-  }) {
-    assert(delay == null || delay >= 0);
-    // 在移动端，无论你是否应用动画，延迟100毫秒都能令状态变更效果更明显，
-    // 因为移动端滚动列表下，按下、释放事件之间的间隔极短。几乎为0，这样你的点击效果基本无效。
-    this.delay = delay ?? (PlatformUtil.isMobile ? 100 : 0);
-  }
+  }) : assert(delay >= 0);
 
   final Widget Function(bool isTap) builder;
 
   final GestureTapCallback? onTap;
 
-  /// 延迟多少毫秒更新点击状态，如果你设置了此参数，当触发 onTapDown 时将记录当前时间戳，
-  /// 然后取 onTapUp 触发的时间戳的差值延迟更新 isTap 状态，该属性一般用来配合过渡动画一起使用,
-  /// 如果你设置了300毫秒的过渡动画，若想等动画加载完再改变状态只需设置300毫秒的延迟即可，
-  /// 否则动画只执行了100毫秒就被迫重置
-  late final int delay;
+  /// 延迟多少毫秒更新点击状态，默认100毫秒，设置一定的延迟时间可以让点击效果更加明显，
+  /// 否则你应当直接使用[GestureDetector]，同时，如果你需要根据状态变更应用过渡动画，
+  /// 那么你应当设置与过渡动画同等的延迟时间，否则过渡动画还未加载完就将被迫重置状态
+  final int delay;
 
   /// 是否禁用，默认false
   final bool disabled;
@@ -69,8 +63,6 @@ class _TapBuilderState extends State<TapBuilder> {
         onTapUp: widget.disabled
             ? null
             : (e) {
-                // i(currentMilliseconds - _time!);
-                // i(max(widget.delay - (currentMilliseconds - _time!), 0));
                 _timer = () {
                   update(false);
                   _timer = null;
