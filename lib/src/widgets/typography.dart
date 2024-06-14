@@ -288,7 +288,9 @@ class A extends _Text {
           return buildText(
             context,
             size: size ?? model.p,
-            color: $color.onHover(isHover, 20).onTap(isTap, 50),
+            color: $color
+                .onHover(isHover, $color.deepen(20))
+                .onTap(isTap, $color.deepen(50)),
             weight: weight,
           );
         },
