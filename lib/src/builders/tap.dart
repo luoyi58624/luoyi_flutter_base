@@ -6,7 +6,7 @@ import 'package:luoyi_dart_base/luoyi_dart_base.dart';
 
 Timer? _timer;
 
-class TapBuilder extends HookWidget {
+class TapBuilder extends StatefulWidget {
   /// 按下事件构造器
   const TapBuilder({
     super.key,
@@ -33,47 +33,57 @@ class TapBuilder extends HookWidget {
   static bool of(BuildContext context) => _TapInheritedWidget.of(context);
 
   @override
+  State<TapBuilder> createState() => _TapBuilderState();
+}
+
+class _TapBuilderState extends State<TapBuilder> {
+  bool isTap = false;
+
+  @override
   Widget build(BuildContext context) {
-    final isTap = useState(false);
     return _TapInheritedWidget(
-      isTap: isTap.value,
+      isTap: isTap,
       child: GestureDetector(
-        onTap: disabled ? null : onTap,
-        onTapDown: disabled
+        onTap: widget.disabled ? null : widget.onTap,
+        onTapDown: widget.disabled
             ? null
             : (e) {
                 if (_timer != null) {
                   _timer!.cancel();
                   _timer = null;
-                  update(isTap, false);
-                  (() => update(isTap, true)).delay(16);
+                  update(false);
+                  (() => update(true)).delay(16);
                 } else {
-                  update(isTap, true);
+                  update(true);
                 }
               },
-        onTapUp: disabled
+        onTapUp: widget.disabled
             ? null
             : (e) {
                 _timer = () {
-                  update(isTap, false);
+                  update(false);
                   _timer = null;
-                }.delay(delay);
+                }.delay(widget.delay);
               },
-        onTapCancel: disabled
+        onTapCancel: widget.disabled
             ? null
             : () {
                 _timer = () {
-                  update(isTap, false);
+                  update(false);
                   _timer = null;
-                }.delay(delay);
+                }.delay(widget.delay);
               },
-        child: builder(isTap.value),
+        child: widget.builder(isTap),
       ),
     );
   }
 
-  void update(ValueNotifier<bool> isTap, bool enabled) {
-    if (isTap.value != enabled) isTap.value = enabled;
+  void update(bool value) {
+    if (mounted && isTap != value) {
+      setState(() {
+        isTap = value;
+      });
+    }
   }
 }
 

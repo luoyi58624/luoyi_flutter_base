@@ -14,12 +14,12 @@ class ComponentDecoration extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 8),
+          padding: const EdgeInsets.only(left: 8, top: 8, bottom: 4),
           child: Text(
             title,
             style: TextStyle(
               fontWeight: FontUtil.bold,
-              fontSize: 16,
+              fontSize: 18,
             ),
           ),
         ),

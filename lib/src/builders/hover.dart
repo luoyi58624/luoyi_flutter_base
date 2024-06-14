@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../utils/platform/platform.dart';
 
-class HoverBuilder extends HookWidget {
+class HoverBuilder extends StatefulWidget {
   /// hover构建器，仅在桌面端渲染，移动端不会渲染
   const HoverBuilder({
     super.key,
@@ -28,28 +28,35 @@ class HoverBuilder extends HookWidget {
   static bool of(BuildContext context) => _HoverInheritedWidget.of(context);
 
   @override
+  State<HoverBuilder> createState() => _HoverBuilderState();
+}
+
+class _HoverBuilderState extends State<HoverBuilder> {
+  bool isHover = false;
+
+  @override
   Widget build(BuildContext context) {
     final $disabled = GlobalHoverWidget.disabled(context);
-    final isHover = useState(false);
+
     return PlatformUtil.isDesktop
         ? _HoverInheritedWidget(
-            isHover: isHover.value,
+            isHover: isHover,
             child: MouseRegion(
-              onEnter: ($disabled || onlyCursor || disabled)
+              onEnter: ($disabled || widget.onlyCursor || widget.disabled)
                   ? null
-                  : (event) => isHover.value = true,
-              onExit: ($disabled || onlyCursor || disabled)
+                  : (event) => setState(() => isHover = true),
+              onExit: ($disabled || widget.onlyCursor || widget.disabled)
                   ? null
-                  : (event) => isHover.value = false,
+                  : (event) => setState(() => isHover = false),
               cursor: $disabled
                   ? SystemMouseCursors.basic
-                  : disabled
+                  : widget.disabled
                       ? SystemMouseCursors.forbidden
-                      : cursor,
-              child: builder(isHover.value),
+                      : widget.cursor,
+              child: widget.builder(isHover),
             ),
           )
-        : builder(isHover.value);
+        : widget.builder(isHover);
   }
 }
 
