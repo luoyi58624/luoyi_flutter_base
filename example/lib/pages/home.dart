@@ -27,6 +27,14 @@ class HomePage extends HookWidget {
             buildCellWidget(context,
                 title: 'Hook 测试', page: const HookDemoPage()),
           ]),
+          TapBuilder(
+            onTap: () {},
+            builder: (isTap) => Container(
+              width: 100,
+              height: 100,
+              color: Colors.grey.onTap(isTap),
+            ),
+          ),
           const Gap(8),
           const ButtonWidgets(),
           const FormWidgets(),

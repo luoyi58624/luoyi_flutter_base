@@ -13,6 +13,61 @@ class HookDemoPage extends HookWidget {
       body: SingleChildScrollView(
         child: ColumnWidget(children: [
           useButton(_useStateData()),
+          TapBuilder(
+            onTap: () {},
+            delay: 0,
+            builder: (isTap) => Container(
+              width: 100,
+              height: 100,
+              color: Colors.grey.onTap(isTap),
+            ),
+          ),
+          const Gap(16),
+          TapBuilder(
+            onTap: () {},
+            delay: 0,
+            builder: (isTap) => AnimatedContainer(
+              duration: const Duration(milliseconds: 500),
+              width: 100,
+              height: 100,
+              color: isTap ? Colors.green : Colors.grey,
+            ),
+          ),
+          const Gap(16),
+          TapBuilder(
+            onTap: () {},
+            delay: 500,
+            builder: (isTap) => AnimatedContainer(
+              duration: const Duration(milliseconds: 500),
+              width: 100,
+              height: 100,
+              color: isTap ? Colors.green : Colors.grey,
+            ),
+          ),
+          const Gap(16),
+          TapBuilder(
+            onTap: () {},
+            delay: 1000,
+            builder: (isTap) => AnimatedContainer(
+              duration: const Duration(milliseconds: 500),
+              width: 100,
+              height: 100,
+              color: isTap ? Colors.green : Colors.grey,
+            ),
+          ),
+          const Gap(16),
+          SelectionArea(
+            child: TapBuilder(
+              onTap: () {},
+              delay: 300,
+              builder: (isTap) => AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                width: 100,
+                height: 100,
+                color: isTap ? Colors.green : Colors.grey,
+              ),
+            ),
+          ),
           const H1('一级Title'),
           const H2('二级Title'),
           const H3('三级Title'),
