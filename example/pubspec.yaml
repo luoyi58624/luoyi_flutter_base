@@ -9,10 +9,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_element_ui:
-    git:
-      url: https://github.com/luoyi58624/flutter_element_ui.git
-      path: packages/flutter_element_ui
   mini_getx: ^5.0.0
 
 dev_dependencies:

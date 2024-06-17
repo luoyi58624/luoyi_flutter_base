@@ -17,15 +17,8 @@ class _App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: buildM2ThemeData(Brightness.light, ElTheme.defaultThemeData),
+      // theme: buildM2ThemeData(Brightness.light),
       home: const HomePage(),
-      builder: (context, child) => ElTheme(
-        data: ElThemeData(
-            config: ElConfigData(
-                // scrollConfiguration:
-                )),
-        child: child!,
-      ),
     );
   }
 }

@@ -6,6 +6,8 @@ import '../widgets/button.dart';
 import '../widgets/cupertino.dart';
 import '../widgets/form.dart';
 import 'hook.dart';
+import 'test.dart';
+import 'typography.dart';
 
 class HomePage extends HookWidget {
   const HomePage({super.key});
@@ -25,7 +27,11 @@ class HomePage extends HookWidget {
         child: ColumnWidget(children: [
           buildCardWidget(context, title: '通用组件', children: [
             buildCellWidget(context,
+                title: 'Test 测试页面', page: const TestPage()),
+            buildCellWidget(context,
                 title: 'Hook 测试', page: const HookDemoPage()),
+            buildCellWidget(context,
+                title: 'Typography 文字排版', page: const TypographyPage()),
           ]),
           TapBuilder(
             onTap: () {},

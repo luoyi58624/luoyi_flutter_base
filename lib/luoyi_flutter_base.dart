@@ -34,7 +34,9 @@ export 'src/utils/font/model.dart';
 export 'src/widgets/animation.dart';
 export 'src/widgets/brightness.dart';
 export 'src/widgets/responsive.dart';
-export 'src/widgets/typography.dart';
+export 'src/widgets/html.dart';
+export 'src/widgets/html/element.dart';
+export 'src/widgets/html/style/style.dart';
 
 /// 初始化 LocalStorage 和 SessionStorage
 Future<void> initStorage() async {
