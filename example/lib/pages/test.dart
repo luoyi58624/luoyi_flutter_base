@@ -28,19 +28,33 @@ class _TestPageState extends State<TestPage> {
             },
             child: Text('count: $count'),
           ),
-          Div(
-            'count: $count',
-            style: const Style(
-              width: 100,
-              height: 100,
-              color: Colors.white,
-              backgroundColor: Colors.green,
-              padding: [50, 0, 0, 0],
-              margin: [20],
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    itemBuilder: (context, index) => DemoWidget(count: count),
+                  ),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemBuilder: (context, index) => const Div(
+                      'count:',
+                      style: Style(
+                        width: 100,
+                        height: 100,
+                        color: Colors.white,
+                        backgroundColor: Colors.green,
+                        padding: [0, 0, 0, 0],
+                        margin: [8],
+                        alignment: Alignment.center,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-          const Gap(16),
-          DemoWidget(count: count),
         ],
       ),
     );
@@ -60,8 +74,9 @@ class DemoWidget extends StatelessWidget {
         width: 100,
         height: 100,
         color: Colors.green,
-        margin: const EdgeInsets.all(100),
-        padding: const EdgeInsets.only(top: 50),
+        margin: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(0),
+        alignment: Alignment.center,
         child: DefaultTextStyle.merge(
           style: const TextStyle(
             color: Colors.white,

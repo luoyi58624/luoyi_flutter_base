@@ -1,4 +1,4 @@
-import 'dart:ui';
+import 'package:flutter/widgets.dart';
 
 class Style {
   /// element width
@@ -28,6 +28,9 @@ class Style {
   /// element border width
   final double? borderWidth;
 
+  /// element child alignment
+  final AlignmentGeometry? alignment;
+
   const Style({
     this.width,
     this.height,
@@ -36,5 +39,6 @@ class Style {
     this.padding,
     this.margin,
     this.borderWidth,
+    this.alignment,
   });
 }

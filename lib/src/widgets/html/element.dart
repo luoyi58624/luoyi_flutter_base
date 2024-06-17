@@ -35,30 +35,19 @@ class Div extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int start = DateTime.now().microsecondsSinceEpoch;
-    late Widget result;
-    if (child is Widget) {
-      result = child;
-    } else {
-      result = Text('$child');
-    }
-    if (style != null) {
-      if (style!.color != null) {
-        result = DefaultTextStyle.merge(
-          style: TextStyle(color: style!.color),
-          child: result,
-        );
-      }
-      result = UnconstrainedBox(
-        child: Container(
-          width: style?.width,
-          height: style?.height,
-          margin: margin,
-          padding: padding,
-          color: style!.backgroundColor,
-          child: result,
-        ),
-      );
-    }
+    Widget result = Container(
+      width: style?.width,
+      height: style?.height,
+      margin: margin,
+      padding: padding,
+      color: style?.backgroundColor,
+      alignment: style?.alignment,
+      child: DefaultTextStyle.merge(
+        style: TextStyle(color: style?.color),
+        child: child is Widget ? child : Text('$child'),
+      ),
+    );
+
     i(DateTime.now().microsecondsSinceEpoch - start, '渲染div耗时(微秒)');
     return result;
   }
