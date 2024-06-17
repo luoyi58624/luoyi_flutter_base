@@ -123,7 +123,7 @@ packages:
     description:
       path: "packages/flutter_element_annotation"
       ref: HEAD
-      resolved-ref: "5e516ef35bddeca3111dfd4f4c2c8bf3e574d8fb"
+      resolved-ref: d34a5abd64959c23854cc6329ec5806c777b29c4
       url: "https://github.com/luoyi58624/flutter_element_ui.git"
     source: git
     version: "0.0.1"
@@ -132,7 +132,7 @@ packages:
     description:
       path: "packages/flutter_element_ui"
       ref: HEAD
-      resolved-ref: "5e516ef35bddeca3111dfd4f4c2c8bf3e574d8fb"
+      resolved-ref: d34a5abd64959c23854cc6329ec5806c777b29c4
       url: "https://github.com/luoyi58624/flutter_element_ui.git"
     source: git
     version: "0.0.1"

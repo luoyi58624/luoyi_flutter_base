@@ -75,7 +75,7 @@ class HookDemoPage extends HookWidget {
           const H5('五级Title'),
           const H6('六级Title'),
           const P('普通文本'),
-          const A('https://www.baidu.com', href: 'https://www.baidu.com'),
+          const A('https://www.baidu.com'),
           const P(['这是一段文字，里面包含', B('加粗'), '、', I('斜体'), '、', '文字']),
           const P([
             '富文本',

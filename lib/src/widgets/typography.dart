@@ -18,7 +18,6 @@ abstract class _Typography extends StatelessWidget {
     this.size,
     this.color,
     this.weight,
-    this.underline = false,
     this.italic = false,
   });
 
@@ -35,10 +34,7 @@ abstract class _Typography extends StatelessWidget {
   /// 文字字重
   final FontWeight? weight;
 
-  /// 文字下划线
-  final bool underline;
-
-  /// 文本倾斜
+  /// 文字斜体
   final bool italic;
 
   Widget buildTypography(
@@ -46,6 +42,7 @@ abstract class _Typography extends StatelessWidget {
     double? size,
     Color? color,
     FontWeight? weight,
+    bool underline = false,
   }) {
     TextStyle style = TextStyle(
       fontSize: size,
@@ -99,7 +96,6 @@ abstract class _Text extends _Typography {
     super.size,
     super.color,
     super.weight,
-    super.underline,
     super.italic,
   });
 
@@ -108,12 +104,14 @@ abstract class _Text extends _Typography {
     required double size,
     Color? color,
     FontWeight? weight,
+    bool underline = false,
   }) {
     return buildTypography(
       context,
       size: size,
       color: color,
       weight: weight ?? FontUtil.normal,
+      underline: underline,
     );
   }
 }
@@ -186,7 +184,6 @@ class P extends _Text {
     super.size,
     super.color,
     super.weight,
-    super.underline,
     super.italic,
   });
 
@@ -210,7 +207,6 @@ class A extends _Text {
     super.color,
     super.weight,
     this.href,
-    super.underline = true,
     super.italic,
   });
 
@@ -230,9 +226,8 @@ class A extends _Text {
           return buildText(
             context,
             size: size ?? _normalFontSize,
-            color: $color
-                .onHover(isHover, $color.deepen(20))
-                .onTap(isTap, $color.deepen(50)),
+            underline: isHover,
+            color: $color.onTap(isTap, $color.deepen(30)),
             weight: weight,
           );
         },
@@ -249,7 +244,6 @@ class B extends _Text {
     super.size,
     super.color,
     super.italic,
-    super.underline,
   });
 
   @override
@@ -271,7 +265,6 @@ class I extends _Text {
     super.size,
     super.color,
     super.weight,
-    super.underline,
   }) : super(italic: true);
 
   @override
