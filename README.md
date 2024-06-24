@@ -53,7 +53,7 @@
 
 - 创建包
 
-> flutter create --template=package 
+> flutter create --template=package
 
 - android minsdk>23需要手动在android下设置以下属性才能压缩安装包
 
@@ -63,5 +63,9 @@ packagingOptions {
             useLegacyPackaging = true
         }
     }
-```.
+```
+
+- 发布包到pub商店
+
+> flutter pub publish --server=https://pub.dartlang.org
 
