@@ -13,6 +13,9 @@ class Style {
   /// element text color
   final Color? color;
 
+  /// text size
+  final double? fontSize;
+
   /// element padding：
   /// 1. [10] - all
   /// 2. [10, 20] - vertical、horizontal
@@ -36,6 +39,7 @@ class Style {
     this.height,
     this.backgroundColor,
     this.color,
+    this.fontSize,
     this.padding,
     this.margin,
     this.borderWidth,

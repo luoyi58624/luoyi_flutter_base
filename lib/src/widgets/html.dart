@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:luoyi_flutter_base/luoyi_flutter_base.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -9,6 +11,18 @@ const double _h4FontSize = 16;
 const double _h5FontSize = 14;
 const double _h6FontSize = 12;
 const double _normalFontSize = 15;
+
+class _TypeSegmentRecord {
+  final bool isText;
+  (int, int) section;
+
+  _TypeSegmentRecord(this.isText, this.section);
+
+  @override
+  String toString() {
+    return '_TypeSegmentRecord{isText: $isText, section: $section}';
+  }
+}
 
 /// 字体排版小部件抽象类，对[Text]进行封装，主要支持2个功能：
 /// 1. [data]支持任意内容，如果是[List]，则使用[Wrap]进行包裹，输出渲染可以当做富文本
@@ -54,6 +68,8 @@ abstract class TypographyWidget extends StatelessWidget {
   final TextHeightBehavior? textHeightBehavior;
   final Color? selectionColor;
 
+  bool get isMultiNode => data is List;
+
   Widget buildTypography(BuildContext context, TextStyle typographyStyle) {
     return DefaultTextStyle.merge(
       style: typographyStyle.merge(style),
@@ -62,35 +78,137 @@ abstract class TypographyWidget extends StatelessWidget {
       overflow: overflow,
       maxLines: maxLines,
       textWidthBasis: textWidthBasis,
-      child: _build(),
+      child: isMultiNode
+          ? Builder(builder: (context) {
+              return RichText(
+                  text: TextSpan(
+                style: DefaultTextStyle.of(context).style,
+                children: _buildRichText(data),
+              ));
+            })
+          : _buildText(),
     );
   }
 
-  Widget _build() {
+  Widget _build(BuildContext context) {
     if (data is List) {
+      List $data = data;
+      List<Widget> children = [];
+      // 分段记录数组类型
+      List<_TypeSegmentRecord> typeSegmentRecords = [];
+
+      // 填充富文本类型分段数据，对连续的文本、其他widget进行分组
+      for (int i = 0; i < $data.length; i++) {
+        var childData = $data[i];
+        if (DartUtil.isBaseType(childData) ||
+            childData is TypographyWidget ||
+            childData is Text ||
+            childData is RichText ||
+            childData is TextSpan) {
+          if (typeSegmentRecords.isEmpty) {
+            typeSegmentRecords.add(_TypeSegmentRecord(true, (i, i)));
+          } else {
+            if (typeSegmentRecords.last.isText) {
+              typeSegmentRecords[typeSegmentRecords.length - 1] =
+                  _TypeSegmentRecord(true, (
+                typeSegmentRecords.last.section.$1,
+                typeSegmentRecords.last.section.$2 + 1
+              ));
+            } else {
+              typeSegmentRecords.add(_TypeSegmentRecord(true, (i, i)));
+            }
+          }
+        } else {
+          typeSegmentRecords.add(_TypeSegmentRecord(false, (i, i)));
+        }
+      }
+      i(typeSegmentRecords);
+      // 将划分好的类型数据转换成文本、富文本、以及其他widget
+      for (var typeData in typeSegmentRecords) {
+        if (typeData.isText) {
+          List<TextSpan> richTextChildren = [];
+          for (int i = typeData.section.$1 + 1; i <= typeData.section.$2; i++) {
+            if (DartUtil.isBaseType(data[i])) {
+              richTextChildren.add(TextSpan(text: data[i]));
+            } else if (data[i] is TypographyWidget) {
+              final $data = (data[i] as TypographyWidget);
+              richTextChildren.add(
+                TextSpan(
+                  text: $data.data,
+                  style: $data.style,
+                ),
+              );
+            }
+          }
+          children.add(_buildFirstTextSpan(
+            context,
+            data[typeData.section.$1],
+            richTextChildren,
+          ));
+        } else {
+          children.add(data[typeData.section.$1]);
+        }
+      }
       return Wrap(
         crossAxisAlignment: WrapCrossAlignment.center,
-        children: (data as List).map((e) {
-          if (e is Widget) return e;
-          return _buildRichText(e);
-        }).toList(),
+        children: children,
       );
     } else {
       return _buildText();
     }
   }
 
-  Widget _buildRichText(dynamic data) {
-    return Text(
-      '$data',
-      strutStyle: strutStyle,
-      textDirection: textDirection,
-      locale: locale,
-      textScaler: textScaler,
-      semanticsLabel: semanticsLabel,
-      textHeightBehavior: textHeightBehavior,
-      selectionColor: selectionColor,
-    );
+  RichText _buildFirstTextSpan(BuildContext context, dynamic data,
+      [List<TextSpan>? children]) {
+    final style = DefaultTextStyle.of(context).style;
+    if (DartUtil.isBaseType(data)) {
+      return RichText(
+        text: TextSpan(
+          text: '$data',
+          style: style,
+          children: children,
+        ),
+      );
+    } else if (data is TypographyWidget) {
+      return RichText(
+        text: TextSpan(
+          text: data.data.toString(),
+          style: data.style,
+          children: children,
+        ),
+      );
+    } else if (data is Text) {
+      return RichText(
+        text: TextSpan(
+          text: data.data,
+          style: style,
+          children: children,
+        ),
+      );
+    } else if (data is RichText) {
+      return data;
+    } else if (data is TextSpan) {
+      return RichText(text: data);
+    } else {
+      throw '_buildFirstTextSpan exception';
+    }
+  }
+
+  List<InlineSpan> _buildRichText(List children) {
+    List<InlineSpan> richChildren = [];
+    for (final child in children) {
+      if (DartUtil.isBaseType(child)) {
+        richChildren.add(TextSpan(text: '$child'));
+      } else if (child is TypographyWidget) {
+        if (child.isMultiNode) {
+        } else {
+          richChildren.add(TextSpan(text: '${child.data}', style: child.style));
+        }
+      } else {
+        richChildren.add(WidgetSpan(child: child));
+      }
+    }
+    return richChildren;
   }
 
   Widget _buildText() {
@@ -204,21 +322,22 @@ class H6 extends TypographyWidget {
 }
 
 /// 内联标签
-class Span extends TypographyWidget {
-  const Span(super.data, {super.key, super.style}) : super(semanticsLabel: 'P');
-
-  @override
-  Widget build(BuildContext context) {
-    return buildTypography(
-      context,
-      const TextStyle(fontSize: _normalFontSize),
-    );
-  }
-}
+// class Span extends TypographyWidget {
+//   const Span(super.data, {super.key, super.style}) : super(semanticsLabel: 'P');
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return buildTypography(
+//       context,
+//       const TextStyle(fontSize: _normalFontSize),
+//     );
+//   }
+// }
 
 /// 段落标签
-class P extends TypographyWidget {
-  const P(super.data, {super.key, super.style}) : super(semanticsLabel: 'P');
+class Span extends TypographyWidget {
+  /// 构建一段文本
+  const Span(super.data, {super.key, super.style}) : super(semanticsLabel: 'P');
 
   @override
   Widget build(BuildContext context) {
@@ -273,41 +392,5 @@ class A extends TypographyWidget {
         },
       );
     });
-  }
-}
-
-/// 加粗文本
-class B extends TypographyWidget {
-  const B(super.data, {super.key, super.style}) : super(semanticsLabel: 'B');
-
-  @override
-  Widget build(BuildContext context) {
-    return buildTypography(
-      context,
-      TextStyle(
-        fontSize: _normalFontSize,
-        fontWeight: FontUtil.bold,
-      ),
-    );
-  }
-}
-
-/// 斜体文本
-class I extends TypographyWidget {
-  const I(
-    super.data, {
-    super.key,
-    super.style,
-  }) : super(semanticsLabel: 'I');
-
-  @override
-  Widget build(BuildContext context) {
-    return buildTypography(
-      context,
-      const TextStyle(
-        fontSize: _normalFontSize,
-        fontStyle: FontStyle.italic,
-      ),
-    );
   }
 }

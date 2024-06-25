@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../global.dart';
 
@@ -42,9 +43,18 @@ class TypographyPage extends StatelessWidget {
           //     ),
           //   ]),
           // ]),
-          const P([
+          const Span([
             'xx想你想金阿奎少女心看书你先看久啊少女心卡视角',
-            P('红色行啊伤心啊剩下行啊剩下阿是x文本', style: TextStyle(color: Colors.red)),
+            Span('红色行啊伤心啊剩下行啊剩下阿是x文本', style: TextStyle(color: Colors.red)),
+            Icon(Icons.home),
+            Icon(Icons.home),
+            Span(
+              '加粗文本',
+              style: TextStyle(fontStyle: FontStyle.italic),
+            ),
+            A('超链接'),
+            'xx想你想金阿奎少女心看书你先看久啊少女心卡视角',
+            'xx想你想金阿奎少女心看书你先看久啊少女心卡视角',
           ]),
           const Gap(16),
           DefaultTextStyle(
@@ -55,10 +65,30 @@ class TypographyPage extends StatelessWidget {
                 text: TextSpan(
                   text: 'xx想你想金阿奎少女心看书你先看久啊少女心卡视角',
                   style: DefaultTextStyle.of(context).style,
-                  children: const [
+                  children: [
                     TextSpan(
                       text: 'hello西南科技安心卡就是你看那就行那可就少女心久啊收纳显卡收纳',
                       style: TextStyle(color: Colors.red),
+                      children: [
+                        TextSpan(text: '罗伊'),
+                      ],
+                    ),
+                    WidgetSpan(child: Icon(Icons.home)),
+                    WidgetSpan(
+                      child: Container(
+                        width: 100,
+                        height: 100,
+                        color: Colors.green,
+                      ),
+                    ),
+                    WidgetSpan(child: Text('陆毅')),
+                    TextSpan(text: '陆毅'),
+                    TextSpan(
+                      text: 'hello西南科技安心卡就是你看那就行那可就少女心久啊收纳显卡收纳',
+                      style: TextStyle(color: Colors.green),
+                      children: [
+                        TextSpan(text: '罗伊'),
+                      ],
                     ),
                   ],
                 ),

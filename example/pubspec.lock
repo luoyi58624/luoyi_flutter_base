@@ -126,6 +126,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.0.2"
+  flutter_obs:
+    dependency: transitive
+    description:
+      name: flutter_obs
+      sha256: "012446534cf388dd57bd994acfb167b08d17a8453c18d7155d432ba0370e8a9d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter

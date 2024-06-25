@@ -10,6 +10,7 @@ export 'package:luoyi_dart_base/luoyi_dart_base.dart';
 // 一个非常轻量的 key-value 本地存储，整个包的源代码不超过100行，不依赖任何本机插件
 export 'package:localstorage/localstorage.dart' show localStorage;
 export 'src/utils/session_storage/session_storage.dart' show sessionStorage;
+export 'package:flutter_obs/flutter_obs.dart';
 export 'package:flutter_hooks/flutter_hooks.dart';
 export 'package:gap/gap.dart';
 export 'package:super_sliver_list/super_sliver_list.dart';
@@ -35,8 +36,10 @@ export 'src/widgets/animation.dart';
 export 'src/widgets/brightness.dart';
 export 'src/widgets/responsive.dart';
 export 'src/widgets/html.dart';
-export 'src/widgets/html/element.dart';
-export 'src/widgets/html/style/style.dart';
+export 'src/widgets/web/web.dart';
+export 'src/widgets/web/widgets/element.dart';
+export 'src/widgets/web/widgets/body.dart';
+export 'src/widgets/web/style/style.dart';
 
 /// 初始化 LocalStorage 和 SessionStorage
 Future<void> initStorage() async {

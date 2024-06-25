@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:luoyi_dart_base/luoyi_dart_base.dart';
-import 'package:luoyi_flutter_base/src/widgets/html/style/style.dart';
+import 'package:luoyi_flutter_base/src/widgets/web/style/style.dart';
 
 abstract class HtmlElement extends StatelessWidget {
   const HtmlElement({super.key});

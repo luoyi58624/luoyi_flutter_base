@@ -1,3 +1,4 @@
+import 'package:example/pages/web.dart';
 import 'package:flutter/material.dart';
 import 'package:example/global.dart';
 
@@ -32,6 +33,7 @@ class HomePage extends HookWidget {
                 title: 'Hook 测试', page: const HookDemoPage()),
             buildCellWidget(context,
                 title: 'Typography 文字排版', page: const TypographyPage()),
+            buildCellWidget(context, title: 'Web 页面', page: const WebPage()),
           ]),
           TapBuilder(
             onTap: () {},
