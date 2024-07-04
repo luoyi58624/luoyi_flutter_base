@@ -6,11 +6,11 @@ class AnimatedColoredBox extends ImplicitlyAnimatedWidget {
     super.key,
     required super.duration,
     required this.color,
-    required this.child,
+    this.child,
   });
 
   final Color color;
-  final Widget child;
+  final Widget? child;
 
   @override
   AnimatedWidgetBaseState<AnimatedColoredBox> createState() =>

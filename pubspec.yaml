@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_obs: ^1.0.0
+  flutter_obs: ^1.1.0
   mini_getx: ^5.0.7
   luoyi_dart_base: ^1.8.0
   go_router: ^14.1.4

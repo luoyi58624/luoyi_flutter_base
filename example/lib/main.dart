@@ -6,7 +6,7 @@ import 'pages/home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await FontUtil.init();
+  // await FontUtil.init();
   initController();
   runApp(const _App());
 }
