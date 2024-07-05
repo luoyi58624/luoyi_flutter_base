@@ -130,10 +130,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_obs
-      sha256: "86da414cb79224ddb84fd4ae79292794b4fc0f0d0bae09af1cc9cbe1f96ef927"
+      sha256: c9f3f3ff2aa5fd18ffa75507079db706096f9a6045d0361cc3328b75ff21f941
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.0"
+    version: "1.2.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter

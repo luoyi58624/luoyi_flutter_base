@@ -5,10 +5,12 @@ class AppController extends GetxController {
 
   static AppController get of => Get.find();
 
-  late final themeMode = useLocalObs<ThemeMode>(
-    ThemeMode.system,
-    'theme_mode',
-    serializeFun: (model) => model.index.toString(),
-    deserializeFun: (json) => ThemeMode.values[int.parse(json)],
-  );
+  late final themeMode = ThemeMode.system.obs;
+
+  // late final themeMode = useLocalObs<ThemeMode>(
+  //   ThemeMode.system,
+  //   'theme_mode',
+  //   serializeFun: (model) => model.index.toString(),
+  //   deserializeFun: (json) => ThemeMode.values[int.parse(json)],
+  // );
 }
