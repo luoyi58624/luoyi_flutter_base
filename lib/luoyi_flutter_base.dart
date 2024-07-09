@@ -21,7 +21,6 @@ export 'src/commons/model.dart';
 export 'src/extensions/color.dart';
 export 'src/extensions/int.dart';
 export 'src/utils/flutter.dart';
-export 'src/utils/device.dart';
 export 'src/utils/session_storage/session_storage.dart';
 export 'src/widgets/animation.dart';
 
