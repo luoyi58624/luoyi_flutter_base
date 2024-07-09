@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.3.0](https://github.com/luoyi58624/luoyi_flutter_base/compare/v2.2.0...v2.3.0) (2024-07-09)
+
+
+### Features
+
+* color扩展onHover、onTap第二个参数变更为Color类型，增强灵活性 ([53b65f8](https://github.com/luoyi58624/luoyi_flutter_base/commit/53b65f8f0206e0a1e51ea298f2b2b9735c6fff68))
+* 完善TapBuilder的delay效果 ([be9e86f](https://github.com/luoyi58624/luoyi_flutter_base/commit/be9e86fc1eb203f03cc9dc150a3908f5addf6e73))
+* 移除字体全局配置 ([da741ce](https://github.com/luoyi58624/luoyi_flutter_base/commit/da741ce04ac35d5cfcbdec5ec70c32071f0b2c07))
+
+
+### Bug Fixes
+
+* TapBuilder更新状态防止dispose ([5a9491e](https://github.com/luoyi58624/luoyi_flutter_base/commit/5a9491e3021158cd3c8a4f7ecf25c8cb67198559))
+
 ## [2.2.0](https://github.com/luoyi58624/luoyi_flutter_base/compare/v2.1.0...v2.2.0) (2024-06-13)
 
 
