@@ -1,13 +1,6 @@
-import 'package:example/global.dart';
-import 'package:example/utils/theme_data_builder.dart';
 import 'package:flutter/material.dart';
 
-import 'pages/home.dart';
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  // await FontUtil.init();
-  initController();
+void main() {
   runApp(const _App());
 }
 
@@ -17,8 +10,12 @@ class _App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // theme: buildM2ThemeData(Brightness.light),
-      home: const HomePage(),
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Example'),
+        ),
+        body: Container(),
+      ),
     );
   }
 }

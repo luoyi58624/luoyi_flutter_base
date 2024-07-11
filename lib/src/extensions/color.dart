@@ -92,11 +92,7 @@ extension FlutterColorExtension on Color {
     return isDark ? brighten(darkScale ?? scale) : darken(lightScale ?? scale);
   }
 
-  /// 当用户鼠标悬停时的颜色
-  Color onHover(bool isHover, [Color? color]) =>
-      isHover ? (color ?? deepen(6)) : this;
-
-  /// 当用户鼠标、手指按下时的颜色
-  Color onTap(bool isTap, [Color? color]) =>
-      isTap ? (color ?? deepen(10)) : this;
+  /// 根据事件状态返回新的颜色
+  Color on(bool flag, {int scale = 10, Color? color}) =>
+      flag ? (color ?? deepen(scale)) : this;
 }
