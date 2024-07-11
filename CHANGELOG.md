@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://github.com/luoyi58624/luoyi_flutter_base/compare/v2.3.0...v2.4.0) (2024-07-11)
+
+
+### Features
+
+* 移除导出的第三方库 ([47b476c](https://github.com/luoyi58624/luoyi_flutter_base/commit/47b476cbf2cc08dd1fa09781057b4eb755427636))
+
 ## [2.3.0](https://github.com/luoyi58624/luoyi_flutter_base/compare/v2.2.0...v2.3.0) (2024-07-09)
 
 
