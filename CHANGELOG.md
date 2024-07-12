@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.0](https://github.com/luoyi58624/luoyi_flutter_base/compare/v2.4.1...v2.5.0) (2024-07-12)
+
+
+### Features
+
+* 新增noRipper ([99e7b3a](https://github.com/luoyi58624/luoyi_flutter_base/commit/99e7b3a225a4d2e168d9081c0c36cf8a14daaa78))
+
 ## [2.4.1](https://github.com/luoyi58624/luoyi_flutter_base/compare/v2.4.0...v2.4.1) (2024-07-12)
 
 
