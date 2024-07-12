@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.4.1](https://github.com/luoyi58624/luoyi_flutter_base/compare/v2.4.0...v2.4.1) (2024-07-12)
+
+
+### Chores
+
+* 新增release-please-config.json、.release-please-manifest.json ([075bbc5](https://github.com/luoyi58624/luoyi_flutter_base/commit/075bbc53a23ab7cd0a1ca8371357afb21d5e2de6))
+* 移除序列化模型 ([2fba968](https://github.com/luoyi58624/luoyi_flutter_base/commit/2fba968a801cd3342cdf18e3ed395cb356bddc55))
+
 ## [2.4.0](https://github.com/luoyi58624/luoyi_flutter_base/compare/v2.3.0...v2.4.0) (2024-07-11)
 
 
