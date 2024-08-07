@@ -10,8 +10,15 @@ export 'package:flutter_obs/flutter_obs.dart';
 export 'package:super_sliver_list/super_sliver_list.dart';
 export 'package:flutter_animate/flutter_animate.dart';
 
+export 'src/extensions/bool.dart';
 export 'src/extensions/color.dart';
 export 'src/extensions/int.dart';
+
 export 'src/utils/flutter.dart';
 export 'src/utils/no_ripper.dart';
+
 export 'src/widgets/animation.dart';
+export 'src/widgets/custom_layout.dart';
+export 'src/widgets/hover.dart';
+export 'src/widgets/simple_widgets.dart';
+export 'src/widgets/tap.dart';
