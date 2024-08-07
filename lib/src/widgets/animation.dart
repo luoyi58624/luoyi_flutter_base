@@ -32,7 +32,7 @@ class _AnimatedColoredBoxState
   @override
   void forEachTween(TweenVisitor<dynamic> visitor) {
     _color = visitor(_color, widget.color,
-        (dynamic value) => ColorTween(begin: value as Color)) as ColorTween;
+            (dynamic value) => ColorTween(begin: value as Color)) as ColorTween;
   }
 }
 
@@ -99,8 +99,8 @@ class _AnimatedRefreshProgressIndicatorState
   @override
   void forEachTween(TweenVisitor<dynamic> visitor) {
     _color = visitor(_color, widget.color,
-        (dynamic value) => ColorTween(begin: value as Color)) as ColorTween?;
+            (dynamic value) => ColorTween(begin: value as Color)) as ColorTween?;
     _backgroundColor = visitor(_backgroundColor, widget.backgroundColor,
-        (dynamic value) => ColorTween(begin: value as Color)) as ColorTween?;
+            (dynamic value) => ColorTween(begin: value as Color)) as ColorTween?;
   }
 }

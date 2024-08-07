@@ -10,9 +10,9 @@ extension FlutterColorStringExtension on String {
   }
 }
 
-/// Color工具函数扩展
+/// Color 扩展
 extension FlutterColorExtension on Color {
-  /// 判断一个颜色是否是暗色
+  /// 判断一个颜色是否是暗色，168相比128而言，感知亮度稍微更明显一点
   bool get isDark => hsp <= 168;
 
   /// 返回一个颜色的hsp (颜色的感知亮度)
@@ -37,12 +37,12 @@ extension FlutterColorExtension on Color {
     bool hasAlpha = false,
   }) =>
       '${hasLeading == true ? '#' : ''}'
-      '${hasAlpha == true ? alpha.toRadixString(16).padLeft(2, '0') : ''}'
-      '${red.toRadixString(16).padLeft(2, '0')}'
-      '${green.toRadixString(16).padLeft(2, '0')}'
-      '${blue.toRadixString(16).padLeft(2, '0')}';
+          '${hasAlpha == true ? alpha.toRadixString(16).padLeft(2, '0') : ''}'
+          '${red.toRadixString(16).padLeft(2, '0')}'
+          '${green.toRadixString(16).padLeft(2, '0')}'
+          '${blue.toRadixString(16).padLeft(2, '0')}';
 
-  /// 创建Material颜色
+  /// 将当前颜色转换成 Material 颜色
   MaterialColor toMaterialColor() {
     List strengths = <double>[.05];
     Map<int, Color> swatch = {};
@@ -67,17 +67,25 @@ extension FlutterColorExtension on Color {
   Color brighten(int scale) {
     assert(scale >= 0 && scale <= 100);
     var p = scale / 100;
-    return Color.fromARGB(alpha, red + ((255 - red) * p).round(),
-        green + ((255 - green) * p).round(), blue + ((255 - blue) * p).round());
+    return Color.fromARGB(
+      alpha,
+      red + ((255 - red) * p).round(),
+      green + ((255 - green) * p).round(),
+      blue + ((255 - blue) * p).round(),
+    );
   }
 
   /// 将颜色变得更暗
   /// * scale 0-100，值越大，颜色越深
   Color darken(int scale) {
     assert(scale >= 0 && scale <= 100);
-    var f = 1 - scale / 100;
+    var p = 1 - scale / 100;
     return Color.fromARGB(
-        alpha, (red * f).round(), (green * f).round(), (blue * f).round());
+      alpha,
+      (red * p).round(),
+      (green * p).round(),
+      (blue * p).round(),
+    );
   }
 
   /// 将颜色变得深，如果当前颜色是亮色，颜色会变暗，但如果当前颜色是暗色，则颜色会变亮
@@ -85,11 +93,25 @@ extension FlutterColorExtension on Color {
   /// * lightScale 0-100，当颜色是亮色时，应用的 scale 值
   /// * darkScale 0-100，当颜色是暗色时，应用的 scale 值
   Color deepen(
-    int scale, {
-    int? lightScale,
-    int? darkScale,
-  }) {
+      int scale, {
+        int? lightScale,
+        int? darkScale,
+      }) {
     return isDark ? brighten(darkScale ?? scale) : darken(lightScale ?? scale);
+  }
+
+  /// 将当前颜色和另一种颜色按一定比例进行混合
+  /// * otherColor 相混合的第二种颜色
+  /// * scale 0-100，比值越小就越接近color1，比值越大就接近color2
+  Color mix(Color otherColor, int scale) {
+    assert(scale >= 0 && scale <= 100);
+    var p = scale / 100;
+    return Color.fromARGB(
+      ((otherColor.alpha - alpha) * p + alpha).round(),
+      ((otherColor.red - red) * p + red).round(),
+      ((otherColor.green - green) * p + green).round(),
+      ((otherColor.blue - blue) * p + blue).round(),
+    );
   }
 
   /// 根据事件状态返回新的颜色

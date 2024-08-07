@@ -4,15 +4,15 @@ import 'package:flutter/services.dart';
 class FlutterUtil {
   FlutterUtil._();
 
-  /// 刷新整个应用
+  /// 刷新整个应用，效果相当于热更新
   static void refreshApp() {
     WidgetsBinding.instance.reassembleApplication();
   }
 
-  /// 当flutter渲染完毕元素后再执行异步逻辑
-  static void nextTick(Future<void> Function() fun) {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      await fun();
+  /// 添加下一帧执行的回调函数，它会在 build 完成后执行
+  static void nextTick(VoidCallback fun) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      fun();
     });
   }
 
