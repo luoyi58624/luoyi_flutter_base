@@ -9,6 +9,7 @@ export 'package:localstorage/localstorage.dart';
 export 'package:flutter_obs/flutter_obs.dart';
 export 'package:super_sliver_list/super_sliver_list.dart';
 export 'package:flutter_animate/flutter_animate.dart';
+export 'package:url_launcher/url_launcher.dart';
 
 export 'src/extensions/bool.dart';
 export 'src/extensions/color.dart';
