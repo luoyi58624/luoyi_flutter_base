@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../commons/models.dart';
+
 class FlutterUtil {
   FlutterUtil._();
 
@@ -47,5 +49,36 @@ class FlutterUtil {
   /// 通过当前context，检查是否包含某个祖先widget
   static bool hasAncestorElement<T>(BuildContext context) {
     return getAncestorElement<T>(context) != null;
+  }
+
+  /// 计算限制后的元素尺寸，返回类似于自适应大小的图片尺寸
+  static SizeModel calcConstraintsSize(
+      double width,
+      double height,
+      double maxWidth,
+      double maxHeight,
+      ) {
+    late double newWidth;
+    late double newHeight;
+    if (width > height) {
+      if (width > maxWidth) {
+        newWidth = maxWidth;
+        double aspect = maxWidth / width;
+        newHeight = (height * aspect).ceilToDouble();
+      } else {
+        newWidth = width;
+        newHeight = height;
+      }
+    } else {
+      if (height > maxHeight) {
+        newHeight = maxHeight;
+        double aspect = maxHeight / height;
+        newWidth = (width * aspect).ceilToDouble();
+      } else {
+        newWidth = width;
+        newHeight = height;
+      }
+    }
+    return SizeModel(newWidth, newHeight);
   }
 }

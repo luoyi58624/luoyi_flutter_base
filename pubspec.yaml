@@ -12,14 +12,14 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  luoyi_dart_base: ^1.12.0
+  luoyi_dart_base: ^1.13.0
   gap: ^3.0.1
   flutter_hooks: ^0.20.5
   flutter_obs: ^1.4.0
   cached_network_image: ^3.3.1
   localstorage: ^5.0.0
   flutter_animate: ^4.5.0
-  web: ^0.5.1
+  web: ^1.0.0
   collection: ^1.18.0
   super_sliver_list: ^0.4.1
   defer_pointer: ^0.0.2
