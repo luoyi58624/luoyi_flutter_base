@@ -15,7 +15,7 @@ class PlatformUtil {
   /// android、android web
   static final bool isAndroid = GeneralPlatform.isAndroid;
 
-  /// ios、ios web
+  /// ios、ios web、ipad
   static final bool isIOS = GeneralPlatform.isIOS;
 
   /// fuchsia、fuchsia web

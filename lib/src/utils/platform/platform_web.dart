@@ -1,24 +1,20 @@
-// ignore: avoid_web_libraries_in_flutter
-import 'package:web/web.dart' as html;
+import 'package:web/web.dart' as web;
 
-html.Navigator _navigator = html.window.navigator;
+String _userAgent = web.window.navigator.userAgent;
 
-// ignore: avoid_classes_with_only_static_members
 class GeneralPlatform {
-  static final bool isMacOS =
-      _navigator.appVersion.contains('Mac OS') && !isIOS;
+  static final bool isMacOS = _userAgent.contains('Mac OS') && !isIOS;
 
-  static final bool isWindows = _navigator.appVersion.contains('Win');
+  static final bool isWindows = _userAgent.contains('Win');
 
-  static final bool isLinux = (_navigator.appVersion.contains('Linux') ||
-          _navigator.appVersion.contains('x11')) &&
-      !isAndroid;
+  static final bool isLinux =
+      (_userAgent.contains('Linux') || _userAgent.contains('x11')) &&
+          !isAndroid;
 
-  static final bool isAndroid = _navigator.appVersion.contains('Android ');
+  static final bool isAndroid = _userAgent.contains('Android');
 
   static final bool isIOS =
-      RegExp(r'/iPad|iPhone|iPod/').hasMatch(_navigator.platform) ||
-          (_navigator.platform == 'MacIntel' && _navigator.maxTouchPoints > 1);
+      RegExp(r'(iPad|iPhone|iPod|Macintosh)').hasMatch(_userAgent);
 
   static const bool isFuchsia = false;
 
