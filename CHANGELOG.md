@@ -1,5 +1,28 @@
 # Changelog
 
+## [2.6.0](https://github.com/luoyi58624/luoyi_flutter_base/compare/v2.5.0...v2.6.0) (2024-08-08)
+
+
+### Features
+
+* flutter_element_ui代码已全部迁移 ([98135ba](https://github.com/luoyi58624/luoyi_flutter_base/commit/98135baeb9247d569723cc7eb6d79c6dd606e679))
+* FontUtil新增字重 ([708045f](https://github.com/luoyi58624/luoyi_flutter_base/commit/708045f23e4408febec6d496544e73e7683f7f9e))
+* int扩展函数新增ms ([e3dd10c](https://github.com/luoyi58624/luoyi_flutter_base/commit/e3dd10c337a0f33ba5a22a6af2aae2ecbe55285a))
+* 迁移 flutter_element_ui 部分代码 ([f52ae51](https://github.com/luoyi58624/luoyi_flutter_base/commit/f52ae519d5f6fdf834a3c01d67cbc9de485b7ad2))
+* 迁移font工具类 ([16525ea](https://github.com/luoyi58624/luoyi_flutter_base/commit/16525eaefcd35f2cbd613fef1ad6df37793cb0c7))
+
+
+### Bug Fixes
+
+* 修复PlatformUtil在web上的判断 ([b7ce1fc](https://github.com/luoyi58624/luoyi_flutter_base/commit/b7ce1fcfec7dd71300ab7b628c33a25dca53f066))
+* 修复缺失的导出 ([b655945](https://github.com/luoyi58624/luoyi_flutter_base/commit/b65594579ac47bd3be98619472d5e03536506f80))
+* 修复缺失的导出 ([2d05221](https://github.com/luoyi58624/luoyi_flutter_base/commit/2d05221f89d0b3186705b13ccf07bc4889e3f7ca))
+
+
+### Chores
+
+* 修改font预设字重 ([95da3f1](https://github.com/luoyi58624/luoyi_flutter_base/commit/95da3f1092dafe2bbce8b472885386c751f256ca))
+
 ## [2.5.0](https://github.com/luoyi58624/luoyi_flutter_base/compare/v2.4.1...v2.5.0) (2024-07-12)
 
 
