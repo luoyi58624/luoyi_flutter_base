@@ -7,6 +7,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:localstorage/localstorage.dart';
 
+import '../platform/platform.dart';
 import 'font_web.dart' if (dart.library.io) 'font_io.dart';
 
 part 'model.dart';
@@ -24,6 +25,27 @@ final HashSet<String> _loadFonts = HashSet();
 /// Flutter字体工具类
 class FontUtil {
   FontUtil._();
+
+  /// 普通字重
+  static FontWeight normal = FontWeight.normal;
+
+  /// 中等字重
+  static FontWeight medium = FontWeight.w500;
+
+  /// 粗体字重
+  static FontWeight bold = FontWeight.bold;
+
+  /// 字体回退列表，flutter会根据此列表依次匹配字体
+  static List<String>? get fontFamilyFallback {
+    // 在 mac 上若不指定苹方字体，那么中文字重只有两种
+    if (PlatformUtil.isMacOS || PlatformUtil.isIOS) {
+      return ['.AppleSystemUIFont', 'PingFang SC'];
+    } else if (PlatformUtil.isWindows) {
+      return ['Microsoft YaHei', '微软雅黑'];
+    } else {
+      return null;
+    }
+  }
 
   /// 初始化的字体
   static FontModel _initialFont = FontPreset.systemFont;
