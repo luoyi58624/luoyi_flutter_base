@@ -18,7 +18,7 @@ Obs<T> useObs<T>(
   ));
 }
 
-/// 在开发模式下禁用hook
+/// 在开发模式下禁用hook，这样当热刷新时将会重置状态
 Obs<T> useDebugObs<T>(
   T initialData, {
   bool auto = true,

@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-extension ElResponsiveExtension on BuildContext {
+extension FlutterResponsiveExtension on BuildContext {
   /// 极小设备，最大宽度默认320
   bool get xs => MediaQuery.sizeOf(this).width <= ResponsiveWidget.of(this).xs;
 
