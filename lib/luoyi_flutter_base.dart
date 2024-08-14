@@ -5,7 +5,6 @@ export 'package:luoyi_dart_base/luoyi_dart_base.dart';
 export 'package:collection/collection.dart';
 export 'package:flutter_hooks/flutter_hooks.dart';
 export 'package:gap/gap.dart';
-export 'package:localstorage/localstorage.dart';
 export 'package:flutter_obs/flutter_obs.dart';
 export 'package:super_sliver_list/super_sliver_list.dart';
 export 'package:flutter_animate/flutter_animate.dart';
@@ -20,10 +19,11 @@ export 'src/extensions/widget.dart';
 
 export 'src/hooks/obs.dart';
 
-export 'src/utils/flutter.dart';
-export 'src/utils/no_ripper.dart';
 export 'src/utils/font/font.dart';
 export 'src/utils/platform/platform.dart';
+export 'src/utils/flutter.dart';
+export 'src/utils/local_storage.dart';
+export 'src/utils/no_ripper.dart';
 
 export 'src/widgets/animation.dart';
 export 'src/widgets/brightness.dart';
