@@ -10,6 +10,7 @@ export 'package:super_sliver_list/super_sliver_list.dart';
 export 'package:flutter_animate/flutter_animate.dart';
 export 'package:url_launcher/url_launcher.dart';
 
+export 'src/commons/global.dart';
 export 'src/commons/models.dart';
 
 export 'src/extensions/bool.dart';
@@ -33,3 +34,7 @@ export 'src/widgets/responsive.dart';
 export 'src/widgets/scroll_behavior.dart';
 export 'src/widgets/simple_widgets.dart';
 export 'src/widgets/tap.dart';
+
+export 'src/widgets/typography/text.dart';
+export 'src/widgets/typography/href.dart';
+export 'src/widgets/typography/title.dart';

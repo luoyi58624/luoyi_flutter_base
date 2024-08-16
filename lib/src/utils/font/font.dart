@@ -27,13 +27,13 @@ class FontUtil {
   FontUtil._();
 
   /// 普通字重
-  static FontWeight normal = FontWeight.w400;
+  static FontWeight normal = FontWeight.normal;
 
   /// 中等字重
   static FontWeight medium = FontWeight.w500;
 
   /// 粗体字重
-  static FontWeight bold = FontWeight.w600;
+  static FontWeight bold = FontWeight.bold;
 
   /// 字体回退列表，flutter会根据此列表依次匹配字体
   static List<String>? get fontFamilyFallback {
