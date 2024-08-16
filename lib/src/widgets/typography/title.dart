@@ -25,7 +25,7 @@ class H2 extends TextWidget {
   TextStyle buildTextStyle(BuildContext context) {
     return DefaultTextStyle.of(context)
         .style
-        .copyWith(fontSize: 1.75.rem, fontWeight: FontUtil.bold)
+        .copyWith(fontSize: 1.5.rem, fontWeight: FontUtil.bold)
         .merge(style);
   }
 }
@@ -38,7 +38,7 @@ class H3 extends TextWidget {
   TextStyle buildTextStyle(BuildContext context) {
     return DefaultTextStyle.of(context)
         .style
-        .copyWith(fontSize: 1.5.rem, fontWeight: FontUtil.bold)
+        .copyWith(fontSize: 1.25.rem, fontWeight: FontUtil.bold)
         .merge(style);
   }
 }
@@ -51,7 +51,7 @@ class H4 extends TextWidget {
   TextStyle buildTextStyle(BuildContext context) {
     return DefaultTextStyle.of(context)
         .style
-        .copyWith(fontSize: 1.25.rem, fontWeight: FontUtil.bold)
+        .copyWith(fontSize: 1.17.rem, fontWeight: FontUtil.bold)
         .merge(style);
   }
 }
