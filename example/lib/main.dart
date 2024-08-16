@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:luoyi_flutter_base/luoyi_flutter_base.dart';
-import 'package:web/web.dart' as web;
 
 void main() {
   runApp(const _App());
@@ -19,9 +18,18 @@ class _App extends StatelessWidget {
         body: Center(
           child: Column(
             children: [
-              SelectableText(web.window.navigator.userAgent),
-              Text(web.window.navigator.userAgent.contains('Macintosh').toString()),
-              Text('IOS: ${PlatformUtil.isIOS}'),
+              DefaultTextStyle(
+                style: TextStyle(color: Colors.grey),
+                child: H1(
+                  ['一级标题 (H1)', H4('四级标题')],
+                  style: TextStyle(fontWeight: FontWeight.w400),
+                ),
+              ),
+              // const H2('二级标题 (H2)'),
+              // const H3('三级标题 (H3)'),
+              // const H4('四级标题 (H4)'),
+              // const H5('五级标题 (H5)'),
+              // const H6('六级标题 (H6)'),
             ],
           ),
         ),

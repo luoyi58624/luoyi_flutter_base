@@ -1,8 +1,9 @@
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:luoyi_flutter_base/luoyi_flutter_base.dart';
+import 'package:luoyi_dart_base/luoyi_dart_base.dart';
 
 import '../../commons/global.dart';
+import '../hover.dart';
 
 class TextWidget extends StatelessWidget {
   const TextWidget(
@@ -69,17 +70,19 @@ class TextWidget extends StatelessWidget {
 
   /// 构建当前文本样式
   TextStyle buildTextStyle(BuildContext context) {
-    return TextStyle(
-      fontSize: globalTextStyle.fontSize,
-      fontWeight: globalTextStyle.fontWeight,
-      color: globalTextStyle.color,
-    ).merge(DefaultTextStyle.of(context).style.merge(style));
+    return GlobalConfig.textStyle.merge(DefaultTextStyle.of(context).style);
   }
 
   /// 构建文本小部件
   @override
   Widget build(BuildContext context) {
-    var $style = buildTextStyle(context);
+    var $style = buildTextStyle(context)
+        .copyWith(
+          // 如果不强制指定它们，那么很容易被 Material 覆写，导致全局定义的字族失效
+          fontFamily: GlobalConfig.textStyle.fontFamily,
+          fontFamilyFallback: GlobalConfig.textStyle.fontFamilyFallback,
+        )
+        .merge(style);
     // 同步 Text 小部件的加粗文本逻辑
     if (MediaQuery.boldTextOf(context)) {
       $style.copyWith(fontWeight: FontWeight.bold);

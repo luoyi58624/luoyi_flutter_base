@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:luoyi_flutter_base/luoyi_flutter_base.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:luoyi_flutter_base/src/commons/global.dart';
+import 'package:luoyi_flutter_base/src/widgets/brightness.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../hover.dart';
+import '../tap.dart';
 import 'href/web.dart' if (dart.library.io) 'href/io.dart';
 import 'text.dart';
 
@@ -115,7 +119,7 @@ class A extends StatelessWidget {
                     ).animate().fade(),
                   ),
                 );
-                Overlay.of(globalContext).insert(_hrefOverlay!);
+                Overlay.of(GlobalConfig.context).insert(_hrefOverlay!);
               }
             },
       onExit: (e) {

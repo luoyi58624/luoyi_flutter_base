@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
+import '../commons/global.dart';
 import '../widgets/scroll_behavior.dart';
-import '../commons/global.dart' as global;
 
 extension FlutterWidgetExtension on Widget {
   /// 禁止使用祖先定义的默认的滚动条，如果你希望当前滚动小部件不使用滚动条，或者你正在使用自定义滚动条，
@@ -12,7 +12,7 @@ extension FlutterWidgetExtension on Widget {
       );
 
   Widget get globalTextStyle => DefaultTextStyle.merge(
-        style: global.globalTextStyle,
+        style: GlobalConfig.textStyle,
         child: this,
       );
 }

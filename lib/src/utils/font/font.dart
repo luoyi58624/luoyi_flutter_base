@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_obs/flutter_obs.dart';
 import 'package:luoyi_dart_base/luoyi_dart_base.dart';
 
@@ -7,7 +8,6 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 import '../local_storage.dart';
-import '../platform/platform.dart';
 import 'font_web.dart' if (dart.library.io) 'font_io.dart';
 
 part 'model.dart';
@@ -35,22 +35,10 @@ class FontUtil {
   /// 粗体字重
   static FontWeight bold = FontWeight.bold;
 
-  /// 字体回退列表，flutter会根据此列表依次匹配字体
-  static List<String>? get fontFamilyFallback {
-    // 在 mac 上若不指定苹方字体，那么中文字重只有两种
-    if (PlatformUtil.isMacOS || PlatformUtil.isIOS) {
-      return ['.AppleSystemUIFont', 'PingFang SC'];
-    } else if (PlatformUtil.isWindows) {
-      return ['Microsoft YaHei', '微软雅黑'];
-    } else {
-      return null;
-    }
-  }
-
   /// 初始化的字体
   static FontModel _initialFont = FontPreset.systemFont;
 
-  /// 当前加载的全局字体模型
+  /// 当前加载的全局字体模型，这是一个响应式变量，使用 [ObsBuilder]、[ValueListenableBuilder] 包裹会自动重建小部件
   static final Obs<FontModel> _currentFontModel = Obs(FontPreset.systemFont);
 
   /// 当前选择的全局字体，null 表示系统字体
@@ -72,7 +60,8 @@ class FontUtil {
 
     if (initialLocalStr == null) {
       _initialFont = fontModel;
-      localStorage.setString(_initialLocalKey, jsonEncode(_initialFont.toJson()));
+      localStorage.setString(
+          _initialLocalKey, jsonEncode(_initialFont.toJson()));
     } else {
       _initialFont = FontModel.fromJson(
           (jsonDecode(initialLocalStr) as Map).cast<String, dynamic>());
