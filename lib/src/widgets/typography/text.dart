@@ -1,6 +1,7 @@
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:luoyi_dart_base/luoyi_dart_base.dart';
+import 'package:luoyi_flutter_base/src/widgets/typography/ext.dart';
 
 import '../../commons/global.dart';
 import '../hover.dart';
@@ -18,7 +19,7 @@ class TextWidget extends StatelessWidget {
     this.overflow,
     this.textScaler,
     this.maxLines,
-    this.semanticsLabel,
+    this.semanticsLabel = 'Text',
     this.textWidthBasis,
     this.textHeightBehavior,
     this.selectionColor,
@@ -26,7 +27,7 @@ class TextWidget extends StatelessWidget {
 
   /// 渲染的文本内容，支持传递任意小部件，如果是[List]集合，则会渲染成富文本。
   ///
-  /// 对于富文本，如果传递的类型并非基础数据类型或者 [ElText] 类型，
+  /// 对于富文本，如果传递的类型并非基础数据类型或者 [TextWidget] 类型，
   /// 那么将自动使用 [WidgetSpan] 进行包裹，为了能够垂直对齐文本，
   /// [WidgetSpan]设置了特定的 alignment、baseline 属性，
   /// 这些默认值对于非文本小部件的垂直对齐效果不好，
@@ -70,19 +71,16 @@ class TextWidget extends StatelessWidget {
 
   /// 构建当前文本样式
   TextStyle buildTextStyle(BuildContext context) {
-    return GlobalConfig.textStyle.merge(DefaultTextStyle.of(context).style);
+    return GlobalConfig.textStyle
+        .merge(DefaultTextStyle.of(context).style)
+        .applyForceTextStyle
+        .merge(style);
   }
 
   /// 构建文本小部件
   @override
   Widget build(BuildContext context) {
-    var $style = buildTextStyle(context)
-        .copyWith(
-          // 如果不强制指定它们，那么很容易被 Material 覆写，导致全局定义的字族失效
-          fontFamily: GlobalConfig.textStyle.fontFamily,
-          fontFamilyFallback: GlobalConfig.textStyle.fontFamilyFallback,
-        )
-        .merge(style);
+    var $style = buildTextStyle(context).copyWith();
     // 同步 Text 小部件的加粗文本逻辑
     if (MediaQuery.boldTextOf(context)) {
       $style.copyWith(fontWeight: FontWeight.bold);
@@ -151,7 +149,7 @@ class TextWidget extends StatelessWidget {
     }
     // 直接返回富文本的文本片段
     if (data is TextSpan || data is WidgetSpan) return data;
-    // 处理 ElText 类型，如果目标 data 是数组，则递归构建文本片段
+    // 处理 TextWidget 类型，如果目标 data 是数组，则递归构建文本片段
     if (data is TextWidget) {
       if (data.data is List) {
         final richTexts = data.data as List;
