@@ -1,12 +1,12 @@
 import 'package:flutter/widgets.dart';
 import 'package:luoyi_flutter_base/src/extensions/num.dart';
-import 'package:luoyi_flutter_base/src/widgets/typography/ext.dart';
+import 'package:luoyi_flutter_base/src/widgets/typography/common.dart';
 
 import '../../utils/font/font.dart';
 import 'text.dart';
 
 // ===========================================================================
-// 标题的字体大小、字重不会被 DefaultTextStyle 覆盖
+// 标题的字体大小、字重不会被 DefaultTextStyle 覆盖，同时标题仅提供 style 属性
 // ===========================================================================
 
 class H1 extends TextWidget {

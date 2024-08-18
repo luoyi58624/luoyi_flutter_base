@@ -1,11 +1,12 @@
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:luoyi_dart_base/luoyi_dart_base.dart';
-import 'package:luoyi_flutter_base/src/widgets/typography/ext.dart';
+import 'package:luoyi_flutter_base/src/widgets/typography/common.dart';
 
 import '../../commons/global.dart';
 import '../hover.dart';
 
+/// 文本组件，与 [Text] 相比，简化了富文本的写法
 class TextWidget extends StatelessWidget {
   const TextWidget(
     this.data, {
