@@ -1,5 +1,6 @@
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:luoyi_dart_base/luoyi_dart_base.dart';
 import 'package:luoyi_flutter_base/src/extensions/private.dart';
 
 import '../commons/global.dart';
@@ -27,11 +28,8 @@ class TextWidget extends StatelessWidget {
 
   /// 渲染的文本内容，支持传递任意小部件，如果是[List]集合，则会渲染成富文本。
   ///
-  /// 对于富文本，如果传递的类型并非基础数据类型或者 [TextWidget] 类型，
-  /// 那么将自动使用 [WidgetSpan] 进行包裹，为了能够垂直对齐文本，
-  /// [WidgetSpan]设置了特定的 alignment、baseline 属性，
-  /// 这些默认值对于非文本小部件的垂直对齐效果不好，
-  /// 但你可以自己在外面包裹 [WidgetSpan] 调整定位。
+  /// 渲染富文本有一点需要注意，嵌套的组件会被转换成 TextSpan、WidgetSpan，
+  /// 所以如果是文本组件，那么只有 style、semanticsLabel 等属性会生效
   final dynamic data;
 
   /// 文本样式
@@ -80,7 +78,7 @@ class TextWidget extends StatelessWidget {
   /// 构建文本小部件
   @override
   Widget build(BuildContext context) {
-    var $style = buildTextStyle(context).copyWith();
+    var $style = buildTextStyle(context);
     // 同步 Text 小部件的加粗文本逻辑
     if (MediaQuery.boldTextOf(context)) {
       $style.copyWith(fontWeight: FontWeight.bold);
@@ -142,7 +140,46 @@ class TextWidget extends StatelessWidget {
     // 1. 如果是文本片段则直接返回
     if (data is TextSpan || data is WidgetSpan) return data;
 
-    // 2. 如果是 Widget 小部件，则使用 WidgetSpan 包裹，默认使用文本对齐方案，
+    // 2. 处理 Text 小部件，对于嵌套的子组件，TextSpan 本身就只接受少量参数，所以其他参数会被忽略
+    if (data is Text) {
+      return TextSpan(
+        text: '${data.data}',
+        style: data.style,
+        semanticsLabel: data.semanticsLabel,
+      );
+    }
+
+    // 3. 处理自定义的 TextWidget 小部件，其实 2、3 两个步骤是对第 4 步进行一个扩充，
+    // 目的是以最大限度解决文本垂直对齐问题，单纯地使用 WidgetSpan 渲染依旧存在文本无法垂直对齐bug
+    if (data is TextWidget) {
+      if (DartUtil.isBaseType(data.data)) {
+        return TextSpan(
+          text: '${data.data}',
+          style: data.buildTextStyle(context),
+          semanticsLabel: data.semanticsLabel,
+        );
+      } else if (data.data is List) {
+        // 如果列表中存在非文本小部件，那么不能使用 TextSpan 渲染，否则在多级嵌套下会出现样式问题，例如：
+        // P(
+        //  B([
+        //    A('百度', href: 'https://www.baidu.com'),
+        //  ]),
+        // ),
+        // A 标签属于 StatelessWidget 小部件，它内部会继承父级样式，如果 B 标签是通过 TextSpan 渲染，
+        // 那么 DefaultTextStyle 无法访问 TextSpan 样式，最终会访问到 P 标签的样式，
+        // 所以针对这种情况我们需要跳到步骤 4 处理，用 WidgetSpan 渲染 B 标签。
+        bool hasWidget = (data.data as List)
+            .any((e) => e is Widget && (e is! Text || e is! TextWidget));
+        if (!hasWidget) {
+          return TextSpan(
+            style: data.buildTextStyle(context),
+            children: _buildRichText(context, data.data),
+          );
+        }
+      }
+    }
+
+    // 4. 如果是 Widget 小部件，则使用 WidgetSpan 包裹，默认使用文本对齐方案，
     // 如果你传递的 Widget 不是文本，你可以包裹 WidgetSpan 自定义对齐
     if (data is Widget) {
       return WidgetSpan(
@@ -152,14 +189,14 @@ class TextWidget extends StatelessWidget {
       );
     }
 
-    // 3. 如果是数组，则递归渲染
+    // 5. 如果是数组，则递归渲染
     if (data is List) {
       return TextSpan(
         children: _buildRichText(context, data),
       );
     }
 
-    // 4. 默认返回文本片段
+    // 6. 默认返回文本片段
     return TextSpan(
       text: '$data',
       semanticsLabel: semanticsLabel,

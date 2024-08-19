@@ -169,23 +169,27 @@ class A extends StatelessWidget {
                 },
           builder: (context) => TapBuilder(
             onTap: $href == null ? null : () => launchUrl(Uri.parse($href)),
-            builder: (context) => child is Widget
-                ? child
-                : DefaultTextStyle.merge(
-                    style: TextStyle(
-                      color: HoverBuilder.of(context) ? activeColor : color,
-                      decoration: decoration == HrefDecoration.underline
-                          ? TextDecoration.underline
-                          : decoration == HrefDecoration.hoverUnderline
-                              ? (HoverBuilder.of(context)
-                                  ? TextDecoration.underline
-                                  : TextDecoration.none)
-                              : TextDecoration.none,
-                      decorationColor:
-                          HoverBuilder.of(context) ? activeColor : color,
-                    ),
-                    child: TextWidget(child),
+            builder: (context) {
+              if (child is Widget) {
+                return child;
+              } else {
+                return DefaultTextStyle.merge(
+                  style: TextStyle(
+                    color: HoverBuilder.of(context) ? activeColor : color,
+                    decoration: decoration == HrefDecoration.underline
+                        ? TextDecoration.underline
+                        : decoration == HrefDecoration.hoverUnderline
+                            ? (HoverBuilder.of(context)
+                                ? TextDecoration.underline
+                                : TextDecoration.none)
+                            : TextDecoration.none,
+                    decorationColor:
+                        HoverBuilder.of(context) ? activeColor : color,
                   ),
+                  child: TextWidget(child),
+                );
+              }
+            },
           ),
         );
       }),

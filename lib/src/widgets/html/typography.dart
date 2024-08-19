@@ -126,3 +126,17 @@ class I extends TextWidget {
         .merge(style);
   }
 }
+
+class Del extends TextWidget {
+  /// 删除线文本
+  const Del(super.data, {super.key, super.style}) : super(semanticsLabel: 'Del');
+
+  @override
+  TextStyle buildTextStyle(BuildContext context) {
+    return GlobalConfig.textStyle
+        .merge(DefaultTextStyle.of(context).style)
+        .copyWith(decoration: TextDecoration.lineThrough)
+        .applyForceTextStyle
+        .merge(style);
+  }
+}
