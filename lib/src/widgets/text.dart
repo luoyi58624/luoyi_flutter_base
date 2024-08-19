@@ -6,7 +6,7 @@ import 'package:luoyi_flutter_base/src/extensions/private.dart';
 import '../commons/global.dart';
 import 'hover.dart';
 
-/// 文本组件，与 [Text] 相比，简化了富文本的写法
+/// 文本组件，与 [Text] 相比，主要简化了富文本的写法，同时它也是很多排版组件的基类
 class TextWidget extends StatelessWidget {
   const TextWidget(
     this.data, {
@@ -150,7 +150,8 @@ class TextWidget extends StatelessWidget {
     }
 
     // 3. 处理自定义的 TextWidget 小部件，其实 2、3 两个步骤是对第 4 步进行一个扩充，
-    // 目的是以最大限度解决文本垂直对齐问题，单纯地使用 WidgetSpan 渲染依旧存在文本无法垂直对齐bug
+    // 目的是以最大限度解决文本垂直对齐问题，单纯地使用 WidgetSpan 渲染如果有些文字太大，
+    // 那么依旧存在文本无法垂直对齐bug
     if (data is TextWidget) {
       if (DartUtil.isBaseType(data.data)) {
         return TextSpan(
@@ -166,7 +167,7 @@ class TextWidget extends StatelessWidget {
         //  ]),
         // ),
         // A 标签属于 StatelessWidget 小部件，它内部会继承父级样式，如果 B 标签是通过 TextSpan 渲染，
-        // 那么 DefaultTextStyle 无法访问 TextSpan 样式，最终会访问到 P 标签的样式，
+        // 由于 DefaultTextStyle 无法访问 TextSpan 样式，那么它将继承 P 标签的样式，导致加粗失败，
         // 所以针对这种情况我们需要跳到步骤 4 处理，用 WidgetSpan 渲染 B 标签。
         bool hasWidget = (data.data as List)
             .any((e) => e is Widget && (e is! Text || e is! TextWidget));
@@ -180,7 +181,7 @@ class TextWidget extends StatelessWidget {
     }
 
     // 4. 如果是 Widget 小部件，则使用 WidgetSpan 包裹，默认使用文本对齐方案，
-    // 如果你传递的 Widget 不是文本，你可以包裹 WidgetSpan 自定义对齐
+    // 如果你传递的 Widget 不是文本，你可以自己包裹 WidgetSpan 实现自定义对齐
     if (data is Widget) {
       return WidgetSpan(
         alignment: PlaceholderAlignment.baseline,

@@ -38,3 +38,4 @@ export 'src/widgets/text.dart';
 
 export 'src/widgets/html/href/href.dart';
 export 'src/widgets/html/typography.dart';
+export 'src/widgets/html/list.dart';
