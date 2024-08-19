@@ -1,6 +1,5 @@
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:luoyi_dart_base/luoyi_dart_base.dart';
 import 'package:luoyi_flutter_base/src/extensions/private.dart';
 
 import '../commons/global.dart';
@@ -139,53 +138,31 @@ class TextWidget extends StatelessWidget {
   }
 
   /// 使用递归构建富文本片段
-  InlineSpan _buildInlineSpan(BuildContext context, dynamic data,
-      [List<InlineSpan>? children]) {
-    // 如果是基础数据类型，则返回文本片段
-    if (DartUtil.isBaseType(data)) {
-      return TextSpan(
-        text: '$data',
-        semanticsLabel: semanticsLabel,
+  InlineSpan _buildInlineSpan(BuildContext context, dynamic data) {
+    // 1. 如果是文本片段则直接返回
+    if (data is TextSpan || data is WidgetSpan) return data;
+
+    // 2. 如果是 Widget 小部件，则使用 WidgetSpan 包裹，默认使用文本对齐方案，
+    // 如果你传递的 Widget 不是文本，你可以包裹 WidgetSpan 自定义对齐
+    if (data is Widget) {
+      return WidgetSpan(
+        alignment: PlaceholderAlignment.baseline,
+        baseline: TextBaseline.alphabetic,
+        child: data,
       );
     }
-    // 直接返回富文本的文本片段
-    if (data is TextSpan || data is WidgetSpan) return data;
-    // 处理 TextWidget 类型，如果目标 data 是数组，则递归构建文本片段
-    if (data is TextWidget) {
-      if (data.data is List) {
-        final richTextList = data.data as List;
-        List<InlineSpan> $children = [];
-        if (richTextList.length > 1) {
-          $children.addAll(
-            _buildRichText(context, richTextList.sublist(1, richTextList.length)),
-          );
-        }
-        return _buildInlineSpan(
-          context,
-          TextWidget(richTextList[0], style: data.buildTextStyle(context)),
-          $children,
-        );
-      } else {
-        if (DartUtil.isBaseType(data.data)) {
-          return TextSpan(
-            text: data.data,
-            style: data.buildTextStyle(context),
-            semanticsLabel: data.semanticsLabel,
-            children: children != null && children.isNotEmpty ? children : null,
-          );
-        }
-      }
-    }
-    return WidgetSpan(
-      alignment: PlaceholderAlignment.baseline,
-      baseline: TextBaseline.alphabetic,
-      child: data,
-    );
-  }
 
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('data', data, showName: true));
+    // 3. 如果是数组，则递归渲染
+    if (data is List) {
+      return TextSpan(
+        children: _buildRichText(context, data),
+      );
+    }
+
+    // 4. 默认返回文本片段
+    return TextSpan(
+      text: '$data',
+      semanticsLabel: semanticsLabel,
+    );
   }
 }
