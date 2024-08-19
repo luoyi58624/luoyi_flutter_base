@@ -6,7 +6,8 @@ import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 final hash = urlStrategy is PathUrlStrategy ? '' : '/#';
 
-String? getFullHref(String href) {
+String? getFullHref(String? href) {
+  if (href == null) return null;
   if (DartUtil.isHttp(href)) return href;
   return window.location.origin + hash + href;
 }

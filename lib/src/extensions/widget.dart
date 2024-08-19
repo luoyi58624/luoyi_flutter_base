@@ -11,6 +11,7 @@ extension FlutterWidgetExtension on Widget {
         child: this,
       );
 
+  /// 应用全局文本样式
   Widget get globalTextStyle => DefaultTextStyle.merge(
         style: GlobalConfig.textStyle,
         child: this,
