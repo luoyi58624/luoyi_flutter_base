@@ -1,10 +1,10 @@
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:luoyi_dart_base/luoyi_dart_base.dart';
-import 'package:luoyi_flutter_base/src/widgets/typography/common.dart';
+import 'package:luoyi_flutter_base/src/extensions/private.dart';
 
-import '../../commons/global.dart';
-import '../hover.dart';
+import '../commons/global.dart';
+import 'hover.dart';
 
 /// 文本组件，与 [Text] 相比，简化了富文本的写法
 class TextWidget extends StatelessWidget {
@@ -153,16 +153,16 @@ class TextWidget extends StatelessWidget {
     // 处理 TextWidget 类型，如果目标 data 是数组，则递归构建文本片段
     if (data is TextWidget) {
       if (data.data is List) {
-        final richTexts = data.data as List;
+        final richTextList = data.data as List;
         List<InlineSpan> $children = [];
-        if (richTexts.length > 1) {
+        if (richTextList.length > 1) {
           $children.addAll(
-            _buildRichText(context, richTexts.sublist(1, richTexts.length)),
+            _buildRichText(context, richTextList.sublist(1, richTextList.length)),
           );
         }
         return _buildInlineSpan(
           context,
-          TextWidget(richTexts[0], style: data.buildTextStyle(context)),
+          TextWidget(richTextList[0], style: data.buildTextStyle(context)),
           $children,
         );
       } else {
@@ -181,5 +181,11 @@ class TextWidget extends StatelessWidget {
       baseline: TextBaseline.alphabetic,
       child: data,
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('data', data, showName: true));
   }
 }

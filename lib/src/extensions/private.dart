@@ -1,6 +1,6 @@
 import 'package:flutter/rendering.dart';
 
-import '../../commons/global.dart';
+import '../commons/global.dart';
 
 extension TextStyleExtension on TextStyle {
   /// 有些全局文本属性不应该被 [DefaultTextStyle] 覆写，当使用 [DefaultTextStyle] 组件时，

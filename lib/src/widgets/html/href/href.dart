@@ -7,10 +7,10 @@ import 'package:luoyi_flutter_base/src/commons/global.dart';
 import 'package:luoyi_flutter_base/src/widgets/brightness.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../hover.dart';
-import '../tap.dart';
-import 'href/web.dart' if (dart.library.io) 'href/io.dart';
-import 'text.dart';
+import '../../hover.dart';
+import '../../tap.dart';
+import './web.dart' if (dart.library.io) './io.dart';
+import '../../text.dart';
 
 /// 超链接地址显示、隐藏动画控制器
 AnimationController? _controller;
@@ -71,9 +71,8 @@ class A extends StatelessWidget {
   /// 则超链接点击事件将失效，你可以通过 A.of(context) 访问超链接地址。
   ///
   /// 提示：如果是客户端，链接地址不是 http 开头将不会显示链接地址，如果是浏览器，则会自动拼接当前网址基本路径。
-  const A({
+  const A(this.child, {
     super.key,
-    required this.child,
     required this.href,
     this.cursor,
     this.color = hrefColor,
@@ -81,7 +80,7 @@ class A extends StatelessWidget {
     this.decoration = HrefDecoration.none,
   });
 
-  /// 超链接内容，如果不是 Widget 类型，则直接渲染成文本，并添加默认的点击跳转事件
+  /// 超链接子组件，如果不是 Widget 类型，则渲染默认样式文本
   final dynamic child;
 
   /// 超链接地址

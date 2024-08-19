@@ -35,48 +35,38 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Example'),
       ),
-      body: Center(
+      body: const Center(
         child: Column(
           children: [
-            const DefaultTextStyle(
-              style: TextStyle(color: Colors.grey),
-              child: H1(
+            // P([
+            //   'Hello, ',
+            //   B('World'),
+            //   A('百度', href: 'https://www.baidu.com'),
+            //   B([
+            //     '百度',
+            //     A('百度', href: 'https://www.baidu.com'),
+            //   ]),
+            // ]),
+            P(
+              B(
                 [
-                  '一级标题 (H1)',
-                  H4(
-                    '四级标题',
-                    style: TextStyle(fontWeight: FontWeight.w100),
-                  )
+                  // '1',
+                  A('2', href: 'https://www.baidu.com'),
+                  '3',
+                  // A('4', href: 'https://www.baidu.com'),
+                  // '5'
                 ],
-                // style: TextStyle(fontWeight: FontWeight.w400),
               ),
             ),
-            A(
-              href: 'https://www.baidu.com',
-              child: Builder(
-                builder: (context) {
-                  return ElevatedButton(
-                    onPressed: () {
-                      i(A.of(context));
-                    },
-                    child: const Text('百度'),
-                  );
-                }
-              ),
-            ),
-            A(
-              href: 'https://www.bing.com',
-              child: Builder(
-                  builder: (context) {
-                    return ElevatedButton(
-                      onPressed: () {
-                        i(A.of(context));
-                      },
-                      child: const Text('Bing'),
-                    );
-                  }
-              ),
-            ),
+            // B(
+            //   [
+            //     // '1',
+            //     A('2', href: 'https://www.baidu.com'),
+            //     '3',
+            //     // A('4', href: 'https://www.baidu.com'),
+            //     // '5'
+            //   ],
+            // ),
           ],
         ),
       ),

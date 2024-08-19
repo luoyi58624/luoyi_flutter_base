@@ -1,12 +1,13 @@
 import 'package:flutter/widgets.dart';
 import 'package:luoyi_flutter_base/src/extensions/num.dart';
-import 'package:luoyi_flutter_base/src/widgets/typography/common.dart';
+import 'package:luoyi_flutter_base/src/extensions/private.dart';
 
+import '../../commons/global.dart';
 import '../../utils/font/font.dart';
-import 'text.dart';
+import '../text.dart';
 
 // ===========================================================================
-// 注意：标题的字体大小、字重不会被 DefaultTextStyle 覆盖
+// 模拟 Html 排版标签
 // ===========================================================================
 
 class H1 extends TextWidget {
@@ -15,8 +16,8 @@ class H1 extends TextWidget {
 
   @override
   TextStyle buildTextStyle(BuildContext context) {
-    return DefaultTextStyle.of(context)
-        .style
+    return GlobalConfig.textStyle
+        .merge(DefaultTextStyle.of(context).style)
         .copyWith(fontSize: 2.rem, fontWeight: FontUtil.bold)
         .applyForceTextStyle
         .merge(style);
@@ -29,8 +30,8 @@ class H2 extends TextWidget {
 
   @override
   TextStyle buildTextStyle(BuildContext context) {
-    return DefaultTextStyle.of(context)
-        .style
+    return GlobalConfig.textStyle
+        .merge(DefaultTextStyle.of(context).style)
         .copyWith(fontSize: 1.5.rem, fontWeight: FontUtil.bold)
         .applyForceTextStyle
         .merge(style);
@@ -43,8 +44,8 @@ class H3 extends TextWidget {
 
   @override
   TextStyle buildTextStyle(BuildContext context) {
-    return DefaultTextStyle.of(context)
-        .style
+    return GlobalConfig.textStyle
+        .merge(DefaultTextStyle.of(context).style)
         .copyWith(fontSize: 1.25.rem, fontWeight: FontUtil.bold)
         .applyForceTextStyle
         .merge(style);
@@ -57,8 +58,8 @@ class H4 extends TextWidget {
 
   @override
   TextStyle buildTextStyle(BuildContext context) {
-    return DefaultTextStyle.of(context)
-        .style
+    return GlobalConfig.textStyle
+        .merge(DefaultTextStyle.of(context).style)
         .copyWith(fontSize: 1.17.rem, fontWeight: FontUtil.bold)
         .applyForceTextStyle
         .merge(style);
@@ -71,8 +72,8 @@ class H5 extends TextWidget {
 
   @override
   TextStyle buildTextStyle(BuildContext context) {
-    return DefaultTextStyle.of(context)
-        .style
+    return GlobalConfig.textStyle
+        .merge(DefaultTextStyle.of(context).style)
         .copyWith(fontSize: 1.rem, fontWeight: FontUtil.bold)
         .applyForceTextStyle
         .merge(style);
@@ -85,9 +86,42 @@ class H6 extends TextWidget {
 
   @override
   TextStyle buildTextStyle(BuildContext context) {
-    return DefaultTextStyle.of(context)
-        .style
+    return GlobalConfig.textStyle
+        .merge(DefaultTextStyle.of(context).style)
         .copyWith(fontSize: 0.875.rem, fontWeight: FontUtil.bold)
+        .applyForceTextStyle
+        .merge(style);
+  }
+}
+
+class P extends TextWidget {
+  /// 普通段落文本
+  const P(super.data, {super.key, super.style}) : super(semanticsLabel: 'P');
+}
+
+class B extends TextWidget {
+  /// 加粗文本
+  const B(super.data, {super.key, super.style}) : super(semanticsLabel: 'B');
+
+  @override
+  TextStyle buildTextStyle(BuildContext context) {
+    return GlobalConfig.textStyle
+        .merge(DefaultTextStyle.of(context).style)
+        .copyWith(fontWeight: FontUtil.bold)
+        .applyForceTextStyle
+        .merge(style);
+  }
+}
+
+class I extends TextWidget {
+  /// 斜体文本
+  const I(super.data, {super.key, super.style}) : super(semanticsLabel: 'I');
+
+  @override
+  TextStyle buildTextStyle(BuildContext context) {
+    return GlobalConfig.textStyle
+        .merge(DefaultTextStyle.of(context).style)
+        .copyWith(fontStyle: FontStyle.italic)
         .applyForceTextStyle
         .merge(style);
   }
