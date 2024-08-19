@@ -41,60 +41,16 @@ class HomePage extends StatelessWidget {
             P([
               'Hello, ',
               B('World'),
-              A('百度', href: 'https://www.baidu.com'),
+              A(
+                '百度',
+                href: 'https://www.baidu.com',
+                decoration: HrefDecoration.hoverUnderline,
+              ),
               B([
                 '百度',
-                A('百度', href: 'https://www.baidu.com'),
+                A('百度', href: 'https://www.baidu.com',color: Colors.black,),
               ]),
             ]),
-            P(
-              B(
-                [
-                  '1',
-                  A('2', href: 'https://www.baidu.com'),
-                  '3',
-                  A('4', href: 'https://www.baidu.com'),
-                  '5',
-                  I([
-                    '3',
-                    A('4', href: 'https://www.baidu.com'),
-                    '5',
-                    H1(
-                      [
-                        '一级标题',
-                        H2('二级标题'),
-                        A('百度', href: 'https://www.baidu.com'),
-                        P(
-                          style: TextStyle(fontStyle: FontStyle.normal),
-                          A('百度', href: 'https://www.baidu.com'),
-                        ),
-                      ],
-                      style: TextStyle(color: Colors.green),
-                    ),
-                  ])
-                ],
-              ),
-            ),
-            RichText(
-              text: TextSpan(
-                  style: TextStyle(color: Colors.red),
-                  children: [
-                    TextSpan(text: 'xxx'),
-                    WidgetSpan(
-                      alignment: PlaceholderAlignment.baseline,
-                      baseline: TextBaseline.alphabetic,
-                      child: Text('xxx'),
-                    ),
-                    TextSpan(children: [
-                      TextSpan(text: 'xxx'),
-                      WidgetSpan(
-                        alignment: PlaceholderAlignment.baseline,
-                        baseline: TextBaseline.alphabetic,
-                        child: Text('xxx'),
-                      ),
-                    ])
-                  ]),
-            ),
           ],
         ),
       ),

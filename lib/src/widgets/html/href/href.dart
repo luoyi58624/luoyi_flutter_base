@@ -71,7 +71,8 @@ class A extends StatelessWidget {
   /// 则超链接点击事件将失效，你可以通过 A.of(context) 访问超链接地址。
   ///
   /// 提示：如果是客户端，链接地址不是 http 开头将不会显示链接地址，如果是浏览器，则会自动拼接当前网址基本路径。
-  const A(this.child, {
+  const A(
+    this.child, {
     super.key,
     required this.href,
     this.cursor,
@@ -130,27 +131,6 @@ class A extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final $href = getFullHref(href);
-    late Widget result;
-
-    // 如果目标不是 Widget，则渲染成文本组件
-    if (child is Widget) {
-      result = child;
-    } else {
-      result = DefaultTextStyle.merge(
-        style: TextStyle(
-          color: HoverBuilder.of(context) ? activeColor : color,
-          decoration: decoration == HrefDecoration.underline
-              ? TextDecoration.underline
-              : decoration == HrefDecoration.hoverUnderline
-                  ? (HoverBuilder.of(context)
-                      ? TextDecoration.underline
-                      : TextDecoration.none)
-                  : TextDecoration.none,
-          decorationColor: HoverBuilder.of(context) ? activeColor : color,
-        ),
-        child: TextWidget(child),
-      );
-    }
 
     return _HrefInheritedWidget(
       href,
@@ -189,7 +169,23 @@ class A extends StatelessWidget {
                 },
           builder: (context) => TapBuilder(
             onTap: $href == null ? null : () => launchUrl(Uri.parse($href)),
-            builder: (context) => result,
+            builder: (context) => child is Widget
+                ? child
+                : DefaultTextStyle.merge(
+                    style: TextStyle(
+                      color: HoverBuilder.of(context) ? activeColor : color,
+                      decoration: decoration == HrefDecoration.underline
+                          ? TextDecoration.underline
+                          : decoration == HrefDecoration.hoverUnderline
+                              ? (HoverBuilder.of(context)
+                                  ? TextDecoration.underline
+                                  : TextDecoration.none)
+                              : TextDecoration.none,
+                      decorationColor:
+                          HoverBuilder.of(context) ? activeColor : color,
+                    ),
+                    child: TextWidget(child),
+                  ),
           ),
         );
       }),
