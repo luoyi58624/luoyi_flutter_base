@@ -67,18 +67,99 @@ class TextWidget extends StatelessWidget {
   /// 文本选中颜色
   final Color? selectionColor;
 
+  /// 自定义当前文本样式，覆写它可以实现自定义样式文本，例如：H1、H2...
+  TextStyle? get textStyle => style;
+
   /// 构建当前文本样式
-  TextStyle buildTextStyle(BuildContext context) {
+  TextStyle _buildTextStyle(BuildContext context, TextStyle? style) {
     return GlobalConfig.textStyle
         .merge(DefaultTextStyle.of(context).style)
         .applyForceTextStyle
+        .merge(textStyle)
         .merge(style);
   }
 
-  /// 构建文本小部件
+  /// 构建富文本片段集合
+  List<InlineSpan> _buildRichText(BuildContext context, List children) {
+    List<InlineSpan> richChildren = [];
+    for (final child in children) {
+      richChildren.add(_buildInlineSpan(context, child));
+    }
+    return richChildren;
+  }
+
+  /// 使用递归构建富文本片段
+  InlineSpan _buildInlineSpan(BuildContext context, dynamic data) {
+    // 1. 如果是文本片段则直接返回
+    if (data is TextSpan || data is WidgetSpan) return data;
+
+    // 2. 处理 Text 小部件，对于嵌套的子组件，TextSpan 本身就只接受少量参数，所以其他参数会被忽略
+    if (data is Text) {
+      return TextSpan(
+        text: '${data.data}',
+        style: data.style,
+        semanticsLabel: data.semanticsLabel,
+      );
+    }
+
+    // 3. 处理自定义的 TextWidget 小部件，2、3 两个步骤是对第 4 步进行一个扩充，
+    // 目的是以最大限度解决文本垂直对齐问题，单纯地使用 WidgetSpan 渲染如果有些文字太大，
+    // 那么依旧存在文本无法垂直对齐bug
+    if (data is TextWidget) {
+      if (DartUtil.isBaseType(data.data)) {
+        return TextSpan(
+          text: '${data.data}',
+          style: data._buildTextStyle(context, data.style),
+          semanticsLabel: data.semanticsLabel,
+        );
+      } else if (data.data is List) {
+        // 如果列表中存在非文本小部件，那么不能使用 TextSpan 渲染，否则在多级嵌套下会出现样式问题，例如：
+        // P(
+        //  B([
+        //    A('百度', href: 'https://www.baidu.com'),
+        //  ]),
+        // ),
+        // A 标签属于 StatelessWidget 小部件，它内部会继承父级样式，如果 B 标签是通过 TextSpan 渲染，
+        // 由于 DefaultTextStyle 无法访问 TextSpan 样式，那么它将继承 P 标签的样式，导致加粗失败，
+        // 所以针对这种情况我们需要跳到步骤 4 处理，用 WidgetSpan 渲染 B 标签。
+        bool hasWidget = (data.data as List)
+            .any((e) => e is Widget && (e is! Text || e is! TextWidget));
+        if (!hasWidget) {
+          return TextSpan(
+            style: data._buildTextStyle(context, data.style),
+            children: _buildRichText(context, data.data),
+          );
+        }
+      }
+    }
+
+    // 4. 如果是 Widget 小部件，则使用 WidgetSpan 包裹，默认使用文本对齐方案，
+    // 如果你传递的 Widget 不是文本，你可以自己包裹 WidgetSpan 实现自定义对齐
+    if (data is Widget) {
+      return WidgetSpan(
+        alignment: PlaceholderAlignment.baseline,
+        baseline: TextBaseline.alphabetic,
+        child: data,
+      );
+    }
+
+    // 5. 如果是数组，则递归渲染
+    if (data is List) {
+      return TextSpan(
+        children: _buildRichText(context, data),
+      );
+    }
+
+    // 6. 默认返回文本片段
+    return TextSpan(
+      text: '$data',
+      semanticsLabel: semanticsLabel,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    var $style = buildTextStyle(context);
+    var $style = _buildTextStyle(context, style);
     // 同步 Text 小部件的加粗文本逻辑
     if (MediaQuery.boldTextOf(context)) {
       $style.copyWith(fontWeight: FontWeight.bold);
@@ -124,83 +205,5 @@ class TextWidget extends StatelessWidget {
             }),
           );
         });
-  }
-
-  /// 构建富文本片段集合
-  List<InlineSpan> _buildRichText(BuildContext context, List children) {
-    List<InlineSpan> richChildren = [];
-    for (final child in children) {
-      richChildren.add(_buildInlineSpan(context, child));
-    }
-    return richChildren;
-  }
-
-  /// 使用递归构建富文本片段
-  InlineSpan _buildInlineSpan(BuildContext context, dynamic data) {
-    // 1. 如果是文本片段则直接返回
-    if (data is TextSpan || data is WidgetSpan) return data;
-
-    // 2. 处理 Text 小部件，对于嵌套的子组件，TextSpan 本身就只接受少量参数，所以其他参数会被忽略
-    if (data is Text) {
-      return TextSpan(
-        text: '${data.data}',
-        style: data.style,
-        semanticsLabel: data.semanticsLabel,
-      );
-    }
-
-    // 3. 处理自定义的 TextWidget 小部件，其实 2、3 两个步骤是对第 4 步进行一个扩充，
-    // 目的是以最大限度解决文本垂直对齐问题，单纯地使用 WidgetSpan 渲染如果有些文字太大，
-    // 那么依旧存在文本无法垂直对齐bug
-    if (data is TextWidget) {
-      if (DartUtil.isBaseType(data.data)) {
-        return TextSpan(
-          text: '${data.data}',
-          style: data.buildTextStyle(context),
-          semanticsLabel: data.semanticsLabel,
-        );
-      } else if (data.data is List) {
-        // 如果列表中存在非文本小部件，那么不能使用 TextSpan 渲染，否则在多级嵌套下会出现样式问题，例如：
-        // P(
-        //  B([
-        //    A('百度', href: 'https://www.baidu.com'),
-        //  ]),
-        // ),
-        // A 标签属于 StatelessWidget 小部件，它内部会继承父级样式，如果 B 标签是通过 TextSpan 渲染，
-        // 由于 DefaultTextStyle 无法访问 TextSpan 样式，那么它将继承 P 标签的样式，导致加粗失败，
-        // 所以针对这种情况我们需要跳到步骤 4 处理，用 WidgetSpan 渲染 B 标签。
-        bool hasWidget = (data.data as List)
-            .any((e) => e is Widget && (e is! Text || e is! TextWidget));
-        if (!hasWidget) {
-          return TextSpan(
-            style: data.buildTextStyle(context),
-            children: _buildRichText(context, data.data),
-          );
-        }
-      }
-    }
-
-    // 4. 如果是 Widget 小部件，则使用 WidgetSpan 包裹，默认使用文本对齐方案，
-    // 如果你传递的 Widget 不是文本，你可以自己包裹 WidgetSpan 实现自定义对齐
-    if (data is Widget) {
-      return WidgetSpan(
-        alignment: PlaceholderAlignment.baseline,
-        baseline: TextBaseline.alphabetic,
-        child: data,
-      );
-    }
-
-    // 5. 如果是数组，则递归渲染
-    if (data is List) {
-      return TextSpan(
-        children: _buildRichText(context, data),
-      );
-    }
-
-    // 6. 默认返回文本片段
-    return TextSpan(
-      text: '$data',
-      semanticsLabel: semanticsLabel,
-    );
   }
 }

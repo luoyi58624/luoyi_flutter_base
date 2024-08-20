@@ -1,8 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:luoyi_flutter_base/src/extensions/num.dart';
-import 'package:luoyi_flutter_base/src/extensions/private.dart';
 
-import '../../commons/global.dart';
 import '../../utils/font/font.dart';
 import '../text.dart';
 
@@ -15,12 +13,8 @@ class H1 extends TextWidget {
   const H1(super.data, {super.key, super.style}) : super(semanticsLabel: 'H1');
 
   @override
-  TextStyle buildTextStyle(BuildContext context) {
-    return GlobalConfig.textStyle
-        .merge(DefaultTextStyle.of(context).style)
-        .copyWith(fontSize: 2.rem, fontWeight: FontUtil.bold)
-        .applyForceTextStyle
-        .merge(style);
+  TextStyle? get textStyle {
+    return TextStyle(fontSize: 2.rem, fontWeight: FontUtil.bold);
   }
 }
 
@@ -29,12 +23,8 @@ class H2 extends TextWidget {
   const H2(super.data, {super.key, super.style}) : super(semanticsLabel: 'H2');
 
   @override
-  TextStyle buildTextStyle(BuildContext context) {
-    return GlobalConfig.textStyle
-        .merge(DefaultTextStyle.of(context).style)
-        .copyWith(fontSize: 1.5.rem, fontWeight: FontUtil.bold)
-        .applyForceTextStyle
-        .merge(style);
+  TextStyle? get textStyle {
+    return TextStyle(fontSize: 1.5.rem, fontWeight: FontUtil.bold);
   }
 }
 
@@ -43,12 +33,8 @@ class H3 extends TextWidget {
   const H3(super.data, {super.key, super.style}) : super(semanticsLabel: 'H3');
 
   @override
-  TextStyle buildTextStyle(BuildContext context) {
-    return GlobalConfig.textStyle
-        .merge(DefaultTextStyle.of(context).style)
-        .copyWith(fontSize: 1.25.rem, fontWeight: FontUtil.bold)
-        .applyForceTextStyle
-        .merge(style);
+  TextStyle? get textStyle {
+    return TextStyle(fontSize: 1.25.rem, fontWeight: FontUtil.bold);
   }
 }
 
@@ -57,12 +43,8 @@ class H4 extends TextWidget {
   const H4(super.data, {super.key, super.style}) : super(semanticsLabel: 'H4');
 
   @override
-  TextStyle buildTextStyle(BuildContext context) {
-    return GlobalConfig.textStyle
-        .merge(DefaultTextStyle.of(context).style)
-        .copyWith(fontSize: 1.17.rem, fontWeight: FontUtil.bold)
-        .applyForceTextStyle
-        .merge(style);
+  TextStyle? get textStyle {
+    return TextStyle(fontSize: 1.17.rem, fontWeight: FontUtil.bold);
   }
 }
 
@@ -71,12 +53,8 @@ class H5 extends TextWidget {
   const H5(super.data, {super.key, super.style}) : super(semanticsLabel: 'H5');
 
   @override
-  TextStyle buildTextStyle(BuildContext context) {
-    return GlobalConfig.textStyle
-        .merge(DefaultTextStyle.of(context).style)
-        .copyWith(fontSize: 1.rem, fontWeight: FontUtil.bold)
-        .applyForceTextStyle
-        .merge(style);
+  TextStyle? get textStyle {
+    return TextStyle(fontSize: 1.rem, fontWeight: FontUtil.bold);
   }
 }
 
@@ -85,12 +63,8 @@ class H6 extends TextWidget {
   const H6(super.data, {super.key, super.style}) : super(semanticsLabel: 'H6');
 
   @override
-  TextStyle buildTextStyle(BuildContext context) {
-    return GlobalConfig.textStyle
-        .merge(DefaultTextStyle.of(context).style)
-        .copyWith(fontSize: 0.875.rem, fontWeight: FontUtil.bold)
-        .applyForceTextStyle
-        .merge(style);
+  TextStyle? get textStyle {
+    return TextStyle(fontSize: 0.875.rem, fontWeight: FontUtil.bold);
   }
 }
 
@@ -104,12 +78,8 @@ class B extends TextWidget {
   const B(super.data, {super.key, super.style}) : super(semanticsLabel: 'B');
 
   @override
-  TextStyle buildTextStyle(BuildContext context) {
-    return GlobalConfig.textStyle
-        .merge(DefaultTextStyle.of(context).style)
-        .copyWith(fontWeight: FontUtil.bold)
-        .applyForceTextStyle
-        .merge(style);
+  TextStyle? get textStyle {
+    return TextStyle(fontWeight: FontUtil.bold);
   }
 }
 
@@ -118,25 +88,18 @@ class I extends TextWidget {
   const I(super.data, {super.key, super.style}) : super(semanticsLabel: 'I');
 
   @override
-  TextStyle buildTextStyle(BuildContext context) {
-    return GlobalConfig.textStyle
-        .merge(DefaultTextStyle.of(context).style)
-        .copyWith(fontStyle: FontStyle.italic)
-        .applyForceTextStyle
-        .merge(style);
+  TextStyle? get textStyle {
+    return const TextStyle(fontStyle: FontStyle.italic);
   }
 }
 
 class Del extends TextWidget {
   /// 删除线文本
-  const Del(super.data, {super.key, super.style}) : super(semanticsLabel: 'Del');
+  const Del(super.data, {super.key, super.style})
+      : super(semanticsLabel: 'Del');
 
   @override
-  TextStyle buildTextStyle(BuildContext context) {
-    return GlobalConfig.textStyle
-        .merge(DefaultTextStyle.of(context).style)
-        .copyWith(decoration: TextDecoration.lineThrough)
-        .applyForceTextStyle
-        .merge(style);
+  TextStyle? get textStyle {
+    return const TextStyle(decoration: TextDecoration.lineThrough);
   }
 }

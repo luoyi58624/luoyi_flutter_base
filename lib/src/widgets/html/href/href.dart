@@ -30,7 +30,7 @@ Timer? _delayShowOverlay;
 /// 延迟隐藏控制器
 Timer? _delayHideOverlay;
 
-/// 隐藏前需要先执行隐藏动画，动画结束后再移除浮层
+/// 移除浮层前需要先执行隐藏动画，动画结束后再移除浮层
 Timer? _delayRemoveOverlay;
 
 /// 超链接浮层地址响应式变量

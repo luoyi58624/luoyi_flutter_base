@@ -64,6 +64,7 @@ class HomePage extends StatelessWidget {
                   A(
                     '百度',
                     href: 'https://www.baidu.com',
+                    color: Colors.grey,
                   ),
                   '哈喽',
                 ]),
@@ -82,6 +83,7 @@ class HomePage extends StatelessWidget {
               A(
                 '百度',
                 href: 'https://www.baidu.com',
+                decoration: HrefDecoration.hoverUnderline,
               ),
               '哈喽',
             ]),
