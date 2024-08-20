@@ -48,26 +48,26 @@ class FontUtil {
 
   /// 初始化全局默认字体
   static Future<void> initFont(FontModel fontModel) async {
-    await initLocalStorage();
-    var localStr = localStorage.getString(_localKey);
+    await initSP();
+    var localStr = sp.getString(_localKey);
 
     // 第一次加载
     if (localStr == null) return await _initFont(fontModel);
 
     // 获取本地初始化的字体，如果本地初始化的字体和传递的fontModel不一致，说明用户更改了fontModel，
     // 那么我们需要重新加载用户传递的fontModel
-    var initialLocalStr = localStorage.getString(_initialLocalKey);
+    var initialLocalStr = sp.getString(_initialLocalKey);
 
     if (initialLocalStr == null) {
       _initialFont = fontModel;
-      localStorage.setString(
+      sp.setString(
           _initialLocalKey, jsonEncode(_initialFont.toJson()));
     } else {
       _initialFont = FontModel.fromJson(
           (jsonDecode(initialLocalStr) as Map).cast<String, dynamic>());
       if (_initialFont.fontFamily != fontModel.fontFamily) {
         _initialFont = fontModel;
-        localStorage.setString(
+        sp.setString(
             _initialLocalKey, jsonEncode(_initialFont.toJson()));
         return await _initFont(fontModel);
       }
@@ -86,7 +86,7 @@ class FontUtil {
   static Future<void> _initFont(FontModel fontModel) async {
     bool success = await loadFont(fontModel);
     if (success) {
-      localStorage.setString(_initialLocalKey, jsonEncode(fontModel.toJson()));
+      sp.setString(_initialLocalKey, jsonEncode(fontModel.toJson()));
     }
   }
 
@@ -100,7 +100,7 @@ class FontUtil {
     if (fontModel.fontUrl == null &&
         (fontModel.fontWeights == null || fontModel.fontWeights!.isEmpty)) {
       _currentFontModel.value = fontModel;
-      localStorage.setString(_localKey, jsonEncode(fontModel.toJson()));
+      sp.setString(_localKey, jsonEncode(fontModel.toJson()));
       _loadFonts.add(fontModel.fontFamily);
       return true;
     } else {
@@ -138,7 +138,7 @@ class FontUtil {
         return false;
       }
       _currentFontModel.value = fontModel;
-      localStorage.setString(_localKey, jsonEncode(fontModel.toJson()));
+      sp.setString(_localKey, jsonEncode(fontModel.toJson()));
       _loadFonts.addAll(fontFamilyList);
       return true;
     }
