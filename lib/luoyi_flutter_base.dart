@@ -15,6 +15,7 @@ export 'src/commons/models.dart';
 
 export 'src/extensions/bool.dart';
 export 'src/extensions/color.dart';
+export 'src/extensions/context.dart';
 export 'src/extensions/int.dart';
 export 'src/extensions/num.dart';
 export 'src/extensions/widget.dart';
