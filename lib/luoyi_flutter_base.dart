@@ -36,7 +36,3 @@ export 'src/widgets/scroll_behavior.dart';
 export 'src/widgets/simple_widgets.dart';
 export 'src/widgets/tap.dart';
 export 'src/widgets/text.dart';
-
-export 'src/widgets/html/href/href.dart';
-export 'src/widgets/html/typography.dart';
-export 'src/widgets/html/list.dart';
