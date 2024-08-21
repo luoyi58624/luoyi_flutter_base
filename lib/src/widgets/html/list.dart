@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:luoyi_flutter_base/src/extensions/context.dart';
+import 'package:luoyi_flutter_base/src/extensions/private.dart';
 
 import '../simple_widgets.dart';
 import '../text.dart';

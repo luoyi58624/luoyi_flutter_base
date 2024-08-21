@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import '../commons/global.dart';
@@ -21,9 +20,4 @@ extension FlutterResponsiveExtension on BuildContext {
 
   /// 大屏桌面设备，最大宽度默认2560
   bool get xl => clientWidth <= GlobalConfig.responsive.xl;
-}
-
-extension BrightnessExtension on BuildContext {
-  /// 当前环境是否是暗黑模式
-  bool get isDark => GlobalConfig.brightness == Brightness.dark;
 }
