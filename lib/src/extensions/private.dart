@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import '../commons/global.dart';
@@ -13,9 +12,4 @@ extension TextStyleExtension on TextStyle {
       fontFamilyFallback: GlobalConfig.textStyle.fontFamilyFallback,
     );
   }
-}
-
-extension BrightnessExtension on BuildContext {
-  /// 当前环境是否是暗黑模式
-  bool get isDark => GlobalConfig.brightness == Brightness.dark;
 }

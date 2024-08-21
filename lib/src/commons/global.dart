@@ -1,8 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import '../utils/platform/platform.dart';
-import 'models.dart';
 
 TextStyle _defaultTextStyle = TextStyle(
   // 全局字体大小，在 TextWidget 中，此属性可以被 DefaultTextStyle 覆盖，
@@ -41,20 +39,5 @@ class GlobalConfig {
             navigatorKey.currentWidget is Navigator,
         '请在 WidgetsApp、MaterialApp、CupertinoApp 等任意顶级 App 组件中设置 navigatorKey');
     return navigatorKey.currentContext!;
-  }
-
-  /// 全局响应式配置
-  static ResponsiveData responsive = const ResponsiveData();
-
-  static Brightness? _brightness;
-
-  /// 全局亮色、暗色主题模式
-  static Brightness get brightness {
-    assert(_brightness != null, 'brightness 未初始化');
-    return _brightness!;
-  }
-
-  static set brightness(Brightness v) {
-    _brightness = v;
   }
 }

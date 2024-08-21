@@ -14,7 +14,6 @@ class _App extends StatelessWidget {
       navigatorKey: GlobalConfig.navigatorKey,
       home: const HomePage(),
       builder: (context, child) {
-        GlobalConfig.brightness = Theme.of(context).brightness;
         return Material(
           child: Overlay(initialEntries: [
             OverlayEntry(builder: (context) {
