@@ -13,15 +13,16 @@ class _App extends StatelessWidget {
     return MaterialApp(
       navigatorKey: GlobalConfig.navigatorKey,
       home: const HomePage(),
-      builder: (context, child) => Material(
-        child: BrightnessWidget(
+      builder: (context, child) {
+        GlobalConfig.brightness = Theme.of(context).brightness;
+        return Material(
           child: Overlay(initialEntries: [
             OverlayEntry(builder: (context) {
               return child!;
             }),
           ]),
-        ),
-      ),
+        );
+      }
     );
   }
 }

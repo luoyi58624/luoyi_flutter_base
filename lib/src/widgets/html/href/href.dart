@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_obs/flutter_obs.dart';
 import 'package:luoyi_dart_base/luoyi_dart_base.dart';
 import 'package:luoyi_flutter_base/src/commons/global.dart';
-import 'package:luoyi_flutter_base/src/widgets/brightness.dart';
+import 'package:luoyi_flutter_base/src/extensions/context.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../hover.dart';

@@ -16,7 +16,9 @@ export 'src/commons/responsive.dart';
 
 export 'src/extensions/bool.dart';
 export 'src/extensions/color.dart';
+export 'src/extensions/context.dart';
 export 'src/extensions/int.dart';
+export 'src/extensions/num.dart';
 export 'src/extensions/widget.dart';
 
 export 'src/hooks/obs.dart';
@@ -28,7 +30,6 @@ export 'src/utils/local_storage.dart';
 export 'src/utils/no_ripper.dart';
 
 export 'src/widgets/animation.dart';
-export 'src/widgets/brightness.dart';
 export 'src/widgets/custom_layout.dart';
 export 'src/widgets/hover.dart';
 export 'src/widgets/scroll_behavior.dart';
