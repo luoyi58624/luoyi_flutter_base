@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:flutter/rendering.dart';
 import 'package:http/http.dart' as http;
 import 'package:luoyi_dart_base/luoyi_dart_base.dart';
 import 'package:path_provider/path_provider.dart';
