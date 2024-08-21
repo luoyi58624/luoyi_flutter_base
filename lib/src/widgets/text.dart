@@ -1,10 +1,56 @@
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:luoyi_dart_base/luoyi_dart_base.dart';
-import 'package:luoyi_flutter_base/src/extensions/private.dart';
 
-import '../commons/global.dart';
+import '../utils/platform/platform.dart';
 import 'hover.dart';
+
+extension FlutterTextNumExtension on num {
+  /// 以全局字体尺寸为基点，按比例返回新的字体大小
+  double get rem {
+    return (_globalFontSize ?? _defaultTextStyle.fontSize)! * this;
+  }
+}
+
+TextStyle _defaultTextStyle = TextStyle(
+  // 全局字体大小，在 TextWidget 中，此属性可以被 DefaultTextStyle 覆盖，
+  // 你可以使用 globalTextStyle 扩展函数应用全局文本样式
+  fontSize: PlatformUtil.isMobile ? 15 : 16,
+  // 字体族，在 TextWidget 中，此属性的优先级高于 DefaultTextStyle
+  fontFamily: null,
+  // 字体回退列表，在 TextWidget 中，此属性的优先级高于 DefaultTextStyle
+  fontFamilyFallback: (PlatformUtil.isMacOS || PlatformUtil.isIOS)
+      ? ['.AppleSystemUIFont', 'PingFang SC']
+      : PlatformUtil.isWindows
+          ? ['Microsoft YaHei', '微软雅黑']
+          : null,
+);
+
+double? _globalFontSize;
+
+/// 全局文本样式，与 [DefaultTextStyle] 不同的是，它作用于全局
+class GlobalTextStyle extends InheritedWidget {
+  GlobalTextStyle({
+    super.key,
+    required super.child,
+    TextStyle? style,
+  }) {
+    this.style = _defaultTextStyle.merge(style);
+    _globalFontSize = this.style.fontSize;
+  }
+
+  late final TextStyle style;
+
+  static GlobalTextStyle of(BuildContext context) {
+    final GlobalTextStyle? result =
+        context.dependOnInheritedWidgetOfExactType<GlobalTextStyle>();
+    assert(result != null, 'No GlobalTextStyle found in context');
+    return result!;
+  }
+
+  @override
+  bool updateShouldNotify(GlobalTextStyle oldWidget) => true;
+}
 
 /// 文本组件，与 [Text] 相比，主要简化了富文本的写法，同时它也是很多排版组件的基类
 class TextWidget extends StatelessWidget {
@@ -72,9 +118,13 @@ class TextWidget extends StatelessWidget {
 
   /// 构建当前文本样式
   TextStyle _buildTextStyle(BuildContext context, TextStyle? style) {
-    return GlobalConfig.textStyle
+    final globalStyle = GlobalTextStyle.of(context).style;
+    return globalStyle
         .merge(DefaultTextStyle.of(context).style)
-        .applyForceTextStyle
+        .copyWith(
+          fontFamily: globalStyle.fontFamily,
+          fontFamilyFallback: globalStyle.fontFamilyFallback,
+        )
         .merge(textStyle)
         .merge(style);
   }
