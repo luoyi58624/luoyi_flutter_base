@@ -12,6 +12,7 @@ export 'package:url_launcher/url_launcher.dart';
 
 export 'src/commons/global.dart';
 export 'src/commons/models.dart';
+export 'src/commons/responsive.dart';
 
 export 'src/extensions/bool.dart';
 export 'src/extensions/color.dart';
@@ -30,7 +31,6 @@ export 'src/widgets/animation.dart';
 export 'src/widgets/brightness.dart';
 export 'src/widgets/custom_layout.dart';
 export 'src/widgets/hover.dart';
-export 'src/widgets/responsive.dart';
 export 'src/widgets/scroll_behavior.dart';
 export 'src/widgets/simple_widgets.dart';
 export 'src/widgets/tap.dart';

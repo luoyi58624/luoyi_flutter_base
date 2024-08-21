@@ -39,4 +39,7 @@ class GlobalConfig {
         '请在 WidgetsApp、MaterialApp、CupertinoApp 等任意顶级 App 组件中设置 navigatorKey');
     return navigatorKey.currentContext!;
   }
+
+  /// 全局响应式配置
+  static ResponsiveData responsive = const ResponsiveData();
 }
