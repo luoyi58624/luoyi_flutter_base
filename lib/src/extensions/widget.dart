@@ -16,4 +16,10 @@ extension FlutterWidgetExtension on Widget {
         style: GlobalConfig.textStyle,
         child: this,
       );
+
+  /// 不要应用祖先默认文本样式
+  Widget get noDefaultTextStyle => DefaultTextStyle(
+        style: const TextStyle(),
+        child: this,
+      );
 }
