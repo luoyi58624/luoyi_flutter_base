@@ -18,8 +18,7 @@ class BrightnessWidget extends InheritedWidget {
   static Brightness of(BuildContext context) {
     final BrightnessWidget? result =
         context.dependOnInheritedWidgetOfExactType<BrightnessWidget>();
-    assert(result != null, 'No BrightnessWidget found in context');
-    return result!.brightness ?? MediaQuery.of(context).platformBrightness;
+    return result?.brightness ?? MediaQuery.of(context).platformBrightness;
   }
 
   @override
