@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
 
+import 'models.dart';
+
 class GlobalConfig {
   GlobalConfig._();
 
@@ -14,4 +16,6 @@ class GlobalConfig {
         '请在 WidgetsApp、MaterialApp、CupertinoApp 等任意顶级 App 组件中设置 navigatorKey');
     return navigatorKey.currentContext!;
   }
+
+  static ResponsiveData responsive = const ResponsiveData();
 }

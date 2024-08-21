@@ -31,7 +31,6 @@ export 'src/widgets/animation.dart';
 export 'src/widgets/brightness.dart';
 export 'src/widgets/custom_layout.dart';
 export 'src/widgets/hover.dart';
-export 'src/widgets/responsive.dart';
 export 'src/widgets/scroll_behavior.dart';
 export 'src/widgets/simple_widgets.dart';
 export 'src/widgets/tap.dart';
