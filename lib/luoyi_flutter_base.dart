@@ -27,6 +27,7 @@ export 'src/utils/platform/platform.dart';
 export 'src/utils/flutter.dart';
 export 'src/utils/local_storage.dart';
 export 'src/utils/no_ripper.dart';
+export 'src/utils/responsive.dart';
 
 export 'src/widgets/animation.dart';
 export 'src/widgets/brightness.dart';

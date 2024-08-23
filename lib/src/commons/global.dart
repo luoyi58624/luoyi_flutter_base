@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import 'models.dart';
+import '../utils/responsive.dart';
 
 class GlobalConfig {
   GlobalConfig._();
