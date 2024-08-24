@@ -13,7 +13,6 @@ export 'package:url_launcher/url_launcher.dart';
 export 'src/commons/global.dart';
 export 'src/commons/models.dart';
 
-export 'src/extensions/bool.dart';
 export 'src/extensions/color.dart';
 export 'src/extensions/context.dart';
 export 'src/extensions/int.dart';
