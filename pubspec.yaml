@@ -15,7 +15,7 @@ dependencies:
   luoyi_dart_base: ^1.13.0
   gap: ^3.0.1
   flutter_hooks: ^0.20.5
-  flutter_obs: ^1.4.0
+  flutter_obs: ^1.5.1
   cached_network_image: ^3.3.1
   flutter_animate: ^4.5.0
   web: ^1.0.0
@@ -27,6 +27,7 @@ dependencies:
   http: ^1.2.2
   path_provider: ^2.1.4
   shared_preferences: ^2.3.1
+  animate_do: ^3.3.4
 
 dev_dependencies:
   flutter_test:
