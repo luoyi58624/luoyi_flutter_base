@@ -20,7 +20,9 @@ export 'src/extensions/int.dart';
 export 'src/extensions/num.dart';
 export 'src/extensions/widget.dart';
 
+export 'src/hooks/lifecycle.dart';
 export 'src/hooks/obs.dart';
+export 'src/hooks/watch.dart';
 
 export 'src/utils/font/font.dart';
 export 'src/utils/platform/platform.dart';
