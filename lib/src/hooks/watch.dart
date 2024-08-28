@@ -8,7 +8,7 @@ import 'package:flutter_obs/flutter_obs.dart';
 /// ```
 void useWatch<T>(
   ValueNotifier<T> modelValue,
-  WatchCallback<T> watchFun,
+  ObsWatchCallback<T> watchFun,
 ) {
   use(_WatchHook(modelValue, watchFun));
 }
@@ -17,7 +17,7 @@ class _WatchHook<T> extends Hook {
   const _WatchHook(this.modelValue, this.watchFun);
 
   final ValueNotifier<T> modelValue;
-  final WatchCallback<T> watchFun;
+  final ObsWatchCallback<T> watchFun;
 
   @override
   _WatchHookState<T> createState() => _WatchHookState();
