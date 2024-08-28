@@ -7,7 +7,7 @@ import 'package:flutter_obs/flutter_obs.dart';
 Obs<T> useObs<T>(
   T initialData, {
   List<ObsNotifyMode> notifyMode = const [ObsNotifyMode.all],
-  ObsWatchCallback<T>? watch,
+  WatchCallback<T>? watch,
   bool immediate = false,
 }) {
   return use(_ObsHook(
@@ -22,7 +22,7 @@ Obs<T> useObs<T>(
 Obs<T> useDebugObs<T>(
   T initialData, {
   List<ObsNotifyMode> notifyMode = const [ObsNotifyMode.all],
-  ObsWatchCallback<T>? watch,
+  WatchCallback<T>? watch,
   bool immediate = false,
 }) {
   return kDebugMode
@@ -42,7 +42,7 @@ class _ObsHook<T> extends Hook<Obs<T>> {
 
   final T initialData;
   final List<ObsNotifyMode> notifyMode;
-  final ObsWatchCallback<T>? watch;
+  final WatchCallback<T>? watch;
   final bool immediate;
 
   @override
