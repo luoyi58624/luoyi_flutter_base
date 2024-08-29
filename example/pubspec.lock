@@ -182,11 +182,12 @@ packages:
   flutter_obs:
     dependency: transitive
     description:
-      name: flutter_obs
-      sha256: "44470b357ed47db9bfaba69702a85ab2edc887975ca8df458d4b830880d8cf51"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.5.3"
+      path: "."
+      ref: HEAD
+      resolved-ref: f72e508c530151ec41a34e3fbc57ae4636645e77
+      url: "https://github.com/luoyi58624/flutter_obs.git"
+    source: git
+    version: "1.5.4"
   flutter_shaders:
     dependency: transitive
     description:
