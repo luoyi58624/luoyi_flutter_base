@@ -30,37 +30,58 @@ class _AnimateHoverTestPageState extends State<AnimateHoverTestPage> {
           })
         ],
       ),
-      body: Column(
-        children: [
-          AnimateTapBuilder(builder: (context) {
-            final activeT = AnimateTapBuilder.t(context);
-            final color = Theme.of(context).colorScheme.primary;
-            final activeColor = color.deepen(20,reversal: true);
-            return Container(
-              width: 300,
-              height: 300,
-              color: color.lerp(activeColor, activeT),
-            );
-          }),
-          AnimateTapBuilder(builder: (context) {
-            return AnimateHoverBuilder(
-              duration: 250.ms,
-              curve: Curves.easeInOut,
+      body: SelectionArea(
+        child: Column(
+          children: [
+            TapBuilder(
+              delay: 100,
               builder: (context) {
-                final hoverT = AnimateHoverBuilder.t(context);
-                final activeT = AnimateTapBuilder.t(context);
                 final color = Theme.of(context).colorScheme.primary;
-                final hoverColor = color.deepen(20);
-                final activeColor = color.deepen(20,reversal: true);
-                return Container(
-                  width: 300,
-                  height: 300,
-                  color: color.lerp(hoverColor, hoverT).lerp(activeColor, activeT),
+                final activeColor = color.deepen(20, reversal: true);
+                return AnimatedContainer(
+                  duration: 100.ms,
+                  width: 100,
+                  height: 100,
+                  color: color.on(TapBuilder.of(context), color: activeColor),
                 );
               },
-            );
-          }),
-        ],
+            ),
+            const Gap(8),
+            AnimateTapBuilder(
+              duration: 100.ms,
+              builder: (context) {
+                final activeT = AnimateTapBuilder.t(context);
+                final color = Theme.of(context).colorScheme.primary;
+                final activeColor = color.deepen(20, reversal: true);
+                return Container(
+                  width: 100,
+                  height: 100,
+                  color: color.lerp(activeColor, activeT),
+                );
+              },
+            ),
+            const Gap(8),
+            AnimateTapBuilder(builder: (context) {
+              return AnimateHoverBuilder(
+                duration: 250.ms,
+                curve: Curves.easeInOut,
+                builder: (context) {
+                  final hoverT = AnimateHoverBuilder.t(context);
+                  final activeT = AnimateTapBuilder.t(context);
+                  final color = Theme.of(context).colorScheme.primary;
+                  final hoverColor = color.deepen(20);
+                  final activeColor = color.deepen(20, reversal: true);
+                  return Container(
+                    width: 100,
+                    height: 100,
+                    color:
+                        color.lerp(hoverColor, hoverT).lerp(activeColor, activeT),
+                  );
+                },
+              );
+            }),
+          ],
+        ),
       ),
     );
   }
