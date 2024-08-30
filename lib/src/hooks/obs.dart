@@ -10,12 +10,7 @@ Obs<T> useObs<T>(
   WatchCallback<T>? watch,
   bool immediate = false,
 }) {
-  return use(_ObsHook(
-    initialData: initialData,
-    notifyMode: notifyMode,
-    watch: watch,
-    immediate: immediate,
-  ));
+  return use(_ObsHook(initialData, notifyMode, watch, immediate));
 }
 
 /// 在开发模式下禁用hook，这样当热刷新时将会重置状态
@@ -33,12 +28,7 @@ Obs<T> useDebugObs<T>(
 }
 
 class _ObsHook<T> extends Hook<Obs<T>> {
-  const _ObsHook({
-    required this.initialData,
-    required this.notifyMode,
-    this.watch,
-    required this.immediate,
-  });
+  const _ObsHook(this.initialData, this.notifyMode, this.watch, this.immediate);
 
   final T initialData;
   final List<ObsNotifyMode> notifyMode;
@@ -65,9 +55,6 @@ class _ObsHookState<T> extends HookState<Obs<T>, _ObsHook<T>> {
     super.dispose();
     _state.dispose();
   }
-
-  @override
-  Object? get debugValue => _state.value;
 
   @override
   String get debugLabel => 'useObs<$T>';

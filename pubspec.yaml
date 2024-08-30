@@ -15,10 +15,10 @@ dependencies:
   luoyi_dart_base: ^1.13.0
   gap: ^3.0.1
   flutter_hooks: ^0.20.5
-#  flutter_obs: ^1.5.4
-  flutter_obs:
-    git:
-      url: https://github.com/luoyi58624/flutter_obs.git
+  flutter_obs: ^1.6.1
+#  flutter_obs:
+#    git:
+#      url: https://github.com/luoyi58624/flutter_obs.git
   cached_network_image: ^3.3.1
   flutter_animate: ^4.5.0
   web: ^1.0.0

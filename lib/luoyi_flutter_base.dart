@@ -27,6 +27,7 @@ export 'src/hooks/watch.dart';
 
 export 'src/utils/font/font.dart';
 export 'src/utils/platform/platform.dart';
+export 'src/utils/animate_obs.dart';
 export 'src/utils/flutter.dart';
 export 'src/utils/local_storage.dart';
 export 'src/utils/no_ripper.dart';

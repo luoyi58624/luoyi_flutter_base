@@ -2,13 +2,15 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_obs/flutter_obs.dart';
 
+import '../utils/animate_obs.dart';
+
 /// 适配[flutter_hooks]库，相对于在[StatelessWidget]中直接使用[Obs]，它可以在小部件重建时保存当前状态
 AnimateObs<T> useAnimateObs<T>(
-  T initialData, {
-  Duration duration = const Duration(milliseconds: 250),
-  Curve curve = Curves.linear,
-  Tween<T>? tween,
-}) {
+    T initialData, {
+      Duration duration = const Duration(milliseconds: 250),
+      Curve curve = Curves.linear,
+      Tween<T>? tween,
+    }) {
   return use(_ObsHook(
     initialData,
     useSingleTickerProvider(),
@@ -20,13 +22,13 @@ AnimateObs<T> useAnimateObs<T>(
 
 class _ObsHook<T> extends Hook<AnimateObs<T>> {
   const _ObsHook(
-    this.initialData,
-    this.vsync,
-    this.duration,
-    this.curve,
-    this.tween, {
-    super.keys,
-  });
+      this.initialData,
+      this.vsync,
+      this.duration,
+      this.curve,
+      this.tween, {
+        super.keys,
+      });
 
   final T initialData;
   final TickerProvider vsync;
