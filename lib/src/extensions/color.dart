@@ -121,4 +121,9 @@ extension FlutterColorExtension on Color {
   /// 根据事件状态返回新的颜色
   Color on(bool flag, {int scale = 10, Color? color}) =>
       flag ? (color ?? deepen(scale)) : this;
+
+  Color lerp(Color otherColor, double t) {
+    assert(Color.lerp(this, otherColor, t) != null);
+    return Color.lerp(this, otherColor, t)!;
+  }
 }

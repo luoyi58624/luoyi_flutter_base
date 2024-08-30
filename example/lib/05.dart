@@ -8,12 +8,22 @@ class Example5 extends HookWidget {
   Widget build(BuildContext context) {
     // final width = useAnimateObs(100.0);
     // final height = useAnimateObs(100.0);
+    final count = useState(0);
+    final controller = useAnimationController();
+    final controller2 = useAnimationController();
+    final count2 = useState(0);
     final size = useAnimateObs(
       const Size(100, 100),
-      tween: SizeTween(),
-      duration: const Duration(milliseconds: 400),
-      curve: Curves.fastEaseInToSlowEaseOut,
+      duration: const Duration(milliseconds: 200),
+      tweenBuilder: () => SizeTween(),
     );
+    final color = useAnimateObs(
+      Colors.green,
+      duration: const Duration(milliseconds: 200),
+      tweenBuilder: () => ColorTween(),
+    );
+
+    // final count = useState(0);
 
     final flag = useState(false);
     return Scaffold(
@@ -26,12 +36,10 @@ class Example5 extends HookWidget {
               flag.value = v;
               if (v) {
                 size.setAnimateValue(const Size(300, 300));
-                // width.setAnimateValue(300);
-                // height.setAnimateValue(300);
+                color.value = Colors.red;
               } else {
                 size.setAnimateValue(const Size(100, 100));
-                // width.setAnimateValue(100);
-                // height.setAnimateValue(100);
+                color.value = Colors.green;
               }
             },
           )
@@ -42,12 +50,12 @@ class Example5 extends HookWidget {
           ObsBuilder(
               watch: [size],
               builder: (context) {
-                print('${size.controller.value}  ${size.animation.value}');
+                // print('${size.controller.value}  ${size.animation.value}');
                 return Container(
                   width: size.animation.value!.width,
                   height: size.animation.value!.height,
-                  decoration: const BoxDecoration(
-                    color: Colors.green,
+                  decoration: BoxDecoration(
+                    color: color.animation.value,
                   ),
                 );
               }),

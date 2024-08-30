@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_obs/flutter_obs.dart';
+import 'package:luoyi_flutter_base/luoyi_flutter_base.dart';
 
 class AnimateObs<T> extends BaseObs<T> {
   /// 支持对响应式变量进行线性插值，以实现动画效果
@@ -13,15 +13,16 @@ class AnimateObs<T> extends BaseObs<T> {
     required TickerProvider vsync,
     this.duration = const Duration(milliseconds: 250),
     this.curve = Curves.linear,
-    Tween<T>? tween,
+    Tween<T> Function()? tweenBuilder,
   }) {
+    // i(value, 'create');
     this.controller = AnimationController(
       vsync: vsync,
       duration: duration,
     )..addListener(() {
         notifyBuilders();
       });
-    this.tween = tween;
+    this.tween = tweenBuilder == null ? null : tweenBuilder();
     animation = this._tween.animate(
           CurvedAnimation(
             parent: this.controller,
@@ -61,26 +62,13 @@ class AnimateObs<T> extends BaseObs<T> {
   /// 因为只有 .value 才会自动绑定。
   late Animation<T> animation;
 
-  /// 修改响应式变量值，如果想应用动画请使用 [setAnimateValue]
+  /// 修改响应式变量值
   @override
   set value(T value) {
-    if (getValue() != value) {
-      oldValue = getValue();
-      setValue(value);
-      controller.duration = Duration.zero;
-      this._tween.begin = animation.value;
-      this._tween.end = value;
-      animation = this._tween.animate(
-            CurvedAnimation(
-              parent: controller,
-              curve: this.curve,
-            ),
-          );
-      controller.forward(from: 0);
-    }
+    setAnimateValue(value);
   }
 
-  /// 以动画的形式设置新值
+  /// 以动画的形式设置新值，支持自定义参数
   /// * curve 自定义动画曲线
   /// * duration 自定义动画持续时间
   void setAnimateValue(

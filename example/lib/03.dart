@@ -17,7 +17,7 @@ class _ExampleState extends State<Example3> with TickerProviderStateMixin {
     vsync: this,
     duration: const Duration(milliseconds: 500),
     curve: const Cubic(.48, .99, .49, .99),
-    tween: SizeTween(),
+    tweenBuilder: () => SizeTween(),
   );
   late final radius = AnimateObs(
     8.0,
@@ -31,7 +31,7 @@ class _ExampleState extends State<Example3> with TickerProviderStateMixin {
     vsync: this,
     duration: const Duration(milliseconds: 800),
     curve: const Cubic(.48, .99, .49, .99),
-    tween: ColorTween(),
+    tweenBuilder: () => ColorTween(),
   );
 
   @override
