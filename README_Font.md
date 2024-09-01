@@ -43,6 +43,19 @@ class _App extends StatelessWidget {
   }
 }
 ```
+
+- pubspec.yaml添加谷歌中文字体，这是裁剪后的谷歌 NotoSansSC 字体，包含常用的3500个中文汉字
+
+```yaml
+flutter:
+  uses-material-design: true
+  fonts:
+    - family: NotoSansSC
+      fonts:
+        - asset: packages/luoyi_flutter_font/fonts/NotoSansSC/NotoSansSC-Medium.ttf
+        - asset: packages/luoyi_flutter_font/fonts/NotoSansSC/NotoSansSC-Bold.ttf
+```
+
 ### 加载动态字体
 
 ```dart

@@ -14,26 +14,26 @@ class _App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ObsBuilder(
-      builder: (context) {
-        return MaterialApp(
-            navigatorKey: GlobalConfig.navigatorKey,
-            home: const HomePage(),
-            theme: ThemeData(
-              brightness: isDark.value ? Brightness.dark : Brightness.light,
-            ),
-            darkTheme: ThemeData(brightness: Brightness.dark),
-            builder: (context, child) {
-              return Material(
-                child: Overlay(initialEntries: [
-                  OverlayEntry(builder: (context) {
-                    return child!;
-                  }),
-                ]),
-              );
-            });
-      }
-    );
+    return ObsBuilder(builder: (context) {
+      return MaterialApp(
+          navigatorKey: GlobalConfig.navigatorKey,
+          home: const HomePage(),
+          themeAnimationDuration: Duration.zero,
+          // themeAnimationDuration: 500.ms,
+          theme: ThemeData(
+            brightness: isDark.value ? Brightness.dark : Brightness.light,
+          ),
+          darkTheme: ThemeData(brightness: Brightness.dark),
+          builder: (context, child) {
+            return Material(
+              child: Overlay(initialEntries: [
+                OverlayEntry(builder: (context) {
+                  return child!;
+                }),
+              ]),
+            );
+          });
+    });
   }
 }
 

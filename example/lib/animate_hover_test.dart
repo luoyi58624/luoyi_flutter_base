@@ -1,11 +1,8 @@
 import 'dart:ui';
 
-import 'package:example/animate_hover.dart';
 import 'package:example/main.dart';
 import 'package:flutter/material.dart';
 import 'package:luoyi_flutter_base/luoyi_flutter_base.dart';
-
-import 'animate_tap.dart';
 
 class AnimateHoverTestPage extends StatefulWidget {
   const AnimateHoverTestPage({super.key});
@@ -17,7 +14,7 @@ class AnimateHoverTestPage extends StatefulWidget {
 class _AnimateHoverTestPageState extends State<AnimateHoverTestPage> {
   @override
   Widget build(BuildContext context) {
-    Tween();
+    final color = Theme.of(context).colorScheme.primary;
     return Scaffold(
       appBar: AppBar(
         title: const Text('动画Hover'),
@@ -30,58 +27,80 @@ class _AnimateHoverTestPageState extends State<AnimateHoverTestPage> {
           })
         ],
       ),
-      body: SelectionArea(
-        child: Column(
-          children: [
-            TapBuilder(
-              delay: 100,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          HoverBuilder(builder: (context) {
+            return TapBuilder(
               builder: (context) {
-                final color = Theme.of(context).colorScheme.primary;
-                final activeColor = color.deepen(20, reversal: true);
                 return AnimatedContainer(
-                  duration: 100.ms,
-                  width: 100,
+                  duration: 5000.ms,
+                  width: TapBuilder.of(context)
+                      ? 100
+                      : HoverBuilder.of(context)
+                          ? 400
+                          : 200,
                   height: 100,
-                  color: color.on(TapBuilder.of(context), color: activeColor),
+                  color: context.colorBuilder(
+                    color,
+                    activeColor: color.deepen(20, reversal: true),
+                    hoverColor: color.deepen(20),
+                  ),
                 );
               },
-            ),
-            const Gap(8),
-            AnimateTapBuilder(
-              duration: 100.ms,
-              builder: (context) {
-                final activeT = AnimateTapBuilder.t(context);
-                final color = Theme.of(context).colorScheme.primary;
-                final activeColor = color.deepen(20, reversal: true);
-                return Container(
-                  width: 100,
-                  height: 100,
-                  color: color.lerp(activeColor, activeT),
-                );
-              },
-            ),
-            const Gap(8),
-            AnimateTapBuilder(builder: (context) {
-              return AnimateHoverBuilder(
-                duration: 250.ms,
-                curve: Curves.easeInOut,
+            );
+          }),
+          const Gap(8),
+          HoverBuilder(
+            enableAnimate: true,
+            duration: 1000.ms,
+            builder: (context) {
+              return TapBuilder(
+                enableAnimate: true,
+                duration: 200.ms,
                 builder: (context) {
-                  final hoverT = AnimateHoverBuilder.t(context);
-                  final activeT = AnimateTapBuilder.t(context);
-                  final color = Theme.of(context).colorScheme.primary;
-                  final hoverColor = color.deepen(20);
-                  final activeColor = color.deepen(20, reversal: true);
+                  final width = 200.0;
+                  final activeWidth = 100.0;
+                  final hoverWidth = 400.0;
+                  final activeT = TapBuilder.t(context);
+                  final hoverT = HoverBuilder.t(context);
+                  late double target;
+                  if (activeT > 0.0) {
+                    target = lerpDouble(width, activeWidth, activeT)!;
+                  } else if (hoverT > 0.0) {
+                    target = lerpDouble(width, hoverWidth, hoverT)!;
+                  } else {
+                    target = width;
+                  }
+
                   return Container(
-                    width: 100,
+                    width: target,
                     height: 100,
-                    color:
-                        color.lerp(hoverColor, hoverT).lerp(activeColor, activeT),
+                    color: context.colorLerpBuilder(
+                      color,
+                      activeColor: color.deepen(20, reversal: true),
+                      hoverColor: color.deepen(20),
+                    ),
                   );
                 },
               );
-            }),
-          ],
-        ),
+            },
+          ),
+          // const Gap(8),
+          // TapBuilder(
+          //   duration: 100.ms,
+          //   builder: (context) {
+          //     final activeT = TapBuilder.t(context);
+          //     final color = Theme.of(context).colorScheme.primary;
+          //     final activeColor = color.deepen(20, reversal: true);
+          //     return Container(
+          //       width: 100,
+          //       height: 100,
+          //       color: color.lerp(activeColor, activeT),
+          //     );
+          //   },
+          // ),
+        ],
       ),
     );
   }
