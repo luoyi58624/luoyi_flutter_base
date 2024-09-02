@@ -50,41 +50,41 @@ class _AnimateHoverTestPageState extends State<AnimateHoverTestPage> {
               },
             );
           }),
-          const Gap(8),
-          HoverBuilder(
-            enableAnimate: true,
-            duration: 1000.ms,
-            builder: (context) {
-              return TapBuilder(
-                enableAnimate: true,
-                duration: 200.ms,
-                builder: (context) {
-                  const width = 200.0;
-                  const activeWidth = 100.0;
-                  const hoverWidth = 400.0;
-                  final activeT = TapBuilder.t(context);
-                  final hoverT = HoverBuilder.t(context);
-                  late double target;
-                  if (activeT > 0.0) {
-                    target = lerpDouble(width, activeWidth, activeT)!;
-                  } else if (hoverT > 0.0) {
-                    target = lerpDouble(width, hoverWidth, hoverT)!;
-                  } else {
-                    target = width;
-                  }
-                  return Container(
-                    width: target,
-                    height: 100,
-                    color: context.colorLerpBuilder(
-                      color,
-                      activeColor: color.deepen(20, reversal: true),
-                      hoverColor: color.deepen(20),
-                    ),
-                  );
-                },
-              );
-            },
-          ),
+          // const Gap(8),
+          // HoverBuilder(
+          //   enableAnimate: true,
+          //   duration: 1000.ms,
+          //   builder: (context) {
+          //     return TapBuilder(
+          //       enableAnimate: true,
+          //       duration: 200.ms,
+          //       builder: (context) {
+          //         const width = 200.0;
+          //         const activeWidth = 100.0;
+          //         const hoverWidth = 400.0;
+          //         final activeT = TapBuilder.t(context);
+          //         final hoverT = HoverBuilder.t(context);
+          //         late double target;
+          //         if (activeT > 0.0) {
+          //           target = lerpDouble(width, activeWidth, activeT)!;
+          //         } else if (hoverT > 0.0) {
+          //           target = lerpDouble(width, hoverWidth, hoverT)!;
+          //         } else {
+          //           target = width;
+          //         }
+          //         return Container(
+          //           width: target,
+          //           height: 100,
+          //           color: context.colorLerpBuilder(
+          //             color,
+          //             activeColor: color.deepen(20, reversal: true),
+          //             hoverColor: color.deepen(20),
+          //           ),
+          //         );
+          //       },
+          //     );
+          //   },
+          // ),
           // const Gap(8),
           // TapBuilder(
           //   duration: 100.ms,
