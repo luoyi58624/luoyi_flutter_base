@@ -22,7 +22,7 @@ class GlobalConfig {
   static ResponsiveData responsive = const ResponsiveData();
 
   /// 切换全局主题动画持续时间，它被用于 [MaterialApp] themeAnimationDuration 属性，防止自定义组件的动画与 Material 不一致
-  static Duration themeAnimationDuration = const Duration(milliseconds: 200);
+  static Duration themeDuration = const Duration(milliseconds: 200);
 
   /// 全局文本尺寸，当注入 [ElConfigProvider] 时初始化，如果你没有指定字体尺寸，
   /// 默认情况下在移动端字体为 15 像素，桌面端为 16 像素。
