@@ -2,6 +2,12 @@ import 'package:flutter/widgets.dart';
 
 import '../commons/global.dart';
 
+/// 此扩展函数不对外提供，使用 Element UI 你需要自行封装，只需将 GlobalConfig 替换成 el 即可，示例：
+/// ```dart
+/// extension ResponsiveExtension on BuildContext {
+///   bool get xs => MediaQuery.sizeOf(this).width <= el.responsive.xs;
+/// }
+/// ```
 extension FlutterResponsiveExtension on BuildContext {
   /// 极小设备，最大宽度默认320
   bool get xs => MediaQuery.sizeOf(this).width <= GlobalConfig.responsive.xs;
