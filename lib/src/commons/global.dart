@@ -39,7 +39,7 @@ class GlobalConfig {
   }
 
   /// 默认的文本样式
-  TextStyle defaultTextStyle = TextStyle(
+  static TextStyle defaultTextStyle = TextStyle(
     fontFamily: null,
     fontFamilyFallback: (PlatformUtil.isMacOS || PlatformUtil.isIOS)
         ? ['.AppleSystemUIFont', 'PingFang SC']
