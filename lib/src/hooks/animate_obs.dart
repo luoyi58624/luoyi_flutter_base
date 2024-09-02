@@ -60,7 +60,6 @@ class _ObsHookState<T> extends HookState<AnimateObs<T>, _ObsHook<T>> {
       _state.curve = hook.curve;
     }
     if (hook.tweenBuilder != oldHook.tweenBuilder) {
-      i(hook.tweenBuilder, oldHook.tweenBuilder);
       _state.tween = hook.tweenBuilder == null ? null : hook.tweenBuilder!();
     }
   }

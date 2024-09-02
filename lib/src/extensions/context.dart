@@ -4,6 +4,10 @@ import '../widgets/hover.dart';
 import '../widgets/tap.dart';
 
 extension FlutterContextExtension on BuildContext {
+  bool get isHover => HoverBuilder.of(this);
+
+  bool get isTap => TapBuilder.of(this);
+
   Color colorBuilder(
     Color color, {
     Color? activeColor,
@@ -11,12 +15,12 @@ extension FlutterContextExtension on BuildContext {
   }) {
     Color result = color;
     if (activeColor != null) {
-      if (TapBuilder.of(this)) {
+      if (isTap) {
         return activeColor;
       }
     }
     if (hoverColor != null) {
-      if (HoverBuilder.of(this)) {
+      if (isHover) {
         return hoverColor;
       }
     }

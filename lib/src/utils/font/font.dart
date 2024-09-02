@@ -27,13 +27,13 @@ class FontUtil {
   FontUtil._();
 
   /// 普通字重
-  static FontWeight normal = FontWeight.normal;
+  static FontWeight normal = FontWeight.w400;
 
   /// 中等字重
   static FontWeight medium = FontWeight.w500;
 
   /// 粗体字重
-  static FontWeight bold = FontWeight.bold;
+  static FontWeight bold = FontWeight.w600;
 
   /// 初始化的字体
   static FontModel _initialFont = FontPreset.systemFont;

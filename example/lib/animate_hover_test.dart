@@ -34,7 +34,9 @@ class _AnimateHoverTestPageState extends State<AnimateHoverTestPage> {
             return TapBuilder(
               builder: (context) {
                 return AnimatedContainer(
-                  duration: 5000.ms,
+                  duration: TapBuilder.of(context) || HoverBuilder.of(context)
+                      ? 500.ms
+                      : Duration.zero,
                   width: TapBuilder.of(context)
                       ? 100
                       : HoverBuilder.of(context)

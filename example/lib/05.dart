@@ -8,21 +8,23 @@ class Example5 extends HookWidget {
   Widget build(BuildContext context) {
     // final width = useAnimateObs(100.0);
     // final height = useAnimateObs(100.0);
+    const defaultStyle = BoxDecoration(
+      color: Colors.green,
+    );
     final count = useState(0);
     final controller = useAnimationController();
     final controller2 = useAnimationController();
     final count2 = useState(0);
     final size = useAnimateObs(
       const Size(100, 100),
-      duration: const Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 1200),
       tweenBuilder: () => SizeTween(),
     );
-    final color = useAnimateObs(
-      Colors.green,
-      duration: const Duration(milliseconds: 200),
-      tweenBuilder: () => ColorTween(),
+    final style = useAnimateObs(
+      defaultStyle,
+      duration: const Duration(milliseconds: 1200),
+      tweenBuilder: () => DecorationTween(),
     );
-
     // final count = useState(0);
 
     final flag = useState(false);
@@ -36,10 +38,13 @@ class Example5 extends HookWidget {
               flag.value = v;
               if (v) {
                 size.setAnimateValue(const Size(300, 300));
-                color.value = Colors.red;
+                style.value = BoxDecoration(
+                  color: Colors.red,
+                  border: Border.all(width: 6, color: Colors.green),
+                );
               } else {
                 size.setAnimateValue(const Size(100, 100));
-                color.value = Colors.green;
+                style.value = defaultStyle;
               }
             },
           )
@@ -50,13 +55,12 @@ class Example5 extends HookWidget {
           ObsBuilder(
               watch: [size],
               builder: (context) {
+                i(style.value);
                 // print('${size.controller.value}  ${size.animation.value}');
                 return Container(
                   width: size.animation.value!.width,
                   height: size.animation.value!.height,
-                  decoration: BoxDecoration(
-                    color: color.animation.value,
-                  ),
+                  decoration: style.value,
                 );
               }),
           // const SizedBox(height: 8),
