@@ -59,9 +59,9 @@ class _AnimateHoverTestPageState extends State<AnimateHoverTestPage> {
                 enableAnimate: true,
                 duration: 200.ms,
                 builder: (context) {
-                  final width = 200.0;
-                  final activeWidth = 100.0;
-                  final hoverWidth = 400.0;
+                  const width = 200.0;
+                  const activeWidth = 100.0;
+                  const hoverWidth = 400.0;
                   final activeT = TapBuilder.t(context);
                   final hoverT = HoverBuilder.t(context);
                   late double target;
@@ -72,7 +72,6 @@ class _AnimateHoverTestPageState extends State<AnimateHoverTestPage> {
                   } else {
                     target = width;
                   }
-
                   return Container(
                     width: target,
                     height: 100,
