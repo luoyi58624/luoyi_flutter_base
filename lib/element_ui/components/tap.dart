@@ -28,7 +28,7 @@ class ElTapBuilder extends StatefulWidget {
 
   /// 根据上下文获取最近的点击状态
   static bool of(BuildContext context) =>
-      _TapInheritedWidget.of(context)?.isTap ?? false;
+      _TapInheritedWidget.maybeOf(context)?.isTap ?? false;
 
   @override
   State<ElTapBuilder> createState() => _ElTapBuilderState();
@@ -98,7 +98,7 @@ class _TapInheritedWidget extends InheritedWidget {
 
   final bool isTap;
 
-  static _TapInheritedWidget? of(BuildContext context) =>
+  static _TapInheritedWidget? maybeOf(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<_TapInheritedWidget>();
 
   @override

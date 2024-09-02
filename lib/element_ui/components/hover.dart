@@ -39,11 +39,11 @@ class ElHoverBuilder extends StatefulWidget {
 
   /// 根据上下文获取最近的悬停状态
   static bool of(BuildContext context) =>
-      _HoverInheritedWidget.of(context)?.isHover ?? false;
+      _HoverInheritedWidget.maybeOf(context)?.isHover ?? false;
 
   /// 根据上下文获取最近的光标样式
   static MouseCursor? mouseCursor(BuildContext context) =>
-      _HoverInheritedWidget.of(context)?.mouseCursor;
+      _HoverInheritedWidget.maybeOf(context)?.mouseCursor;
 
   @override
   State<ElHoverBuilder> createState() => _ElHoverBuilderState();
@@ -105,7 +105,7 @@ class _HoverInheritedWidget extends InheritedWidget {
   final bool isHover;
   final MouseCursor? mouseCursor;
 
-  static _HoverInheritedWidget? of(BuildContext context) =>
+  static _HoverInheritedWidget? maybeOf(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<_HoverInheritedWidget>();
 
   @override
