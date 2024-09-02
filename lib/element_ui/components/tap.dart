@@ -4,9 +4,9 @@ import 'dart:math';
 import 'package:flutter/widgets.dart';
 import 'package:luoyi_dart_base/luoyi_dart_base.dart';
 
-class TapBuilder extends StatefulWidget {
+class ElTapBuilder extends StatefulWidget {
   /// 点击事件构建器
-  const TapBuilder({
+  const ElTapBuilder({
     super.key,
     required this.builder,
     this.onTap,
@@ -31,10 +31,10 @@ class TapBuilder extends StatefulWidget {
       _TapInheritedWidget.of(context)?.isTap ?? false;
 
   @override
-  State<TapBuilder> createState() => _TapBuilderState();
+  State<ElTapBuilder> createState() => _ElTapBuilderState();
 }
 
-class _TapBuilderState extends State<TapBuilder> {
+class _ElTapBuilderState extends State<ElTapBuilder> {
   bool isTap = false;
   int? _time;
   Timer? _timer;

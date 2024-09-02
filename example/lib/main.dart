@@ -139,7 +139,7 @@ class _ChildPageState extends State<_ChildPage> with TickerProviderStateMixin {
       ),
       body: Column(
         children: [
-          HoverBuilder(builder: (context) {
+          ElHoverBuilder(builder: (context) {
             return ObsBuilder(
               watch: [width, color],
               builder: (context) {
@@ -148,7 +148,7 @@ class _ChildPageState extends State<_ChildPage> with TickerProviderStateMixin {
                   height: height.animation.value,
                   decoration: BoxDecoration(
                     color: color.animation.value,
-                    // color: color.on(HoverBuilder.of(context)),
+                    // color: color.on(ElHoverBuilder.of(context)),
                   ),
                 );
               },

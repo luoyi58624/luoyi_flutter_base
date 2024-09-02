@@ -54,20 +54,20 @@
 ### Features
 
 * color扩展onHover、onTap第二个参数变更为Color类型，增强灵活性 ([53b65f8](https://github.com/luoyi58624/luoyi_flutter_base/commit/53b65f8f0206e0a1e51ea298f2b2b9735c6fff68))
-* 完善TapBuilder的delay效果 ([be9e86f](https://github.com/luoyi58624/luoyi_flutter_base/commit/be9e86fc1eb203f03cc9dc150a3908f5addf6e73))
+* 完善ElTapBuilder的delay效果 ([be9e86f](https://github.com/luoyi58624/luoyi_flutter_base/commit/be9e86fc1eb203f03cc9dc150a3908f5addf6e73))
 * 移除字体全局配置 ([da741ce](https://github.com/luoyi58624/luoyi_flutter_base/commit/da741ce04ac35d5cfcbdec5ec70c32071f0b2c07))
 
 
 ### Bug Fixes
 
-* TapBuilder更新状态防止dispose ([5a9491e](https://github.com/luoyi58624/luoyi_flutter_base/commit/5a9491e3021158cd3c8a4f7ecf25c8cb67198559))
+* ElTapBuilder更新状态防止dispose ([5a9491e](https://github.com/luoyi58624/luoyi_flutter_base/commit/5a9491e3021158cd3c8a4f7ecf25c8cb67198559))
 
 ## [2.2.0](https://github.com/luoyi58624/luoyi_flutter_base/compare/v2.1.0...v2.2.0) (2024-06-13)
 
 
 ### Features
 
-* HoverBuilder、TapBuilder新增InheritedWidget，新增PlatformUtil ([adb4d39](https://github.com/luoyi58624/luoyi_flutter_base/commit/adb4d3958c7a7d08fa14aad863cd5ef8fa076142))
+* ElHoverBuilder、ElTapBuilder新增InheritedWidget，新增PlatformUtil ([adb4d39](https://github.com/luoyi58624/luoyi_flutter_base/commit/adb4d3958c7a7d08fa14aad863cd5ef8fa076142))
 * 优化rootContext的断言 ([7c10a62](https://github.com/luoyi58624/luoyi_flutter_base/commit/7c10a629bd1ea347b96890d97cdd8c8287953170))
 * 加载多个字重字体使用并行加载 ([a93a112](https://github.com/luoyi58624/luoyi_flutter_base/commit/a93a1126bec3ae3e456165357ffcecd212427108))
 * 完善各种字体排版小部件 ([35a68f4](https://github.com/luoyi58624/luoyi_flutter_base/commit/35a68f4faf87ceef18e8e5af3aa4b8beeb2d89d3))
@@ -87,7 +87,7 @@
 
 * onHover、onTap移除BuildContext参数 ([0aa910f](https://github.com/luoyi58624/luoyi_flutter_base/commit/0aa910fa00ecc610cdd16d87d84b45f01e7e8b48))
 * 修复未导出的依赖 ([e87b1b8](https://github.com/luoyi58624/luoyi_flutter_base/commit/e87b1b82d77b8e2ac8bd4216fc22986c0a03a2ad))
-* 移除HoverBuild、TapBuilder ([fbe1940](https://github.com/luoyi58624/luoyi_flutter_base/commit/fbe19405311a8a046d9f324d234599f96c78fbc0))
+* 移除HoverBuild、ElTapBuilder ([fbe1940](https://github.com/luoyi58624/luoyi_flutter_base/commit/fbe19405311a8a046d9f324d234599f96c78fbc0))
 
 ## [2.1.0](https://github.com/luoyi58624/luoyi_flutter_base/compare/v2.0.1...v2.1.0) (2024-05-22)
 

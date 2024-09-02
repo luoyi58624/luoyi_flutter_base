@@ -30,16 +30,16 @@ class _AnimateHoverTestPageState extends State<AnimateHoverTestPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          HoverBuilder(builder: (context) {
-            return TapBuilder(
+          ElHoverBuilder(builder: (context) {
+            return ElTapBuilder(
               builder: (context) {
                 return AnimatedContainer(
-                  duration: TapBuilder.of(context) || HoverBuilder.of(context)
+                  duration: ElTapBuilder.of(context) || ElHoverBuilder.of(context)
                       ? 500.ms
                       : Duration.zero,
-                  width: TapBuilder.of(context)
+                  width: ElTapBuilder.of(context)
                       ? 100
-                      : HoverBuilder.of(context)
+                      : ElHoverBuilder.of(context)
                           ? 400
                           : 200,
                   height: 100,
@@ -53,19 +53,19 @@ class _AnimateHoverTestPageState extends State<AnimateHoverTestPage> {
             );
           }),
           // const Gap(8),
-          // HoverBuilder(
+          // ElHoverBuilder(
           //   enableAnimate: true,
           //   duration: 1000.ms,
           //   builder: (context) {
-          //     return TapBuilder(
+          //     return ElTapBuilder(
           //       enableAnimate: true,
           //       duration: 200.ms,
           //       builder: (context) {
           //         const width = 200.0;
           //         const activeWidth = 100.0;
           //         const hoverWidth = 400.0;
-          //         final activeT = TapBuilder.t(context);
-          //         final hoverT = HoverBuilder.t(context);
+          //         final activeT = ElTapBuilder.t(context);
+          //         final hoverT = ElHoverBuilder.t(context);
           //         late double target;
           //         if (activeT > 0.0) {
           //           target = lerpDouble(width, activeWidth, activeT)!;
@@ -88,10 +88,10 @@ class _AnimateHoverTestPageState extends State<AnimateHoverTestPage> {
           //   },
           // ),
           // const Gap(8),
-          // TapBuilder(
+          // ElTapBuilder(
           //   duration: 100.ms,
           //   builder: (context) {
-          //     final activeT = TapBuilder.t(context);
+          //     final activeT = ElTapBuilder.t(context);
           //     final color = Theme.of(context).colorScheme.primary;
           //     final activeColor = color.deepen(20, reversal: true);
           //     return Container(

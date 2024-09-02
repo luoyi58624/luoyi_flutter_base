@@ -1,12 +1,12 @@
 import 'package:flutter/widgets.dart';
 
-import '../widgets/hover.dart';
-import '../widgets/tap.dart';
+import '../../element_ui/components/hover.dart';
+import '../../element_ui/components/tap.dart';
 
 extension FlutterContextExtension on BuildContext {
-  bool get isHover => HoverBuilder.of(this);
+  bool get isHover => ElHoverBuilder.of(this);
 
-  bool get isTap => TapBuilder.of(this);
+  bool get isTap => ElTapBuilder.of(this);
 
   Color colorBuilder(
     Color color, {

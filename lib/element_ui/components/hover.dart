@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-import '../utils/platform/platform.dart';
+import '../../src/utils/platform/platform.dart';
 
-class HoverBuilder extends StatefulWidget {
+class ElHoverBuilder extends StatefulWidget {
   /// hover构建器
-  const HoverBuilder({
+  const ElHoverBuilder({
     super.key,
     required this.builder,
     this.cursor,
@@ -46,10 +46,10 @@ class HoverBuilder extends StatefulWidget {
       _HoverInheritedWidget.of(context)?.mouseCursor;
 
   @override
-  State<HoverBuilder> createState() => _HoverBuilderState();
+  State<ElHoverBuilder> createState() => _ElHoverBuilderState();
 }
 
-class _HoverBuilderState extends State<HoverBuilder> {
+class _ElHoverBuilderState extends State<ElHoverBuilder> {
   bool isHover = false;
 
   @override
