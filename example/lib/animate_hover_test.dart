@@ -43,7 +43,7 @@ class _AnimateHoverTestPageState extends State<AnimateHoverTestPage> {
                           ? 400
                           : 200,
                   height: 100,
-                  color: context.colorBuilder(
+                  color: context.buildEventColor(
                     color,
                     activeColor: color.deepen(20, reversal: true),
                     hoverColor: color.deepen(20),

@@ -5,6 +5,8 @@ class AnimatedColoredBox extends ImplicitlyAnimatedWidget {
   const AnimatedColoredBox({
     super.key,
     required super.duration,
+    super.curve,
+    super.onEnd,
     required this.color,
     this.child,
   });
@@ -41,6 +43,8 @@ class AnimatedRefreshProgressIndicator extends ImplicitlyAnimatedWidget {
   const AnimatedRefreshProgressIndicator({
     super.key,
     required super.duration,
+    super.curve,
+    super.onEnd,
     this.value,
     this.color,
     this.backgroundColor,

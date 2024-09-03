@@ -11,9 +11,9 @@ export 'package:flutter_animate/flutter_animate.dart';
 export 'package:url_launcher/url_launcher.dart';
 export 'package:animate_do/animate_do.dart';
 
+export 'element_ui/components/text.dart';
 export 'element_ui/components/hover.dart';
 export 'element_ui/components/tap.dart';
-export 'element_ui/components/text.dart';
 
 export 'src/commons/global.dart';
 export 'src/commons/models.dart';

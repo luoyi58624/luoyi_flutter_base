@@ -21,7 +21,8 @@ class GlobalConfig {
   /// 响应式配置
   static ResponsiveData responsive = const ResponsiveData();
 
-  /// 切换全局主题动画持续时间，它被用于 [MaterialApp] themeAnimationDuration 属性，防止自定义组件的动画与 Material 不一致
+  /// 切换全局主题动画持续时间，当你使用 [MaterialApp] 时，你应该将此属性设置到 themeAnimationDuration，
+  /// 防止自定义组件的动画与 Material 不一致
   static Duration themeDuration = const Duration(milliseconds: 200);
 
   /// 全局文本尺寸，当注入 [ElConfigProvider] 时初始化，如果你没有指定字体尺寸，
