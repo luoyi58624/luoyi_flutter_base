@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:example/main.dart';
 import 'package:flutter/material.dart';
 import 'package:luoyi_flutter_base/luoyi_flutter_base.dart';
@@ -30,16 +28,17 @@ class _AnimateHoverTestPageState extends State<AnimateHoverTestPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ElHoverBuilder(builder: (context) {
-            return ElTapBuilder(
+          HoverBuilder(builder: (context) {
+            return TapBuilder(
               builder: (context) {
                 return AnimatedContainer(
-                  duration: ElTapBuilder.of(context) || ElHoverBuilder.of(context)
-                      ? 500.ms
-                      : Duration.zero,
-                  width: ElTapBuilder.of(context)
+                  duration:
+                      TapBuilder.of(context) || HoverBuilder.of(context)
+                          ? 500.ms
+                          : Duration.zero,
+                  width: TapBuilder.of(context)
                       ? 100
-                      : ElHoverBuilder.of(context)
+                      : HoverBuilder.of(context)
                           ? 400
                           : 200,
                   height: 100,
@@ -53,19 +52,19 @@ class _AnimateHoverTestPageState extends State<AnimateHoverTestPage> {
             );
           }),
           // const Gap(8),
-          // ElHoverBuilder(
+          // HoverBuilder(
           //   enableAnimate: true,
           //   duration: 1000.ms,
           //   builder: (context) {
-          //     return ElTapBuilder(
+          //     return TapBuilder(
           //       enableAnimate: true,
           //       duration: 200.ms,
           //       builder: (context) {
           //         const width = 200.0;
           //         const activeWidth = 100.0;
           //         const hoverWidth = 400.0;
-          //         final activeT = ElTapBuilder.t(context);
-          //         final hoverT = ElHoverBuilder.t(context);
+          //         final activeT = TapBuilder.t(context);
+          //         final hoverT = HoverBuilder.t(context);
           //         late double target;
           //         if (activeT > 0.0) {
           //           target = lerpDouble(width, activeWidth, activeT)!;
@@ -88,10 +87,10 @@ class _AnimateHoverTestPageState extends State<AnimateHoverTestPage> {
           //   },
           // ),
           // const Gap(8),
-          // ElTapBuilder(
+          // TapBuilder(
           //   duration: 100.ms,
           //   builder: (context) {
-          //     final activeT = ElTapBuilder.t(context);
+          //     final activeT = TapBuilder.t(context);
           //     final color = Theme.of(context).colorScheme.primary;
           //     final activeColor = color.deepen(20, reversal: true);
           //     return Container(

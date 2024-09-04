@@ -21,9 +21,11 @@ class GlobalConfig {
   /// 响应式配置
   static ResponsiveData responsive = const ResponsiveData();
 
-  /// 切换全局主题动画持续时间，当你使用 [MaterialApp] 时，你应该将此属性设置到 themeAnimationDuration，
-  /// 防止自定义组件的动画与 Material 不一致
+  /// 切换全局主题动画持续时间，这是 [MaterialApp] 中 themeAnimationDuration 属性
   static Duration themeDuration = const Duration(milliseconds: 200);
+
+  /// 切换全局主题动画曲线，这是 [MaterialApp] 中 themeAnimationCurve 属性
+  static Curve themeCurve = Curves.linear;
 
   /// 全局文本尺寸，当注入 [ElConfigProvider] 时初始化，如果你没有指定字体尺寸，
   /// 默认情况下在移动端字体为 15 像素，桌面端为 16 像素。

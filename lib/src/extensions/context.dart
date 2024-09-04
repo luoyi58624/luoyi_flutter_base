@@ -1,16 +1,12 @@
 import 'package:flutter/widgets.dart';
 
-import '../../element_ui/components/hover.dart';
-import '../../element_ui/components/duration.dart';
-import '../../element_ui/components/tap.dart';
+import '../widgets/hover.dart';
+import '../widgets/tap.dart';
 
 extension FlutterContextExtension on BuildContext {
-  bool get isHover => ElHoverBuilder.of(this);
+  bool get isHover => HoverBuilder.of(this);
 
-  bool get isTap => ElTapBuilder.of(this);
-
-  /// 获取响应事件触发的动画持续时间，默认情况下，
-  Duration? get themeDuration => ElThemeDuration.maybeOf(this);
+  bool get isTap => TapBuilder.of(this);
 
   /// 构建由响应事件触发的颜色状态
   Color buildEventColor(
