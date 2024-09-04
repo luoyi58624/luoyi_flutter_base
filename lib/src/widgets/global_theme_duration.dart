@@ -17,7 +17,7 @@ class GlobalThemeStyle extends StatelessWidget {
   /// 改变主题前设置全局主题动画时间，这样可以令应用中所有动画小部件的过渡动画保持一致，
   /// * fun 实现切换主题的回调函数
   /// * delay 重置动画最小延迟时间，默认500毫秒
-  static Future<void> changeTheme(VoidCallback fun, [int? delay]) async {
+  static void changeTheme(VoidCallback fun, [int? delay]) {
     if (_timer != null) {
       _timer!.cancel();
       _timer = null;
