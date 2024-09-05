@@ -9,14 +9,15 @@ class TapBuilder extends StatefulWidget {
   const TapBuilder({
     super.key,
     required this.builder,
-    this.onTap,
     this.delay = 100,
     this.disabled = false,
+    this.onTap,
+    this.onTapDown,
+    this.onTapUp,
+    this.onTapCancel,
   }) : assert(delay >= 0);
 
   final WidgetBuilder builder;
-
-  final GestureTapCallback? onTap;
 
   /// 延迟多少毫秒更新点击状态，默认100毫秒，设置一定的延迟时间可以让点击效果更加明显，
   /// 否则你应当直接使用[GestureDetector]，同时，如果你需要根据状态变更应用过渡动画，
@@ -25,6 +26,11 @@ class TapBuilder extends StatefulWidget {
 
   /// 是否禁用，默认false
   final bool disabled;
+
+  final GestureTapCallback? onTap;
+  final GestureTapDownCallback? onTapDown;
+  final GestureTapUpCallback? onTapUp;
+  final GestureTapCancelCallback? onTapCancel;
 
   /// 根据上下文获取最近的点击状态
   static bool of(BuildContext context) =>
@@ -48,6 +54,7 @@ class _TapBuilderState extends State<TapBuilder> {
         onTapDown: widget.disabled
             ? null
             : (e) {
+                if (widget.onTapDown != null) widget.onTapDown!(e);
                 _time = currentMilliseconds;
                 if (_timer != null) {
                   _timer!.cancel();
@@ -61,6 +68,7 @@ class _TapBuilderState extends State<TapBuilder> {
         onTapUp: widget.disabled
             ? null
             : (e) {
+                if (widget.onTapUp != null) widget.onTapUp!(e);
                 _timer = () {
                   update(false);
                   _timer = null;
@@ -69,6 +77,7 @@ class _TapBuilderState extends State<TapBuilder> {
         onTapCancel: widget.disabled
             ? null
             : () {
+                if (widget.onTapCancel != null) widget.onTapCancel!();
                 _timer = () {
                   update(false);
                   _timer = null;
