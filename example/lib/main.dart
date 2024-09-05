@@ -16,7 +16,6 @@ class _App extends StatelessWidget {
   Widget build(BuildContext context) {
     return ObsBuilder(builder: (context) {
       return MaterialApp(
-          navigatorKey: GlobalConfig.navigatorKey,
           home: const HomePage(),
           themeAnimationDuration: Duration.zero,
           // themeAnimationDuration: 500.ms,

@@ -1,8 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import '../commons/global.dart';
-
-/// 此扩展函数不对外提供，使用 Element UI 你需要自行封装，只需将 GlobalConfig 替换成 el 即可，示例：
+/// 此扩展函数不对外提供，使用 Element UI 你需要自行封装，只需将 responsiveData 替换成 el 即可，示例：
 /// ```dart
 /// extension ResponsiveExtension on BuildContext {
 ///   bool get xs => MediaQuery.sizeOf(this).width <= el.responsive.xs;
@@ -10,20 +8,23 @@ import '../commons/global.dart';
 /// ```
 extension FlutterResponsiveExtension on BuildContext {
   /// 极小设备，最大宽度默认320
-  bool get xs => MediaQuery.sizeOf(this).width <= GlobalConfig.responsive.xs;
+  bool get xs => MediaQuery.sizeOf(this).width <= responsiveData.xs;
 
   /// 移动端设备，最大宽度默认640
-  bool get sm => MediaQuery.sizeOf(this).width <= GlobalConfig.responsive.sm;
+  bool get sm => MediaQuery.sizeOf(this).width <= responsiveData.sm;
 
   /// 平板设备，最大宽度默认1024
-  bool get md => MediaQuery.sizeOf(this).width <= GlobalConfig.responsive.md;
+  bool get md => MediaQuery.sizeOf(this).width <= responsiveData.md;
 
   /// 桌面设备，最大宽度默认1920
-  bool get lg => MediaQuery.sizeOf(this).width <= GlobalConfig.responsive.lg;
+  bool get lg => MediaQuery.sizeOf(this).width <= responsiveData.lg;
 
   /// 大屏桌面设备，最大宽度默认2560
-  bool get xl => MediaQuery.sizeOf(this).width <= GlobalConfig.responsive.xl;
+  bool get xl => MediaQuery.sizeOf(this).width <= responsiveData.xl;
 }
+
+/// 目前不允许对响应式配置做自定义操作
+const ResponsiveData responsiveData = ResponsiveData();
 
 /// 响应式配置
 class ResponsiveData {
