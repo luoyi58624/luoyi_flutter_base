@@ -138,21 +138,19 @@ class _ChildPageState extends State<_ChildPage> with TickerProviderStateMixin {
       ),
       body: Column(
         children: [
-          HoverBuilder(builder: (context) {
-            return ObsBuilder(
-              watch: [width, color],
-              builder: (context) {
-                return Container(
-                  width: width.animation.value,
-                  height: height.animation.value,
-                  decoration: BoxDecoration(
-                    color: color.animation.value,
-                    // color: color.on(HoverBuilder.of(context)),
-                  ),
-                );
-              },
-            );
-          }),
+          ObsBuilder(
+            watch: [width, color],
+            builder: (context) {
+              return Container(
+                width: width.animation.value,
+                height: height.animation.value,
+                decoration: BoxDecoration(
+                  color: color.animation.value,
+                  // color: color.on(HoverBuilder.of(context)),
+                ),
+              );
+            },
+          )
         ],
       ),
     );

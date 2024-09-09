@@ -11,7 +11,6 @@ export 'package:flutter_animate/flutter_animate.dart';
 export 'package:url_launcher/url_launcher.dart';
 export 'package:animate_do/animate_do.dart';
 
-export 'src/commons/global.dart';
 export 'src/commons/models.dart';
 
 export 'src/extensions/color.dart';
@@ -31,12 +30,7 @@ export 'src/utils/animate_obs.dart';
 export 'src/utils/flutter.dart';
 export 'src/utils/local_storage.dart';
 export 'src/utils/no_ripper.dart';
-export 'src/utils/responsive.dart';
 
-export 'src/widgets/hover.dart';
-export 'src/widgets/tap.dart';
 export 'src/widgets/animation.dart';
-export 'src/widgets/brightness.dart';
 export 'src/widgets/custom_layout.dart';
-export 'src/widgets/scroll_behavior.dart';
 export 'src/widgets/simple_widgets.dart';
