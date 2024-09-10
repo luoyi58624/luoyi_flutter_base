@@ -160,11 +160,11 @@ class _ChildPageState extends State<_ChildPage> with TickerProviderStateMixin {
 extension AnimateObsExt on AnimateObs<Color?> {
   /// 根据事件状态返回新的颜色
   Color on(bool flag, {int scale = 10, Color? color}) {
-    if (flag) {
-      value = color ?? value!.deepen(scale);
-    } else {
-      controller.reverse();
-    }
+    // if (flag) {
+    //   value = color ?? value!.deepen(scale);
+    // } else {
+    //   controller.reverse();
+    // }
     return animation.value!;
   }
 }
