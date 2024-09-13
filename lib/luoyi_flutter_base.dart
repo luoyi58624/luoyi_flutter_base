@@ -31,6 +31,5 @@ export 'src/utils/flutter.dart';
 export 'src/utils/local_storage.dart';
 export 'src/utils/no_ripper.dart';
 
-export 'src/widgets/animation.dart';
 export 'src/widgets/custom_layout.dart';
 export 'src/widgets/simple_widgets.dart';
