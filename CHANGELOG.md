@@ -1,5 +1,37 @@
 # Changelog
 
+## [2.7.0](https://github.com/luoyi58624/luoyi_flutter_base/compare/v2.6.0...v2.7.0) (2024-09-18)
+
+
+### Features
+
+* color deepen 函数新增 reversal 属性 ([451c81c](https://github.com/luoyi58624/luoyi_flutter_base/commit/451c81cc34cd1b34919bcafc34dfb18688936693))
+* 优化 TextWidget 构建样式逻辑，精简 H1-H6 等小部件重复代码 ([8589ec5](https://github.com/luoyi58624/luoyi_flutter_base/commit/8589ec5b7d1d50b067f0fde6424419bf338bf031))
+* 优化超链接显示、隐藏逻辑 ([948795a](https://github.com/luoyi58624/luoyi_flutter_base/commit/948795a3a7a85753ca283c46f5a6d43a7b91e1b4))
+* 新增 AnimateObs ([799123f](https://github.com/luoyi58624/luoyi_flutter_base/commit/799123f37bb5733818f42bc988e7c7d124bb64e8))
+* 新增 eventAnimateDuration 扩展方法 ([6148828](https://github.com/luoyi58624/luoyi_flutter_base/commit/6148828a47b46fad80abf52e33291d5c996b4f38))
+* 新增 lifecycle、watch 钩子 ([ff55251](https://github.com/luoyi58624/luoyi_flutter_base/commit/ff5525105af960908e2f3a7b97a0cea4aabd809e))
+* 新增 ul、ol、li 等列表组件 ([e3b2640](https://github.com/luoyi58624/luoyi_flutter_base/commit/e3b2640acd56a19ff65f4f25987908f25827ed04))
+* 新增 useAnimateObs ([4fb6957](https://github.com/luoyi58624/luoyi_flutter_base/commit/4fb69571256a92055ca8421003bf4b8b876a82fb))
+* 新增有序、无序列表 ([b96204e](https://github.com/luoyi58624/luoyi_flutter_base/commit/b96204e1da627f2c800ffa35ea6f0c1e25afc7e7))
+* 添加 ElThemeDuration 小部件 ([3c0544f](https://github.com/luoyi58624/luoyi_flutter_base/commit/3c0544f7337aa1c8e49f4f9a9d85f7a43ee903a0))
+* 添加 globalTextStyle 扩展函数 ([8ae6ab8](https://github.com/luoyi58624/luoyi_flutter_base/commit/8ae6ab8fcc55f60e3f2e1d6fc0565c5e00f4ce6b))
+* 添加 GlobalThemeStyle 小部件 ([b0d09a6](https://github.com/luoyi58624/luoyi_flutter_base/commit/b0d09a69ee9459b6d004162f4607d7e3913185f4))
+* 添加 noDefaultTextStyle 扩展函数 ([89add21](https://github.com/luoyi58624/luoyi_flutter_base/commit/89add21b85f7e048168306ef3a069711540c6549))
+* 添加文本组件 ([c7ecbf3](https://github.com/luoyi58624/luoyi_flutter_base/commit/c7ecbf365258521030829e759bbe1d84fa18a8c7))
+* 迁移部分 element_ui 的实现，避免暴露一些不公开的api ([9f00377](https://github.com/luoyi58624/luoyi_flutter_base/commit/9f003771a195f0da1474dbb535eb6b313ca50fe0))
+
+
+### Bug Fixes
+
+* BrightnessWidget不做断言 ([b1722a8](https://github.com/luoyi58624/luoyi_flutter_base/commit/b1722a8238b8138ac97e2472b7ffd04f75d72721))
+* eventAnimateDuration -&gt; themeDuration ([950ffdb](https://github.com/luoyi58624/luoyi_flutter_base/commit/950ffdbf95339402c195bdf22fe113935af73343))
+* 修复多级嵌套富文本下样式问题 ([b2cc865](https://github.com/luoyi58624/luoyi_flutter_base/commit/b2cc865d78106cca1f16aff7adac4b57705e93b9))
+* 修复富文本样式覆写bug ([a76f07e](https://github.com/luoyi58624/luoyi_flutter_base/commit/a76f07e46b7f8447102ae75c615d481bcec3e4e8))
+* 修复超链接 hover 样式失效bug ([a577079](https://github.com/luoyi58624/luoyi_flutter_base/commit/a577079ef755528d1f3505df388c41eaaab94034))
+* 提高 TextWidget 加载 fontFamily、fontFamilyFallback 的优先级，防止被 DefaultTextStyle 覆盖 ([a8e92fb](https://github.com/luoyi58624/luoyi_flutter_base/commit/a8e92fb1d71709458fe6e0face9ce0e5c27a8b3b))
+* 精简富文本构建片段，修复深层嵌套样式bug ([c9d69fc](https://github.com/luoyi58624/luoyi_flutter_base/commit/c9d69fc852f99140d3061b6821a723e29906d29d))
+
 ## [2.6.0](https://github.com/luoyi58624/luoyi_flutter_base/compare/v2.5.0...v2.6.0) (2024-08-14)
 
 
