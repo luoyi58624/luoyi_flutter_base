@@ -12,24 +12,3 @@ export 'package:url_launcher/url_launcher.dart';
 export 'package:animate_do/animate_do.dart';
 
 export 'src/commons/models.dart';
-
-export 'src/extensions/color.dart';
-export 'src/extensions/context.dart';
-export 'src/extensions/int.dart';
-export 'src/extensions/num.dart';
-export 'src/extensions/widget.dart';
-
-export 'src/hooks/animate_obs.dart';
-export 'src/hooks/lifecycle.dart';
-export 'src/hooks/obs.dart';
-export 'src/hooks/watch.dart';
-
-export 'src/utils/font/font.dart';
-export 'src/utils/platform/platform.dart';
-export 'src/utils/animate_obs.dart';
-export 'src/utils/flutter.dart';
-export 'src/utils/local_storage.dart';
-export 'src/utils/no_ripper.dart';
-
-export 'src/widgets/custom_layout.dart';
-export 'src/widgets/simple_widgets.dart';
